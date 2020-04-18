@@ -4,6 +4,9 @@
     height: 350px;
     cursor: pointer;
 
+    &:hover .img-container{
+        opacity: 0.85;
+    }
     .details-container {
         position: absolute;
         height: 105px;
@@ -20,7 +23,8 @@
         height: 235px;
         width: 235px;
         margin-top: 10px;
-
+        transition: ease-in-out 0.4s;
+        
         img {
             height: 100%;
             width: 95%;
