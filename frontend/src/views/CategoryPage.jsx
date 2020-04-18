@@ -33,7 +33,6 @@ class CategoryPage extends Component {
     }
 
     updateFilters = (filter) => {
-        filter.selected = !filter.selected;        
         let filterBy = { ...this.props.filterBy };
         const isFound = filterBy.filters.some(currFilter => currFilter.name === filter.name);
         if (isFound) {

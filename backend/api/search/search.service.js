@@ -13,11 +13,10 @@ module.exports = {
     // add
 }
 
-async function query(filterBy) {    
+async function query(filterBy) {
     try {
-        const criteria = searchUtils.buildCriteria(filterBy);
+        let criteria = searchUtils.buildCriteria(filterBy);
         let collection = await dbService.getCollection('product');
-
         const products = await collection.find(criteria).toArray();
         products.forEach(product => delete product.costPrice);
         const prices = products.map(product => product.price);
@@ -26,11 +25,16 @@ async function query(filterBy) {
         const specValueIds = products.map(product => product.specValues).flat();
         collection = await dbService.getCollection('specValue');
         const specValues = await collection.find({ '_id': { $in: specValueIds } }).toArray();
+        specValues.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
         const specKeyIds = specValues.map(specValue => specValue.specKeyId).flat();
         collection = await dbService.getCollection('specKey');
         const specKeys = await collection.find({ '_id': { $in: specKeyIds } }).toArray();
-        const filters = searchUtils.createFilters(specKeys, specValues, filterBy.filters);        
-        return { products, priceFilter:{max:maxPrice, min:minPrice} , filters }
+        const filters = searchUtils.createFilters(specKeys, specValues, filterBy.filters);
+
+        // add siblings filters to selected filters.
+
+
+        return { products, priceFilter: { max: maxPrice, min: minPrice }, filters }
 
     } catch (err) {
         console.log('ERROR: cannot find products', err);
