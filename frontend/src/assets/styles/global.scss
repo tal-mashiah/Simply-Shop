@@ -1,0 +1,33 @@
+// Setup
+@import "setup/variables.scss";
+@import "setup/functions.scss";
+@import "setup/mixins.scss";
+
+// Basics
+@import "basics/base.scss";
+@import "basics/burger.scss";
+@import "basics/helpers.scss";
+@import "basics/buttons.scss";
+@import "basics/layout.scss";
+@import "basics/typography.scss";
+
+// Components //
+
+// general
+@import "components/general/search-bar.scss";
+@import "components/general/spinner.scss";
+
+// header
+@import "components/header/header.scss";
+@import "components/header/nav-bar.scss";
+
+// product
+@import "components/product/product-preview.scss";
+@import "components/product/product-list.scss";
+
+// filter
+@import "components/filter/filter-list.scss";
+@import "components/filter/filter-preview.scss";
+@import "components/filter/filter-option-list.scss";
+@import "components/filter/filter-option-preview.scss";
+@import "components/filter/filter-price.scss";

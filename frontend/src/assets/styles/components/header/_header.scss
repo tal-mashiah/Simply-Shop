@@ -1,0 +1,19 @@
+header{
+    top: 0;
+    right: 0;
+    position: fixed;
+    height: $header-height;
+    width: 100%;
+    transition: linear 0.6s;
+    z-index: 999;
+    background: rgb(197, 197, 197);
+
+    .main-logo {
+        img {
+            width: 80px;
+            position: absolute;
+            top: -2px;
+            left: 7px;
+        }
+    }
+}

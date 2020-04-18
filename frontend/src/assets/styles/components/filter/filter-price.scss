@@ -1,0 +1,29 @@
+.filter-price-title {
+    margin-bottom: 20px;
+}
+
+.input-range {
+    margin: 0 5px;
+}
+
+.input-range__label--min,
+.input-range__label--max {
+    display: none;
+}
+
+.input-range__label-container {
+    left: -50%;
+    bottom: -40px;
+    color: $filter-clr;
+    font-size: 11px;
+    font-family: Lato;
+}
+
+.input-range__track--active {
+    background: #3589fe;
+}
+
+.input-range__slider {
+    background: #fff;
+    border: 1px solid #b7b7b7;
+}

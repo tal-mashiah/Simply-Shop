@@ -1,0 +1,29 @@
+.product-preview {
+    position: relative;
+    max-width: 250px;
+    height: 350px;
+
+    .details-container {
+        position: absolute;
+        height: 105px;
+        padding: 10px 16px;
+        bottom: 0;
+
+        .price {
+            font-size: rem(19px);
+            font-family: Lato-Bold;
+        }
+    }
+
+    .img-container {
+        height: 235px;
+        width: 235px;
+        margin-top: 10px;
+
+        img {
+            height: 100%;
+            width: 95%;
+            object-fit: contain;
+        }
+    }
+}
