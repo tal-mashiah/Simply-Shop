@@ -5,6 +5,7 @@ import NavBar from './NavBar.jsx'
 import Logo from './Logo.jsx';
 import Hamburger from './Hamburger.jsx';
 import Spinner from '../../cmps/general/Spinner.jsx';
+import SearchBar from '../general/SearchBar.jsx';
 
 
 export default class Header extends Component {
@@ -25,8 +26,9 @@ export default class Header extends Component {
         
         console.log(categories);
         return (
-            <header className="flex">
+            <header className="flex justify-between align-center">
                 <Logo />
+                <SearchBar/>
                 <NavBar categories={categories}/>
                 <Hamburger />
             </header>

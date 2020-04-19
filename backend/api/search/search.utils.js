@@ -39,6 +39,9 @@ const buildCriteria = (filterBy) => {
         const filterIds = filterBy.filters.map(filter => ObjectId(filter._id));
         criteria['specValues'] = { $all: filterIds };
     }
+    if (filterBy.searchValue) {
+        criteria['title'] =  new RegExp(".*"+filterBy.searchValue+".*", "i");
+    }
     return criteria;
 }
 

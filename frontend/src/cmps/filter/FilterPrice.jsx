@@ -12,13 +12,13 @@ export default class FilterPrice extends Component {
         }
     };
 
-    componentDidUpdate() {
-        const { generalMin, generalMax } = this.props.priceFilter;
-        const { min, max } = this.state.value;
-        if (generalMin !== min && generalMax !== max) {
-            this.setState({ value: { min: this.props.priceFilter.min, max: this.props.priceFilter.max } })
+    componentDidUpdate(prevprops) {
+        const { generalMin, generalMax, min, max } = this.props.priceFilter;
+        if (prevprops.priceFilter.min !== min && prevprops.priceFilter.max !== max) {
+            this.setState({ value: { min: generalMin, max: generalMax } })
         }
     }
+
 
     onUpdatePrice = () => {
         this.props.updatePrice(this.state.value)
@@ -26,17 +26,19 @@ export default class FilterPrice extends Component {
 
     render() {
         const { value } = this.state;
-        const { generalMin, generalMax, min, max } = this.props.priceFilter;
-        if (generalMin === generalMax || min === max) return null;
+        let { generalMin, generalMax } = this.props.priceFilter;
         return (
             <div className="filter-price-preview">
                 <h3 className="filter-price-title">Price</h3>
-                <InputRange
-                    maxValue={generalMax}
-                    minValue={generalMin}
-                    value={value}
-                    onChange={value => this.setState({ value })}
-                    onChangeComplete={value => this.onUpdatePrice()} />
+                <div className="price-range flex">
+                    <InputRange
+                        maxValue={generalMax}
+                        minValue={generalMin}
+                        value={value}
+                        onChange={value => this.setState({ value })}
+                        onChangeComplete={value => this.onUpdatePrice()} />
+                </div>
+
             </div>
         )
     }

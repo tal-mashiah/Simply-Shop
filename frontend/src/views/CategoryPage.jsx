@@ -15,15 +15,16 @@ class CategoryPage extends Component {
 
     loadSearchData = () => {
         const { _id } = this.props.match.params;
-        const { filterBy } = this.props
+        const { filterBy, updateFilterBy, loadSearchData } = this.props;
         filterBy.categoryId = _id;
-        this.props.updateFilterBy(filterBy);
-        this.props.loadSearchData(filterBy);
+        filterBy.searchValue = null;
+        updateFilterBy(filterBy);
+        loadSearchData(filterBy);
     }
 
     componentDidUpdate(prevProps) {
-        const { filterBy } = this.props
-        const isIdMatch = prevProps.match.params._id !== this.props.match.params._id
+        const { filterBy } = this.props;
+        const isIdMatch = prevProps.match.params._id !== this.props.match.params._id;
         if (prevProps.filterBy !== this.props.filterBy || isIdMatch) {
             this.loadSearchData();
         }

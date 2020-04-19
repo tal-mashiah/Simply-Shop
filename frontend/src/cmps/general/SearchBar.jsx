@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import { withRouter } from "react-router-dom";
 
-export default class SearchBar extends Component {
+class SearchBar extends Component {
     state = { term: '' }
 
     handleChange = (ev) => {
@@ -9,7 +10,7 @@ export default class SearchBar extends Component {
 
     onSubmit = (ev) => {
         ev.preventDefault();
-        this.props.searchBy(this.state.term);
+        this.props.history.push(`/search/${this.state.term}`)
         this.setState({ term: '' });
     }
 
@@ -17,14 +18,11 @@ export default class SearchBar extends Component {
         return (
             <div className='search-bar'>
                 <form onSubmit={this.onSubmit}>
-                    <div className="search-title">{`${this.props.searchName} Search`}</div>
-                    <input type="text" onChange={this.handleChange} value={this.state.term} />
+                        <input type="text" onChange={this.handleChange} value={this.state.term} />
                 </form>
             </div>
         )
     }
 }
 
-SearchBar.defaultProps = {
-    searchName: '',
-}
+export default withRouter(SearchBar);
