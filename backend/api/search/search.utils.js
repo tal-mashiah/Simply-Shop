@@ -1,9 +1,16 @@
 const ObjectId = require('mongodb').ObjectId;
 
-const createFilters = (specKeys, specValues, selectedFilters) => {
-    console.log('selectedFilters: ', selectedFilters);
-    console.log('specValues: ', specValues);
+const createPriceFilter = (allProducts, products) => {
+    const prices = products.map(product => product.price);
+    const allPrices = allProducts.map(product => product.price);
+    const max = Math.max(...prices);
+    const min = Math.min(...prices);
+    const generalMax = Math.max(...allPrices);
+    const generalMin = Math.min(...allPrices);
+    return { max, min, generalMax, generalMin }
+}
 
+const createFilters = (specKeys, specValues, selectedFilters) => {
     let newFilters = [];
     if (selectedFilters.length > 0) {
         specValues = _updateSpecValues(specValues, selectedFilters);
@@ -48,6 +55,7 @@ const _updateSpecValues = (values, filters) => {
 }
 
 module.exports = {
+    createPriceFilter,
     createFilters,
     buildCriteria
 }

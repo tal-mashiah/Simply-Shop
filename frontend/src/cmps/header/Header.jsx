@@ -1,28 +1,34 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import categoryService from '../../services/categoryService';
+
 import NavBar from './NavBar.jsx'
+import Logo from './Logo.jsx';
+import Hamburger from './Hamburger.jsx';
+import Spinner from '../../cmps/general/Spinner.jsx';
+
 
 export default class Header extends Component {
+    state = { categories: [] }
 
-    onToggleMenu = () => {
-        document.querySelector('nav').classList.toggle('open');
-        document.querySelector('header').classList.toggle('menu-open');
+    componentDidMount() {
+        this.loadCategories();
     }
 
+    loadCategories = async () => {
+        const categories = await categoryService.query();
+        this.setState({categories})
+    }
+    
     render() {
+        const {categories} = this.state;
+        if (!categories) return <Spinner/>
+        
+        console.log(categories);
         return (
-            <header>
-                <div className='main-logo'>
-                    <NavLink activeClassName="active" to='/' exact>
-                        {/* <img src={require('')} alt="logo" /> */}
-                    </NavLink>
-                </div>
-
-                <button className="nav-hamburger" onClick={this.onToggleMenu}>
-                    <span></span><span></span><span></span>
-                </button>
-
-                <NavBar />
+            <header className="flex">
+                <Logo />
+                <NavBar categories={categories}/>
+                <Hamburger />
             </header>
         )
     }

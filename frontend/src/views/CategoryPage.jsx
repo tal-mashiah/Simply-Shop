@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { loadSearchData, updateFilterBy, updateSearchFilters } from '../actions/searchActions';
+import { loadSearchData, updateFilterBy } from '../actions/searchActions';
 
 import ProductList from '../cmps/product/ProductList.jsx';
 import FilterList from '../cmps/filter/FilterList.jsx';
@@ -14,17 +14,25 @@ class CategoryPage extends Component {
     }
 
     loadSearchData = () => {
-        this.props.loadSearchData(this.props.filterBy);
+        const { _id } = this.props.match.params;
+        const { filterBy } = this.props
+        filterBy.categoryId = _id;
+        this.props.updateFilterBy(filterBy);
+        this.props.loadSearchData(filterBy);
     }
 
     componentDidUpdate(prevProps) {
-        if(prevProps.filterBy !== this.props.filterBy){
+        const { filterBy } = this.props
+        const isIdMatch = prevProps.match.params._id !== this.props.match.params._id
+        if (prevProps.filterBy !== this.props.filterBy || isIdMatch) {
             this.loadSearchData();
         }
-        // console.log('prevProps: ',prevProps.filterBy.priceFilter);
-        // console.log('this props: ',this.props.filterBy.priceFilter);
+        if (isIdMatch) {
+            filterBy.priceFilter = { max: null, min: null };
+            filterBy.filters = [];
+            this.props.updateFilterBy(filterBy);
+        }
     }
-    
 
     updatePrice = (updatedPrice) => {
         let filterBy = { ...this.props.filterBy };
@@ -40,19 +48,13 @@ class CategoryPage extends Component {
         } else {
             filterBy.filters.push(filter);
         }
-        console.log(filterBy);
-        
         this.props.updateFilterBy(filterBy);
-
-        // filter.selected = !filter.selected;        
-        // this.props.filters.forEach(currFilter => 
-        // currFilter.values.map(value=>value._id === value._id ? filter : value));
-        // this.props.updateSearchFilters(this.props.filters,filter);
     }
-    
+
     render() {
-        const { products, filters, priceFilter } = this.props;
+        const { products, filters, priceFilter } = this.props;        
         if (!products) return <Spinner />
+        
         return (
             <div className='category-page flex'>
                 <FilterList
@@ -78,8 +80,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     loadSearchData,
-    updateFilterBy,
-    // updateSearchFilters
+    updateFilterBy
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryPage);

@@ -12,6 +12,8 @@ export default class FilterPreview extends Component {
 
     render() {
         const { filter, updateFilters } = this.props;
+        console.log('filter: ',filter);
+        
         return (
             <div className="filter-preview flex column">
                 <div className="filter-title-container flex justify-between" onClick={this.toggleFilters}>

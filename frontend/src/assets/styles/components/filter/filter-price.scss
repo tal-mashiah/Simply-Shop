@@ -1,5 +1,10 @@
-.filter-price-title {
-    margin-bottom: 20px;
+.filter-price-preview {
+    min-height: 90px;
+    border-bottom: 1px solid #ebebeb;
+    padding: 25px 0 35px;
+    .filter-price-title {
+        margin-bottom: 20px;
+    }
 }
 
 .input-range {

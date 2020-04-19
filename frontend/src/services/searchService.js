@@ -7,5 +7,3 @@ export default {
 function query(filterBy) {
     return HttpService.post('search', filterBy);
 }
-
-
