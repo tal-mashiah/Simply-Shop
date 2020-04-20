@@ -12,6 +12,12 @@ async function getSearchData(req, res) {
     }
 }
 
+async function getProduct(req, res) {
+    const product = await searchService.getById(req.params.id)
+    res.send(product)
+}
+
 module.exports = {
-    getSearchData
+    getSearchData,
+    getProduct
 }

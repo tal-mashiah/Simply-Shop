@@ -40,9 +40,26 @@ const buildCriteria = (filterBy) => {
         criteria['specValues'] = { $all: filterIds };
     }
     if (filterBy.searchValue) {
-        criteria['title'] =  new RegExp(".*"+filterBy.searchValue+".*", "i");
+        criteria['title'] = new RegExp(".*" + filterBy.searchValue + ".*", "i");
     }
     return criteria;
+}
+
+const createSpecs = (specKeys, specValues) => {
+    // const specs = [
+    //     {specKey: 'brand',specValue: 'apple' },
+    //     {specKey: 'Display Size',specValue: '15.6' }
+    // ]
+    let specs = [];
+    for (let specValue of specValues) {
+        for (const specKey of specKeys) {
+            if (specValue.specKeyId.toString() === specKey._id.toString()) {
+                specs.push({ specKey: specKey.name, specValue: specValue.name })
+            }
+        }
+    }
+    specs.sort((a, b) => (a.specKey > b.specKey) ? 1 : ((b.specKey > a.specKey) ? -1 : 0));
+    return specs;
 }
 
 const _updateSpecValues = (values, filters) => {
@@ -60,5 +77,6 @@ const _updateSpecValues = (values, filters) => {
 module.exports = {
     createPriceFilter,
     createFilters,
-    buildCriteria
+    buildCriteria,
+    createSpecs
 }

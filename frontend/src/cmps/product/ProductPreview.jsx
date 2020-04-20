@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 export default class ProductPreview extends Component {
 
     render() {
-        const { title, imagesUrl, price } = this.props.product;
+        const { title, imagesUrl, price, _id } = this.props.product;
         return (
             <div className="product-preview">
+                <Link to={`/product/${_id}`}>
                 <div className="img-container">
                     <img src={imagesUrl[0]} alt={title} />
                 </div>
@@ -12,6 +14,7 @@ export default class ProductPreview extends Component {
                     <h4 className="title">{title}</h4>
                     <h2 className="price">{price}</h2>
                 </div>
+                </Link>
             </div>
         )
     }

@@ -12,6 +12,20 @@ export function loadSearchData(filterBy) {
     };
 }
 
+export function loadCurrProduct(_id) {    
+    return async dispatch => {
+        try {
+            const currProduct = await searchService.getById(_id);
+            console.log(currProduct);
+            
+            dispatch(_setCurrProduct(currProduct));
+
+        } catch (err) {
+            console.log('searchActions: err in load currProduct', err);
+        }
+    };
+}
+
 export function updateFilterBy(filterBy) {
     return dispatch => {
         try {
@@ -33,6 +47,13 @@ function _setSearchData(searchData) {
     return {
         type: 'SET_SEARCH_DATA',
         searchData
+    };
+}
+
+function _setCurrProduct(currProduct) {
+    return {
+        type: 'SET_CURR_PRODUCT',
+        currProduct
     };
 }
 

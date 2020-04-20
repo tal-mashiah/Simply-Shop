@@ -5,6 +5,7 @@ import history from './history';
 import Header from './cmps/header/Header.jsx';
 import Home from './views/Home.jsx';
 import CategoryPage from './views/CategoryPage.jsx';
+import ProductDetails from './views/ProductDetails.jsx';
 import SearchPage from './views/SearchPage.jsx';
 
 function App() {
@@ -14,8 +15,9 @@ function App() {
         <Header/>
         <Switch>
           <Route path="/" component={Home} exact/>
-          <Route path="/category/:_id" component={CategoryPage} exact/>
-          <Route path="/search/:term" component={SearchPage} exact/>
+          <Route path="/category/:_id" component={CategoryPage}/>
+          <Route path="/product/:_id" component={ProductDetails}/>
+          <Route path="/search/:term" component={SearchPage}/>
         </Switch>
       </Router>
     </div>
