@@ -1,0 +1,51 @@
+.product-quantity {
+    height: 125px;
+    align-items: center;
+    border-bottom: #cacaca 1px solid;
+    label {
+        font-size: 14px;
+        font-family: Lato-Bold;
+    }
+    .quantity-bar {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        height: 35px;
+        input {
+            border: none;
+            text-align: center;
+            font-size: 20px;
+            width: 50px;
+            background-color: #eceeef;
+            padding-top: 3px;
+            outline: none;
+        }
+        .spinner-btn {
+            transition: all ease-in 0.2s;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 35px;
+            height: 34px;
+            font-size: 15px;
+            i {
+                font-size: 13px;
+            }
+        }
+        #inc-btn:hover {
+            i {
+                color: #06ad00;
+            }
+        }
+        #dec-btn:hover {
+            i {
+                color: #9e0e00;
+            }
+        }
+    }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    display: none;
+}

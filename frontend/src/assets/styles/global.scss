@@ -11,6 +11,10 @@
 @import "basics/layout.scss";
 @import "basics/typography.scss";
 
+// views 
+
+@import "views/product-details.scss";
+
 // Components //
 
 // general
@@ -25,6 +29,12 @@
 @import "components/product/product-preview.scss";
 @import "components/product/product-list.scss";
 
+// product details
+@import "node_modules/react-image-gallery/styles/scss/image-gallery.scss";
+@import "components/product-details/product-content.scss";
+@import "components/product-details/product-gallery.scss";
+@import "components/product-details/product-quantity.scss";
+
 // filter
 @import "components/filter/filter-list.scss";
 @import "components/filter/filter-preview.scss";
@@ -35,4 +45,3 @@
 // category
 @import "components/category/category-list.scss";
 @import "components/category/category-preview.scss";
-

@@ -22,9 +22,8 @@ export default class Header extends Component {
     
     render() {
         const {categories} = this.state;
-        if (!categories) return <Spinner/>
-        
-        console.log(categories);
+        if (!categories) return <Spinner/>      
+          
         return (
             <header className="flex justify-between align-center">
                 <Logo />

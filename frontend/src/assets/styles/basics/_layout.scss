@@ -1,5 +1,5 @@
 .container {
-    // max-width: $normal-breakpoint;
+    max-width: $desktop-breakpoint;
     margin: 0 auto;
     padding-left: 10px;
     padding-right: 10px;
@@ -8,10 +8,10 @@
         max-width: $mobile-breakpoint;
     }
     @include for-normal-layout {
-        max-width: $narrow-breakpoint;
+        max-width: $tablet-breakpoint;
     }
     @include for-wide-layout {
-        max-width: $normal-breakpoint;
+        max-width: $desktop-breakpoint;
     }
 }
 

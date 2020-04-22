@@ -46,10 +46,6 @@ const buildCriteria = (filterBy) => {
 }
 
 const createSpecs = (specKeys, specValues) => {
-    // const specs = [
-    //     {specKey: 'brand',specValue: 'apple' },
-    //     {specKey: 'Display Size',specValue: '15.6' }
-    // ]
     let specs = [];
     for (let specValue of specValues) {
         for (const specKey of specKeys) {
@@ -60,6 +56,14 @@ const createSpecs = (specKeys, specValues) => {
     }
     specs.sort((a, b) => (a.specKey > b.specKey) ? 1 : ((b.specKey > a.specKey) ? -1 : 0));
     return specs;
+}
+
+const createImages = (imageUrls) => {
+    const images = [];
+    for (const imageUrl of imageUrls) {
+        images.push({ original: imageUrl, thumbnail: imageUrl })
+    }
+    return images;
 }
 
 const _updateSpecValues = (values, filters) => {
@@ -78,5 +82,6 @@ module.exports = {
     createPriceFilter,
     createFilters,
     buildCriteria,
-    createSpecs
+    createSpecs,
+    createImages
 }

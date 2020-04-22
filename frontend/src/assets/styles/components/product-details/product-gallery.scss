@@ -1,0 +1,19 @@
+.image-gallery {
+    padding-right: 64px;
+    min-width: 605px;
+    width: 50vw;
+}
+.gallery-zoom {
+    position: absolute;
+}
+.image-gallery-thumbnail {
+    transition: ease-in-out 0.3s;
+    border: none;
+    cursor: pointer;
+    &.active,&:hover,&:focus{
+        border: none;
+    }
+    &:hover {
+        opacity: 0.9;
+    }
+}

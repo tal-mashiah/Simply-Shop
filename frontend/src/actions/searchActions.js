@@ -1,25 +1,21 @@
 import searchService from '../services/searchService';
 
-export function loadSearchData(filterBy) {    
+export function loadSearchData(filterBy) {
     return async dispatch => {
         try {
             const searchData = await searchService.query(filterBy);
             dispatch(_setSearchData(searchData));
-
         } catch (err) {
             console.log('searchActions: err in load searchData', err);
         }
     };
 }
 
-export function loadCurrProduct(_id) {    
+export function loadCurrProduct(_id) {
     return async dispatch => {
         try {
             const currProduct = await searchService.getById(_id);
-            console.log(currProduct);
-            
             dispatch(_setCurrProduct(currProduct));
-
         } catch (err) {
             console.log('searchActions: err in load currProduct', err);
         }

@@ -46,8 +46,8 @@ async function getById(productId) {
         collection = await dbService.getCollection('specValue');
         const specValues = await collection.find({ "_id": { $in: product.specValues }}).toArray();;
         const specs = searchUtils.createSpecs(specKeys, specValues);
-        console.log('specs: ', specs);
-
+        const images = searchUtils.createImages(product.imagesUrl);
+        product.imagesUrl = images;
         return {product, specs};
     }
 
