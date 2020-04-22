@@ -26,9 +26,9 @@ class ProductDetails extends Component {
     }
 
     render() {
-        console.log(this.props.productData);
         if (!this.props.productData) return <Spinner />
         const { product } = this.props.productData;
+        const { productData } = this.props;
         return (
             <div className="product-details flex column align-center">
                 <div className="product-details-container">
@@ -36,7 +36,7 @@ class ProductDetails extends Component {
                         <ProductGallery images={product.imagesUrl} />
                         <ProductContent product={product} />
                     </div>
-                    <ProductInfo product={product}/>
+                    <ProductInfo productData={productData}/>
                 </div>
             </div>
         )

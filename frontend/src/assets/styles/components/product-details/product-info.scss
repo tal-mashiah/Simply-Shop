@@ -1,19 +1,34 @@
-.info-tabs {
-    border-bottom: 1px solid #b7b7b7;
-    li {
-        transition: all .4s ease-out;
-        padding: 16px 0;
-        margin-right: 125px;
-        color: #949494;
-        font-size: 18px;
-        cursor: pointer;
-        border-bottom: 3px solid transparent;
-        &:hover {
-            color: #3a414a;
+.product-info {
+    .info-tabs {
+        border-bottom: 1px solid #b7b7b7;
+        margin-bottom: 28px;
+        li {
+            transition: all 0.4s ease-out;
+            padding: 16px 0;
+            margin-right: 125px;
+            color: #949494;
+            font-size: 18px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            &:hover {
+                color: #3a414a;
+            }
+            &.active {
+                border-bottom-color: #3589fe;
+                color: #3a414a;
+            }
         }
-        &.active {
-            border-bottom-color: #3589fe;
-            color: #3a414a;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+        td {
+            width: 50%;
+            padding: 8px;
+            text-align: left;
         }
     }
 }
