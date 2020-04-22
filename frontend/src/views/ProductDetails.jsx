@@ -36,7 +36,7 @@ class ProductDetails extends Component {
                         <ProductGallery images={product.imagesUrl} />
                         <ProductContent product={product} />
                     </div>
-                    <ProductInfo />
+                    <ProductInfo product={product}/>
                 </div>
             </div>
         )

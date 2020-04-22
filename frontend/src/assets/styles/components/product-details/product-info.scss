@@ -1,0 +1,19 @@
+.info-tabs {
+    border-bottom: 1px solid #b7b7b7;
+    li {
+        transition: all .4s ease-out;
+        padding: 16px 0;
+        margin-right: 125px;
+        color: #949494;
+        font-size: 18px;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        &:hover {
+            color: #3a414a;
+        }
+        &.active {
+            border-bottom-color: #3589fe;
+            color: #3a414a;
+        }
+    }
+}
