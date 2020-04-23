@@ -26,7 +26,7 @@ export default class ProductContent extends Component {
                 <div className="gallery-zoom" id="myPortal" />
                 <div className="top-content flex column justify-between">
                     <h1 className="content-title flex column">{title}</h1>
-                    {quantity === 1 || <span>Total for {quantity} units:</span>}
+                    {quantity === 1 || <span>Total amount for {quantity} units:</span>}
                     <div className="content-price"><i className="fas fa-dollar-sign"></i>{price * quantity}</div>
                 </div>
                 <ProductQuantity quantity={quantity} onQuantityChange={this.onQuantityChange} />

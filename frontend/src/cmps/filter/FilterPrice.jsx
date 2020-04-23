@@ -14,7 +14,9 @@ export default class FilterPrice extends Component {
 
     componentDidUpdate(prevprops) {
         const { generalMin, generalMax, min, max } = this.props.priceFilter;
-        if (prevprops.priceFilter.min !== min && prevprops.priceFilter.max !== max) {
+        if (prevprops.priceFilter.min !== min && prevprops.priceFilter.max !== max ||
+             generalMin !== prevprops.priceFilter.generalMin ||
+             generalMax !== prevprops.priceFilter.generalMax) {
             this.setState({ value: { min: generalMin, max: generalMax } })
         }
     }

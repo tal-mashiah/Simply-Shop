@@ -5,7 +5,7 @@ import NavBar from './NavBar.jsx'
 import Logo from './Logo.jsx';
 import Hamburger from './Hamburger.jsx';
 import Spinner from '../../cmps/general/Spinner.jsx';
-import SearchBar from '../general/SearchBar.jsx';
+import SearchBar from './SearchBar.jsx';
 
 
 export default class Header extends Component {

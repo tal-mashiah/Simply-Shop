@@ -9,13 +9,20 @@ module.exports = {
 }
 
 async function query(filterBy) {
+    console.log('filterBy: ',filterBy);
+    
     const criteria = searchUtils.buildCriteria(filterBy);
     let collection = await dbService.getCollection('product');
     try {
         const products = await collection.find(criteria).toArray();
-        const allProducts = await collection.find({ 'categoryId': ObjectId(filterBy.categoryId) }).toArray();
+        if(filterBy.searchValue){
+            var allProducts = await collection.find({ 'title': new RegExp(".*" + filterBy.searchValue + ".*", "i") }).toArray();
+        } else{
+            var allProducts = await collection.find({ 'categoryId': ObjectId(filterBy.categoryId) }).toArray();
+        }
         products.forEach(product => delete product.costPrice);
-
+        console.log('allProducts: ',allProducts);
+        
         const priceFilter = searchUtils.createPriceFilter(allProducts, products);
 
         const specValueIds = products.map(product => product.specValues).flat();
@@ -25,9 +32,8 @@ async function query(filterBy) {
         const specKeyIds = specValues.map(specValue => specValue.specKeyId).flat();
         collection = await dbService.getCollection('specKey');
         const specKeys = await collection.find({ '_id': { $in: specKeyIds } }).toArray();
-
         const filters = searchUtils.createFilters(specKeys, specValues, filterBy.filters);
-
+        
         return { products, priceFilter, filters }
 
     } catch (err) {
@@ -48,6 +54,7 @@ async function getById(productId) {
         const specs = searchUtils.createSpecs(specKeys, specValues);
         const images = searchUtils.createImages(product.imagesUrl);
         product.imagesUrl = images;
+        delete product.specValues
         return {product, specs};
     }
 
