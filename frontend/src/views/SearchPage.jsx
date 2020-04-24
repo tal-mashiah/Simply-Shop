@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux';
-import { loadSearchData, updateFilterBy } from '../actions/searchActions';
+import { loadSearchData, updateFilterBy, updateSortBy } from '../actions/searchActions';
 
 import ProductList from '../cmps/product/ProductList.jsx';
 import FilterList from '../cmps/filter/FilterList.jsx';
 import Spinner from '../cmps/general/Spinner.jsx';
+import SearchHeader from '../cmps/search/SearchHeader';
 
 class SearchPage extends Component {
 
@@ -14,24 +15,44 @@ class SearchPage extends Component {
     }
 
     loadSearchData = () => {
-        const { term } = this.props.match.params;
+        const { term, _id } = this.props.match.params;
         const { filterBy, updateFilterBy, loadSearchData } = this.props;
-        filterBy.searchValue = term;
-        filterBy.categoryId = null;
-
+        if (term) {
+            filterBy.searchValue = term;
+            filterBy.categoryId = null;
+        }
+        if (_id) {
+            filterBy.categoryId = _id;
+            filterBy.searchValue = null;
+        }
         updateFilterBy(filterBy);
         loadSearchData(filterBy);
     }
 
+
     componentDidUpdate(prevProps) {
-        const { filterBy} = this.props;
-        if (prevProps.match.params.term !== this.props.match.params.term) {
-            filterBy.filters = [];
-            filterBy.priceFilter = { max: null, min: null };
-            this.loadSearchData();
+        const { term, _id } = this.props.match.params;
+        const { filterBy } = this.props;
+        if (term) {
+            if (prevProps.match.params.term !== this.props.match.params.term) {
+                filterBy.filters = [];
+                filterBy.priceFilter = { max: null, min: null };
+                this.loadSearchData();
+            }
+            if (prevProps.filterBy !== filterBy) {
+                this.loadSearchData();
+            }
         }
-        if (prevProps.filterBy !== filterBy) {
-            this.loadSearchData();
+        if (_id) {
+            const isIdMatch = prevProps.match.params._id !== this.props.match.params._id;
+            if (prevProps.filterBy !== this.props.filterBy || isIdMatch) {
+                this.loadSearchData();
+            }
+            if (isIdMatch) {
+                filterBy.priceFilter = { max: null, min: null };
+                filterBy.filters = [];
+                this.props.updateFilterBy(filterBy);
+            }
         }
     }
 
@@ -52,22 +73,31 @@ class SearchPage extends Component {
         this.props.updateFilterBy(filterBy);
     }
 
+    updateSort = (sortBy) => {
+        this.props.updateSortBy(sortBy);
+
+    }
+
     render() {
-        const { products, filters, priceFilter } = this.props;
-        const { term } = this.props.match.params;
+        const { products, filters, priceFilter, filterBy } = this.props;
+        const { term, name} = this.props.match.params;
         if (!products) return <Spinner />
-        console.log('products length: ', products.length);
-        console.log('term: ', term);
+        console.log('name: ',name);
         
         return (
             <div className='flex'>
-                <FilterList
-                    filters={filters}
-                    priceFilter={priceFilter}
-                    updatePrice={this.updatePrice}
-                    updateFilters={this.updateFilters}
-                />
-                <ProductList products={products} />
+                {(products.length < 2 && filterBy.filters.length === 0 && !filterBy.priceFilter.min && !name) ||
+                    <FilterList
+                        filters={filters}
+                        priceFilter={priceFilter}
+                        updatePrice={this.updatePrice}
+                        updateFilters={this.updateFilters}
+                    />}
+
+                <div className="search-container">
+                    <SearchHeader term={term || name} productsLength={products.length} updateSort={this.updateSort} sortBy={filterBy.sortBy} />
+                    <ProductList products={products} />
+                </div>
             </div>
         )
     }
@@ -84,7 +114,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     loadSearchData,
-    updateFilterBy
+    updateFilterBy,
+    updateSortBy
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);

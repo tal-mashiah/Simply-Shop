@@ -1,5 +1,20 @@
 const ObjectId = require('mongodb').ObjectId;
 
+const sortProducts = (products, sort) => {
+    console.log('products: ', products);
+    console.log('sort: ', sort);
+    switch (sort) {
+        case 'Best Match':
+            return products;
+        case 'Price: Low to High':
+            return products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+        case 'Price: High to Low':
+            return products.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+        default:
+            break;
+    }
+}
+
 const createPriceFilter = (allProducts, products) => {
     const prices = products.map(product => product.price);
     const allPrices = allProducts.map(product => product.price);
@@ -83,5 +98,6 @@ module.exports = {
     createFilters,
     buildCriteria,
     createSpecs,
-    createImages
+    createImages,
+    sortProducts
 }

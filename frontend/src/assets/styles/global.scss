@@ -11,9 +11,6 @@
 @import "basics/layout.scss";
 @import "basics/typography.scss";
 
-// views 
-
-@import "views/product-details.scss";
 
 // Components //
 
@@ -46,3 +43,12 @@
 // category
 @import "components/category/category-list.scss";
 @import "components/category/category-preview.scss";
+
+// search
+@import "components/search/search-header.scss";
+@import "components/search/product-sort.scss";
+
+// views //
+
+@import "views/product-details.scss";
+@import "views/search-page.scss";

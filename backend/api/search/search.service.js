@@ -20,11 +20,9 @@ async function query(filterBy) {
         } else{
             var allProducts = await collection.find({ 'categoryId': ObjectId(filterBy.categoryId) }).toArray();
         }
-        products.forEach(product => delete product.costPrice);
-        console.log('allProducts: ',allProducts);
-        
+        products.forEach(product => delete product.costPrice);        
         const priceFilter = searchUtils.createPriceFilter(allProducts, products);
-
+        const sortedProducts =  searchUtils.sortProducts(products, filterBy.sortBy );
         const specValueIds = products.map(product => product.specValues).flat();
         collection = await dbService.getCollection('specValue');
         const specValues = await collection.find({ '_id': { $in: specValueIds } }).toArray();
@@ -34,7 +32,7 @@ async function query(filterBy) {
         const specKeys = await collection.find({ '_id': { $in: specKeyIds } }).toArray();
         const filters = searchUtils.createFilters(specKeys, specValues, filterBy.filters);
         
-        return { products, priceFilter, filters }
+        return { products: sortedProducts, priceFilter, filters }
 
     } catch (err) {
         console.log('ERROR: cannot find products', err);

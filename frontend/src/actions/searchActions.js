@@ -11,6 +11,13 @@ export function loadSearchData(filterBy) {
     };
 }
 
+function _setSearchData(searchData) {
+    return {
+        type: 'SET_SEARCH_DATA',
+        searchData
+    };
+}
+
 export function loadCurrProduct(_id) {
     return async dispatch => {
         try {
@@ -22,12 +29,19 @@ export function loadCurrProduct(_id) {
     };
 }
 
+function _setCurrProduct(currProduct) {
+    return {
+        type: 'SET_CURR_PRODUCT',
+        currProduct
+    };
+}
+
 export function updateFilterBy(filterBy) {
     return dispatch => {
         try {
             dispatch(_updateFilterBy(filterBy));
         } catch (err) {
-            console.log('searchActions: err in load searchData', err);
+            console.log('searchActions: err in update FilterBy', err);
         }
     };
 }
@@ -39,35 +53,19 @@ function _updateFilterBy(filterBy) {
     };
 }
 
-function _setSearchData(searchData) {
-    return {
-        type: 'SET_SEARCH_DATA',
-        searchData
+export function updateSortBy(sortBy) {
+    return dispatch => {
+        try {
+            dispatch(_updateSortBy(sortBy));
+        } catch (err) {
+            console.log('searchActions: err in update SortBy', err);
+        }
     };
 }
 
-function _setCurrProduct(currProduct) {
+function _updateSortBy(sortBy) {
     return {
-        type: 'SET_CURR_PRODUCT',
-        currProduct
+        type: 'UPDATE_SORT_BY',
+        sortBy
     };
 }
-
-// export function updateSearchFilters(filters,filter) {
-//     console.log('filters: ',filters);
-//     return async dispatch => {
-//         try {
-//             const updateFilter = await searchService.updateFilter(filter);
-//             dispatch(_updateSearchFilters(filters));
-//         } catch (err) {
-//             console.log('searchActions: err in load searchData', err);
-//         }
-//     };
-// }
-
-// function _updateSearchFilters(filters) {
-//     return {
-//         type: 'UPDATE_SEARCH_FILTER',
-//         filters
-//     };
-// }
