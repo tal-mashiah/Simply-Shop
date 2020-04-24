@@ -4,11 +4,11 @@ const sortProducts = (products, sort) => {
     console.log('products: ', products);
     console.log('sort: ', sort);
     switch (sort) {
-        case 'Best Match':
+        case 'bestMatch':
             return products;
-        case 'Price: Low to High':
+        case 'PriceAscending':
             return products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-        case 'Price: High to Low':
+        case 'PriceDescending':
             return products.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
         default:
             break;

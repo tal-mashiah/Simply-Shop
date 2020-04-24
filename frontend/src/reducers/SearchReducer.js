@@ -8,7 +8,7 @@ const initialState = {
         filters: [],
         searchValue: null,
         pageNumber: 1,
-        sortBy: 'Best Match',
+        sortBy: 'bestMatch',
     }
 };
 
