@@ -82,7 +82,6 @@ class SearchPage extends Component {
         const { products, filters, priceFilter, filterBy } = this.props;
         const { term, name} = this.props.match.params;
         if (!products) return <Spinner />
-        console.log('name: ',name);
         
         return (
             <div className='flex'>
