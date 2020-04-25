@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import { connect } from 'react-redux';
 import { loadCurrProduct } from '../actions/searchActions';
+import { updateBag } from '../actions/checkoutActions';
 
 import ProductContent from '../cmps/product-details/content/ProductContent.jsx';
 import ProductGallery from '../cmps/product-details/gallery/ProductGallery';
@@ -25,6 +26,10 @@ class ProductDetails extends Component {
         }
     }
 
+    addToBag = (item) => {
+        this.props.updateBag(item)
+    }
+
     render() {
         if (!this.props.productData) return <Spinner />
         const { product } = this.props.productData;
@@ -34,7 +39,7 @@ class ProductDetails extends Component {
                 <div className="product-details-container">
                     <div className="product-top-container flex">
                         <ProductGallery images={product.imagesUrl} />
-                        <ProductContent product={product} />
+                        <ProductContent product={product} addToBag={this.addToBag}/>
                     </div>
                     <ProductInfo productData={productData}/>
                 </div>
@@ -50,7 +55,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    loadCurrProduct
+    loadCurrProduct,
+    updateBag
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
