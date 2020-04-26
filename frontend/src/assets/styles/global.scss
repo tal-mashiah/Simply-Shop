@@ -16,6 +16,7 @@
 
 // general
 @import "components/general/spinner.scss";
+@import "components/general/quantity-bar.scss";
 
 // header
 @import "components/header/header.scss";
@@ -47,6 +48,11 @@
 // search
 @import "components/search/search-header.scss";
 @import "components/search/product-sort.scss";
+
+// cart
+@import "components/cart/cart.scss";
+@import "components/cart/cart-item-preview.scss";
+@import "components/cart/cart-item-list.scss";
 
 // views //
 

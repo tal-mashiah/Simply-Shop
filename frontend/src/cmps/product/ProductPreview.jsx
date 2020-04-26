@@ -12,7 +12,7 @@ export default class ProductPreview extends Component {
                 </div>
                 <div className="details-container flex column justify-between">
                     <h4 className="title">{title}</h4>
-                    <h2 className="price">{price}</h2>
+                    <h2 className="price"><i className="fas fa-dollar-sign"></i>{price}</h2>
                 </div>
                 </Link>
             </div>

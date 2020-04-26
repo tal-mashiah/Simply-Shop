@@ -1,23 +1,12 @@
-import React, { Component } from 'react'
 
-export default class ProductQuantity extends Component {
+import React from 'react'
+import QuntityBar from '../../general/QuntityBar.jsx'
 
-    handleChange = (diff) => {
-        this.props.onQuantityChange(diff);
-    }
-
-    render() {
-        const { quantity } = this.props;
-        return (
-            <div className="product-quantity flex align-center justify-between">
-                <label>Quantity:</label>
-                <div className="quantity-bar flex">
-                    <div id="dec-btn" className="spinner-btn" onClick={() => this.handleChange(-1)}><i className="fas fa-minus"></i></div>
-                    <input type="number" value={quantity} readOnly />
-                    <div id="inc-btn" className="spinner-btn" onClick={() => this.handleChange(1)}><i className="fas fa-plus"></i></div>
-                </div>
-            </div>
-
-        )
-    }
+export default function ProductQuantity({ quantity, changeQuantity }) {
+    return (
+        <div className="product-quantity flex align-center justify-between">
+            <label>Quantity:</label>
+            <QuntityBar quantity={quantity} changeQuantity={changeQuantity}/>
+        </div>
+    )
 }

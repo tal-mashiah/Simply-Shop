@@ -14,7 +14,7 @@ export default class ProductContent extends Component {
         }
     }
 
-    onQuantityChange = (diff) => {
+    changeQuantity = (diff) => {
         this.setState({ quantity: this.state.quantity + diff })
     }
 
@@ -38,7 +38,7 @@ export default class ProductContent extends Component {
                     <div className="content-price"><i className="fas fa-dollar-sign"></i>{price * quantity}</div>
                 </div>
 
-                <ProductQuantity quantity={quantity} onQuantityChange={this.onQuantityChange} />
+                <ProductQuantity quantity={quantity} changeQuantity={this.changeQuantity} />
 
                 <div className="buy-container flex justify-between align-center">
                     <button id="buy-btn" className="main-btn">Buy now</button>

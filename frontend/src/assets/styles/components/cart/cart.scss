@@ -1,0 +1,30 @@
+.cart {
+    position: relative;
+    width: 35px;
+    .fa-shopping-cart{
+        font-size: 16px;
+    }
+    .cart-quantity{
+        position: absolute;
+        height: 16px;
+        min-width: 14px;
+        top: 12px;
+        right: -1px;
+        line-height: 13px;
+        border-radius: 50%;
+        background-color: #3589fe;
+        border: 1px solid #3589fe;
+        color: #fff;
+        padding: 0 3px;
+        font-size: 12px;
+    }
+    &:hover .cart-modal{
+        display: block;
+    }
+}
+        .cart-modal{
+            display: none;
+            position: absolute;
+            top: $header-height;
+            right: 0;
+        }
