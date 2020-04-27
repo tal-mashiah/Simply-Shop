@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 export default class QuntityBar extends Component {
 
     handleChange = (diff) => {
-        this.props.changeQuantity(diff);
+        const { changeQuantity, itemId, quantity } = this.props;
+        changeQuantity(diff, itemId, quantity);
     }
 
     render() {

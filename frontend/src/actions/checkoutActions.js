@@ -33,3 +33,22 @@ function _deleteItem(itemId) {
         itemId
     };
 }
+
+export function updateQuantity(itemId,diff,quantity) {
+    return async dispatch => {
+        try {
+            dispatch(_updateQuantity(itemId,diff,quantity));
+        } catch (err) {
+            console.log('checkoutActions: err in update quantity', err);
+        }
+    };
+}
+
+function _updateQuantity(itemId,diff,quantity) {
+    return {
+        type: 'UPDATE_QUANTITY',
+        quantity,
+        itemId,
+        diff
+    };
+}

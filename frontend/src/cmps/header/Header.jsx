@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import categoryService from '../../services/categoryService';
 
 import { connect } from 'react-redux';
-import { deleteItem } from '../../actions/checkoutActions';
+import { deleteItem, updateQuantity } from '../../actions/checkoutActions';
 
 import NavBar from './NavBar.jsx'
 import Logo from './Logo.jsx';
@@ -20,23 +20,28 @@ class Header extends Component {
 
     loadCategories = async () => {
         const categories = await categoryService.query();
-        this.setState({categories})
+        this.setState({ categories })
     }
 
     deleteItem = (itemId) => {
         this.props.deleteItem(itemId);
     }
-    
+
+    changeQuantity = (diff, itemId, quantity) => {
+        console.log(itemId, diff);
+        this.props.updateQuantity(itemId,diff,quantity);
+    }
+
     render() {
-        const {categories} = this.state;
-        const {bag} = this.props;
-        if (!categories) return <Spinner/>      
-          
+        const { categories } = this.state;
+        const { bag } = this.props;
+        if (!categories) return <Spinner />
+
         return (
             <header className="flex justify-between align-center">
                 <Logo />
-                <SearchBar/>
-                <NavBar categories={categories} bag={bag} deleteItem={this.deleteItem}/>
+                <SearchBar />
+                <NavBar categories={categories} bag={bag} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
                 <Hamburger />
             </header>
         )
@@ -50,7 +55,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    deleteItem
+    deleteItem,
+    updateQuantity
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

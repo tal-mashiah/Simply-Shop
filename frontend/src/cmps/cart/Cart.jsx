@@ -8,13 +8,13 @@ export default class Cart extends Component {
     }
 
     render() {
-        const { bag, deleteItem } = this.props;
+        const { bag, deleteItem, changeQuantity } = this.props;
         return (
             <div className='link-container'>
                 <div className='cart'>
                     <i className="fas fa-shopping-cart"></i>
                     <span className='cart-quantity'> {this.renderQuantity()} </span>
-                    <CartModal bag={bag} deleteItem={deleteItem} />
+                    <CartModal bag={bag} deleteItem={deleteItem} changeQuantity={changeQuantity} />
                 </div>
             </div>
         )
