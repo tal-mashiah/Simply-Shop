@@ -1,7 +1,10 @@
 .cart-item-preview {
-    border-bottom: 1px solid #ebebeb;
-    padding: 10px 0;
+    
+    padding: 12px 0;
     line-height: initial;
+    &:not(:last-of-type){
+        border-bottom: 1px solid #ebebeb;
+    }
     cursor: default;
     img {
         width: 100px;

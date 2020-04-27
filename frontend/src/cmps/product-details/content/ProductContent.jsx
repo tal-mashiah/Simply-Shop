@@ -20,8 +20,9 @@ export default class ProductContent extends Component {
 
     onAddToBag = () => {
         const { quantity } = this.state;
-        const { product } = this.props
-        this.props.addToBag({ product, quantity })
+        const { product } = this.props;
+        this.props.addToBag({ product, quantity });
+        
     }
 
     render() {
@@ -41,8 +42,8 @@ export default class ProductContent extends Component {
                 <ProductQuantity quantity={quantity} changeQuantity={this.changeQuantity} />
 
                 <div className="buy-container flex justify-between align-center">
-                    <button id="buy-btn" className="main-btn">Buy now</button>
-                    <button onClick={() => this.onAddToBag()} id="add-btn" className="main-btn">Add to bag</button>
+                    <button id="primary" className="main-btn">Buy now</button>
+                    <button id="secondary" className="main-btn" onClick={() => this.onAddToBag()} >Add to bag</button>
                 </div>
             </div>
         )

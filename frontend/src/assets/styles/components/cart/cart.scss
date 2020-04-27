@@ -1,10 +1,10 @@
 .cart {
     position: relative;
     width: 35px;
-    .fa-shopping-cart{
+    .fa-shopping-cart {
         font-size: 16px;
     }
-    .cart-quantity{
+    .cart-quantity {
         position: absolute;
         height: 16px;
         min-width: 14px;
@@ -18,13 +18,50 @@
         padding: 0 3px;
         font-size: 12px;
     }
-    &:hover .cart-modal{
-        display: block;
+    &:hover .cart-modal {
+        visibility: visible;
+        opacity: 1;
+    }
+    .cart-modal {
+        transition: all linear 0.5s;
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        top: $header-height;
+        right: 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        background-color: #fff;
+        .cart-modal-total {
+            text-align: end;
+            font-size: 20px;
+            font-family: Lato-Bold;
+            line-height: 2;
+            padding: 10px 15px;
+            border-top: #cacaca 1px solid;
+            min-width: 497px;
+            cursor: default;
+            .main-btn {
+                height: 40px;
+            }
+            span {
+                font-size: 22px;
+                &:not(:last-of-type) {
+                    margin-right: 10px;
+                }
+                i {
+                    font-size: 19px;
+                    margin-right: 2px;
+                }
+            }
+        }
+        .cart-modal-empty {
+            font-family: Lato-Bold;
+            font-size: 16px;
+            cursor: default;
+        }
+        &.visible {
+            visibility: visible;
+            opacity: 1;
+        }
     }
 }
-        .cart-modal{
-            display: none;
-            position: absolute;
-            top: $header-height;
-            right: 0;
-        }

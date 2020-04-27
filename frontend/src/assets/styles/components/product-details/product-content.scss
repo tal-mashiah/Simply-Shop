@@ -26,23 +26,5 @@
     }
     .buy-container {
         height: 125px;
-        #buy-btn {
-            background-color: #3589fe;
-            color: #fff;
-            margin-right: 32px;
-            &:hover {
-                background-color: #1766d5;
-            }
-        }
-        #add-btn {
-            color: #3a414a;
-            background-color: transparent;
-            border: 2px solid #3a414a;
-            &:hover {
-                color: #fff;
-                background-color: #2a2c2e;
-                border-color: #2a2c2e;
-            }
-        }
     }
 }
