@@ -6,12 +6,13 @@ const ObjectId = require('mongodb').ObjectId;
 module.exports = {
     query,
     getById,
-    getStorageProducts
+    getByIds
 }
 
 async function query(filterBy) {
     const criteria = searchUtils.buildCriteria(filterBy);
     let collection = await dbService.getCollection('product');
+
     try {
         const products = await collection.find(criteria).toArray();
         if (filterBy.searchValue) {
@@ -41,6 +42,7 @@ async function query(filterBy) {
 
 async function getById(productId) {
     let collection = await dbService.getCollection('product');
+
     try {
         const product = await collection.findOne({ "_id": ObjectId(productId) });
         delete product.costPrice;
@@ -52,31 +54,24 @@ async function getById(productId) {
         product.imagesUrl = searchUtils.createImages(product.imagesUrl);
         delete product.specValues
         return { product, specs };
-    }
 
-    catch (err) {
+    } catch (err) {
         console.log(`ERROR: while finding product ${productId}`)
         throw err;
     }
 }
 
-async function getStorageProducts(storageBag) {
+async function getByIds(ids) {
     let collection = await dbService.getCollection('product');
-    try {
-        const productIds = storageBag.map(item => ObjectId(item.productId));
-        const products = await collection.find({ "_id": { $in: productIds } }).toArray();
 
-        const updatedBag = products.map(product => {
-            product.imagesUrl = searchUtils.createImages(product.imagesUrl);
-            for (const item of storageBag) {
-                if (item.productId === product._id.toString()) {
-                    return { product, quantity: item.quantity }
-                }
-            }
-        })
-        return updatedBag;
-    }
-    catch (err) {
+    try {
+        const productIds = ids.map(id => ObjectId(id));
+        const products = await collection.find({ "_id": { $in: productIds } }).toArray();
+        products.forEach(product => product.imagesUrl = searchUtils.createImages(product.imagesUrl));
+
+        return products;
+
+    } catch (err) {
         console.log('ERROR: cannot find storage products', err);
         throw err;
     }

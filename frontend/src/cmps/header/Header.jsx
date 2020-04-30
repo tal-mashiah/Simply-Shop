@@ -21,8 +21,8 @@ class Header extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.bag !== this.props.bag) {
-            const storageBag = this.props.bag.map(item => { return { productId: item.product._id, quantity: item.quantity } })
-            storageService.saveToStorage('bag', storageBag)
+            const storageBag = this.props.bag.map(item => { return { productId: item.product._id, quantity: item.quantity } });
+            storageService.saveToStorage('bag', storageBag);
         }
     }
 
@@ -33,7 +33,7 @@ class Header extends Component {
 
     loadStorageBag = () => {
         const storageBag = storageService.loadFromStorage('bag');
-        if (storageBag) this.props.setBag(storageBag);
+        if (storageBag && storageBag.length > 0) this.props.setBag(storageBag);
     }
 
     deleteItem = (itemId) => {

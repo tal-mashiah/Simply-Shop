@@ -1,9 +1,9 @@
 const express = require('express')
-const { getSearchData, getStorageProducts, getProduct } = require('./search.controller')
+const { getSearchData, getProducts, getProduct } = require('./search.controller')
 const router = express.Router()
 
 router.post('/', getSearchData);
-router.post('/storage', getStorageProducts);
+router.post('/products', getProducts);
 router.get('/:id', getProduct)
 
 module.exports = router

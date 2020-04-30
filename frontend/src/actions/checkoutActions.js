@@ -3,7 +3,16 @@ import searchService from '../services/searchService';
 export function setBag(storageBag) {
     return async dispatch => {
         try {
-            const updatedBag = await searchService.getStorageProducts(storageBag);
+            const productIds = storageBag.map(item => item.productId);
+            const products = await searchService.getByIds(productIds);
+            const updatedBag = products.map(product => {
+                for (const item of storageBag) {
+                    if (item.productId === product._id.toString()) {
+                        return { product, quantity: item.quantity }
+                    }
+                }
+            })
+
             dispatch(_setBag(updatedBag));
         } catch (err) {
             console.log('checkoutActions: err in set bag', err);
@@ -52,17 +61,17 @@ function _deleteItem(itemId) {
     };
 }
 
-export function updateQuantity(itemId,diff,quantity) {
+export function updateQuantity(itemId, diff, quantity) {
     return dispatch => {
         try {
-            dispatch(_updateQuantity(itemId,diff,quantity));
+            dispatch(_updateQuantity(itemId, diff, quantity));
         } catch (err) {
             console.log('checkoutActions: err in update quantity', err);
         }
     };
 }
 
-function _updateQuantity(itemId,diff,quantity) {
+function _updateQuantity(itemId, diff, quantity) {
     return {
         type: 'UPDATE_QUANTITY',
         quantity,
