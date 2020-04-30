@@ -2,7 +2,8 @@ import HttpService from './HttpService';
 
 export default {
     query,
-    getById
+    getById,
+    getStorageProducts
 };
 
 function query(filterBy) {
@@ -11,4 +12,8 @@ function query(filterBy) {
 
 function getById(id) {
     return HttpService.get(`search/${id}`);
+}
+
+function getStorageProducts(storageBag) {
+    return HttpService.post('search/storage', storageBag);
 }

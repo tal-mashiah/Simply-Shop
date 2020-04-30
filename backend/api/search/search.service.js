@@ -5,24 +5,23 @@ const ObjectId = require('mongodb').ObjectId;
 
 module.exports = {
     query,
-    getById
+    getById,
+    getStorageProducts
 }
 
 async function query(filterBy) {
-    console.log('filterBy: ',filterBy);
-    
     const criteria = searchUtils.buildCriteria(filterBy);
     let collection = await dbService.getCollection('product');
     try {
         const products = await collection.find(criteria).toArray();
-        if(filterBy.searchValue){
+        if (filterBy.searchValue) {
             var allProducts = await collection.find({ 'title': new RegExp(".*" + filterBy.searchValue + ".*", "i") }).toArray();
-        } else{
+        } else {
             var allProducts = await collection.find({ 'categoryId': ObjectId(filterBy.categoryId) }).toArray();
         }
-        products.forEach(product => delete product.costPrice);        
+        products.forEach(product => delete product.costPrice);
         const priceFilter = searchUtils.createPriceFilter(allProducts, products);
-        const sortedProducts =  searchUtils.sortProducts(products, filterBy.sortBy );
+        const sortedProducts = searchUtils.sortProducts(products, filterBy.sortBy);
         const specValueIds = products.map(product => product.specValues).flat();
         collection = await dbService.getCollection('specValue');
         const specValues = await collection.find({ '_id': { $in: specValueIds } }).toArray();
@@ -31,7 +30,7 @@ async function query(filterBy) {
         collection = await dbService.getCollection('specKey');
         const specKeys = await collection.find({ '_id': { $in: specKeyIds } }).toArray();
         const filters = searchUtils.createFilters(specKeys, specValues, filterBy.filters);
-        
+
         return { products: sortedProducts, priceFilter, filters }
 
     } catch (err) {
@@ -48,16 +47,37 @@ async function getById(productId) {
         collection = await dbService.getCollection('specKey');
         const specKeys = await collection.find({}).toArray();;
         collection = await dbService.getCollection('specValue');
-        const specValues = await collection.find({ "_id": { $in: product.specValues }}).toArray();;
+        const specValues = await collection.find({ "_id": { $in: product.specValues } }).toArray();;
         const specs = searchUtils.createSpecs(specKeys, specValues);
-        const images = searchUtils.createImages(product.imagesUrl);
-        product.imagesUrl = images;
+        product.imagesUrl = searchUtils.createImages(product.imagesUrl);
         delete product.specValues
-        return {product, specs};
+        return { product, specs };
     }
 
     catch (err) {
         console.log(`ERROR: while finding product ${productId}`)
+        throw err;
+    }
+}
+
+async function getStorageProducts(storageBag) {
+    let collection = await dbService.getCollection('product');
+    try {
+        const productIds = storageBag.map(item => ObjectId(item.productId));
+        const products = await collection.find({ "_id": { $in: productIds } }).toArray();
+
+        const updatedBag = products.map(product => {
+            product.imagesUrl = searchUtils.createImages(product.imagesUrl);
+            for (const item of storageBag) {
+                if (item.productId === product._id.toString()) {
+                    return { product, quantity: item.quantity }
+                }
+            }
+        })
+        return updatedBag;
+    }
+    catch (err) {
+        console.log('ERROR: cannot find storage products', err);
         throw err;
     }
 }

@@ -1,8 +1,6 @@
 const ObjectId = require('mongodb').ObjectId;
 
 const sortProducts = (products, sort) => {
-    console.log('products: ', products);
-    console.log('sort: ', sort);
     switch (sort) {
         case 'bestMatch':
             return products;

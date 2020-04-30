@@ -12,6 +12,16 @@ async function getSearchData(req, res) {
     }
 }
 
+async function getStorageProducts(req, res) {
+    try {
+        const storageProducts = await searchService.getStorageProducts(req.body)
+        res.send(storageProducts)
+    } catch (err) {
+        logger.error('Cannot get storage products', err);
+        res.status(500).send({ error: 'cannot get storage products' })
+    }
+}
+
 async function getProduct(req, res) {
     const product = await searchService.getById(req.params.id)
     res.send(product)
@@ -19,5 +29,6 @@ async function getProduct(req, res) {
 
 module.exports = {
     getSearchData,
+    getStorageProducts,
     getProduct
 }

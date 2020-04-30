@@ -1,7 +1,25 @@
-// import searchService from '../services/searchService';
+import searchService from '../services/searchService';
+
+export function setBag(storageBag) {
+    return async dispatch => {
+        try {
+            const updatedBag = await searchService.getStorageProducts(storageBag);
+            dispatch(_setBag(updatedBag));
+        } catch (err) {
+            console.log('checkoutActions: err in set bag', err);
+        }
+    };
+}
+
+function _setBag(updatedBag) {
+    return {
+        type: 'SET_BAG',
+        updatedBag
+    };
+}
 
 export function updateBag(item) {
-    return async dispatch => {
+    return dispatch => {
         try {
             dispatch(_updateBag(item));
         } catch (err) {
@@ -18,7 +36,7 @@ function _updateBag(item) {
 }
 
 export function deleteItem(itemId) {
-    return async dispatch => {
+    return dispatch => {
         try {
             dispatch(_deleteItem(itemId));
         } catch (err) {
@@ -35,7 +53,7 @@ function _deleteItem(itemId) {
 }
 
 export function updateQuantity(itemId,diff,quantity) {
-    return async dispatch => {
+    return dispatch => {
         try {
             dispatch(_updateQuantity(itemId,diff,quantity));
         } catch (err) {

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import categoryService from '../../services/categoryService';
+import storageService from '../../services/storageService';
 
 import { connect } from 'react-redux';
-import { deleteItem, updateQuantity } from '../../actions/checkoutActions';
+import { setBag, deleteItem, updateQuantity } from '../../actions/checkoutActions';
 
 import NavBar from './NavBar.jsx'
 import Logo from './Logo.jsx';
@@ -10,17 +11,29 @@ import Hamburger from './Hamburger.jsx';
 import Spinner from '../../cmps/general/Spinner.jsx';
 import SearchBar from './SearchBar.jsx';
 
-
 class Header extends Component {
     state = { categories: [] }
 
     componentDidMount() {
         this.loadCategories();
+        this.loadStorageBag();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.bag !== this.props.bag) {
+            const storageBag = this.props.bag.map(item => { return { productId: item.product._id, quantity: item.quantity } })
+            storageService.saveToStorage('bag', storageBag)
+        }
     }
 
     loadCategories = async () => {
         const categories = await categoryService.query();
         this.setState({ categories })
+    }
+
+    loadStorageBag = () => {
+        const storageBag = storageService.loadFromStorage('bag');
+        if (storageBag) this.props.setBag(storageBag);
     }
 
     deleteItem = (itemId) => {
@@ -29,7 +42,7 @@ class Header extends Component {
 
     changeQuantity = (diff, itemId, quantity) => {
         console.log(itemId, diff);
-        this.props.updateQuantity(itemId,diff,quantity);
+        this.props.updateQuantity(itemId, diff, quantity);
     }
 
     render() {
@@ -55,6 +68,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
+    setBag,
     deleteItem,
     updateQuantity
 };
