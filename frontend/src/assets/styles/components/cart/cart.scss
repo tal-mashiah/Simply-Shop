@@ -29,7 +29,7 @@
         position: absolute;
         top: $header-height;
         left: -10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         background-color: #fff;
         .cart-modal-total {
             font-family: open-sans-bold;
@@ -39,7 +39,8 @@
             min-width: 497px;
             cursor: default;
             .main-btn {
-                height: 40px;
+                height: 35px;
+                margin-right: 0;
             }
             span {
                 font-size: 20px;

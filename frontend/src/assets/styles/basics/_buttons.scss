@@ -7,14 +7,14 @@
     outline: none;
     border-radius: 4px;
     font-family: open-sans-bold;
-    font-size: 14px;
+    font-size: 16px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     text-align: center;
-    &#primary {
+    &.primary {
         background-color: #3589fe;
         color: #fff;
-        margin-left: 32px;
+        margin-right: 32px;
         &:hover {
             background-color: #1766d5;
         }
@@ -23,7 +23,7 @@
             cursor: default;
         }
     }
-    &#secondary {
+    &.secondary {
         color: #3a414a;
         background-color: transparent;
         border: 2px solid #3a414a;

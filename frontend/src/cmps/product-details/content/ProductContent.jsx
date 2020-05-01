@@ -41,8 +41,8 @@ export default class ProductContent extends Component {
                 <ProductQuantity quantity={quantity} changeQuantity={this.changeQuantity} />
 
                 <div className="buy-container flex justify-between align-center">
-                    <button id="primary" className="main-btn">קנה עכשיו</button>
-                    <button id="secondary" className="main-btn" onClick={() => this.onAddToBag()} >הוסף לסל</button>
+                    <button className="main-btn secondary" onClick={() => this.onAddToBag()} >הוסף לסל</button>
+                    <button className="main-btn primary">קנה עכשיו</button>
                 </div>
             </div>
         )

@@ -16,8 +16,8 @@ export default class CartModal extends Component {
                     <div className="cart-modal-empty">
                         עגלת הקניות שלך ריקה
                 </div>}
-                <div className="cart-modal-total flex justify-between">
-                    <button id="primary" className={bag.length > 0 ? "main-btn" : "main-btn disabled"}>בצע הזמנה</button>
+                <div className="cart-modal-total flex justify-between align-center">
+                    <button className={bag.length > 0 ? "main-btn primary" : "main-btn primary disabled"}>בצע הזמנה</button>
                     <div>
                         <span>סה"כ:</span>
                         <span>{this.renderBagSum()}<i className="fas fa-shekel-sign"></i></span>

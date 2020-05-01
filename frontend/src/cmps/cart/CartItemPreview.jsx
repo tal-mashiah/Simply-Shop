@@ -15,21 +15,18 @@ export default class CartItemPreview extends Component {
             <div className="cart-item-preview flex">
                 <img src={imagesUrl[0].thumbnail} alt="Cart item" />
                 <div className="cart-item-info flex column justify-between">
-
                     <Link to={`/product/${_id}`}><h5>{title}</h5></Link>
+                    <div className="price flex">{price}<i className="fas fa-shekel-sign"></i></div>
                     <QuntityBar quantity={item.quantity} changeQuantity={changeQuantity} itemId={_id} />
-                    <div className="total-amount">
-                        <div>סה"כ עבור <span>{item.quantity > 1 ? item.quantity : null}</span> {item.quantity > 1 ? 'יחידות:' : 'יחידה אחת:'}</div>
-                        <div><span>{item.quantity * price}<i className="fas fa-shekel-sign"></i></span></div>
-                    </div>
                 </div>
+                {item.quantity > 1 ?
+                    < div className="total-amount">
+                        <span>סה"כ עבור <span>{item.quantity}</span> יחידות: </span>
+                        <span>{item.quantity * price}<i className="fas fa-shekel-sign"></i></span>
+                    </div> : null}
 
-
-                <div className="trash flex column justify-between">
-                    <i onClick={this.onDeleteItem} className="fas fa-trash-alt"></i>
-                    <p className="price flex">{price}<i className="fas fa-shekel-sign"></i></p>
-                </div>
-            </div>
+                <i onClick={this.onDeleteItem} className="fas fa-trash-alt"></i>
+            </div >
         )
     }
 }

@@ -1,6 +1,7 @@
 .cart-item-preview {
     padding: 12px 0;
     line-height: initial;
+    position: relative;
     &:not(:last-of-type) {
         border-bottom: 1px solid #ebebeb;
     }
@@ -12,10 +13,9 @@
     .cart-item-info {
         min-width: 300px;
         text-align: start;
-        margin: 0 5px 0 15px;
+        margin: 0 15px 0 50px;
         h5 {
             font-weight: 600;
-            margin-bottom: 10px;
             font-size: 14px;
             cursor: pointer;
             &:hover {
@@ -26,7 +26,6 @@
             height: 18px;
             border-radius: 4px;
             width: 52px;
-            margin-bottom: 10px;
             input {
                 font-size: 13px;
                 width: 18px;
@@ -39,34 +38,38 @@
                 }
             }
         }
-        .total-amount {
-            font-size: 12px;
-            span {
-                font-weight: 600;
-                i {
-                    font-size: 9px;
-                    margin: 0 3px;
-                }
-            }
-        }
-    }
-    .trash {
-        align-items: flex-end;
-        i {
-            font-size: 13px;
-            cursor: pointer;
-            color: #acabab;
-            &:hover {
-                color: #44484a;
-            }
-        }
-        p {
+        .price {
             font-weight: 600;
-            font-size: 16px;
+            font-size: 14px;
             i {
                 font-size: 12px;
                 margin: 7px 2px 0 0;
                 color: #44484a;
+            }
+        }
+    }
+    .fa-trash-alt {
+        font-size: 13px;
+        padding: 10px;
+        cursor: pointer;
+        color: #acabab;
+        position: absolute;
+        top: 6px;
+        left: -9px;
+        &:hover {
+            color: #44484a;
+        }
+    }
+    .total-amount {
+        font-size: 12px;
+        position: absolute;
+        bottom: 13px;
+        left: -2px;
+        span {
+            font-weight: 600;
+            i {
+                font-size: 9px;
+                margin: 0 3px;
             }
         }
     }

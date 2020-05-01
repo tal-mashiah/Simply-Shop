@@ -38,8 +38,8 @@ class ProductDetails extends Component {
             <div className="product-details flex column align-center">
                 <div className="product-details-container">
                     <div className="product-top-container flex">
-                        <ProductGallery images={product.imagesUrl} />
                         <ProductContent product={product} addToBag={this.addToBag} />
+                        <ProductGallery images={product.imagesUrl} />
                     </div>
                     <ProductInfo productData={productData} />
                 </div>
