@@ -9,6 +9,7 @@
 
 .input-range {
     margin: 0 5px;
+    direction: ltr;
 }
 
 .input-range__label--min,
@@ -21,7 +22,7 @@
     bottom: -40px;
     color: $filter-clr;
     font-size: 11px;
-    font-family: Lato;
+    font-family: open-sans;
 }
 
 .input-range__track--active {

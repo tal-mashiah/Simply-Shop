@@ -3,10 +3,11 @@
 }
 
 html {
-  font-family: Lato, sans-serif;
+  font-family: open-sans, sans-serif;
   color: $base-clr;
   font-size: rem(14px);
   line-height: 1;
+  direction: rtl;
 }
 
 body {

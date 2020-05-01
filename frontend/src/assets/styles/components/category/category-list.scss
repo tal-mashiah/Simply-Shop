@@ -1,9 +1,9 @@
 .category-list {
     position: absolute;
     top: $header-height;
-    right: 0;
+    left: 0;
     background: white;
     width: 225px;
     height: 100vh;
-    border-left: 1px lightgrey solid;
+    border-right: 1px lightgrey solid;
 }

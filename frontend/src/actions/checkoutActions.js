@@ -5,6 +5,7 @@ export function setBag(storageBag) {
         try {
             const productIds = storageBag.map(item => item.productId);
             const products = await searchService.getByIds(productIds);
+            // eslint-disable-next-line
             const updatedBag = products.map(product => {
                 for (const item of storageBag) {
                     if (item.productId === product._id.toString()) {

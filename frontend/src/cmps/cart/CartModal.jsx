@@ -14,13 +14,13 @@ export default class CartModal extends Component {
                 <CartItemList bag={bag} deleteItem={deleteItem} changeQuantity={changeQuantity} />
                 {bag.length > 0 ||
                     <div className="cart-modal-empty">
-                        Your bag is currently empty
+                        עגלת הקניות שלך ריקה
                 </div>}
                 <div className="cart-modal-total flex justify-between">
-                    <button id="primary" className={bag.length > 0 ? "main-btn" : "main-btn disabled"}>place your order</button>
+                    <button id="primary" className={bag.length > 0 ? "main-btn" : "main-btn disabled"}>בצע הזמנה</button>
                     <div>
-                        <span>Total:</span>
-                        <span><i className="fas fa-dollar-sign"></i>{this.renderBagSum()}</span>
+                        <span>סה"כ:</span>
+                        <span>{this.renderBagSum()}<i className="fas fa-shekel-sign"></i></span>
                     </div>
                 </div>
             </div>

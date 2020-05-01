@@ -22,7 +22,7 @@ export default class ProductContent extends Component {
         const { quantity } = this.state;
         const { product } = this.props;
         this.props.addToBag({ product, quantity });
-        
+
     }
 
     render() {
@@ -30,20 +30,19 @@ export default class ProductContent extends Component {
         const { quantity } = this.state;
         return (
             <div className="product-content">
-
                 <div className="gallery-zoom" id="myPortal" />
-
+                
                 <div className="top-content flex column justify-between">
                     <h1 className="content-title flex column">{title}</h1>
-                    {quantity === 1 || <span>Total amount for {quantity} units:</span>}
-                    <div className="content-price"><i className="fas fa-dollar-sign"></i>{price * quantity}</div>
+                    {quantity === 1 || <span> סה"כ עבור {quantity} יחידות:</span>}
+                    <div className="content-price">{price * quantity}<i className="fas fa-shekel-sign"></i></div>
                 </div>
 
                 <ProductQuantity quantity={quantity} changeQuantity={this.changeQuantity} />
 
                 <div className="buy-container flex justify-between align-center">
-                    <button id="primary" className="main-btn">Buy now</button>
-                    <button id="secondary" className="main-btn" onClick={() => this.onAddToBag()} >Add to bag</button>
+                    <button id="primary" className="main-btn">קנה עכשיו</button>
+                    <button id="secondary" className="main-btn" onClick={() => this.onAddToBag()} >הוסף לסל</button>
                 </div>
             </div>
         )

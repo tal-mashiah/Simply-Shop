@@ -1,8 +1,7 @@
 .cart-item-preview {
-    
     padding: 12px 0;
     line-height: initial;
-    &:not(:last-of-type){
+    &:not(:last-of-type) {
         border-bottom: 1px solid #ebebeb;
     }
     cursor: default;
@@ -45,8 +44,8 @@
             span {
                 font-weight: 600;
                 i {
-                    font-size: 10px;
-                    margin: 0 1px;
+                    font-size: 9px;
+                    margin: 0 3px;
                 }
             }
         }
@@ -65,8 +64,8 @@
             font-weight: 600;
             font-size: 16px;
             i {
-                font-size: 14px;
-                margin: 4px 2px 0 0;
+                font-size: 12px;
+                margin: 7px 2px 0 0;
                 color: #44484a;
             }
         }

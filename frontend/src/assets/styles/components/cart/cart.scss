@@ -28,13 +28,11 @@
         opacity: 0;
         position: absolute;
         top: $header-height;
-        right: 0;
+        left: -10px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
         background-color: #fff;
         .cart-modal-total {
-            text-align: end;
-            font-size: 20px;
-            font-family: Lato-Bold;
+            font-family: open-sans-bold;
             line-height: 2;
             padding: 10px 15px;
             border-top: #cacaca 1px solid;
@@ -44,18 +42,18 @@
                 height: 40px;
             }
             span {
-                font-size: 22px;
+                font-size: 20px;
                 &:not(:last-of-type) {
-                    margin-right: 10px;
+                    margin-left: 10px;
                 }
                 i {
-                    font-size: 19px;
-                    margin-right: 2px;
+                    font-size: 15px;
+                    margin-right: 3px;
                 }
             }
         }
         .cart-modal-empty {
-            font-family: Lato-Bold;
+            font-family: open-sans-bold;
             font-size: 16px;
             cursor: default;
         }

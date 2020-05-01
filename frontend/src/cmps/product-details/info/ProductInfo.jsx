@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 export default class ProductInfo extends Component {
-    state = { openTab: 'Description' }
+    state = { openTab: 'Specification' }
 
     onTabClick = (tabName) => {
         this.setState({ openTab: tabName });
@@ -27,8 +27,8 @@ export default class ProductInfo extends Component {
         return (
             <div className="product-info">
                 <ul className="info-tabs flex">
-                    <li className={openTab === 'Description' ? 'active' : ''} onClick={() => this.onTabClick('Description')}>Description</li>
-                    <li className={openTab === 'Specification' ? 'active' : ''} onClick={() => this.onTabClick('Specification')}>Specification</li>
+                    <li className={openTab === 'Specification' ? 'active' : ''} onClick={() => this.onTabClick('Specification')}>מפרט</li>
+                    <li className={openTab === 'Description' ? 'active' : ''} onClick={() => this.onTabClick('Description')}>תיאור המוצר</li>
                 </ul>
                 {openTab !== 'Description' || <div className="product-description">{product.description}</div>}
                 {openTab !== 'Specification' ||

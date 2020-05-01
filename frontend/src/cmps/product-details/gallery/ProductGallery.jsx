@@ -8,15 +8,15 @@ export default class ProductGallery extends Component {
     myRenderItem = (image) => {
         return <ImageGalleryZoom image={image} />;
     }
-
+    // TODO maybe remove gallery zoom
     render() {
         const properties = {
             thumbnailPosition: "left",
             slideOnThumbnailOver:true,
-            showFullscreenButton: false,
+            // showFullscreenButton: false,
             showPlayButton: false,
             showNav: false,
-            renderItem: this.myRenderItem.bind(this),
+            // renderItem: this.myRenderItem.bind(this),
             items: this.props.images
         };
         return <ImageGallery {...properties} />

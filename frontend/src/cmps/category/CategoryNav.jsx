@@ -14,7 +14,7 @@ export default class CategoryNav extends Component {
         const { categories } = this.props;
         return (
             <div className='link-container' onClick={this.toggleCategories}>
-                <h3>Categories</h3>
+                <h3>קטגוריות</h3>
                 {this.state.isCategoriesShown ?
                     <CategoryList categories={categories} toggleCategories={this.toggleCategories} /> : null}
             </div>

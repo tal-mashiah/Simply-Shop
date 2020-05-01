@@ -41,7 +41,6 @@ class Header extends Component {
     }
 
     changeQuantity = (diff, itemId, quantity) => {
-        console.log(itemId, diff);
         this.props.updateQuantity(itemId, diff, quantity);
     }
 

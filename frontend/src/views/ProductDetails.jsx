@@ -39,9 +39,9 @@ class ProductDetails extends Component {
                 <div className="product-details-container">
                     <div className="product-top-container flex">
                         <ProductGallery images={product.imagesUrl} />
-                        <ProductContent product={product} addToBag={this.addToBag}/>
+                        <ProductContent product={product} addToBag={this.addToBag} />
                     </div>
-                    <ProductInfo productData={productData}/>
+                    <ProductInfo productData={productData} />
                 </div>
             </div>
         )

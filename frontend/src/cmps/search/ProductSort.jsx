@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 
 export default class ProductSort extends Component {
     state = {
-        order: this.props.sortBy,
+        order: 'רלוונטיות',
         isOptionsShown: false,
         options: [
-            { key: 'bestMatch', value: 'Best Match' },
-            { key: 'PriceAscending', value: 'Price: Low to High' },
-            { key: 'PriceDescending', value: 'Price: High to Low' }
+            { key: 'bestMatch', value: 'רלוונטיות' },
+            { key: 'PriceAscending', value: 'מחיר: מהנמוך לגבוה' },
+            { key: 'PriceDescending', value: 'מחיר: מהגבוה לנמוך' }
         ]
     };
 

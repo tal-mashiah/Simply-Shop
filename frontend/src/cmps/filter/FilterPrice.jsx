@@ -31,7 +31,7 @@ export default class FilterPrice extends Component {
         let { generalMin, generalMax } = this.props.priceFilter;
         return (
             <div className="filter-price-preview">
-                <h3 className="filter-price-title">Price</h3>
+                <h3 className="filter-price-title">מחיר</h3>
                 <div className="price-range flex">
                     <InputRange
                         maxValue={generalMax}
