@@ -5,12 +5,12 @@ class SearchBar extends Component {
     state = { term: '' }
 
     handleChange = (ev) => {
-        this.props.history.push(`/search/${ev.target.value}`)
         this.setState({ term: ev.target.value })
     }
 
     onSubmit = (ev) => {
         ev.preventDefault();
+        this.props.history.push(`/search/${this.state.term}`)
         this.setState({ term: '' });
     }
 

@@ -10,6 +10,7 @@ import Logo from './Logo.jsx';
 import Hamburger from './Hamburger.jsx';
 import Spinner from '../../cmps/general/Spinner.jsx';
 import SearchBar from './SearchBar.jsx';
+import CategoryList from '../category/CategoryList.jsx';
 
 class Header extends Component {
     state = { categories: [] }
@@ -50,10 +51,13 @@ class Header extends Component {
         if (!categories) return <Spinner />
 
         return (
-            <header className="flex justify-between align-center">
-                <Logo />
-                <SearchBar />
-                <NavBar categories={categories} bag={bag} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
+            <header >
+                <div className="top-header flex justify-between align-center">
+                    <Logo />
+                    <SearchBar />
+                    <NavBar categories={categories} bag={bag} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
+                </div>
+                <CategoryList categories={categories} />
                 <Hamburger />
             </header>
         )

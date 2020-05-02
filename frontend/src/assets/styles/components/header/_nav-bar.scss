@@ -13,7 +13,7 @@ nav {
   float: right;
   .link-container {
     cursor: pointer;
-    line-height: $header-height;
+    line-height: $top-header-height;
     text-align: center;
     padding: 0 10px;
     &:hover {

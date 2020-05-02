@@ -1,4 +1,4 @@
-header{
+header {
     top: 0;
     right: 0;
     position: fixed;
@@ -9,14 +9,18 @@ header{
     background: #fff;
     border-bottom: 1px solid #ebebeb;
 
+    .top-header {
+        height: $top-header-height;
+    }
+
     .main-logo {
-        width: $logo-width*1.45;
-        height: $header-height;
+        width: $logo-width * 1.45;
+        height: $top-header-height;
         img {
             width: $logo-width;
             position: absolute;
-            top: 7px;
-            right: 5px;
+            top: 3px;
+            right: 6px;
         }
     }
 }

@@ -12,5 +12,7 @@ $tablet-breakpoint: 720px;
 $desktop-breakpoint: 1400px;
 
 // header
-$header-height: 65px;
-$logo-width: 175px;
+$top-header-height: 65px;
+$bottom-header-height: 45px;
+$header-height: $top-header-height + $bottom-header-height;
+$logo-width: 225px;
