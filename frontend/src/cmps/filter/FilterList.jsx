@@ -6,10 +6,8 @@ export default function FilterList({ filters, priceFilter, updatePrice, updateFi
 
     return (
         <div className="filter-list">
-            <FilterPrice 
-            priceFilter={priceFilter}
-            updatePrice={updatePrice}/>
-            
+            <FilterPrice priceFilter={priceFilter} updatePrice={updatePrice} />
+
             {filters.map((filter, idx) => {
                 return <FilterPreview updateFilters={updateFilters} filter={filter} key={idx} />
             })}

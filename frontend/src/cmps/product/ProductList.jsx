@@ -4,8 +4,8 @@ import ProductPreview from '../product/ProductPreview.jsx';
 export default function ProductList({products}) {
     return (
         <div className="product-list">
-            {products.map((product,idx) => {
-                return <ProductPreview product={product} key={idx}/>
+            {products.map((product) => {
+                return <ProductPreview product={product} key={product._id}/>
             })}
         </div>
     )

@@ -5,8 +5,8 @@ export default function CategoryList({categories}) {
 
     return (
         <div className="category-list flex">
-            {categories.map((category,idx) => {
-                return <CategoryPreview category={category} key={idx}/>
+            {categories.map((category) => {
+                return <CategoryPreview category={category} key={category._id}/>
             })}
         </div>
     )

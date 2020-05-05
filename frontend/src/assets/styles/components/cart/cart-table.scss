@@ -1,0 +1,28 @@
+.cart-table {
+    border-collapse: collapse;
+    tbody {
+        
+        tr {
+            td {
+                font-size: 18px;
+                font-family: open-sans-bold;
+                padding: 0 20px;
+                border: 1px solid #ebebeb;
+            }
+            img {
+                width: 150px;
+                height: 150px;
+            }
+            .title {
+                max-width: 750px;
+                line-height: 22px;
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+            .fa-trash-alt{
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+
 import ProductQuantity from './ProductQuantity.jsx';
+import { Link } from 'react-router-dom';
 
 export default class ProductContent extends Component {
     state = { quantity: 1, min: 1, max: 10 }
@@ -39,12 +41,12 @@ export default class ProductContent extends Component {
                 </div>
 
                 <ProductQuantity quantity={quantity} changeQuantity={this.changeQuantity} />
-
                 <div className="buy-container flex justify-between align-center">
                     <button className="main-btn secondary" onClick={() => this.onAddToBag()} >הוסף לסל</button>
-                    <button className="main-btn primary">קנה עכשיו</button>
+                    <Link to="/cart"><button className="main-btn primary" onClick={() => this.onAddToBag()}>קנה עכשיו</button></Link>
                 </div>
             </div>
+            
         )
     }
 }

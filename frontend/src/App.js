@@ -6,6 +6,7 @@ import Header from './cmps/header/Header.jsx';
 import Home from './views/Home.jsx';
 import ProductDetails from './views/ProductDetails.jsx';
 import SearchPage from './views/SearchPage.jsx';
+import CartPage from './views/CartPage.jsx';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/category/:name/:_id" component={SearchPage}/>
           <Route path="/product/:_id" component={ProductDetails}/>
           <Route path="/search/:term" component={SearchPage}/>
+          <Route path="/cart" component={CartPage}/>
         </Switch>
       </Router>
     </div>

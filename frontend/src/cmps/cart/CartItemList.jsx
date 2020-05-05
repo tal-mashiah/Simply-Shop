@@ -4,8 +4,8 @@ import CartItemPreview from './CartItemPreview.jsx'
 export default function CartItemList({ bag, deleteItem, changeQuantity }) {
     return (
         <div className="cart-item-list">
-            {bag.map((item, idx) => {
-                return <CartItemPreview item={item} key={idx} deleteItem={deleteItem} changeQuantity={changeQuantity}/>
+            {bag.map((item) => {
+                return <CartItemPreview item={item} key={item.product._id} deleteItem={deleteItem} changeQuantity={changeQuantity} />
             })}
         </div>
     )
