@@ -20,7 +20,7 @@ class CartPage extends Component {
         console.log(bag);
 
         return (
-            <div className="cart-page">
+            <div className="cart-page container flex justify-center">
                 <CartTable bag={bag} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity}/>
             </div>
         )

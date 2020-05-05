@@ -13,14 +13,14 @@ export default class CartTablePreview extends Component {
         const { _id, title, price, imagesUrl } = this.props.item.product;
         const { item, changeQuantity } = this.props;
         return (
-            <tr>
-                <td><img src={imagesUrl[0].thumbnail} alt="product img" /></td>
-                <td className="title"><Link to={`/product/${_id}`}>{title}</Link></td>
-                <td><QuntityBar quantity={item.quantity} changeQuantity={changeQuantity} itemId={_id} /></td>
-                <td>{price}</td>
-                <td>{price * item.quantity}</td>
-                <td><i onClick={this.onDeleteItem} className="fas fa-trash-alt"></i></td>
-            </tr>
+            <div className="cart-table-preview flex align-center justify-between">
+                <Link to={`/product/${_id}`}><img src={imagesUrl[0].thumbnail} alt="product img" /></Link>
+                <div className="title"><Link to={`/product/${_id}`}>{title}</Link></div>
+                <div className="price">{price}<i className="fas fa-shekel-sign"></i></div>
+                <QuntityBar quantity={item.quantity} changeQuantity={changeQuantity} itemId={_id} />
+                <div className="price">{price * item.quantity}<i className="fas fa-shekel-sign"></i></div>
+                <i className="fas fa-trash-alt" onClick={this.onDeleteItem}></i>
+            </div>
         )
     }
 }

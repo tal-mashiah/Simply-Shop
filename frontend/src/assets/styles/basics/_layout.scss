@@ -1,18 +1,17 @@
 .container {
-    max-width: $desktop-breakpoint;
+    // max-width: $desktop-breakpoint;
     margin: 0 auto;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 32px;
     
-    @include for-narrow-layout {
-        max-width: $mobile-breakpoint;
-    }
-    @include for-normal-layout {
-        max-width: $tablet-breakpoint;
-    }
-    @include for-wide-layout {
-        max-width: $desktop-breakpoint;
-    }
+    // @include for-narrow-layout {
+    //     max-width: $mobile-breakpoint;
+    // }
+    // @include for-normal-layout {
+    //     max-width: $tablet-breakpoint;
+    // }
+    // @include for-wide-layout {
+    //     max-width: $desktop-breakpoint;
+    // }
 }
 
 // fixed header padding 
