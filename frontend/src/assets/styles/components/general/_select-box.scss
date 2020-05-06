@@ -1,11 +1,11 @@
-.product-sort{
+.select-box{
     width: 180px;
     color: #44484a;
     margin-top: 3px;
     cursor: pointer;
     font-size: 16px;
     
-    .sort-title {
+    .title {
         padding: 11px 14px 11px;
         border: 1px solid #ebebeb;
         border-radius: 4px;
@@ -22,13 +22,13 @@
             border-bottom-right-radius: 0px;
         }
     }
-    .sort-options-container{
+    .options-container{
         width: 180px;
         position: absolute;
         border: 1px solid #ebebeb;
         border-top: none;
         z-index: 10;
-        .sort-option{
+        .option{
             background-color: #fff;
             padding: 7px 14px 7px;
             &:hover{

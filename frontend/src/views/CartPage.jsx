@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { deleteItem, updateQuantity } from '../actions/checkoutActions';
 
 import CartTable from '../cmps/cart-page/cart-table/CartTable.jsx';
+import Delivery from '../cmps/cart-page/delivery/Delivery.jsx';
 
 class CartPage extends Component {
 
@@ -20,8 +21,9 @@ class CartPage extends Component {
         console.log(bag);
 
         return (
-            <div className="cart-page container flex justify-center">
+            <div className="cart-page container flex column align-center">
                 <CartTable bag={bag} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity}/>
+                <Delivery/>
             </div>
         )
     }

@@ -17,6 +17,7 @@
 // general
 @import "components/general/spinner.scss";
 @import "components/general/quantity-bar.scss";
+@import "components/general/select-box.scss";
 
 // header
 @import "components/header/header.scss";
@@ -47,7 +48,6 @@
 
 // search
 @import "components/search/search-header.scss";
-@import "components/search/product-sort.scss";
 
 // cart
 @import "components/cart/cart-table.scss";
@@ -59,3 +59,4 @@
 
 @import "views/product-details.scss";
 @import "views/search-page.scss";
+@import "views/cart-page.scss";

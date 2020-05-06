@@ -80,9 +80,9 @@ class SearchPage extends Component {
 
     render() {
         const { products, filters, priceFilter, filterBy } = this.props;
-        const { term, name} = this.props.match.params;
+        const { term, name } = this.props.match.params;
         if (!products) return <Spinner />
-        
+
         return (
             <div className='flex'>
                 {(products.length < 2 && filterBy.filters.length === 0 && !filterBy.priceFilter.min && !name) ||
@@ -94,7 +94,7 @@ class SearchPage extends Component {
                     />}
 
                 <div className="search-container">
-                    <SearchHeader term={term || name} productsLength={products.length} updateSort={this.updateSort} sortBy={filterBy.sortBy} />
+                    <SearchHeader term={term || name} productsLength={products.length} updateSort={this.updateSort} />
                     <ProductList products={products} />
                 </div>
             </div>
