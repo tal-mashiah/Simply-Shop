@@ -20,7 +20,7 @@ export default class CartModal extends Component {
                         עגלת הקניות שלך ריקה
                 </div>}
                 <div className="cart-modal-total flex justify-between align-center">
-                    <ConditionalLink to="/cart">
+                    <ConditionalLink to="/checkout">
                         <button className={bag.length > 0 ? "main-btn primary" : "main-btn primary disabled"}>בצע הזמנה</button>
                     </ConditionalLink>
                     <div>

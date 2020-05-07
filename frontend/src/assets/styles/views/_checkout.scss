@@ -1,0 +1,20 @@
+.cart-page {
+    height: 100vh;
+    background-color: #f6f6f6;
+    .cart-sections {
+        & > div {
+            $cart-section-padding:25px;
+
+            background-color: #fff;
+            border-radius: 3px;
+            padding: $cart-section-padding;
+            margin-bottom: 50px;
+            h1 {
+                padding-bottom:$cart-section-padding;
+                border-bottom: 1px solid #ebebeb;
+                margin-bottom: 15px;
+            }
+        }
+    }
+}
+

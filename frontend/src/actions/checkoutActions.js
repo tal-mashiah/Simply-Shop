@@ -80,3 +80,20 @@ function _updateQuantity(itemId, diff, quantity) {
         diff
     };
 }
+
+export function setDelivery(option) {
+    return dispatch => {
+        try {
+            dispatch(_setDelivery(option));
+        } catch (err) {
+            console.log('checkoutActions: err in set delivery', err);
+        }
+    };
+}
+
+function _setDelivery(option) {
+    return {
+        type: 'SET_DELIVERY',
+        option
+    };
+}

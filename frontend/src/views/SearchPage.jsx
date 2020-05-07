@@ -73,8 +73,8 @@ class SearchPage extends Component {
         this.props.updateFilterBy(filterBy);
     }
 
-    updateSort = (sortBy) => {
-        this.props.updateSortBy(sortBy);
+    updateSort = (option) => {
+        this.props.updateSortBy(option.key);
 
     }
 

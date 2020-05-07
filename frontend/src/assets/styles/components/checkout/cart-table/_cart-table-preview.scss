@@ -1,0 +1,45 @@
+.cart-table-preview {
+    padding: 5px 0;
+    font-size: 16px;
+    &:not(:last-child) {
+        border-bottom: 1px solid #ebebeb;
+    }
+    img {
+        width: 100px;
+        height: 100px;
+    }
+    .title {
+        line-height: 22px;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    .quantity-bar {
+        height: 25px;
+        input {
+            font-size: 18px;
+            width: 50px;
+            flex-grow: 5;
+        }
+        .spinner-btn {
+            width: 25px;
+            height: 25px;
+            flex-grow: 2;
+        }
+    }
+    .price {
+        text-align: center;
+        .fa-shekel-sign {
+            font-size: 12px;
+            padding-right: 3px;
+        }
+    }
+    .fa-trash-alt {
+        color: #acabab;
+        cursor: pointer;
+        transition: color ease-in 0.3s;
+        &:hover {
+            color: initial;
+        }
+    }
+}

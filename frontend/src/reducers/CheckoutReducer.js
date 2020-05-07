@@ -1,5 +1,6 @@
 const initialState = {
-    bag: []
+    bag: [],
+    delivery: null
 };
 
 export default function (state = initialState, action = {}) {
@@ -30,6 +31,9 @@ export default function (state = initialState, action = {}) {
             const updatedBag = state.bag.map(bagItem =>
                 bagItem.product._id === action.itemId ? { ...bagItem, quantity: action.diff + bagItem.quantity } : bagItem)
             return { ...state, bag: updatedBag };
+
+        case 'SET_DELIVERY':
+            return { ...state, delivery: action.option };
 
         default:
             return state;

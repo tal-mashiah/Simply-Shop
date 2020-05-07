@@ -50,13 +50,17 @@
 @import "components/search/search-header.scss";
 
 // cart
-@import "components/cart/cart-table.scss";
 @import "components/cart/cart.scss";
 @import "components/cart/cart-item-preview.scss";
 @import "components/cart/cart-item-list.scss";
+
+// checkout
+@import "components/checkout/cart-table/cart-table-list";
+@import "components/checkout/cart-table/cart-table-preview";
+@import "components/checkout/delivery/delivery";
 
 // views //
 
 @import "views/product-details.scss";
 @import "views/search-page.scss";
-@import "views/cart-page.scss";
+@import "views/checkout.scss";

@@ -1,0 +1,18 @@
+.delivery {
+    .delivery-price {
+        font-size: 18px;
+        .fa-shekel-sign{
+            font-size: 12px;
+            margin-right: 2px;
+        }
+    }
+    .total-price {
+        font-size: 18px;
+        font-family: open-sans-bold;
+
+        .fa-shekel-sign{
+            font-size: 14px;
+            margin-right: 3px;
+        }
+    }
+}

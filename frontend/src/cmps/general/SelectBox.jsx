@@ -19,7 +19,7 @@ export default class SelectBox extends Component {
     handleOptionClick = (option) => {
         this.setState({ title: option.value, isOptionsShown: false })
         if (option !== this.state.title) {
-            this.props.handleChange(option.key);
+            this.props.handleChange(option);
         }
     }
 
