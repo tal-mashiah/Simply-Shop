@@ -5,6 +5,7 @@ import { deleteItem, updateQuantity, setDelivery } from '../actions/checkoutActi
 
 import CartTable from '../cmps/checkout/cart-table/CartTable.jsx';
 import Delivery from '../cmps/checkout/delivery/Delivery.jsx';
+import OrderForm from '../cmps/checkout/order-form/OrderForm';
 
 class Checkout extends Component {
 
@@ -27,7 +28,7 @@ class Checkout extends Component {
                 <div className="cart-sections">
                     <CartTable bag={bag} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
                     <Delivery bag={bag} delivery={delivery} onDeliverySelected={this.onDeliverySelected} />
-                    <div><h1>פרטי הזמנה</h1></div>
+                    <OrderForm/>
                 </div>
             </div>
         )
