@@ -29,6 +29,7 @@ class Checkout extends Component {
                     <CartTable bag={bag} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
                     <Delivery bag={bag} delivery={delivery} onDeliverySelected={this.onDeliverySelected} />
                     <OrderForm/>
+                    <div ></div>
                 </div>
             </div>
         )
