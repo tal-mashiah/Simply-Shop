@@ -1,19 +1,9 @@
 import React, { Component } from 'react'
 
 export default class Form extends Component {
+
     state = {
-        form: {
-            fullName: {},
-            phone: {},
-            email: {},
-            city: {},
-            street: {},
-            number: {},
-            apartment: {},
-            postal: {},
-            mailbox: {},
-            notes: {}
-        },
+        form: null,
         regex: {
             required: /(.|\s)*\S(.|\s)*/,
             langAndMin2Char: /^[a-zA-Z\u0590-\u05fe\s"'-]{2,}$/,
@@ -34,24 +24,24 @@ export default class Form extends Component {
     handleChange = (event) => {
         const { name, value } = event.target;
         const { form } = this.state;
-        const currInput = form[name];
+        const currInput = this.props.inputs.find(item => item.name === name);
         currInput.value = value;
-        const validationAttr = event.target.getAttribute("validation");
-        if (validationAttr) {
-            const validations = validationAttr.split(' ');
-            for (const validation of validations) {
+
+        if (currInput.validation) {
+            for (const validation of currInput.validation) {
                 this.validate(validation, currInput);
                 if (!currInput.isValid) break;
             }
         } else {
             currInput.isValid = true;
         }
-        this.setState({ form: { ...form, [name]: currInput } });
+
+        this.setState({ form: { ...form, [name]: { value: currInput.value, isValid: currInput.isValid} } });
     }
 
     validate = (validation, currInput) => {
-
         const { regex, errors } = this.state;
+
         if (!regex[validation].test(currInput.value)) {
             currInput.error = errors[validation];
             currInput.isValid = false;
@@ -63,15 +53,17 @@ export default class Form extends Component {
 
     render() {
         const { inputs } = this.props;
+        console.log(this.state.form);
+
         return (
             <form>
                 {inputs.map((input, idx) => {
                     const ConditionalInput = input.type === 'textarea' ? 'textarea' : 'input';
-                    const inputName = this.state.form[input.name];
-                    return <div key={idx} className={inputName.error ? "input-container error" : inputName.isValid ? "input-container valid" : "input-container"}>
-                        <label htmlFor={input.name}>{input.value} {input.validation ? <i className="fas fa-star-of-life"></i> : null}</label>
-                        <ConditionalInput type={input.type} onChange={this.handleChange} id={input.name} name={input.name} placeholder={input.value} validation={input.validation}></ConditionalInput>
-                        <div className="form-error">{!inputName || inputName.error}
+
+                    return <div key={idx} className={input.error ? "input-container error" : input.isValid ? "input-container valid" : "input-container"}>
+                        <label htmlFor={input.name}>{input.label} {input.validation ? <i className="fas fa-star-of-life"></i> : null}</label>
+                        <ConditionalInput type={input.type} onChange={this.handleChange} id={input.name} name={input.name} placeholder={input.label}></ConditionalInput>
+                        <div className="form-error">{!input || input.error}
                             <div className="arrow-up"></div>
                         </div>
                         <i className="fas fa-times-circle"></i>
