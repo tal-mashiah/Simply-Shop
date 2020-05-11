@@ -18,6 +18,7 @@
 @import "components/general/spinner.scss";
 @import "components/general/quantity-bar.scss";
 @import "components/general/select-box.scss";
+@import "components/general/form";
 
 // header
 @import "components/header/header.scss";
@@ -58,7 +59,7 @@
 @import "components/checkout/cart-table/cart-table-list";
 @import "components/checkout/cart-table/cart-table-preview";
 @import "components/checkout/delivery/delivery";
-@import "components/checkout/order-form/form";
+@import "components/checkout/order-form/order-form";
 
 
 // views //
