@@ -1,0 +1,23 @@
+.payment-total {
+    align-self: flex-end;
+    div {
+        font-size: 16px;
+        padding: 5px 0;
+        .fa-shekel-sign {
+            font-size: 11px;
+        }
+        &.delivery {
+            margin-bottom: 15px;
+        }
+        &.total {
+            font-size: 18px;
+            font-family: open-sans-bold;
+            .fa-shekel-sign {
+                font-size: 14px;
+            }
+        }
+    }
+    .main-btn {
+        margin: 15px 0 0;
+    }
+}

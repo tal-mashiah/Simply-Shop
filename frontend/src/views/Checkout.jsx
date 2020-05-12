@@ -6,7 +6,7 @@ import { deleteItem, updateQuantity, setDelivery, updateForm } from '../actions/
 import CartTable from '../cmps/checkout/cart-table/CartTable.jsx';
 import Delivery from '../cmps/checkout/Delivery.jsx';
 import OrderForm from '../cmps/checkout/OrderForm.jsx';
-import Payment from '../cmps/checkout/Payment';
+import Payment from '../cmps/checkout/payment/Payment.jsx';
 
 class Checkout extends Component {
 
@@ -23,19 +23,18 @@ class Checkout extends Component {
     }
 
     updateForm = (isValid,form) => {
-
         this.props.updateForm(isValid,form);
     }
 
     render() {
-        const { bag, delivery } = this.props;
+        const { bag, delivery, form } = this.props;
         return (
             <div className="cart-page container flex column align-center">
                 <div className="cart-sections">
                     <CartTable bag={bag} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
                     <Delivery bag={bag} delivery={delivery} onDeliverySelected={this.onDeliverySelected} />
                     <OrderForm updateForm={this.updateForm}/>
-                    <Payment/>
+                    <Payment bag={bag} delivery={delivery} form={form}/>
                     
                 </div>
             </div>
@@ -46,7 +45,8 @@ class Checkout extends Component {
 const mapStateToProps = state => {
     return {
         bag: state.checkout.bag,
-        delivery: state.checkout.delivery
+        delivery: state.checkout.delivery,
+        form: state.checkout.form
     };
 };
 

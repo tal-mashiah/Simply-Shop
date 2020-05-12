@@ -1,0 +1,24 @@
+.delivery-info{
+    padding:  20px 40px;
+    background-color: #f1f3f8;
+    border: 2px solid #d5dae6;
+    h2{
+        font-size: 22px;
+    }
+    &>div{
+        padding: 15px 0;
+        border-bottom: 1px solid #d5dae6;
+        font-size: 16px;
+        &:first-child {
+            padding: 0;
+        }
+        &:last-child {
+            border: none
+        }
+    }
+    .name{
+        font-family: open-sans-bold;
+    }
+    
+    
+}

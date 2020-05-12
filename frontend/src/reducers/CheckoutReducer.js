@@ -44,7 +44,7 @@ export default function (state = initialState, action = {}) {
             updatedForm.isValid = action.isValid;
             updatedForm.input = action.form;
 
-            return { ...state, form: updatedForm };
+            return { ...state, form: {...updatedForm} };
 
         default:
             return state; 

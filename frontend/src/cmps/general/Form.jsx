@@ -44,8 +44,8 @@ export default class Form extends Component {
             currInput.isValid = true;
         }
 
-        this.setState({ form: { ...form, [name]: currInput.value} });
-        this.checkIfFormValid();
+        this.setState({ form: { ...form, [name]: currInput.value } }, () => this.checkIfFormValid());
+
     }
 
     validate = (validation, currInput) => {
@@ -73,7 +73,6 @@ export default class Form extends Component {
 
     render() {
         const { inputs } = this.props;
-        console.log(inputs);
 
         return (
             <form>
