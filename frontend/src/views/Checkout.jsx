@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { deleteItem, updateQuantity, setDelivery } from '../actions/checkoutActions';
+import { deleteItem, updateQuantity, setDelivery, updateForm } from '../actions/checkoutActions';
 
 import CartTable from '../cmps/checkout/cart-table/CartTable.jsx';
-import Delivery from '../cmps/checkout/delivery/Delivery.jsx';
-import OrderForm from '../cmps/checkout/order-form/OrderForm';
+import Delivery from '../cmps/checkout/Delivery.jsx';
+import OrderForm from '../cmps/checkout/OrderForm.jsx';
+import Payment from '../cmps/checkout/Payment';
 
 class Checkout extends Component {
 
@@ -21,6 +22,11 @@ class Checkout extends Component {
         this.props.updateQuantity(itemId, diff, quantity);
     }
 
+    updateForm = (isValid,form) => {
+
+        this.props.updateForm(isValid,form);
+    }
+
     render() {
         const { bag, delivery } = this.props;
         return (
@@ -28,8 +34,9 @@ class Checkout extends Component {
                 <div className="cart-sections">
                     <CartTable bag={bag} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
                     <Delivery bag={bag} delivery={delivery} onDeliverySelected={this.onDeliverySelected} />
-                    <OrderForm/>
-                    <div ></div>
+                    <OrderForm updateForm={this.updateForm}/>
+                    <Payment/>
+                    
                 </div>
             </div>
         )
@@ -46,7 +53,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     deleteItem,
     updateQuantity,
-    setDelivery
+    setDelivery,
+    updateForm
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

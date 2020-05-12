@@ -97,3 +97,21 @@ function _setDelivery(option) {
         option
     };
 }
+
+export function updateForm(isValid,form) {
+    return dispatch => {
+        try {
+            dispatch(_updateForm(isValid,form));
+        } catch (err) {
+            console.log('checkoutActions: err in update form', err);
+        }
+    };
+}
+
+function _updateForm(isValid,form) {
+    return {
+        type: 'UPDATE_FORM',
+        isValid,
+        form
+    };
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SelectBox from '../../general/SelectBox.jsx';
+import SelectBox from '../general/SelectBox.jsx';
 
 export default class Delivery extends Component {
     state = {

@@ -1,6 +1,10 @@
 const initialState = {
     bag: [],
-    delivery: null
+    delivery: null,
+    form: {
+        isValid: false,
+        input: null
+    }
 };
 
 export default function (state = initialState, action = {}) {
@@ -35,7 +39,14 @@ export default function (state = initialState, action = {}) {
         case 'SET_DELIVERY':
             return { ...state, delivery: action.option };
 
+        case 'UPDATE_FORM':
+            const updatedForm = state.form;
+            updatedForm.isValid = action.isValid;
+            updatedForm.input = action.form;
+
+            return { ...state, form: updatedForm };
+
         default:
-            return state;
+            return state; 
     }
 }

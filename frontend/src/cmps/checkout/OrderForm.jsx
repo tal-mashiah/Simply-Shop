@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import Form from '../../general/Form.jsx';
+import Form from '../general/Form.jsx';
 export default class OrderForm extends Component {
     state = {
-        personalInputs: [
+        inputs: [
             { type: 'text', name: 'fullName', label: 'שם מלא', validation: ['required', 'langAndMin2Char', 'twoWords'] },
             { type: 'tel', name: 'phone', label: 'טלפון נייד', validation: ['required', 'phone'] },
-            { type: 'text', name: 'email', label: 'אימייל', validation: ['required', 'email'] }
-        ],
-        orderInputs: [
+            { type: 'text', name: 'email', label: 'אימייל', validation: ['required', 'email'] },
             { type: 'text', name: 'city', label: 'עיר / יישוב', validation: ['required', 'langAndMin2Char'] },
             { type: 'text', name: 'street', label: 'רחוב', validation: ['required'] },
             { type: 'number', name: 'number', label: 'מספר בית', validation: ['required'] },
@@ -17,21 +15,12 @@ export default class OrderForm extends Component {
             { type: 'textarea', name: 'notes', label: 'הערות' }
         ]
     }
+
     render() {
-        const { personalInputs, orderInputs } = this.state;
         return (
             <div>
                 <h1>פרטי הזמנה</h1>
-                <div className="flex justify-around">
-                    <div className="form-section-container">
-                        <h2>פרטים אישיים:</h2>
-                        <Form inputs={personalInputs} />
-                    </div>
-                    <div className="form-section-container">
-                        <h2>פרטי משלוח:</h2>
-                        <Form inputs={orderInputs} />
-                    </div>
-                </div>
+                <Form inputs={this.state.inputs} updateForm={this.props.updateForm}/>
             </div>
         )
     }
