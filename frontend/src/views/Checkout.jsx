@@ -35,7 +35,6 @@ class Checkout extends Component {
                     <Delivery bag={bag} delivery={delivery} onDeliverySelected={this.onDeliverySelected} />
                     <OrderForm updateForm={this.updateForm}/>
                     <Payment bag={bag} delivery={delivery} form={form}/>
-                    
                 </div>
             </div>
         )

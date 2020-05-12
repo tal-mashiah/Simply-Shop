@@ -4,7 +4,6 @@ export default class Form extends Component {
 
     state = {
         form: null,
-        allValid: false,
         regex: {
             required: /(.|\s)*\S(.|\s)*/,
             langAndMin2Char: /^[a-zA-Z\u0590-\u05fe\s"'-]{2,}$/,
@@ -61,14 +60,8 @@ export default class Form extends Component {
     }
 
     checkIfFormValid = () => {
-        const isValid = this.props.inputs.every(input => input.isValid === true);
-        if (isValid) {
-            this.setState(prevState => ({ allValid: !prevState.allValid }));
-            this.props.updateForm(isValid, this.state.form)
-        } else if (this.state.allValid) {
-            this.setState(prevState => ({ allValid: !prevState.allValid }));
-            this.props.updateForm(isValid, this.state.form)
-        }
+        const isFormValid = this.props.inputs.every(input => input.isValid === true);
+        this.props.updateForm(isFormValid, this.state.form);
     }
 
     render() {
