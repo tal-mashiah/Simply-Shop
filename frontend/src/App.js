@@ -7,6 +7,7 @@ import Home from './views/Home.jsx';
 import ProductDetails from './views/ProductDetails.jsx';
 import SearchPage from './views/SearchPage.jsx';
 import Checkout from './views/Checkout.jsx';
+import Login from './views/Login.jsx';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
           <Route path="/product/:_id" component={ProductDetails}/>
           <Route path="/search/:term" component={SearchPage}/>
           <Route path="/checkout" component={Checkout}/>
+          <Route path="/register" component={Login}/>
+          <Route path="/login" component={Login}/>
         </Switch>
       </Router>
     </div>

@@ -39,11 +39,10 @@ form {
             }
         }
         textarea {
-            min-width: 100%;
             min-height: 75px;
             max-height: 300px;
             font-family: open-sans;
-            max-width: fit-content;
+            resize: vertical;
         }
         .form-error {
             position: relative;

@@ -13,7 +13,7 @@ export default class CartModal extends Component {
         const ConditionalLink = bag.length > 0 ? Link : 'div';
 
         return (
-            <div className="cart-modal">
+            <div className="modal">
                 <CartItemList bag={bag} deleteItem={deleteItem} changeQuantity={changeQuantity} />
                 {bag.length > 0 ||
                     <div className="cart-modal-empty">
