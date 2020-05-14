@@ -9,9 +9,7 @@ export default class PaymentTotal extends Component {
     render() {
         const { delivery, form } = this.props;
         const sum = this.rendertotalSum();
-        if (!delivery) return null;
-        console.log(form);
-        
+        if (!delivery) return null;        
         return (
             <div className="payment-total">
                     <div className="sub-total">סכום ביניים: {sum} <i className="fas fa-shekel-sign"></i></div>

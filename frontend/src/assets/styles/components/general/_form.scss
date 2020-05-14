@@ -119,5 +119,13 @@ form {
             color: $error-clr;
             display: none;
         }
+        .fa-eye-slash,.fa-eye{
+            position: absolute;
+            font-size: 12px;
+            left: 36px;
+            top: 37px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     }
 }

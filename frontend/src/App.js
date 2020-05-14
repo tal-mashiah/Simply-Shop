@@ -3,11 +3,11 @@ import { Router, Switch, Route} from 'react-router';
 import history from './history';
 
 import Header from './cmps/header/Header.jsx';
-import Home from './views/Home.jsx';
-import ProductDetails from './views/ProductDetails.jsx';
-import SearchPage from './views/SearchPage.jsx';
-import Checkout from './views/Checkout.jsx';
-import Login from './views/Login.jsx';
+import Home from './pages/Home.jsx';
+import ProductDetails from './pages/ProductDetails.jsx';
+import SearchPage from './pages/SearchPage.jsx';
+import Checkout from './pages/Checkout.jsx';
+import Login from './pages/Login.jsx';
 
 function App() {
   return (

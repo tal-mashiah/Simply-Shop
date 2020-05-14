@@ -14,13 +14,11 @@ export default class NavCart extends Component {
         return (
 
             <div className='link-container'>
-                <Link to="/checkout">
-                    <div className='nav-cart'>
-                        <i className="fas fa-shopping-cart"></i>
-                        <span className='cart-quantity'> {this.renderQuantity()} </span>
-                        <CartModal bag={bag} deleteItem={deleteItem} changeQuantity={changeQuantity} />
-                    </div>
-                </Link>
+                <div className='nav-cart'>
+                    <Link to="/checkout"> <i className="fas fa-shopping-cart"></i></Link>
+                    <span className='cart-quantity'> {this.renderQuantity()} </span>
+                    <CartModal bag={bag} deleteItem={deleteItem} changeQuantity={changeQuantity} />
+                </div>
             </div >
 
         )
