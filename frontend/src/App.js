@@ -20,8 +20,8 @@ function App() {
           <Route path="/product/:_id" component={ProductDetails}/>
           <Route path="/search/:term" component={SearchPage}/>
           <Route path="/checkout" component={Checkout}/>
-          <Route path="/register" component={Login}/>
-          <Route path="/login" component={Login}/>
+          <Route path="/:pageName" component={Login}/>
+          <Route path="/:pageName" component={Login}/>
         </Switch>
       </Router>
     </div>

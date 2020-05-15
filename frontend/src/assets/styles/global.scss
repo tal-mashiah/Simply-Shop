@@ -18,7 +18,7 @@
 @import "components/general/spinner.scss";
 @import "components/general/quantity-bar.scss";
 @import "components/general/select-box.scss";
-@import "components/general/form";
+@import "components/general/form.scss";
 
 // header
 @import "components/header/header.scss";
@@ -59,12 +59,12 @@
 @import "components/cart/cart-item-list.scss";
 
 // checkout
-@import "components/checkout/cart-table/cart-table-list";
-@import "components/checkout/cart-table/cart-table-preview";
-@import "components/checkout/delivery";
-@import "components/checkout/order-form";
-@import "components/checkout/payment/payment-total";
-@import "components/checkout/payment/delivery-info";
+@import "components/checkout/cart-table/cart-table-list.scss";
+@import "components/checkout/cart-table/cart-table-preview.scss";
+@import "components/checkout/delivery.scss";
+@import "components/checkout/order-form.scss";
+@import "components/checkout/payment/payment-total.scss";
+@import "components/checkout/payment/delivery-info.scss";
 
 
 // views //
@@ -72,3 +72,4 @@
 @import "views/product-details.scss";
 @import "views/search-page.scss";
 @import "views/checkout.scss";
+@import "views/login.scss";
