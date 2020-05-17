@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { updateForm } from '../actions/UserActions';
+import { updateForm, signup, login } from '../actions/UserActions';
 
 import Form from '../cmps/general/Form.jsx';
 
@@ -33,29 +33,41 @@ class Login extends Component {
 
     loadPageData() {
         const { pageName } = this.props.match.params;
-        this.setState({ pageName })
+        this.updateForm(false, null);
+        this.setState({ pageName });
     }
 
     updateForm = (isValid, form) => {
         this.props.updateForm(isValid, form);
     }
 
+    setUser = () => {
+        const { pageName } = this.state;
+        const { login, signup, form } = this.props;        
+        if (!form.isValid) return;
+        if (pageName === 'login') {
+            login(form.input)
+        } else {
+            signup(form.input)
+        }
+    }
+
     render() {
         const { loginInputs, registerInputs, pageName } = this.state;
-        const { isValid } = this.props;
+        const { isValid } = this.props.form;
+        const { loggedInUser } = this.props;
         if (!pageName) return null;
-
+        console.log('loggedInUser: ', loggedInUser);
         return (
             <div className="login flex column align-center">
-                <div className="login-nav flex justify-center">
-                    <Link to="/login"> <div className="login">התחבר</div></Link>
-                    <div className="border">|</div>
-                    <Link to="/register"> <div className="register">הרשם</div></Link>
+                <div className="login-nav flex justify-around">
+                    <Link to="/login"> <div className={pageName === 'login' ? "login active" : "login"}>התחבר</div></Link>
+                    <Link to="/register"> <div className={pageName === 'register' ? "register active" : "register"}>הרשם</div></Link>
                 </div>
                 {pageName === 'login' ?
                     <Form inputs={loginInputs} updateForm={this.updateForm} /> :
                     <Form inputs={registerInputs} updateForm={this.updateForm} />}
-                <button className={isValid ? "main-btn primary" : "main-btn primary disabled"}>{pageName === 'login' ? 'התחבר' : 'הרשם'}</button>
+                <button onClick={this.setUser} className={isValid ? "main-btn primary" : "main-btn primary disabled"}>{pageName === 'login' ? 'התחבר' : 'הרשם'}</button>
             </div>
         )
     }
@@ -63,12 +75,15 @@ class Login extends Component {
 
 const mapStateToProps = state => {
     return {
-        isValid: state.checkout.form.isValid
+        form: state.user.form,
+        loggedInUser: state.user.loggedInUser
     };
 };
 
 const mapDispatchToProps = {
-    updateForm
+    updateForm,
+    signup,
+    login
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -1,8 +1,8 @@
-const bcrypt = require('bcrypt')
-const userService = require('../user/user.service')
-const logger = require('../../services/logger.service')
+const bcrypt = require('bcrypt');
+const userService = require('../user/user.service');
+const logger = require('../../services/logger.service');
 
-const saltRounds = 10
+const saltRounds = 10;
 
 async function login(email, password) {
     logger.debug(`auth.service - login with email: ${email}`)
@@ -17,12 +17,13 @@ async function login(email, password) {
     return user;
 }
 
-async function signup(email, password, username) {
-    logger.debug(`auth.service - signup with email: ${email}, username: ${username}`)
-    if (!email || !password || !username) return Promise.reject('email, username and password are required!')
-
+async function signup(email, password, fullName) {
+    logger.debug(`auth.service - signup with email: ${email}, username: ${fullName}`)
+    if (!email || !password || !fullName) return Promise.reject('email, username and password are required!')
+    const user = await userService.getByEmail(email);
+    if(user) return Promise.reject('The user is already registered')
     const hash = await bcrypt.hash(password, saltRounds)
-    return userService.add({email, password: hash, username})
+    return userService.add({email, password: hash, fullName})
 }
 
 module.exports = {

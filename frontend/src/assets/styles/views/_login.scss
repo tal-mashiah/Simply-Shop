@@ -1,24 +1,34 @@
 .login {
     .login-nav {
-        margin-top: 15px;
+        margin: 40px 0 60px;
         border-bottom: 1px solid #b7b7b7;
-        padding: 0 5px 15px;
-        .login, .register {
-            font-size: 20px;
-            font-family: open-sans-bold;
-            padding: 0 5px;
-        }
-        .border {
-            font-size: 25px;
-            line-height: 15px;
-            color: #899094;
+        width: 350px;
+        height: 35px;
+        a {
+            width: 50%;
+            height: 20px;
+            text-align: center;
+            &:first-of-type {
+                border-left: 1px solid #b7b7b7;
+            }
+            .login,
+            .register {
+                font-size: 20px;
+                font-family: open-sans-bold;
+                width: fit-content;
+                display: inline-block;
+                height: 34px;
+                &.active {
+                    border-bottom: 3px solid #3589fe;
+                }
+            }
         }
     }
-    form{
+    form {
         min-width: 500px;
     }
 
-    .main-btn{
+    .main-btn {
         margin: 0;
     }
 }

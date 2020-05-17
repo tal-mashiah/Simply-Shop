@@ -1,15 +1,16 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const path = require('path')
-const cookieParser = require('cookie-parser')
-const session = require('express-session')
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
-const app = express()
+const app = express();
 const http = require('http').createServer(app);
 
-const searchRoutes = require('./api/search/search.routes')
-const categoryRoutes = require('./api/category/category.routes')
+const searchRoutes = require('./api/search/search.routes');
+const categoryRoutes = require('./api/category/category.routes');
+const authRoutes = require('./api/auth/auth.routes');
 
 app.use(cookieParser())
 app.use(bodyParser.json());
@@ -31,10 +32,11 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // routes
-app.use('/api/search', searchRoutes)
-app.use('/api/category', categoryRoutes)
+app.use('/api/search', searchRoutes);
+app.use('/api/category', categoryRoutes);
+app.use('/api/auth', authRoutes);
 
-const logger = require('./services/logger.service')
+const logger = require('./services/logger.service');
 const port = process.env.PORT || 3030;
 http.listen(port, () => {
     logger.info('Server is running on port: ' + port)

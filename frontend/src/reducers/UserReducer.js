@@ -1,4 +1,8 @@
+let localLoggedinUser = null;
+if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
+
 const initialState = {
+  loggedInUser: localLoggedinUser,
     form: {
         isValid: false,
         input: null
@@ -7,6 +11,9 @@ const initialState = {
 
 export default function (state = initialState, action = {}) {
     switch (action.type) {
+        
+        case 'SET_USER':
+            return { ...state, loggedInUser: action.user };
 
         case 'UPDATE_FORM':
             const updatedForm = state.form;
