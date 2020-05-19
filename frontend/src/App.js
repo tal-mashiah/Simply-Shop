@@ -8,6 +8,7 @@ import ProductDetails from './pages/ProductDetails.jsx';
 import SearchPage from './pages/SearchPage.jsx';
 import Checkout from './pages/Checkout.jsx';
 import Login from './pages/Login.jsx';
+import Account from './pages/Account.jsx';
 import NotFound from './pages/NotFound.jsx';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/checkout" component={Checkout} exact/>
           <Route path="/auth/:pageName" component={Login} exact/>
           <Route path="/auth/:pageName" component={Login} exact/>
+          <Route path="/account" component={Account} exact/>
           <Route path="/" component={NotFound}/>
         </Switch>
       </Router>

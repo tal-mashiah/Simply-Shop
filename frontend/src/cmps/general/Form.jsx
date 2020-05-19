@@ -55,12 +55,18 @@ export default class Form extends Component {
     componentDidMount() {
         this.props.inputs.forEach(input => {
             input.isValid = input.validation ? false : true;
+            if (input.value) {
+                this.handleInput(input.name, input.value);
+            }
         });
     }
 
-
     handleChange = (event) => {
         const { name, value } = event.target;
+        this.handleInput(name, value);
+    }
+
+    handleInput(name, value) {
         const { form } = this.state;
         const currInput = this.props.inputs.find(item => item.name === name);
         currInput.value = value;
@@ -73,9 +79,7 @@ export default class Form extends Component {
         } else {
             currInput.isValid = true;
         }
-
         this.setState({ form: { ...form, [name]: currInput.value } }, () => this.checkIfFormValid());
-
     }
 
     validate = (validation, currInput) => {
@@ -107,7 +111,7 @@ export default class Form extends Component {
     togglePassword = (input) => {
         const currInput = this.props.inputs.find(currInput => currInput.name === input.name);
         currInput.type = currInput.type === 'password' ? 'text' : 'password';
-        this.setState({...this.state})
+        this.setState({ ...this.state })
     }
 
     render() {
@@ -120,12 +124,12 @@ export default class Form extends Component {
 
                     return <div key={idx} className={input.error ? "input-container error" : input.isValid && input.value ? "input-container valid" : "input-container"}>
                         <label htmlFor={input.name}>{input.label} {input.validation ? <i className="fas fa-star-of-life"></i> : null}</label>
-                        <ConditionalInput type={input.type} onChange={this.handleChange} id={input.name} name={input.name} placeholder={input.label}></ConditionalInput>
+                        <ConditionalInput type={input.type} value={input.value || ''} onChange={this.handleChange} id={input.name} name={input.name} placeholder={input.label}></ConditionalInput>
                         <div className="form-error">{!input || input.error}
                             <div className="arrow-up"></div>
                         </div>
                         {input.toggleVisibility ? <i onClick={() => this.togglePassword(input)} className={input.type === 'password' ? "far fa-eye-slash" : "far fa-eye"}></i> : null}
-                        <i className="fas fa-times-circle"></i>
+                        <i className="fas fa-exclamation-circle"></i>
                         <i className="fas fa-check-circle"></i>
                     </div>
                 })}

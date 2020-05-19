@@ -26,8 +26,7 @@ export function login(userCreds) {
             dispatch(loading());
             const user = await userService.login(userCreds);
             dispatch(_setUser(user));
-            // dispatch(_setError(null));
-            history.push('/');
+            history.push('/account');
         } 
         catch (err) {
             console.log('err in action: ',err);
@@ -45,8 +44,7 @@ export function signup(userCreds) {
             delete userCreds.passwordValidation;
             const user = await userService.signup(userCreds);
             dispatch(_setUser(user));
-            // dispatch(_setError(null));
-            history.push('/');
+            history.push('/account');
         } 
         catch (err) {
             dispatch(_setError(err));

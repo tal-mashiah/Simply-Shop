@@ -78,7 +78,7 @@ form {
             .fa-check-circle {
                 display: none;
             }
-            .fa-times-circle {
+            .fa-exclamation-circle {
                 display: block;
             }
         }
@@ -99,7 +99,7 @@ form {
             .fa-check-circle {
                 display: block;
             }
-            .fa-times-circle {
+            .fa-exclamation-circle {
                 display: none;
             }
         }
@@ -111,7 +111,7 @@ form {
             color: $success-clr;
             display: none;
         }
-        .fa-times-circle {
+        .fa-exclamation-circle {
             position: absolute;
             left: 10px;
             top: 36px;

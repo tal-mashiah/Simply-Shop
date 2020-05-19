@@ -17,7 +17,6 @@ export default class FilterPreview extends Component {
         if (prevCounter !== thisCounter) {
             this.setState({ isFiltersShown: isSomeSelected })
         }
-
     }
 
 
@@ -29,9 +28,6 @@ export default class FilterPreview extends Component {
 
     render() {
         const { filter, updateFilters } = this.props;
-        console.log(filter.key, this.state.isFiltersShown);
-        console.log(filter.key, filter);
-
         return (
             <div className="filter-preview flex column">
                 <div className="filter-title-container flex justify-between" onClick={this.toggleFilters}>

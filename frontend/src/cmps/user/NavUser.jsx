@@ -2,12 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function NavUser({ loggedInUser, logout }) {
-    console.log(loggedInUser);
 
     return (
         <div className='link-container'>
             <div className="nav-user">
-                <i className="fas fa-user"></i>
+                <Link to={loggedInUser ? "/account" : "/auth/login"}> <i className="fas fa-user"></i></Link>
                 <div className="modal">
                     {!loggedInUser ?
                         <React.Fragment>
@@ -21,7 +20,7 @@ export default function NavUser({ loggedInUser, logout }) {
                             <button className="main-btn secondary" onClick={() => logout()}>התנתק</button>
                         </React.Fragment>}
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
