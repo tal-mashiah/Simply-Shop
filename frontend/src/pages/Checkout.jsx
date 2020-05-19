@@ -28,14 +28,17 @@ class Checkout extends Component {
 
     render() {
         const { bag, delivery, form } = this.props;
+        
         return (
             <div className="cart-page container flex column align-center">
+                {bag.length ?
                 <div className="cart-sections">
                     <CartTable bag={bag} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
                     <Delivery bag={bag} delivery={delivery} onDeliverySelected={this.onDeliverySelected} />
                     <OrderForm updateForm={this.updateForm}/>
                     <Payment bag={bag} delivery={delivery} form={form}/>
-                </div>
+                </div>:
+                <div className="empty-cart flex align-center">העגלה שלך ריקה</div>}
             </div>
         )
     }

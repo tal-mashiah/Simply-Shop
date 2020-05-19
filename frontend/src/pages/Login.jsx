@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { updateForm, signup, login } from '../actions/UserActions';
+import { updateForm, signup, login, setError } from '../actions/UserActions';
 
 import Form from '../cmps/general/Form.jsx';
+import Spinner from '../cmps/general/Spinner.jsx';
 
 class Login extends Component {
     state = {
@@ -13,7 +14,7 @@ class Login extends Component {
             { type: 'text', name: 'fullName', label: 'שם מלא', validation: ['required', 'langAndMin2Char', 'twoWords'] },
             { type: 'text', name: 'email', label: 'אימייל', validation: ['required', 'email'] },
             { type: 'password', name: 'password', label: 'סיסמה', toggleVisibility: true, validation: ['required', 'passvalid', 'min8Char', 'engAndNums'] },
-            { type: 'password', name: 'password-validation', label: 'אימות סיסמה', toggleVisibility: true, validation: ['required', 'passvalid'] }
+            { type: 'password', name: 'passwordValidation', label: 'אימות סיסמה', toggleVisibility: true, validation: ['required', 'passvalid'] }
         ],
         loginInputs: [
             { type: 'text', name: 'email', label: 'אימייל', validation: ['required', 'email'] },
@@ -35,6 +36,7 @@ class Login extends Component {
         const { pageName } = this.props.match.params;
         this.updateForm(false, null);
         this.setState({ pageName });
+        this.props.setError(null);
     }
 
     updateForm = (isValid, form) => {
@@ -43,31 +45,32 @@ class Login extends Component {
 
     setUser = () => {
         const { pageName } = this.state;
-        const { login, signup, form } = this.props;        
+        const { login, signup, form } = this.props;
         if (!form.isValid) return;
         if (pageName === 'login') {
-            login(form.input)
+            login(form.input);
         } else {
-            signup(form.input)
+            signup(form.input);
         }
     }
 
     render() {
         const { loginInputs, registerInputs, pageName } = this.state;
-        const { isValid } = this.props.form;
-        const { loggedInUser } = this.props;
+        const { loggedInUser, isLoading, errMsg, form } = this.props;
         if (!pageName) return null;
         console.log('loggedInUser: ', loggedInUser);
         return (
             <div className="login flex column align-center">
                 <div className="login-nav flex justify-around">
-                    <Link to="/login"> <div className={pageName === 'login' ? "login active" : "login"}>התחבר</div></Link>
-                    <Link to="/register"> <div className={pageName === 'register' ? "register active" : "register"}>הרשם</div></Link>
+                    <Link to="/auth/login"> <div className={pageName === 'login' ? "login active" : "login"}>התחבר</div></Link>
+                    <Link to="/auth/register"> <div className={pageName === 'register' ? "register active" : "register"}>הרשם</div></Link>
                 </div>
+                {!isLoading || <Spinner />}
+                {!errMsg || <div className="error-msg">{errMsg}</div>}
                 {pageName === 'login' ?
                     <Form inputs={loginInputs} updateForm={this.updateForm} /> :
                     <Form inputs={registerInputs} updateForm={this.updateForm} />}
-                <button onClick={this.setUser} className={isValid ? "main-btn primary" : "main-btn primary disabled"}>{pageName === 'login' ? 'התחבר' : 'הרשם'}</button>
+                <button onClick={this.setUser} className={form.isValid ? "main-btn primary" : "main-btn primary disabled"}>{pageName === 'login' ? 'התחבר' : 'הרשם'}</button>
             </div>
         )
     }
@@ -76,12 +79,15 @@ class Login extends Component {
 const mapStateToProps = state => {
     return {
         form: state.user.form,
-        loggedInUser: state.user.loggedInUser
+        loggedInUser: state.user.loggedInUser,
+        errMsg: state.user.errMsg,
+        isLoading: state.system.isLoading
     };
 };
 
 const mapDispatchToProps = {
     updateForm,
+    setError,
     signup,
     login
 };

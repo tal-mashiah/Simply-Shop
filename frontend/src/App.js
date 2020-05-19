@@ -8,6 +8,7 @@ import ProductDetails from './pages/ProductDetails.jsx';
 import SearchPage from './pages/SearchPage.jsx';
 import Checkout from './pages/Checkout.jsx';
 import Login from './pages/Login.jsx';
+import NotFound from './pages/NotFound.jsx';
 
 function App() {
   return (
@@ -16,12 +17,13 @@ function App() {
         <Header/>
         <Switch>
           <Route path="/" component={Home} exact/>
-          <Route path="/category/:name/:_id" component={SearchPage}/>
-          <Route path="/product/:_id" component={ProductDetails}/>
-          <Route path="/search/:term" component={SearchPage}/>
-          <Route path="/checkout" component={Checkout}/>
-          <Route path="/:pageName" component={Login}/>
-          <Route path="/:pageName" component={Login}/>
+          <Route path="/category/:name/:_id" component={SearchPage} exact/>
+          <Route path="/product/:_id" component={ProductDetails} exact/>
+          <Route path="/search/:term" component={SearchPage} exact/>
+          <Route path="/checkout" component={Checkout} exact/>
+          <Route path="/auth/:pageName" component={Login} exact/>
+          <Route path="/auth/:pageName" component={Login} exact/>
+          <Route path="/" component={NotFound}/>
         </Switch>
       </Router>
     </div>

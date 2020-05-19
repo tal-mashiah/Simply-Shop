@@ -10,14 +10,14 @@ export default class Form extends Component {
             phone: /^05\d([-.]{0,1})\d{3}([-.]{0,1})\d{4}$/,
             // eslint-disable-next-line
             email: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/,
-            min8Char: /.{8,}/,
+            min8Char: /.{6,}/,
             engAndNums: /^[a-zA-Z0-9]*$/,
             passvalid: (currInput) => {
-                const contraName = currInput.name === 'password-validation' ? 'password' : 'password-validation';
+                const contraName = currInput.name === 'passwordValidation' ? 'password' : 'passwordValidation';
                 const contraInput = this.props.inputs.find(input => input.name === contraName);
                 switch (currInput.name) {
 
-                    case 'password-validation':
+                    case 'passwordValidation':
                         if (contraInput.value === currInput.value) return true;
                         break;
 

@@ -4,6 +4,7 @@ import storageService from '../../services/storageService';
 
 import { connect } from 'react-redux';
 import { setBag, deleteItem, updateQuantity } from '../../actions/checkoutActions';
+import { logout } from '../../actions/UserActions';
 
 import NavBar from './NavBar.jsx'
 import Logo from './Logo.jsx';
@@ -45,9 +46,13 @@ class Header extends Component {
         this.props.updateQuantity(itemId, diff, quantity);
     }
 
+    logout = () => {
+        this.props.logout()
+    }
+
     render() {
         const { categories } = this.state;
-        const { bag } = this.props;
+        const { bag, loggedInUser } = this.props;
         if (!categories) return <Spinner />
 
         return (
@@ -55,7 +60,7 @@ class Header extends Component {
                 <div className="top-header flex justify-between align-center">
                     <Logo />
                     <SearchBar />
-                    <NavBar categories={categories} bag={bag} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
+                    <NavBar categories={categories} bag={bag} loggedInUser={loggedInUser} logout={this.logout} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
                 </div>
                 <CategoryList categories={categories} />
                 <Hamburger />
@@ -66,11 +71,13 @@ class Header extends Component {
 
 const mapStateToProps = state => {
     return {
-        bag: state.checkout.bag
+        bag: state.checkout.bag,
+        loggedInUser: state.user.loggedInUser
     };
 };
 
 const mapDispatchToProps = {
+    logout,
     setBag,
     deleteItem,
     updateQuantity

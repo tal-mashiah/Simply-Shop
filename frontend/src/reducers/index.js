@@ -1,11 +1,14 @@
 import { combineReducers } from 'redux';
-import SearchReducer from './SearchReducer';
+
 import CheckoutReducer from './CheckoutReducer';
+import SystemReducer from './SystemReducer';
+import SearchReducer from './SearchReducer';
 import UserReducer from './UserReducer';
 
 const rootReducer = combineReducers({
-  search: SearchReducer,
   checkout: CheckoutReducer,
+  system: SystemReducer,
+  search: SearchReducer,
   user: UserReducer
 })
 

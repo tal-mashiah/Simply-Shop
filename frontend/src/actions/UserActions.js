@@ -1,4 +1,6 @@
 import userService from '../services/userService';
+import { loading, doneLoading } from './SystemActions';
+import history from '../history';
 
 export function updateForm(isValid, form) {
     return dispatch => {
@@ -21,32 +23,46 @@ function _updateForm(isValid, form) {
 export function login(userCreds) {
     return async dispatch => {
         try {
+            dispatch(loading());
             const user = await userService.login(userCreds);
             dispatch(_setUser(user));
-
-        } catch (err) {
-            console.log('userActions: err in login', err);
+            // dispatch(_setError(null));
+            history.push('/');
+        } 
+        catch (err) {
+            console.log('err in action: ',err);
+            dispatch(_setError(err));
+        } 
+        finally {
+            dispatch(doneLoading());
         }
     };
 }
 export function signup(userCreds) {
     return async dispatch => {
         try {
+            dispatch(loading());
+            delete userCreds.passwordValidation;
             const user = await userService.signup(userCreds);
             dispatch(_setUser(user));
-
-        } catch (err) {
-            console.log('userActions: err in signup', err);
+            // dispatch(_setError(null));
+            history.push('/');
+        } 
+        catch (err) {
+            dispatch(_setError(err));
+        }
+        finally {
+            dispatch(doneLoading());
         }
     };
 }
 export function logout() {
-    return async dispatch => {
+    return dispatch => {
         try {
-            await userService.logout();
+            userService.logout();
             dispatch(_setUser(null));
-
-        } catch (err) {
+        } 
+        catch (err) {
             console.log('userActions: err in logout', err);
         }
     };
@@ -56,5 +72,22 @@ export function _setUser(user) {
     return {
         type: 'SET_USER',
         user
+    };
+}
+
+export function setError(err) {
+    return dispatch => {
+        try {
+            dispatch(_setError(err));
+        } catch (err) {
+            console.log('userActions: err in set error', err);
+        }
+    };
+}
+
+export function _setError(err) {
+    return {
+        type: 'SET_ERROR',
+        err
     };
 }
