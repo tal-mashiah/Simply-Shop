@@ -26,7 +26,7 @@ export function login(userCreds) {
             dispatch(loading());
             const user = await userService.login(userCreds);
             dispatch(_setUser(user));
-            history.push('/account');
+            history.push('/account/orders');
         } 
         catch (err) {
             console.log('err in action: ',err);
@@ -44,7 +44,7 @@ export function signup(userCreds) {
             delete userCreds.passwordValidation;
             const user = await userService.signup(userCreds);
             dispatch(_setUser(user));
-            history.push('/account');
+            history.push('/account/orders');
         } 
         catch (err) {
             dispatch(_setError(err));
@@ -59,6 +59,7 @@ export function logout() {
         try {
             userService.logout();
             dispatch(_setUser(null));
+            history.push('/');
         } 
         catch (err) {
             console.log('userActions: err in logout', err);

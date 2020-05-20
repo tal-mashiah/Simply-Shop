@@ -61,7 +61,7 @@ class Login extends Component {
         console.log('loggedInUser: ', loggedInUser);
         return (
             <div className="login flex column align-center">
-                <div className="login-nav flex justify-around">
+                <div className="page-nav flex justify-around">
                     <Link to="/auth/login"> <div className={pageName === 'login' ? "login active" : "login"}>התחבר</div></Link>
                     <Link to="/auth/register"> <div className={pageName === 'register' ? "register active" : "register"}>הרשם</div></Link>
                 </div>

@@ -23,8 +23,7 @@ function App() {
           <Route path="/search/:term" component={SearchPage} exact/>
           <Route path="/checkout" component={Checkout} exact/>
           <Route path="/auth/:pageName" component={Login} exact/>
-          <Route path="/auth/:pageName" component={Login} exact/>
-          <Route path="/account" component={Account} exact/>
+          <Route path="/account/:pageName" component={Account} exact/>
           <Route path="/" component={NotFound}/>
         </Switch>
       </Router>

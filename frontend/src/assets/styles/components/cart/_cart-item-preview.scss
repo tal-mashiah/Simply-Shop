@@ -41,9 +41,9 @@
         .price {
             font-weight: 600;
             font-size: 14px;
-            i {
-                font-size: 12px;
-                margin: 7px 2px 0 0;
+            .fa-shekel-sign {
+                font-size: 11px;
+                margin: 5px 2px 0 0;
                 color: #44484a;
             }
         }
@@ -67,7 +67,7 @@
         left: -2px;
         span {
             font-weight: 600;
-            i {
+            .fa-shekel-sign {
                 font-size: 9px;
                 margin: 0 3px;
             }

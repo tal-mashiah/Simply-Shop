@@ -1,14 +1,17 @@
 .delivery-info{
-    padding:  20px 40px;
+    padding: 20px 55px;
     background-color: #f1f3f8;
     border: 2px solid #d5dae6;
+    max-width: 400px;
     h2{
         font-size: 22px;
+        margin-bottom: 10px;
     }
     &>div{
         padding: 15px 0;
         border-bottom: 1px solid #d5dae6;
         font-size: 16px;
+        line-break: anywhere;
         &:first-child {
             padding: 0;
         }

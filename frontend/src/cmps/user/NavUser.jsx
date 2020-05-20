@@ -6,7 +6,7 @@ export default function NavUser({ loggedInUser, logout }) {
     return (
         <div className='link-container'>
             <div className="nav-user">
-                <Link to={loggedInUser ? "/account" : "/auth/login"}> <i className="fas fa-user"></i></Link>
+                <Link to={loggedInUser ? "/account/orders" : "/auth/login"}> <i className="fas fa-user"></i></Link>
                 <div className="modal">
                     {!loggedInUser ?
                         <React.Fragment>

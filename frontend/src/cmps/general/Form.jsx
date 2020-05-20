@@ -70,8 +70,10 @@ export default class Form extends Component {
         const { form } = this.state;
         const currInput = this.props.inputs.find(item => item.name === name);
         currInput.value = value;
-
-        if (currInput.validation) {
+        if (!currInput.value && !currInput.validation.includes('required')) {
+            currInput.isValid = true;
+            currInput.error = '';
+        } else if (currInput.validation) {
             for (const validation of currInput.validation) {
                 this.validate(validation, currInput);
                 if (!currInput.isValid) break;
@@ -123,7 +125,7 @@ export default class Form extends Component {
                     const ConditionalInput = input.type === 'textarea' ? 'textarea' : 'input';
 
                     return <div key={idx} className={input.error ? "input-container error" : input.isValid && input.value ? "input-container valid" : "input-container"}>
-                        <label htmlFor={input.name}>{input.label} {input.validation ? <i className="fas fa-star-of-life"></i> : null}</label>
+                        <label htmlFor={input.name}>{input.label} {input.validation.includes('required') ? <i className="fas fa-star-of-life"></i> : null}</label>
                         <ConditionalInput type={input.type} value={input.value || ''} onChange={this.handleChange} id={input.name} name={input.name} placeholder={input.label}></ConditionalInput>
                         <div className="form-error">{!input || input.error}
                             <div className="arrow-up"></div>

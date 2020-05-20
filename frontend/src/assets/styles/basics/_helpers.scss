@@ -55,8 +55,33 @@
 //parallax
 
 .parallax {
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.page-nav {
+  margin: 40px 0;
+  border-bottom: 1px solid #b7b7b7;
+  width: 350px;
+  height: 35px;
+  a {
+    width: 50%;
+    height: 20px;
+    text-align: center;
+    &:first-of-type {
+      border-left: 1px solid #b7b7b7;
+    }
+    & > div {
+      font-size: 20px;
+      font-family: open-sans-bold;
+      width: fit-content;
+      display: inline-block;
+      height: 34px;
+      &.active {
+        border-bottom: 3px solid #3589fe;
+      }
+    }
   }
+}

@@ -66,9 +66,12 @@
 @import "components/checkout/payment/payment-total.scss";
 @import "components/checkout/payment/delivery-info.scss";
 
+// account
+@import "components/account/order.scss";
 
 // views //
 
+@import "views/account.scss";
 @import "views/product-details.scss";
 @import "views/search-page.scss";
 @import "views/checkout.scss";
