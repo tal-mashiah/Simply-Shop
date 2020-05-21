@@ -29,7 +29,6 @@ export function login(userCreds) {
             history.push('/account/orders');
         } 
         catch (err) {
-            console.log('err in action: ',err);
             dispatch(_setError(err));
         } 
         finally {
@@ -88,5 +87,23 @@ export function _setError(err) {
     return {
         type: 'SET_ERROR',
         err
+    };
+}
+
+export function updateUser(userCreds) {
+    console.log(userCreds);
+    
+    return async dispatch => {
+        try {
+            dispatch(loading());
+            // const user = await userService.login(userCreds);
+            // dispatch(_setUser(user));
+        } 
+        catch (err) {
+            console.log('userActions: err in update user', err);
+        } 
+        finally {
+            dispatch(doneLoading());
+        }
     };
 }

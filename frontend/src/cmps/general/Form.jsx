@@ -51,14 +51,16 @@ export default class Form extends Component {
         }
     }
 
-
     componentDidMount() {
+        let form = {};
         this.props.inputs.forEach(input => {
-            input.isValid = input.validation ? false : true;
+            input.isValid = input.validation ? input.validation.includes('required') ? false : true : true;
             if (input.value) {
-                this.handleInput(input.name, input.value);
+                this.handleInput(input.name, input.value, false);
+                form[input.name] = input.value;
             }
         });
+        this.setState({ form }, () => this.checkIfFormValid());
     }
 
     handleChange = (event) => {
@@ -66,11 +68,11 @@ export default class Form extends Component {
         this.handleInput(name, value);
     }
 
-    handleInput(name, value) {
+    handleInput(name, value, isState = true) {
         const { form } = this.state;
         const currInput = this.props.inputs.find(item => item.name === name);
         currInput.value = value;
-        if (!currInput.value && !currInput.validation.includes('required')) {
+        if (!currInput.value && (!currInput.validation || !currInput.validation.includes('required'))) {
             currInput.isValid = true;
             currInput.error = '';
         } else if (currInput.validation) {
@@ -81,7 +83,7 @@ export default class Form extends Component {
         } else {
             currInput.isValid = true;
         }
-        this.setState({ form: { ...form, [name]: currInput.value } }, () => this.checkIfFormValid());
+        isState && this.setState({ form: { ...form, [name]: currInput.value } }, () => this.checkIfFormValid());
     }
 
     validate = (validation, currInput) => {
@@ -118,6 +120,7 @@ export default class Form extends Component {
 
     render() {
         const { inputs } = this.props;
+        // console.log(this.state.form);
 
         return (
             <form>
@@ -125,7 +128,7 @@ export default class Form extends Component {
                     const ConditionalInput = input.type === 'textarea' ? 'textarea' : 'input';
 
                     return <div key={idx} className={input.error ? "input-container error" : input.isValid && input.value ? "input-container valid" : "input-container"}>
-                        <label htmlFor={input.name}>{input.label} {input.validation.includes('required') ? <i className="fas fa-star-of-life"></i> : null}</label>
+                        <label htmlFor={input.name}>{input.label} {input.validation ? input.validation.includes('required') ? <i className="fas fa-star-of-life"></i> : null : null}</label>
                         <ConditionalInput type={input.type} value={input.value || ''} onChange={this.handleChange} id={input.name} name={input.name} placeholder={input.label}></ConditionalInput>
                         <div className="form-error">{!input || input.error}
                             <div className="arrow-up"></div>
