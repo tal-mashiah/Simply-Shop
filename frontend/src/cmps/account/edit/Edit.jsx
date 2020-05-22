@@ -46,9 +46,11 @@ export default class Edit extends Component {
 
     render() {
         const { updatedInputs, isValid } = this.state;
+        const { growlMsg } = this.props;
         if (!updatedInputs) return null;
         return (
-            <div>
+            <div className="flex column align-center">
+                {!growlMsg || <div className="growl-msg success">{growlMsg}</div>}
                 <Form inputs={updatedInputs} updateForm={this.updateForm} />
                 <button className={isValid ? "main-btn primary" : "main-btn primary disabled"} onClick={this.onUpdateUser}>עדכון פרטים</button>
             </div>

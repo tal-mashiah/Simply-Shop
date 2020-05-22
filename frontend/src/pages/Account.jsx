@@ -34,19 +34,19 @@ class Account extends Component {
 
     render() {
         const { pageName } = this.state;
-        const { loggedInUser } = this.props;
+        const { loggedInUser, growlMsg } = this.props;
 
         return (
             <div className="acount">
                 <div className="hero flex align-center justify-center"> {loggedInUser.fullName}</div>
-                <div className="page-container">
+                <div className="page-container flex column align-center">
                     <div className="page-nav flex justify-around">
                         <Link to="/account/orders"> <div className={pageName === 'orders' ? "orders active" : "orders"}>הזמנות</div></Link>
                         <Link to="/account/edit"> <div className={pageName === 'edit' ? "edit active" : "edit"}>עריכת חשבון</div></Link>
                         <Link to="/account/password"> <div className={pageName === 'password' ? "password active" : "password"}>שינוי סיסמה</div></Link>
                     </div>
                     {pageName === 'orders' && <Order />}
-                    {pageName === 'edit' && <Edit user={loggedInUser} updateUser={this.updateUser}/>}
+                    {pageName === 'edit' && <Edit user={loggedInUser} growlMsg={growlMsg} updateUser={this.updateUser}/>}
                 </div>
             </div>
         )
@@ -55,6 +55,7 @@ class Account extends Component {
 
 const mapStateToProps = state => {
     return {
+        growlMsg: state.user.growlMsg,
         loggedInUser: state.user.loggedInUser
     };
 };

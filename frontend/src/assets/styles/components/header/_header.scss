@@ -7,7 +7,7 @@ header {
     transition: linear 0.6s;
     z-index: 999;
     background: #fff;
-    border-bottom: 1px solid #ebebeb;
+    border-bottom: 1px solid $border-clr;
 
     .top-header {
         height: $top-header-height;

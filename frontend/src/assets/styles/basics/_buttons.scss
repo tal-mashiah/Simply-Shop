@@ -12,11 +12,10 @@
     text-transform: uppercase;
     text-align: center;
     &.primary {
-        background-color: #3589fe;
+        background-color: $primary-clr;
         color: #fff;
-        margin-right: 32px;
         &:hover {
-            background-color: #1766d5;
+            background-color: darken($color: $primary-clr, $amount: 10%);
         }
         &.disabled{
             background-color: #c3dcff;
@@ -24,13 +23,13 @@
         }
     }
     &.secondary {
-        color: #3a414a;
+        color: $secondary-clr;
         background-color: transparent;
-        border: 2px solid #3a414a;
+        border: 2px solid $secondary-clr;
         &:hover {
             color: #fff;
-            background-color: #2a2c2e;
-            border-color: #2a2c2e;
+            background-color: darken($color: $secondary-clr, $amount: 5%);
+            border-color: darken($color: $secondary-clr, $amount: 5%);
         }
     }
 }

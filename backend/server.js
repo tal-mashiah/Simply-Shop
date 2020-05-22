@@ -11,6 +11,7 @@ const http = require('http').createServer(app);
 const searchRoutes = require('./api/search/search.routes');
 const categoryRoutes = require('./api/category/category.routes');
 const authRoutes = require('./api/auth/auth.routes');
+const userRoutes = require('./api/user/user.routes');
 
 app.use(cookieParser())
 app.use(bodyParser.json());
@@ -35,6 +36,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/api/search', searchRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
 
 const logger = require('./services/logger.service');
 const port = process.env.PORT || 3030;

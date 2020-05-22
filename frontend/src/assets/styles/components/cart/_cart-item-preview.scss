@@ -3,7 +3,7 @@
     line-height: initial;
     position: relative;
     &:not(:last-of-type) {
-        border-bottom: 1px solid #ebebeb;
+        border-bottom: 1px solid $border-clr;
     }
     cursor: default;
     img {
@@ -44,7 +44,7 @@
             .fa-shekel-sign {
                 font-size: 11px;
                 margin: 5px 2px 0 0;
-                color: #44484a;
+                color: $base-clr;
             }
         }
     }
@@ -57,7 +57,7 @@
         top: 6px;
         left: -9px;
         &:hover {
-            color: #44484a;
+            color: $base-clr;
         }
     }
     .total-amount {

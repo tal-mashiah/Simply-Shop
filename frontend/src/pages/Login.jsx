@@ -56,9 +56,9 @@ class Login extends Component {
 
     render() {
         const { loginInputs, registerInputs, pageName } = this.state;
-        const { loggedInUser, isLoading, errMsg, form } = this.props;
+        const { isLoading, growlMsg, form } = this.props;
         if (!pageName) return null;
-        console.log('loggedInUser: ', loggedInUser);
+
         return (
             <div className="login flex column align-center">
                 <div className="page-nav flex justify-around">
@@ -66,7 +66,7 @@ class Login extends Component {
                     <Link to="/auth/register"> <div className={pageName === 'register' ? "register active" : "register"}>הרשם</div></Link>
                 </div>
                 {!isLoading || <Spinner />}
-                {!errMsg || <div className="error-msg">{errMsg}</div>}
+                {!growlMsg || <div className="growl-msg err">{growlMsg}</div>}
                 {pageName === 'login' ?
                     <Form inputs={loginInputs} updateForm={this.updateForm} /> :
                     <Form inputs={registerInputs} updateForm={this.updateForm} />}
@@ -79,8 +79,7 @@ class Login extends Component {
 const mapStateToProps = state => {
     return {
         form: state.user.form,
-        loggedInUser: state.user.loggedInUser,
-        errMsg: state.user.errMsg,
+        growlMsg: state.user.growlMsg,
         isLoading: state.system.isLoading
     };
 };

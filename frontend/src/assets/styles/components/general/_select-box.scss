@@ -1,13 +1,13 @@
 .select-box{
     width: 180px;
-    color: #44484a;
+    color: $base-clr;
     margin-top: 3px;
     cursor: pointer;
     font-size: 16px;
     
     .title {
         padding: 11px 14px 11px;
-        border: 1px solid #ebebeb;
+        border: 1px solid $border-clr;
         border-radius: 4px;
         -moz-appearance: none;
         -webkit-appearance: none;
@@ -25,7 +25,7 @@
     .options-container{
         width: 180px;
         position: absolute;
-        border: 1px solid #ebebeb;
+        border: 1px solid $border-clr;
         border-top: none;
         z-index: 10;
         .option{

@@ -2,7 +2,7 @@
     position: relative;
     max-width: 485px;
     .top-content {
-        border-bottom: rgb(202, 202, 202) 1px solid;
+        border-bottom: $border-clr 1px solid;
         padding-bottom: 15px;
         font-family: open-sans-bold;
         min-height: 125px;
@@ -15,7 +15,7 @@
         span {
             font-size: 14px;
             padding-bottom: 8px;
-            color: rgba(0, 83, 199, 0.76);
+            color: $primary-clr;
             text-align: left;
         }
         .content-price {
@@ -30,5 +30,8 @@
     }
     .buy-container {
         height: 125px;
+        .main-btn.primary{
+            margin-right: 32px;
+        }
     }
 }

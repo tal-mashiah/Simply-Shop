@@ -26,12 +26,12 @@
     }
     #inc-btn:hover {
         i {
-            color: #06ad00;
+            color: $success-clr;
         }
     }
     #dec-btn:hover {
         i {
-            color: #9e0e00;
+            color: $error-clr;
         }
     }
 }

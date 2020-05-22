@@ -1,7 +1,7 @@
 .product-info {
     margin-bottom: 15px;
     .info-tabs {
-        border-bottom: 1px solid #b7b7b7;
+        border-bottom: 1px solid $border-clr;
         margin-bottom: 28px;
         li {
             transition: all 0.35s ease-out;
@@ -12,11 +12,11 @@
             cursor: pointer;
             border-bottom: 3px solid transparent;
             &:hover {
-                color: #3a414a;
+                color: $secondary-clr;
             }
             &.active {
-                border-bottom-color: #3589fe;
-                color: #3a414a;
+                border-bottom-color: $primary-clr;
+                color: $secondary-clr;
             }
         }
     }

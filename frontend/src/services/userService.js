@@ -17,12 +17,14 @@ function getUsers() {
 function getById(userId) {
     return HttpService.get(`user/${userId}`)
 }
+
 function remove(userId) {
     return HttpService.delete(`user/${userId}`)
 }
 
-function update(user) {
-    return HttpService.put(`user/${user._id}`, user)
+async function update(userCred) {
+    const user = await HttpService.put(`user/${userCred._id}`, userCred)
+    return _handleLogin(user)
 }
 
 async function login(userCred) {
