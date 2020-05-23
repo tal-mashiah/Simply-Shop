@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Switch, Route} from 'react-router';
+import { Router, Switch, Route } from 'react-router';
 import history from './history';
 
 import Header from './cmps/header/Header.jsx';
@@ -10,21 +10,23 @@ import Checkout from './pages/Checkout.jsx';
 import Login from './pages/Login.jsx';
 import Account from './pages/Account.jsx';
 import NotFound from './pages/NotFound.jsx';
+import GrowlMessage from './cmps/general/GrowlMessage.jsx'
 
 function App() {
   return (
-    <div className="App header-padding"> 
+    <div className="App header-padding">
       <Router history={history}>
-        <Header/>
+        <GrowlMessage />
+        <Header />
         <Switch>
-          <Route path="/" component={Home} exact/>
-          <Route path="/category/:name/:_id" component={SearchPage} exact/>
-          <Route path="/product/:_id" component={ProductDetails} exact/>
-          <Route path="/search/:term" component={SearchPage} exact/>
-          <Route path="/checkout" component={Checkout} exact/>
-          <Route path="/auth/:pageName" component={Login} exact/>
-          <Route path="/account/:pageName" component={Account} exact/>
-          <Route path="/" component={NotFound}/>
+          <Route path="/" component={Home} exact />
+          <Route path="/category/:name/:_id" component={SearchPage} exact />
+          <Route path="/product/:_id" component={ProductDetails} exact />
+          <Route path="/search/:term" component={SearchPage} exact />
+          <Route path="/checkout" component={Checkout} exact />
+          <Route path="/auth/:pageName" component={Login} exact />
+          <Route path="/account/:pageName" component={Account} exact />
+          <Route path="/" component={NotFound} />
         </Switch>
       </Router>
     </div>

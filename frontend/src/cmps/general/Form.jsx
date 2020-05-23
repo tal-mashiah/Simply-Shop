@@ -129,7 +129,7 @@ export default class Form extends Component {
 
                     return <div key={idx} className={input.error ? "input-container error" : input.isValid && input.value ? "input-container valid" : "input-container"}>
                         <label htmlFor={input.name}>{input.label} {input.validation ? input.validation.includes('required') ? <i className="fas fa-star-of-life"></i> : null : null}</label>
-                        <ConditionalInput type={input.type} value={input.value || ''} onChange={this.handleChange} id={input.name} name={input.name} placeholder={input.label}></ConditionalInput>
+                        <ConditionalInput type={input.type} value={input.value || ''} onChange={this.handleChange} id={input.name} name={input.name} placeholder={input.label} autoComplete="on"></ConditionalInput>
                         <div className="form-error">{!input || input.error}
                             <div className="arrow-up"></div>
                         </div>

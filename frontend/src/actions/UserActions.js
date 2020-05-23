@@ -1,5 +1,6 @@
 import userService from '../services/userService';
 import { loading, doneLoading } from './SystemActions';
+import { setGrowl } from './GrowlActions';
 import history from '../history';
 
 export function updateForm(isValid, form) {
@@ -27,15 +28,17 @@ export function login(userCreds) {
             const user = await userService.login(userCreds);
             dispatch(_setUser(user));
             history.push('/account/orders');
+            dispatch(setGrowl('התחברת בהצלחה', 'success'));
         }
         catch (err) {
-            dispatch(_setGrowlMsg(err));
+            dispatch(setGrowl(err, 'error'));
         }
         finally {
             dispatch(doneLoading());
         }
     };
 }
+
 export function signup(userCreds) {
     return async dispatch => {
         try {
@@ -46,13 +49,14 @@ export function signup(userCreds) {
             history.push('/account/orders');
         }
         catch (err) {
-            dispatch(_setGrowlMsg(err));
+            dispatch(setGrowl(err, 'error'));
         }
         finally {
             dispatch(doneLoading());
         }
     };
 }
+
 export function logout() {
     return dispatch => {
         try {
@@ -66,30 +70,6 @@ export function logout() {
     };
 }
 
-export function _setUser(user) {
-    return {
-        type: 'SET_USER',
-        user
-    };
-}
-
-export function setError(err) {
-    return dispatch => {
-        try {
-            dispatch(_setGrowlMsg(err));
-        } catch (err) {
-            console.log('userActions: err in set error', err);
-        }
-    };
-}
-
-export function _setGrowlMsg(growlMsg) {
-    return {
-        type: 'SET_GROWL',
-        growlMsg
-    };
-}
-
 export function updateUser(userCreds) {
     console.log(userCreds);
 
@@ -98,7 +78,7 @@ export function updateUser(userCreds) {
             dispatch(loading());
             const user = await userService.update(userCreds);
             dispatch(_setUser(user));
-            dispatch(_setGrowlMsg('פרטי החשבון שונו בהצלחה.'));
+            dispatch(setGrowl('פרטי החשבון שונו בהצלחה', 'success'));
         }
         catch (err) {
             console.log('userActions: err in update user', err);
@@ -106,5 +86,12 @@ export function updateUser(userCreds) {
         finally {
             dispatch(doneLoading());
         }
+    };
+}
+
+export function _setUser(user) {
+    return {
+        type: 'SET_USER',
+        user
     };
 }

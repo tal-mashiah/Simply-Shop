@@ -1,0 +1,22 @@
+.Toastify__toast-container {
+    width: 300px;
+    .Toastify__toast {
+        border-radius: 5px;
+        min-height: 40px;
+        &.Toastify__toast--success {
+            background-color: $success-clr;
+        }
+        &.Toastify__toast--error {
+            background-color: $error-clr;
+        }
+        .Toastify__toast-body {
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            font-family: open-sans-bold;
+        }
+        button {
+            display: none;
+        }
+    }
+}

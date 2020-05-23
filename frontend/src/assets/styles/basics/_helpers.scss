@@ -90,12 +90,28 @@
   text-align: center;
   padding: 6px 20px;
   font-family: open-sans-bold;
-  &.err{
+  &.err {
     color: $error-clr;
     border: 1px solid $error-clr;
   }
-  &.success{
+  &.success {
     color: $success-clr;
     border: 1px solid $success-clr;
+  }
+  &.fade-in {
+    opacity: 0;
+    animation-name: fadeInOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 2s;
+  }
+
+  @keyframes fadeInOpacity {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
   }
 }

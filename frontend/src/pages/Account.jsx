@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateUser } from '../actions/UserActions';
 
-
 import Order from '../cmps/account/order/Order';
 import Edit from '../cmps/account/edit/Edit';
 
@@ -34,7 +33,7 @@ class Account extends Component {
 
     render() {
         const { pageName } = this.state;
-        const { loggedInUser, growlMsg } = this.props;
+        const { loggedInUser } = this.props;
 
         return (
             <div className="acount">
@@ -46,7 +45,7 @@ class Account extends Component {
                         <Link to="/account/password"> <div className={pageName === 'password' ? "password active" : "password"}>שינוי סיסמה</div></Link>
                     </div>
                     {pageName === 'orders' && <Order />}
-                    {pageName === 'edit' && <Edit user={loggedInUser} growlMsg={growlMsg} updateUser={this.updateUser}/>}
+                    {pageName === 'edit' && <Edit user={loggedInUser} updateUser={this.updateUser}/>}
                 </div>
             </div>
         )
@@ -55,7 +54,6 @@ class Account extends Component {
 
 const mapStateToProps = state => {
     return {
-        growlMsg: state.user.growlMsg,
         loggedInUser: state.user.loggedInUser
     };
 };

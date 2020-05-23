@@ -10,7 +10,9 @@ class SearchBar extends Component {
 
     onSubmit = (ev) => {
         ev.preventDefault();
-        this.props.history.push(`/search/${this.state.term}`)
+        const {term} = this.state;
+        if(!term) return;
+        this.props.history.push(`/search/${term}`)
         this.setState({ term: '' });
     }
 
@@ -18,7 +20,10 @@ class SearchBar extends Component {
         return (
             <div className='search-bar'>
                 <form onSubmit={this.onSubmit}>
-                        <input type="text" onChange={this.handleChange} value={this.state.term} placeholder="חפש..."/>
+                    <div className="input-container">
+                        <input type="text" onChange={this.handleChange} value={this.state.term} placeholder="חפש..." />
+                        <i className="fas fa-search" onClick={this.onSubmit}></i>
+                    </div>
                 </form>
             </div>
         )

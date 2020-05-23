@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { updateForm, signup, login, setError } from '../actions/UserActions';
+import { updateForm, signup, login } from '../actions/UserActions';
 
 import Form from '../cmps/general/Form.jsx';
 import Spinner from '../cmps/general/Spinner.jsx';
@@ -36,7 +36,6 @@ class Login extends Component {
         const { pageName } = this.props.match.params;
         this.updateForm(false, null);
         this.setState({ pageName });
-        this.props.setError(null);
     }
 
     updateForm = (isValid, form) => {
@@ -56,7 +55,7 @@ class Login extends Component {
 
     render() {
         const { loginInputs, registerInputs, pageName } = this.state;
-        const { isLoading, growlMsg, form } = this.props;
+        const { isLoading, form } = this.props;
         if (!pageName) return null;
 
         return (
@@ -66,7 +65,6 @@ class Login extends Component {
                     <Link to="/auth/register"> <div className={pageName === 'register' ? "register active" : "register"}>הרשם</div></Link>
                 </div>
                 {!isLoading || <Spinner />}
-                {!growlMsg || <div className="growl-msg err">{growlMsg}</div>}
                 {pageName === 'login' ?
                     <Form inputs={loginInputs} updateForm={this.updateForm} /> :
                     <Form inputs={registerInputs} updateForm={this.updateForm} />}
@@ -79,14 +77,12 @@ class Login extends Component {
 const mapStateToProps = state => {
     return {
         form: state.user.form,
-        growlMsg: state.user.growlMsg,
         isLoading: state.system.isLoading
     };
 };
 
 const mapDispatchToProps = {
     updateForm,
-    setError,
     signup,
     login
 };
