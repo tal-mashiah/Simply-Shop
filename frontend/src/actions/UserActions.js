@@ -71,8 +71,6 @@ export function logout() {
 }
 
 export function updateUser(userCreds) {
-    console.log(userCreds);
-
     return async dispatch => {
         try {
             dispatch(loading());
@@ -90,6 +88,30 @@ export function updateUser(userCreds) {
 }
 
 export function _setUser(user) {
+    return {
+        type: 'SET_USER',
+        user
+    };
+}
+
+export function updatePassword(userCreds) {
+    return async dispatch => {
+        try {
+            dispatch(loading());
+            const user = await userService.updatePassword(userCreds);
+            // dispatch(_updatePassword(user));
+            dispatch(setGrowl('הסיסמה שונתה בהצלחה', 'success'));
+        }
+        catch (err) {
+            dispatch(setGrowl(err, 'error'));
+        }
+        finally {
+            dispatch(doneLoading());
+        }
+    };
+}
+
+export function _updatePassword(user) {
     return {
         type: 'SET_USER',
         user

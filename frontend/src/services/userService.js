@@ -7,7 +7,8 @@ export default {
     getUsers,
     getById,
     remove,
-    update
+    update,
+    updatePassword
 }
 
 function getUsers() {
@@ -25,6 +26,10 @@ function remove(userId) {
 async function update(userCred) {
     const user = await HttpService.put(`user/${userCred._id}`, userCred)
     return _handleLogin(user)
+}
+
+function updatePassword(userCred) {
+    return HttpService.put(`user/updatePassword/${userCred._id}`, userCred)
 }
 
 async function login(userCred) {

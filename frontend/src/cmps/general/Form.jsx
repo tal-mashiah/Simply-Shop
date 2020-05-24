@@ -6,7 +6,7 @@ export default class Form extends Component {
         regex: {
             required: /(.|\s)*\S(.|\s)*/,
             langAndMin2Char: /^[a-zA-Z\u0590-\u05fe\s"'-]{2,}$/,
-            twoWords: /^([a-zA-Z\u0590-\u05fe]{2,40} +[a-zA-Z\u0590-\u05fe]{2,40})$/,
+            twoWords: /^([a-zA-Z\u0590-\u05fe]{2,40} +[a-zA-Z\u0590-\u05fe]{1,40}).+/,
             phone: /^05\d([-.]{0,1})\d{3}([-.]{0,1})\d{4}$/,
             // eslint-disable-next-line
             email: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/,
@@ -45,7 +45,7 @@ export default class Form extends Component {
             twoWords: 'חובה להזין שם פרטי ושם משפחה',
             phone: 'מספר טלפון אינו תקין',
             email: 'כתובת מייל אינה תקינה',
-            min8Char: 'חובה להזין מינימום 8 ספרות',
+            min8Char: 'חובה להזין מינימום 6 ספרות',
             engAndNums: 'חובה להזין אותיות באנגלית או מספרים בלבד',
             passvalid: 'הסיסמאות אינן תואמות'
         }
@@ -120,16 +120,16 @@ export default class Form extends Component {
 
     render() {
         const { inputs } = this.props;
-        // console.log(this.state.form);
 
         return (
             <form>
                 {inputs.map((input, idx) => {
                     const ConditionalInput = input.type === 'textarea' ? 'textarea' : 'input';
-
-                    return <div key={idx} className={input.error ? "input-container error" : input.isValid && input.value ? "input-container valid" : "input-container"}>
-                        <label htmlFor={input.name}>{input.label} {input.validation ? input.validation.includes('required') ? <i className="fas fa-star-of-life"></i> : null : null}</label>
-                        <ConditionalInput type={input.type} value={input.value || ''} onChange={this.handleChange} id={input.name} name={input.name} placeholder={input.label} autoComplete="on"></ConditionalInput>
+        
+                    
+                    return <div key={idx} className={input.error ? "input-container error" : input.isValid && input.value && !input.disabled ? "input-container valid" : "input-container"}>
+                        <label htmlFor={input.disabled ? '' : input.name}>{input.label} {input.validation ? input.validation.includes('required') ? <i className="fas fa-star-of-life"></i> : null : null}</label>
+                        <ConditionalInput className={input.disabled && "disabled"} type={input.type} value={input.value || ''} onChange={this.handleChange} id={input.name} name={input.name} placeholder={input.label} autoComplete="on"></ConditionalInput>
                         <div className="form-error">{!input || input.error}
                             <div className="arrow-up"></div>
                         </div>

@@ -37,6 +37,12 @@ form {
                 color: #44484a81;
                 font-size: 1em;
             }
+            &.disabled {
+                pointer-events: none;
+                background-color: #e9ecef;
+                border: 1px solid #dbdbdb;
+                color: lighten($color: $base-clr, $amount: 25%)
+            }
         }
         textarea {
             min-height: 75px;
@@ -119,7 +125,8 @@ form {
             color: $error-clr;
             display: none;
         }
-        .fa-eye-slash,.fa-eye{
+        .fa-eye-slash,
+        .fa-eye {
             position: absolute;
             font-size: 12px;
             left: 36px;

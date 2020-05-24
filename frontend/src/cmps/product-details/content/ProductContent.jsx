@@ -22,9 +22,9 @@ export default class ProductContent extends Component {
 
     onAddToBag = () => {
         const { quantity } = this.state;
-        const { product } = this.props;
-        this.props.addToBag({ product, quantity });
-
+        const { product, setGrowl, addToBag } = this.props;
+        addToBag({ product, quantity });
+        setGrowl(quantity > 1 ? `${quantity} מוצרים התווספו לעגלה` : `המוצר התווסף לעגלה`, 'info')
     }
 
     render() {
@@ -33,7 +33,7 @@ export default class ProductContent extends Component {
         return (
             <div className="product-content">
                 <div className="gallery-zoom" id="myPortal" />
-                
+
                 <div className="top-content flex column justify-between">
                     <h1 className="content-title flex column">{title}</h1>
                     {quantity === 1 || <span> סה"כ עבור {quantity} יחידות:</span>}
@@ -46,7 +46,7 @@ export default class ProductContent extends Component {
                     <Link to="/checkout"><button className="main-btn primary" onClick={() => this.onAddToBag()}>קנה עכשיו</button></Link>
                 </div>
             </div>
-            
+
         )
     }
 }

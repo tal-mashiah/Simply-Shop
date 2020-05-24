@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { loadCurrProduct } from '../actions/searchActions';
 import { updateBag } from '../actions/checkoutActions';
+import { setGrowl } from '../actions/GrowlActions';
 
 import ProductContent from '../cmps/product-details/content/ProductContent.jsx';
 import ProductGallery from '../cmps/product-details/gallery/ProductGallery';
@@ -33,12 +34,12 @@ class ProductDetails extends Component {
     render() {
         if (!this.props.productData) return <Spinner />
         const { product } = this.props.productData;
-        const { productData } = this.props;
+        const { productData, setGrowl } = this.props;
         return (
             <div className="product-details flex column align-center">
                 <div className="product-details-container">
                     <div className="product-top-container flex">
-                        <ProductContent product={product} addToBag={this.addToBag} />
+                        <ProductContent product={product} addToBag={this.addToBag} setGrowl={setGrowl} />
                         <ProductGallery images={product.imagesUrl} />
                     </div>
                     <ProductInfo productData={productData} />
@@ -56,7 +57,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     loadCurrProduct,
-    updateBag
+    updateBag,
+    setGrowl
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

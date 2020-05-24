@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import Form from '../../general/Form.jsx';
+import Form from '../general/Form.jsx';
 
 export default class Edit extends Component {
     state = {
         isValid: null,
         form: null,
         inputs: [
+            { type: 'text', name: 'email', label: 'אימייל', disabled: true },
             { type: 'text', name: 'fullName', label: 'שם מלא', validation: ['required', 'langAndMin2Char', 'twoWords'] },
-            { type: 'text', name: 'email', label: 'אימייל', validation: ['required', 'email'] },
             { type: 'text', name: 'city', label: 'עיר / יישוב', validation: ['langAndMin2Char'] },
             { type: 'text', name: 'street', label: 'רחוב' },
             { type: 'number', name: 'number', label: 'מספר בית' },
@@ -35,10 +35,22 @@ export default class Edit extends Component {
         this.setState({ isValid, form });
     }
 
+    checkIfFormChanged = (form,user) => {
+        for (const [key, value] of Object.entries(form)) {
+            if (user[key] !== value){
+                return true;
+            }
+        }
+        this.props.setGrowl('לא שינית כלום יא אהבל טמבל','warn')
+        return false;
+    }
+
     onUpdateUser = () => {
         const { isValid, form } = this.state;
         const { updateUser, user } = this.props;
-        if (isValid) {
+        const isChanged = this.checkIfFormChanged(form,user)
+
+        if (isValid && isChanged) {
             form._id = user._id
             updateUser(form);
         }

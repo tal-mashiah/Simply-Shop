@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { updateUser } from '../actions/UserActions';
+import { updateUser, updatePassword } from '../actions/UserActions';
+import { setGrowl } from '../actions/GrowlActions';
 
-import Order from '../cmps/account/order/Order';
-import Edit from '../cmps/account/edit/Edit';
+import Order from '../cmps/account/Order';
+import Edit from '../cmps/account/Edit';
+import Password from '../cmps/account/Password';
 
 class Account extends Component {
     state = {
@@ -31,9 +33,17 @@ class Account extends Component {
         this.props.updateUser(form);
     }
 
+    updatePassword = (form) => {
+        const { loggedInUser, updatePassword } = this.props;
+        form._id = loggedInUser._id;
+        form.email = loggedInUser.email;
+        delete form.passwordValidation;
+        updatePassword(form);
+    }
+
     render() {
         const { pageName } = this.state;
-        const { loggedInUser } = this.props;
+        const { loggedInUser, setGrowl } = this.props;
 
         return (
             <div className="acount">
@@ -45,7 +55,8 @@ class Account extends Component {
                         <Link to="/account/password"> <div className={pageName === 'password' ? "password active" : "password"}>שינוי סיסמה</div></Link>
                     </div>
                     {pageName === 'orders' && <Order />}
-                    {pageName === 'edit' && <Edit user={loggedInUser} updateUser={this.updateUser}/>}
+                    {pageName === 'edit' && <Edit user={loggedInUser} updateUser={this.updateUser} setGrowl={setGrowl}/>}
+                    {pageName === 'password' && <Password updatePassword={this.updatePassword}/>}
                 </div>
             </div>
         )
@@ -59,7 +70,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    updateUser
+    updatePassword,
+    updateUser,
+    setGrowl
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);
