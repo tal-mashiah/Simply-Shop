@@ -25,8 +25,8 @@ async function updateUser(req, res) {
 async function updatePassword(req, res) {
     const { currPassword, email, password } = req.body;
     try {
-        const user = await userService.updatePassword(currPassword, email, password)
-        res.json(user)
+        await userService.updatePassword(currPassword, email, password)
+        res.status(200).send();
     } catch (err) {
         res.status(401).send(err)
     }

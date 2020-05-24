@@ -45,9 +45,10 @@ class Login extends Component {
     setUser = () => {
         const { pageName } = this.state;
         const { login, signup, form } = this.props;
+        const {lastRoute} = this.props.location;
         if (!form.isValid) return;
         if (pageName === 'login') {
-            login(form.input);
+            login(form.input,lastRoute);
         } else {
             signup(form.input);
         }
@@ -56,8 +57,7 @@ class Login extends Component {
     render() {
         const { loginInputs, registerInputs, pageName } = this.state;
         const { isLoading, form } = this.props;
-        if (!pageName) return null;
-
+        if (!pageName) return null;        
         return (
             <div className="login flex column align-center">
                 <div className="page-nav flex justify-around">

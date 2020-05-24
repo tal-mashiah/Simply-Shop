@@ -1,8 +1,17 @@
-.form-section-container {
-    width: 40%;
-    h2 {
-        margin-bottom: 15px;
-        font-size: 18px;
-        font-family: open-sans-bold;
+.order-form{
+    .checkout-login{
+        margin: 7px 0;
+        a{
+            font-family: open-sans-bold;
+            color: $primary-clr;
+        }
+    }
+    .form-section-container {
+        width: 40%;
+        h2 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-family: open-sans-bold;
+        }
     }
 }

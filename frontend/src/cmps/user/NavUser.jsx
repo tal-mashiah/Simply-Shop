@@ -16,7 +16,6 @@ export default function NavUser({ loggedInUser, logout }) {
                         :
                         <React.Fragment>
                             <div className="userName">שלום <span>{loggedInUser.fullName}</span></div>
-                            {/* <div className="email">{loggedInUser.email}</div> */}
                             <div className="logged-in-nav">
                                 <Link to="/account/orders"> <div className="orders">הזמנות</div></Link>
                                 <Link to="/account/edit"> <div className="edit">עריכת חשבון</div></Link>

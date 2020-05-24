@@ -92,8 +92,6 @@ async function updatePassword(currPassword, email, password) {
     const collection = await dbService.getCollection('user');
     try {
         await collection.update({ _id: user._id }, { $set: { password: hash } });
-        delete user.password;
-        return user
     } catch (err) {
         console.log(`ERROR: cannot update user ${user._id}`)
         throw err;

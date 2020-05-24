@@ -21,13 +21,19 @@ function _updateForm(isValid, form) {
     };
 }
 
-export function login(userCreds) {
+export function login(userCreds, lastRoute) {
     return async dispatch => {
         try {
             dispatch(loading());
             const user = await userService.login(userCreds);
             dispatch(_setUser(user));
-            history.push('/account/orders');
+
+            if (lastRoute === '/checkout') {
+                history.push('/checkout#form');
+            } else {
+                history.push('/account/orders');
+            }
+
             dispatch(setGrowl('התחברת בהצלחה', 'success'));
         }
         catch (err) {
@@ -62,7 +68,6 @@ export function logout() {
         try {
             userService.logout();
             dispatch(_setUser(null));
-            history.push('/');
         }
         catch (err) {
             console.log('userActions: err in logout', err);
@@ -98,8 +103,7 @@ export function updatePassword(userCreds) {
     return async dispatch => {
         try {
             dispatch(loading());
-            const user = await userService.updatePassword(userCreds);
-            // dispatch(_updatePassword(user));
+            await userService.updatePassword(userCreds);
             dispatch(setGrowl('הסיסמה שונתה בהצלחה', 'success'));
         }
         catch (err) {
@@ -108,12 +112,5 @@ export function updatePassword(userCreds) {
         finally {
             dispatch(doneLoading());
         }
-    };
-}
-
-export function _updatePassword(user) {
-    return {
-        type: 'SET_USER',
-        user
     };
 }

@@ -7,12 +7,12 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.1",
+    "braintree-web": "^3.62.1",
     "node-sass": "^4.13.1",
     "react": "^16.12.0",
     "react-dev-utils": "^10.1.0",
     "react-dom": "^16.12.0",
     "react-image-gallery": "^1.0.7",
-    "react-image-magnify": "^2.7.4",
     "react-input-range": "^1.3.0",
     "react-numeric-input": "^2.2.3",
     "react-redux": "^7.1.3",
@@ -23,8 +23,7 @@
     "react-toastify": "^6.0.5",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "scss": "^0.2.4",
-    "socket.io-client": "^2.3.0"
+    "scss": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
