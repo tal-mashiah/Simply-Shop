@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-// import { client, paypalCheckout } from 'braintree-web';
 
 import { connect } from 'react-redux';
 import { deleteItem, updateQuantity, setDelivery, updateForm } from '../actions/checkoutActions';
@@ -11,16 +10,6 @@ import OrderForm from '../cmps/checkout/OrderForm.jsx';
 import Payment from '../cmps/checkout/payment/Payment.jsx';
 
 class Checkout extends Component {
-
-    // componentDidMount() {
-    //     paypalCheckout.paypal.Button.render({
-    //         braintree: {
-    //             client: client,
-    //             paypalCheckout: paypalCheckout
-    //         },
-    //         // The rest of your configuration
-    //     }, '#mashiah');
-    // }
 
     componentDidUpdate() {
         let hash = this.props.location.hash.replace('#', '');
