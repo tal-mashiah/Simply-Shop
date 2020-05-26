@@ -41,7 +41,7 @@ export default class Edit extends Component {
                 return true;
             }
         }
-        this.props.setGrowl('לא שינית כלום יא אהבל טמבל','warn')
+        this.props.setGrowl('לא בוצע שינוי בטופס','warn')
         return false;
     }
 

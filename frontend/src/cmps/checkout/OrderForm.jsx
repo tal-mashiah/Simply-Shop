@@ -5,8 +5,8 @@ import history from '../../history';
 export default class OrderForm extends Component {
     state = {
         inputs: [
-            { type: 'text', name: 'fullName', label: 'שם מלא', validation: ['required', 'langAndMin2Char', 'twoWords'] },
             { type: 'text', name: 'email', label: 'אימייל', validation: ['required', 'email'] },
+            { type: 'text', name: 'fullName', label: 'שם מלא', validation: ['required', 'langAndMin2Char', 'twoWords'] },
             { type: 'tel', name: 'phone', label: 'טלפון נייד', validation: ['required', 'phone'] },
             { type: 'text', name: 'city', label: 'עיר / יישוב', validation: ['required', 'langAndMin2Char'] },
             { type: 'text', name: 'street', label: 'רחוב', validation: ['required'] },
@@ -20,32 +20,46 @@ export default class OrderForm extends Component {
     }
 
     componentDidMount() {
-        const {user} = this.props;
-        if(user){
-            const updatedInputs = this.state.inputs.map(input => {
+        const { user } = this.props;
+        const { inputs } = this.state;
+        if (user) {
+            const updatedInputs = inputs.map(input => {
+                let inputCopy = { ...input };
                 for (let [key, value] of Object.entries(user)) {
-                    if (input.name === key) {
-                        input.value = value;
+                    if (inputCopy.name === key) {
+                        inputCopy.value = value;
+                    }
+                    if (inputCopy.name === 'email') {
+                        delete inputCopy.validation;
+                        inputCopy.disabled = true;
                     }
                 }
-                return input;
+                return inputCopy;
             })
             this.setState({ updatedInputs });
-        } else{
+        } else {
+            this.setState({ updatedInputs: inputs });
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (!this.props.user && prevProps.user) {
             this.setState({ updatedInputs: this.state.inputs });
         }
     }
 
+
     render() {
-        const {updatedInputs} = this.state;
-        const {user} = this.props;
-        if(!updatedInputs) return null;   
+        const { updatedInputs } = this.state;
+        const { user, updateForm, logout } = this.props;
+        if (!updatedInputs) return null;
 
         return (
             <div className="order-form">
                 <h1>פרטי הזמנה</h1>
-                {!user && <div className="checkout-login">לקוח/ה רשום? <Link to={{pathname: 'auth/login',lastRoute: history.location.pathname}}>התחבר/י עכשיו</Link></div>}
-                <Form inputs={updatedInputs} updateForm={this.props.updateForm}/>
+        {user ? <div className="checkout-auth">{`לא ${user.fullName}?`} <span onClick={() => logout()}>התנתק</span></div> :
+                <div className="checkout-auth">לקוח/ה רשום? <Link to={{ pathname: 'auth/login', lastRoute: history.location.pathname }}>התחבר/י עכשיו</Link></div>}
+                <Form inputs={updatedInputs} updateForm={updateForm} />
             </div>
         )
     }

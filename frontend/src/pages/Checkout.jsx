@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { connect } from 'react-redux';
 import { deleteItem, updateQuantity, setDelivery, updateForm } from '../actions/checkoutActions';
+import { logout } from '../actions/UserActions';
 
 import CartTable from '../cmps/checkout/cart-table/CartTable.jsx';
 import Delivery from '../cmps/checkout/Delivery.jsx';
@@ -10,14 +11,17 @@ import OrderForm from '../cmps/checkout/OrderForm.jsx';
 import Payment from '../cmps/checkout/payment/Payment.jsx';
 
 class Checkout extends Component {
+    state = { isFirstLoad: true }
 
     componentDidUpdate() {
+        const {isFirstLoad} = this.state;
         let hash = this.props.location.hash.replace('#', '');
-        if (hash) {
+        if (hash && isFirstLoad) {
             let node = ReactDOM.findDOMNode(this.refs[hash]);
             if (node) {
                 node.scrollIntoView();
             }
+            this.setState({isFirstLoad:false})
         }
     }
 
@@ -38,7 +42,7 @@ class Checkout extends Component {
     }
 
     render() {
-        const { bag, delivery, form, loggedInUser } = this.props;
+        const { bag, delivery, form, loggedInUser, logout } = this.props;
 
         return (
             <div className="cart-page container flex column align-center">
@@ -47,9 +51,8 @@ class Checkout extends Component {
                         <CartTable bag={bag} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
                         <Delivery bag={bag} delivery={delivery} onDeliverySelected={this.onDeliverySelected} />
                         <div ref='form'></div>
-                        <OrderForm user={loggedInUser} updateForm={this.updateForm} />
+                        <OrderForm user={loggedInUser} updateForm={this.updateForm} logout={logout} />
                         <Payment bag={bag} delivery={delivery} form={form} />
-                        <div id="mashiah"></div>
                     </div> :
                     <div className="empty-cart flex align-center">העגלה שלך ריקה</div>}
             </div>
@@ -70,7 +73,8 @@ const mapDispatchToProps = {
     deleteItem,
     updateQuantity,
     setDelivery,
-    updateForm
+    updateForm,
+    logout
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

@@ -1,9 +1,10 @@
 .order-form{
-    .checkout-login{
+    .checkout-auth{
         margin: 7px 0;
-        a{
+        a,span{
             font-family: open-sans-bold;
             color: $primary-clr;
+            cursor: pointer;
         }
     }
     .form-section-container {

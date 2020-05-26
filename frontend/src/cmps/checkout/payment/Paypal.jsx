@@ -29,7 +29,7 @@ export default class Paypal extends Component {
 
         const client = {
             sandbox: 'ATdDIT-PLOt7WZnr9V9lExrU1UYEFvpThguewvMIr-e3UnJFDAn3OI5W34zU-1ntHeT-wjBy7HMS9jeX',
-            production: 'YOUR-PRODUCTION-APP-ID',
+            production: 'AZecGWi6nLYj7ABkMSGdaS894yE0AHdNdfZNCVM_sARfqBs8BZBMIM5pGhWfmhuD5AmKeCJV5RqmAMox',
         }
         // In order to get production's app-ID, you will have to send your app to Paypal for approval first
         // For sandbox app-ID (after logging into your developer account, please locate the "REST API apps" section, click "Create App"):
