@@ -63,6 +63,14 @@ export default class Form extends Component {
         this.setState({ form }, () => this.checkIfFormValid());
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.inputs !== this.props.inputs) {
+            this.props.inputs.forEach(input => {
+                input.isValid = input.validation ? input.validation.includes('required') ? false : true : true;
+            });
+        }
+    }
+
     handleChange = (event) => {
         const { name, value } = event.target;
         this.handleInput(name, value);
@@ -125,8 +133,8 @@ export default class Form extends Component {
             <form>
                 {inputs.map((input, idx) => {
                     const ConditionalInput = input.type === 'textarea' ? 'textarea' : 'input';
-        
-                    
+
+
                     return <div key={idx} className={input.error ? "input-container error" : input.isValid && input.value && !input.disabled ? "input-container valid" : "input-container"}>
                         <label htmlFor={input.disabled ? '' : input.name}>{input.label} {input.validation ? input.validation.includes('required') ? <i className="fas fa-star-of-life"></i> : null : null}</label>
                         <ConditionalInput className={input.disabled && "disabled"} type={input.type} value={input.value || ''} onChange={this.handleChange} id={input.name} name={input.name} placeholder={input.label} autoComplete="on"></ConditionalInput>
