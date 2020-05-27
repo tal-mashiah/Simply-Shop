@@ -63,11 +63,13 @@ export function signup(userCreds) {
     };
 }
 
-export function logout() {
+export function logout(currRoute) {
     return dispatch => {
         try {
             userService.logout();
+            dispatch(setGrowl('התנתקת בהצלחה', 'info'));
             dispatch(_setUser(null));
+            if(currRoute.includes("account")) history.push('/');
         }
         catch (err) {
             console.log('userActions: err in logout', err);

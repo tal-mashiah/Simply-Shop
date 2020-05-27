@@ -46,8 +46,8 @@ class Header extends Component {
         this.props.updateQuantity(itemId, diff, quantity);
     }
 
-    logout = () => {
-        this.props.logout()
+    logout = (currRoute) => {
+        this.props.logout(currRoute)
     }
 
     render() {

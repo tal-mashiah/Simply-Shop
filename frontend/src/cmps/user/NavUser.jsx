@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import history from '../../history';
 
 export default function NavUser({ loggedInUser, logout }) {
-
+    
     return (
         <div className='link-container'>
             <div className="nav-user">
@@ -21,7 +22,7 @@ export default function NavUser({ loggedInUser, logout }) {
                                 <Link to="/account/edit"> <div className="edit">עריכת חשבון</div></Link>
                                 <Link to="/account/password"> <div className="password">שינוי סיסמה</div></Link>
                             </div>
-                            <button className="main-btn secondary" onClick={() => logout()}>התנתק</button>
+                            <button className="main-btn secondary" onClick={() => logout(history.location.pathname)}>התנתק</button>
                         </React.Fragment>}
                 </div>
             </div >
