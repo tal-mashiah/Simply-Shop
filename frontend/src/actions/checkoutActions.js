@@ -1,5 +1,5 @@
 import searchService from '../services/searchService';
-import checkoutService from '../services/checkoutService';
+import orderService from '../services/orderService';
 import { setGrowl } from './GrowlActions';
 
 
@@ -119,15 +119,24 @@ function _updateForm(isValid, form) {
     };
 }
 
-export function addOrder(isSucceed, order) {
+export function addOrder(type, order) {
 
     return async dispatch => {
         try {
-            await checkoutService.add(order);
-            if(isSucceed){
-                dispatch(setGrowl('הזמנה התקבלה', 'success'));
-            } else{
-                dispatch(setGrowl('הזמנה נכשלה', 'error'));
+            await orderService.add(order);
+
+            switch (type) {
+                case 'success':
+                    dispatch(setGrowl('ההזמנה התקבלה', 'success'));
+                    break;
+                case 'cancel':
+                    dispatch(setGrowl('ביטלת את ההזמנה', 'warn'));
+                    break;
+                case 'error':
+                    dispatch(setGrowl('אירעה שגיאה בפייפאל', 'error'));
+                    break;
+                default:
+                    break;
             }
 
         } catch (err) {

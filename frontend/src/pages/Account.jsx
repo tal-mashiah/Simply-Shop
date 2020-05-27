@@ -44,7 +44,7 @@ class Account extends Component {
     render() {
         const { pageName } = this.state;
         const { loggedInUser, setGrowl } = this.props;
-
+        if (!loggedInUser) return null;
         return (
             <div className="acount">
                 <div className="hero flex align-center justify-center"> {loggedInUser.fullName}</div>
@@ -55,8 +55,8 @@ class Account extends Component {
                         <Link to="/account/password"> <div className={pageName === 'password' ? "password active" : "password"}>שינוי סיסמה</div></Link>
                     </div>
                     {pageName === 'orders' && <Order />}
-                    {pageName === 'edit' && <Edit user={loggedInUser} updateUser={this.updateUser} setGrowl={setGrowl}/>}
-                    {pageName === 'password' && <Password updatePassword={this.updatePassword}/>}
+                    {pageName === 'edit' && <Edit user={loggedInUser} updateUser={this.updateUser} setGrowl={setGrowl} />}
+                    {pageName === 'password' && <Password updatePassword={this.updatePassword} />}
                 </div>
             </div>
         )

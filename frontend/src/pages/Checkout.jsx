@@ -41,16 +41,25 @@ class Checkout extends Component {
         this.props.updateForm(isValid, form);
     }
 
-    addOrder = (isSucceed) => {
+    addOrder = (type) => {
         const { bag, delivery, form, loggedInUser, addOrder } = this.props;
-        const order = {
-            user: loggedInUser,
-            form: form,
-            delivery: delivery,
-            bag: bag
+        let order = {};
+        order.date = Date.now();
+        order.checkoutInfo = form.input;
+        order.userId = loggedInUser ? loggedInUser._id : null;
+        order.totalAmount = bag.reduce((acc, item) => acc + (item.product.price * item.quantity), delivery.price);
+        order.delivery = {
+            method: delivery.value,
+            price: delivery.price
         };
-
-        addOrder(isSucceed, order)
+        order.products = bag.map(item => {
+            return {
+                productId: item.product._id,
+                quantity: item.quantity,
+                price: item.product.price
+            }
+        });
+        addOrder(type, order)
     }
 
     render() {
@@ -62,8 +71,9 @@ class Checkout extends Component {
                     <div className="cart-sections">
                         <CartTable bag={bag} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
                         <Delivery bag={bag} delivery={delivery} onDeliverySelected={this.onDeliverySelected} />
-                        <div ref='form'></div>
-                        <OrderForm user={loggedInUser} updateForm={this.updateForm} logout={logout} />
+                        <div ref='form'>
+                            <OrderForm user={loggedInUser} updateForm={this.updateForm} logout={logout} />
+                        </div>
                         <Payment bag={bag} delivery={delivery} form={form} addOrder={this.addOrder} />
                     </div> :
                     <div className="empty-cart flex align-center">העגלה שלך ריקה</div>}

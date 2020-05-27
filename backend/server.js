@@ -8,9 +8,9 @@ const session = require('express-session');
 const app = express();
 const http = require('http').createServer(app);
 
-const checkoutRoutes = require('./api/checkout/checkout.routes');
 const categoryRoutes = require('./api/category/category.routes');
 const searchRoutes = require('./api/search/search.routes');
+const orderRoutes = require('./api/order/order.routes');
 const authRoutes = require('./api/auth/auth.routes');
 const userRoutes = require('./api/user/user.routes');
 
@@ -34,7 +34,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // routes
-app.use('/api/checkout', checkoutRoutes);
+app.use('/api/order', orderRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/search', searchRoutes);
 app.use('/api/auth', authRoutes);
