@@ -2,13 +2,13 @@ import HttpService from './HttpService';
 
 export default {
     add,
-    getById
+    getByUserId
 };
 
 function add(order) {
     return HttpService.post('order', order);
 }
 
-function getById(userId) {
+function getByUserId(userId) {
     return HttpService.get(`order/${userId}`)
 }

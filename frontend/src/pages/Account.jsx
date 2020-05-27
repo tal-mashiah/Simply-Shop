@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { updateUser, updatePassword } from '../actions/UserActions';
 import { setGrowl } from '../actions/GrowlActions';
 
-import Order from '../cmps/account/Order';
+import Order from '../cmps/account/order/Order';
 import Edit from '../cmps/account/Edit';
 import Password from '../cmps/account/Password';
 
@@ -54,7 +54,7 @@ class Account extends Component {
                         <Link to="/account/edit"> <div className={pageName === 'edit' ? "edit active" : "edit"}>עריכת חשבון</div></Link>
                         <Link to="/account/password"> <div className={pageName === 'password' ? "password active" : "password"}>שינוי סיסמה</div></Link>
                     </div>
-                    {pageName === 'orders' && <Order />}
+                    {pageName === 'orders' && <Order userId={loggedInUser._id} />}
                     {pageName === 'edit' && <Edit user={loggedInUser} updateUser={this.updateUser} setGrowl={setGrowl} />}
                     {pageName === 'password' && <Password updatePassword={this.updatePassword} />}
                 </div>
