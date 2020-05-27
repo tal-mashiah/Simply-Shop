@@ -9,7 +9,7 @@ export default class Password extends Component {
             { type: 'password', name: 'currPassword', label: 'סיסמה נוכחית', toggleVisibility: true, validation: ['required'] },
             { type: 'password', name: 'password', label: 'סיסמה חדשה', toggleVisibility: true, validation: ['required', 'passvalid', 'min8Char', 'engAndNums'] },
             { type: 'password', name: 'passwordValidation', label: 'אימות סיסמה', toggleVisibility: true, validation: ['required', 'passvalid'] }
-        ],
+        ]
     }
 
     updateForm = (isValid, form) => {
@@ -17,14 +17,18 @@ export default class Password extends Component {
     }
 
     onUpdatePassword = () => {
-        const { isValid, form } = this.state;
+        const { isValid, form, inputs } = this.state;
         if (isValid) {
+            inputs.forEach(input => {
+                delete input.value;
+            });
+            this.setState({ inputs });
             this.props.updatePassword(form);
         }
     }
 
     render() {
-        const { inputs, isValid } = this.state;
+        const { isValid, inputs } = this.state;
         return (
             <div className="flex column align-center">
                 <Form inputs={inputs} updateForm={this.updateForm} />

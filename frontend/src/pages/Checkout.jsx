@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import { connect } from 'react-redux';
-import { deleteItem, updateQuantity, setDelivery, updateForm } from '../actions/checkoutActions';
+import { deleteItem, updateQuantity, setDelivery, updateForm, addOrder } from '../actions/checkoutActions';
 import { logout } from '../actions/UserActions';
 
 import CartTable from '../cmps/checkout/cart-table/CartTable.jsx';
@@ -14,14 +14,14 @@ class Checkout extends Component {
     state = { isFirstLoad: true }
 
     componentDidUpdate() {
-        const {isFirstLoad} = this.state;
+        const { isFirstLoad } = this.state;
         let hash = this.props.location.hash.replace('#', '');
         if (hash && isFirstLoad) {
             let node = ReactDOM.findDOMNode(this.refs[hash]);
             if (node) {
                 node.scrollIntoView();
             }
-            this.setState({isFirstLoad:false})
+            this.setState({ isFirstLoad: false })
         }
     }
 
@@ -41,6 +41,18 @@ class Checkout extends Component {
         this.props.updateForm(isValid, form);
     }
 
+    addOrder = (isSucceed) => {
+        const { bag, delivery, form, loggedInUser, addOrder } = this.props;
+        const order = {
+            user: loggedInUser,
+            form: form,
+            delivery: delivery,
+            bag: bag
+        };
+
+        addOrder(isSucceed, order)
+    }
+
     render() {
         const { bag, delivery, form, loggedInUser, logout } = this.props;
 
@@ -52,7 +64,7 @@ class Checkout extends Component {
                         <Delivery bag={bag} delivery={delivery} onDeliverySelected={this.onDeliverySelected} />
                         <div ref='form'></div>
                         <OrderForm user={loggedInUser} updateForm={this.updateForm} logout={logout} />
-                        <Payment bag={bag} delivery={delivery} form={form} />
+                        <Payment bag={bag} delivery={delivery} form={form} addOrder={this.addOrder} />
                     </div> :
                     <div className="empty-cart flex align-center">העגלה שלך ריקה</div>}
             </div>
@@ -62,18 +74,19 @@ class Checkout extends Component {
 
 const mapStateToProps = state => {
     return {
-        bag: state.checkout.bag,
+        loggedInUser: state.user.loggedInUser,
         delivery: state.checkout.delivery,
         form: state.checkout.form,
-        loggedInUser: state.user.loggedInUser
+        bag: state.checkout.bag
     };
 };
 
 const mapDispatchToProps = {
-    deleteItem,
     updateQuantity,
     setDelivery,
+    deleteItem,
     updateForm,
+    addOrder,
     logout
 };
 

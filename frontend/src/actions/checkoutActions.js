@@ -1,4 +1,7 @@
 import searchService from '../services/searchService';
+import checkoutService from '../services/checkoutService';
+import { setGrowl } from './GrowlActions';
+
 
 export function setBag(storageBag) {
     return async dispatch => {
@@ -98,20 +101,37 @@ function _setDelivery(option) {
     };
 }
 
-export function updateForm(isValid,form) {
+export function updateForm(isValid, form) {
     return dispatch => {
         try {
-            dispatch(_updateForm(isValid,form));
+            dispatch(_updateForm(isValid, form));
         } catch (err) {
             console.log('checkoutActions: err in update form', err);
         }
     };
 }
 
-function _updateForm(isValid,form) {
+function _updateForm(isValid, form) {
     return {
         type: 'UPDATE_FORM',
         isValid,
         form
+    };
+}
+
+export function addOrder(isSucceed, order) {
+
+    return async dispatch => {
+        try {
+            await checkoutService.add(order);
+            if(isSucceed){
+                dispatch(setGrowl('הזמנה התקבלה', 'success'));
+            } else{
+                dispatch(setGrowl('הזמנה נכשלה', 'error'));
+            }
+
+        } catch (err) {
+            console.log('checkoutActions: err in set bag', err);
+        }
     };
 }

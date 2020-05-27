@@ -48,16 +48,22 @@ export default class OrderForm extends Component {
         }
     }
 
+    onLogOut = () => {
+        const { logout, updateForm } = this.props;
+        logout()
+        updateForm(false,null);
+    }
+
 
     render() {
         const { updatedInputs } = this.state;
-        const { user, updateForm, logout } = this.props;
+        const { user, updateForm } = this.props;
         if (!updatedInputs) return null;
 
         return (
             <div className="order-form">
                 <h1>פרטי הזמנה</h1>
-        {user ? <div className="checkout-auth">{`לא ${user.fullName}?`} <span onClick={() => logout()}>התנתק</span></div> :
+        {user ? <div className="checkout-auth">{`לא ${user.fullName}?`} <span onClick={this.onLogOut}>התנתק</span></div> :
                 <div className="checkout-auth">לקוח/ה רשום? <Link to={{ pathname: 'auth/login', lastRoute: history.location.pathname }}>התחבר/י עכשיו</Link></div>}
                 <Form inputs={updatedInputs} updateForm={updateForm} />
             </div>
