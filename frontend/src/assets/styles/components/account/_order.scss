@@ -1,3 +1,45 @@
 .order{
-    text-align: center;
+    width: 100%;
+    .order-list{
+        .order-preview{
+            background-color: #f6f6f6;
+            padding: 0 35px 30px;
+            margin-bottom: 20px;
+            .order-header{
+                padding: 12px 15px;
+                font-size: 14px;
+                .date{
+                    margin-left: 20px;
+                }
+            }
+            .order-product-list{
+                background-color: #fff;
+                padding: 0 15px;
+                .order-product-preview{
+                    padding: 10px 0;
+                    border-bottom: 1px solid $border-clr;
+                    img{
+                        width: 100px;
+                        margin-left: 20px;
+                    }
+                    .info{
+                        .title{
+                            margin-bottom: 10px;
+                            font-size: 15px;
+                            :hover{
+                                text-decoration: underline;
+                            }
+                        }
+                        .price{
+                            font-family: open-sans-bold;
+                            .fa-shekel-sign{
+                                font-size: 11px;
+                                margin-right: 3px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

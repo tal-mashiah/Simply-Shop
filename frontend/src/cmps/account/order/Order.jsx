@@ -16,9 +16,7 @@ export default class Order extends Component {
 
     render() {
         const { orders } = this.state;
-        console.log(orders);
         return (
-
             <div className="order">
                 {orders
                     ? <OrderList orders={orders} />
