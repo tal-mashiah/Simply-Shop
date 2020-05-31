@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 export default class OrderProductPreview extends Component {
     render() {
         const { quantity, title, price, imagesUrl, productId } = this.props.product
-        console.log('product: ', this.props.product);
-
         return (
             <div className="order-product-preview flex">
                 <Link to={`/product/${productId}`}><img src={imagesUrl[0]} alt="product img" /></Link>

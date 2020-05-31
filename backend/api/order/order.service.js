@@ -1,13 +1,12 @@
 const dbService = require('../../services/db.service')
 const ObjectId = require('mongodb').ObjectId;
-let orderNumber = 10000;
 
 async function add(order) {
     const collection = await dbService.getCollection('order')
     order.userId = ObjectId(order.userId);
-    order.orderNumber = orderNumber;
-    orderNumber++;
     try {
+        let ordersCounter = await collection.countDocuments({})
+        order.orderNumber = ordersCounter + 10000;
         await collection.insertOne(order);
     } catch (err) {
         console.log(`ERROR: cannot insert user`)
@@ -29,6 +28,9 @@ async function getByUserId(userId) {
                     product.title = dbProduct.title;
                 }
             }
+            console.log('orders: ', orders);
+            
+            orders.sort((a, b) => parseFloat(b.date) - parseFloat(a.date));
             return orders
         } else {
             return null;

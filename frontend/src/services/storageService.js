@@ -8,7 +8,12 @@ function loadFromStorage(key, defaultValue) {
     return str ? JSON.parse(str) : defaultValue
 }
 
+function removeFromStorage(key) {
+    localStorage.removeItem(key);
+}
+
 export default {
-    saveToStorage,
-    loadFromStorage
+    removeFromStorage,
+    loadFromStorage,
+    saveToStorage
 };

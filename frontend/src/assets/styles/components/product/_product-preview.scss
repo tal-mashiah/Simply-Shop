@@ -1,22 +1,19 @@
 .product-preview {
     position: relative;
-    max-width: 250px;
-    height: 350px;
     cursor: pointer;
+    padding: 7.5px 15px;
 
-    &:hover .img-container{
+    &:hover .img-container {
         opacity: 0.85;
     }
     .details-container {
-        position: absolute;
         height: 105px;
-        padding: 10px 16px;
         bottom: 0;
 
         .price {
             font-size: 18px;
             font-family: open-sans-bold;
-            i{
+            i {
                 font-size: 12px;
                 margin-right: 3px;
             }
@@ -24,14 +21,11 @@
     }
 
     .img-container {
-        height: 235px;
-        width: 235px;
-        margin-top: 10px;
         transition: ease-in-out 0.4s;
-        
+        margin-bottom: 10px;
+
         img {
-            height: 100%;
-            width: 95%;
+            max-width: 100%;
             object-fit: contain;
         }
     }

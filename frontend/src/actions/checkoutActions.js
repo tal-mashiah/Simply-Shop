@@ -1,5 +1,8 @@
 import searchService from '../services/searchService';
 import orderService from '../services/orderService';
+import storageService from '../services/storageService';
+import history from '../history';
+
 import { setGrowl } from './GrowlActions';
 
 
@@ -128,9 +131,12 @@ export function addOrder(type, order) {
             switch (type) {
                 case 'success':
                     dispatch(setGrowl('ההזמנה התקבלה', 'success'));
+                    dispatch(_setBag([]));
+                    storageService.removeFromStorage('bag')
+                    history.push('/account/orders')
                     break;
                 case 'cancel':
-                    dispatch(setGrowl('ביטלת את ההזמנה', 'warn'));
+                    dispatch(setGrowl('ההזמנה התבטלה', 'warn'));
                     break;
                 case 'error':
                     dispatch(setGrowl('אירעה שגיאה בפייפאל', 'error'));
