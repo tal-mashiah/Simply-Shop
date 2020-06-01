@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class Hamburger extends Component {
 
     onToggleMenu = () => {
-        document.querySelector('nav').classList.toggle('open');
+        document.querySelector('.category-list').classList.toggle('open');
         document.querySelector('header').classList.toggle('menu-open');
     }
 

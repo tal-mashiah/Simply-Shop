@@ -8,19 +8,21 @@ header {
     z-index: 999;
     background: #fff;
     border-bottom: 1px solid $border-clr;
-
+    @include for-tablet-layout {
+        height: $top-header-height;
+    }
     .top-header {
         height: $top-header-height;
     }
 
     .main-logo {
-        width: $logo-width * 1.45;
-        height: $top-header-height;
+        // width: $logo-width * 1.45;
+        // height: $top-header-height;
         img {
             width: $logo-width;
-            position: absolute;
-            top: 3px;
-            right: 6px;
+            // position: absolute;
+            // top: 3px;
+            // right: 6px;
         }
     }
 }

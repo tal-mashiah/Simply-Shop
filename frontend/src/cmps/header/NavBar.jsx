@@ -5,7 +5,7 @@ import NavUser from '../user/NavUser.jsx';
 export default function NavBar({ bag, loggedInUser, deleteItem, changeQuantity, logout }) {
     return (
         <nav className='flex'>
-            <NavUser loggedInUser={loggedInUser} logout={logout}/>
+            <NavUser loggedInUser={loggedInUser} logout={logout} />
             <NavCart bag={bag} deleteItem={deleteItem} changeQuantity={changeQuantity} />
         </nav>
     )

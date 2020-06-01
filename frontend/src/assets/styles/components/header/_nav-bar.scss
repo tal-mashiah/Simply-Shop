@@ -1,15 +1,4 @@
 nav {
-  @include for-mobile-layout {
-    flex-direction: column;
-    position: fixed;
-    right: 0;
-    top: 50px;
-    height: 100vh;
-    border-left: 1px solid $border-clr;
-    transform: translate(100%, 0);
-    transition: transform 0.9s;
-    background-color: #ebecf0;
-  }
   float: right;
   .link-container {
     position: relative;

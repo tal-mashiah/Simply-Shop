@@ -10,8 +10,8 @@ import NavBar from './NavBar.jsx'
 import Logo from './Logo.jsx';
 import Hamburger from './Hamburger.jsx';
 import Spinner from '../../cmps/general/Spinner.jsx';
-import SearchBar from './SearchBar.jsx';
 import CategoryList from '../category/CategoryList.jsx';
+import SearchBar from './SearchBar.jsx';
 
 class Header extends Component {
     state = { categories: [] }
