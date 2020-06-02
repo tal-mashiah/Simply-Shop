@@ -8,21 +8,38 @@ header {
     z-index: 999;
     background: #fff;
     border-bottom: 1px solid $border-clr;
-    @include for-tablet-layout {
-        height: $top-header-height;
-    }
     .top-header {
         height: $top-header-height;
+        .right-container {
+            width: 100%;
+        }
+        .main-logo {
+            img {
+                width: $logo-width;
+            }
+        }
     }
 
-    .main-logo {
-        // width: $logo-width * 1.45;
-        // height: $top-header-height;
-        img {
-            width: $logo-width;
-            // position: absolute;
-            // top: 3px;
-            // right: 6px;
+    @include for-tablet-layout {
+        height: $top-header-height;
+        .top-header {
+            .right-container {
+                justify-content: flex-start;
+            }
+            .main-logo {
+                position: absolute;
+                z-index: 1;
+                margin: 0 auto;
+                left: 0;
+                right: 0;
+                width: 175px;
+                &.query-open {
+                    display: none;
+                }
+                img {
+                    width: 175px;
+                }
+            }
         }
     }
 }

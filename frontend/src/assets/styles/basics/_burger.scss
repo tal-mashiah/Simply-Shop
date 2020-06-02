@@ -4,15 +4,15 @@
     justify-content: space-around;
     flex-direction: column;
     border: none;
-    width: 25px;
-    height: 25px;
+    width: 21px;
+    height: 22px;
     background: transparent;
     cursor: pointer;
     transition: 0.3s all;
     outline: none;
-    position: absolute;
-    right: 8px;
-    bottom: 18px;
+    margin: 0 10px;
+    z-index: 1;
+    order: 1;
   }
   display: none;
 
@@ -20,7 +20,7 @@
     display: block;
     height: 3px;
     background: $base-clr;
-    width: 22px;
+    width: 20px;
     transition: 0.3s all;
     transform: rotate(360deg);
   }

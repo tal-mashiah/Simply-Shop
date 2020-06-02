@@ -59,11 +59,13 @@ class Header extends Component {
             <header >
                 <div className="top-header flex justify-between align-center">
                     <Logo />
-                    <SearchBar />
+                    <div className="right-container flex justify-center align-center">
+                        <Hamburger />
+                        <SearchBar />
+                    </div>
                     <NavBar categories={categories} bag={bag} loggedInUser={loggedInUser} logout={this.logout} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
                 </div>
                 <CategoryList categories={categories} />
-                <Hamburger />
             </header>
         )
     }
