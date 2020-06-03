@@ -14,7 +14,7 @@ import CategoryList from '../category/CategoryList.jsx';
 import SearchBar from './SearchBar.jsx';
 
 class Header extends Component {
-    state = { categories: [] }
+    state = { categories: [], isSearchBarOpen: false, isBurgerOpen: false }
 
     componentDidMount() {
         this.loadCategories();
@@ -26,6 +26,18 @@ class Header extends Component {
             const storageBag = this.props.bag.map(item => { return { productId: item.product._id, quantity: item.quantity } });
             storageService.saveToStorage('bag', storageBag);
         }
+    }
+
+    toggleSearchBar = () => {
+        this.setState(prevState => ({
+            isSearchBarOpen: !prevState.isSearchBarOpen
+        }));
+    }
+
+    toggleBurgerModal = () => {
+        this.setState(prevState => ({
+            isBurgerOpen: !prevState.isBurgerOpen
+        }));
     }
 
     loadCategories = async () => {
@@ -51,21 +63,22 @@ class Header extends Component {
     }
 
     render() {
-        const { categories } = this.state;
+        const { categories, isSearchBarOpen, isBurgerOpen } = this.state;
         const { bag, loggedInUser } = this.props;
         if (!categories) return <Spinner />
-
+        console.log('isBurgerOpen: ',isBurgerOpen);
+        
         return (
-            <header >
-                <div className="top-header flex justify-between align-center">
+            <header className={isBurgerOpen ? "menu-open" : ''}>
+                <div className={`top-header flex justify-between align-center ${isSearchBarOpen && 'query-open'}`}>
                     <Logo />
                     <div className="right-container flex justify-center align-center">
-                        <Hamburger />
-                        <SearchBar />
+                        <Hamburger toggleBurgerModal={this.toggleBurgerModal} />
+                        <SearchBar toggleSearchBar={this.toggleSearchBar} />
                     </div>
                     <NavBar categories={categories} bag={bag} loggedInUser={loggedInUser} logout={this.logout} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
                 </div>
-                <CategoryList categories={categories} />
+                <CategoryList categories={categories} isBurgerOpen={isBurgerOpen}/>
             </header>
         )
     }

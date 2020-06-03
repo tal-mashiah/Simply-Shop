@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { withRouter } from "react-router-dom";
 
 class SearchBar extends Component {
-    state = { term: '' }
+    state = { term: '' };
+    searchInputRef = React.createRef();
 
     handleChange = (ev) => {
         this.setState({ term: ev.target.value })
@@ -10,11 +11,12 @@ class SearchBar extends Component {
 
     onSubmit = (ev) => {
         ev.preventDefault();
-        document.querySelectorAll('.search-bar form,.search-bar input,.main-logo,.fa-search').forEach(el => el.classList.toggle('query-open'));
-        document.querySelector('.search-bar input').focus();
+        this.searchInputRef.current.focus();
         const { term } = this.state;
+        const { toggleSearchBar, history } = this.props;
+        toggleSearchBar();
         if (!term) return;
-        this.props.history.push(`/search/${term}`)
+        history.push(`/search/${term}`)
         this.setState({ term: '' });
     }
 
@@ -22,7 +24,7 @@ class SearchBar extends Component {
         return (
             <div className='search-bar flex align-center'>
                 <form onSubmit={this.onSubmit}>
-                    <input type="text" className="search-input" onChange={this.handleChange} value={this.state.term} placeholder="חפש..." />
+                    <input type="text" ref={this.searchInputRef} className="search-input" onChange={this.handleChange} value={this.state.term} placeholder="חפש..." />
                     <i className="fas fa-search" onClick={this.onSubmit}></i>
                 </form>
             </div>

@@ -33,11 +33,29 @@ header {
                 left: 0;
                 right: 0;
                 width: 175px;
-                &.query-open {
-                    display: none;
-                }
                 img {
                     width: 175px;
+                }
+            }
+            &.query-open {
+                .main-logo {
+                    display: none;
+                }
+                .search-bar {
+                    form {
+                        width: 100%;
+                        transition: all 0.5s linear;
+                        input {
+                            width: 100%;
+                            padding: 0 20px 0 40px;
+                            border: 1px solid #ddd;
+                        }
+                        .fa-search {
+                            font-size: 18px;
+                            left: 10px;
+                            top: 9px;
+                        }
+                    }
                 }
             }
         }
