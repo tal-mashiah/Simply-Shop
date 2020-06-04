@@ -4,7 +4,11 @@
     padding: 15px 0px;
     cursor: pointer;
     margin: 0 5px;
-    &:hover{
+    &:hover {
         border-bottom: 2px solid $primary-clr;
+    }
+    @include for-tablet-layout {
+        border-bottom: 1px solid lightgray;
+        margin: 0 10px;
     }
 }

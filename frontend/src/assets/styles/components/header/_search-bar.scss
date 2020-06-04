@@ -33,6 +33,7 @@
         margin: 0 10px;
         form {
             width: 0;
+            transition: all 0.2s linear;
             input {
                 width: 0;
                 padding: 0;
@@ -43,6 +44,13 @@
                 left: -39px;
                 top: 8px;
                 color: $base-clr;
+            }
+        }
+    }
+    @include for-mobile-layout {
+        form {
+            .fa-search {
+                left: -25px;
             }
         }
     }

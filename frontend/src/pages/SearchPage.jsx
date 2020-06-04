@@ -10,6 +10,8 @@ import SearchHeader from '../cmps/search/SearchHeader';
 
 class SearchPage extends Component {
 
+    state = { isFiltersShown: false };
+
     componentDidMount() {
         this.loadSearchData();
     }
@@ -75,7 +77,12 @@ class SearchPage extends Component {
 
     updateSort = (option) => {
         this.props.updateSortBy(option.key);
+    }
 
+    toggleFilters = () => {
+        this.setState(prevState => ({
+            isFiltersShown: !prevState.isFiltersShown
+        }))
     }
 
     render() {
@@ -89,12 +96,17 @@ class SearchPage extends Component {
                     <FilterList
                         filters={filters}
                         priceFilter={priceFilter}
+                        isFiltersShown={this.state.isFiltersShown}
                         updatePrice={this.updatePrice}
                         updateFilters={this.updateFilters}
                     />}
 
                 <div className="search-container">
                     <SearchHeader term={term || name} productsLength={products.length} updateSort={this.updateSort} />
+                    <div className="filter-btn flex justify-center align-center" onClick={this.toggleFilters}>
+                        <i className="fas fa-filter"></i>
+                        <div className="title">סנן תוצאות</div>
+                    </div>
                     <ProductList products={products} />
                 </div>
             </div>

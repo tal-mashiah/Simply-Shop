@@ -4,7 +4,7 @@ import CategoryPreview from '../category/CategoryPreview.jsx';
 export default function CategoryList({ categories, isBurgerOpen }) {
 
     return (
-        <div className={`category-list flex ${isBurgerOpen && 'open'}`}>
+        <div className={`category-list flex ${isBurgerOpen ? 'open' : ''}`}>
             {categories.map((category) => {
                 return <CategoryPreview category={category} key={category._id} />
             })}

@@ -27,7 +27,10 @@ export default class SelectBox extends Component {
         const { title, isOptionsShown } = this.state;
         return (
             <div className="select-box">
-                <div onClick={() => this.showOptions()} className={`title ${isOptionsShown ? 'active' : ''}`}>{title}</div>
+                <div onClick={() => this.showOptions()} className={`title-container flex justify-between ${isOptionsShown ? 'active' : ''}`}>
+                    <div className="title">{title}</div>
+                    <i className="fas fa-caret-down"></i>
+                </div>
                 {!isOptionsShown ||
                     <div className={`options-container ${isOptionsShown ? 'active' : ''}`}>
                         {this.props.options.map((option, idx) => {

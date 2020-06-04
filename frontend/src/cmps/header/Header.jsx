@@ -79,6 +79,7 @@ class Header extends Component {
                     <NavBar categories={categories} bag={bag} loggedInUser={loggedInUser} logout={this.logout} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
                 </div>
                 <CategoryList categories={categories} isBurgerOpen={isBurgerOpen}/>
+                <div className="screen" onClick={this.toggleBurgerModal}></div>
             </header>
         )
     }

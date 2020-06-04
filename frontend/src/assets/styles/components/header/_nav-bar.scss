@@ -1,8 +1,5 @@
 nav {
   float: right;
-  @include for-tablet-layout {
-    order: 4;
-  }
   .link-container {
     position: relative;
     cursor: pointer;
@@ -35,6 +32,24 @@ nav {
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
       border-radius: 3px;
       background-color: #fff;
+    }
+  }
+  @include for-tablet-layout {
+    order: 4;
+    .link-container {
+      &:hover {
+        background-color: initial;
+      }
+      .modal {
+        display: none;
+      }
+    }
+  }
+  @include for-mobile-layout {
+    .link-container {
+      width: 45px;
+      margin-right: 0;
+      line-height: $top-header-height;
     }
   }
 }

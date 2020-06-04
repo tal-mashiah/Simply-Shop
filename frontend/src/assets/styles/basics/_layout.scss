@@ -1,24 +1,18 @@
 .container {
-    // max-width: $desktop-breakpoint;
     margin: 0 auto;
     padding: 32px;
-    
-    // @include for-narrow-layout {
-    //     max-width: $mobile-breakpoint;
-    // }
-    // @include for-normal-layout {
-    //     max-width: $tablet-breakpoint;
-    // }
-    // @include for-wide-layout {
-    //     max-width: $desktop-breakpoint;
-    // }
 }
-
-// fixed header padding 
 
 .header-padding {
     padding-top: $header-height;
     @include for-tablet-layout {
         padding-top: $top-header-height;
     }
-  }
+}
+
+.open {
+    &.category-list,
+    &.filter-list {
+        transform: translate(0, 0);
+    }
+}
