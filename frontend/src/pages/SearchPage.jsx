@@ -102,11 +102,7 @@ class SearchPage extends Component {
                     />}
 
                 <div className="search-container">
-                    <SearchHeader term={term || name} productsLength={products.length} updateSort={this.updateSort} />
-                    <div className="filter-btn flex justify-center align-center" onClick={this.toggleFilters}>
-                        <i className="fas fa-filter"></i>
-                        <div className="title">סנן תוצאות</div>
-                    </div>
+                    <SearchHeader term={term || name} productsLength={products.length} updateSort={this.updateSort} toggleFilters={this.toggleFilters} />
                     <ProductList products={products} />
                 </div>
             </div>

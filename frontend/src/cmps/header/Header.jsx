@@ -66,7 +66,6 @@ class Header extends Component {
         const { categories, isSearchBarOpen, isBurgerOpen } = this.state;
         const { bag, loggedInUser } = this.props;
         if (!categories) return <Spinner />
-        console.log('isBurgerOpen: ',isBurgerOpen);
         
         return (
             <header className={isBurgerOpen ? "menu-open" : ''}>

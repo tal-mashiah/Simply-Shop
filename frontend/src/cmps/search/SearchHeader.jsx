@@ -13,13 +13,19 @@ export default class SearchHeader extends Component {
     };
 
     render() {
-        const {term, productsLength, updateSort} = this.props;
-        const {options} = this.state;
+        const { term, productsLength, updateSort, toggleFilters } = this.props;
+        const { options } = this.state;
         return (
             <div className="search-header flex align-center justify-between">
-            <SearchResultInfo term={term} productsLength={productsLength}/>
-            <SelectBox handleChange={updateSort} options={options}/>
-        </div>
+                <SearchResultInfo term={term} productsLength={productsLength} />
+                <div>
+                    <div className="filter-btn flex justify-center align-center" onClick={toggleFilters}>
+                        <i className="fas fa-filter"></i>
+                        <div className="title">סנן תוצאות</div>
+                    </div>
+                    <SelectBox handleChange={updateSort} options={options} />
+                </div>
+            </div>
         )
     }
 }
