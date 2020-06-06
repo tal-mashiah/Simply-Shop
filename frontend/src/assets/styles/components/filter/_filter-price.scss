@@ -5,6 +5,9 @@
     .filter-price-title {
         margin-bottom: 20px;
     }
+    @include for-tablet-layout {
+        padding: 10px 0 20px;
+    }
 }
 
 .input-range {

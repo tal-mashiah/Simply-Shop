@@ -18,7 +18,7 @@ export default class SearchHeader extends Component {
         return (
             <div className="search-header flex align-center justify-between">
                 <SearchResultInfo term={term} productsLength={productsLength} />
-                <div>
+                <div className="btns-container flex">
                     <div className="filter-btn flex justify-center align-center" onClick={toggleFilters}>
                         <i className="fas fa-filter"></i>
                         <div className="title">סנן תוצאות</div>

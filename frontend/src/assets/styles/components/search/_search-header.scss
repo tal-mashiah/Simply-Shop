@@ -8,14 +8,56 @@
             font-family: open-sans-bold;
         }
     }
+    .filter-btn {
+        display: none;
+    }
+
     @include for-tablet-layout {
-        height: 100px;
+        height: 125px;
+        flex-direction: column;
+        border: none;
+        &.flex {
+            align-items: initial;
+        }
+        h2 {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            span {
+                margin-right: 6px;
+            }
+        }
+        .btns-container {
+            height: 35px;
+            .filter-btn {
+                display: flex;
+                cursor: pointer;
+                height: 25px;
+                width: 50%;
+                border: 1px solid #ebebeb;
+                height: 100%;
+                .title {
+                    font-size: 16px;
+                }
+                .fa-filter {
+                    font-size: 12px;
+                    margin: 3px 7px 0;
+                }
+            }
+        }
     }
     @include for-mobile-layout {
+        height: 100px;
         h2 {
-            span{
+            font-size: 18px;
+            justify-content: center;
+            span {
                 display: block;
             }
+        }
+        .btns-container {
+            height: 30px;
         }
     }
 }

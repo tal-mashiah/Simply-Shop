@@ -6,8 +6,9 @@
         transform: translate(100%, 0);
         transition: transform 0.9s;
         position: fixed;
-        z-index: 2;
+        z-index: 990;
         background-color: #fff;
         height: 100vh;
+        width: 40%;
     }
 }

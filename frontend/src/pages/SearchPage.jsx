@@ -87,19 +87,21 @@ class SearchPage extends Component {
 
     render() {
         const { products, filters, priceFilter, filterBy } = this.props;
+        const {isFiltersShown} = this.state;
         const { term, name } = this.props.match.params;
         if (!products) return <Spinner />
 
         return (
-            <div className='flex'>
+            <div className={`flex ${isFiltersShown ? 'menu-open' : ''}`}>
                 {(products.length < 2 && filterBy.filters.length === 0 && !filterBy.priceFilter.min && !name) ||
                     <FilterList
                         filters={filters}
                         priceFilter={priceFilter}
-                        isFiltersShown={this.state.isFiltersShown}
+                        isFiltersShown={isFiltersShown}
                         updatePrice={this.updatePrice}
                         updateFilters={this.updateFilters}
                     />}
+                <div className="screen" onClick={this.toggleFilters}></div>
 
                 <div className="search-container">
                     <SearchHeader term={term || name} productsLength={products.length} updateSort={this.updateSort} toggleFilters={this.toggleFilters} />

@@ -1,20 +1,7 @@
 .search-container {
     width: 100%;
     padding: 0 20px;
-    .filter-btn {
-        display: none;
-        title{
-            font-size: 18px;
-        }
-        .fa-filter{
-            font-size: 18px;
-        }
-    }
-    @include for-tablet-layout {
-        .filter-btn {
-            display: flex;
-            cursor: pointer;
-            height: 25px;
-        }
+    @include for-mobile-layout {
+        padding: 0;
     }
 }

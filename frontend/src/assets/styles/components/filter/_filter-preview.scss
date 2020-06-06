@@ -14,4 +14,10 @@
             line-height: 20px;
         }
     }
+    @include for-tablet-layout {
+        min-height: 60px;
+        .filter-title-container {
+            margin-top: 20px;
+        }
+    }
 }
