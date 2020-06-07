@@ -1,7 +1,11 @@
-.filter-list{
+.filter-list {
     min-width: 225px;
     padding: 0 20px 35px;
     border-left: 1px $border-clr solid;
+    position: relative;
+    .close,.close-btn {
+        display: none;
+    }
     @include for-tablet-layout {
         transform: translate(100%, 0);
         transition: transform 0.9s;
@@ -10,5 +14,23 @@
         background-color: #fff;
         height: 100vh;
         width: 40%;
+        .close {
+            height: 50px;
+            display: block;
+            .fa-times {
+                font-size: 20px;
+                cursor: pointer;
+                padding: 10px;
+                position: absolute;
+                top: 0px;
+                right: 6px;
+            }
+        }
+        .close-btn{
+            display: flex;
+            width: 100%;
+            margin-top: 15px;
+            height: 40px;
+        }
     }
 }

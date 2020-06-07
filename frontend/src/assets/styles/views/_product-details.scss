@@ -3,4 +3,13 @@
     .product-top-container {
         margin-bottom: 65px;
     }
+    @include for-laptop-layout {
+        .product-top-container {
+            flex-direction: column-reverse;
+            align-items: center;
+        }
+    }
+    @include for-mobile-layout {
+        padding: 16px;
+    }
 }

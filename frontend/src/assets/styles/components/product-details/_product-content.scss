@@ -30,8 +30,44 @@
     }
     .buy-container {
         height: 125px;
-        .main-btn.primary{
+        .main-btn.primary {
             margin-right: 32px;
+        }
+    }
+    @include for-laptop-layout {
+        max-width: 600px;
+    }
+    @include for-mobile-layout {
+        .top-content {
+            min-height: 110px;
+            .content-title {
+                font-size: 18px;
+            }
+            span {
+                font-size: 12px;
+            }
+            .content-price {
+                font-size: 20px;
+                i {
+                    font-size: 16px;
+                }
+            }
+        }
+        .buy-container {
+            height: 100px;
+            a {
+                width: 50%;
+            }
+            .main-btn {
+                height: 40px;
+                &.primary {
+                    margin-right: 10px;
+                    width: 100%;
+                }
+                &.secondary {
+                    width: 50%;
+                }
+            }
         }
     }
 }

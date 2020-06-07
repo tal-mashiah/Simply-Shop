@@ -100,6 +100,7 @@ class SearchPage extends Component {
                         isFiltersShown={isFiltersShown}
                         updatePrice={this.updatePrice}
                         updateFilters={this.updateFilters}
+                        toggleFilters={this.toggleFilters}
                     />}
                 <div className="screen" onClick={this.toggleFilters}></div>
 
