@@ -3,8 +3,20 @@
     padding: 0 20px 35px;
     border-left: 1px $border-clr solid;
     position: relative;
-    .close,.close-btn {
+    overflow: auto;
+    .close,
+    .close-btn {
         display: none;
+    }
+    .spinner {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 10%;
+        width: 98%;
+        img {
+            width: 100px;
+        }
     }
     @include for-tablet-layout {
         transform: translate(100%, 0);
@@ -26,10 +38,10 @@
                 right: 6px;
             }
         }
-        .close-btn{
+        .close-btn {
             display: flex;
             width: 100%;
-            margin-top: 15px;
+            margin: 15px 0 50px;
             height: 40px;
         }
     }

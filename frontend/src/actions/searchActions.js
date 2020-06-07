@@ -1,12 +1,17 @@
 import searchService from '../services/searchService';
+import { loading, doneLoading } from './SystemActions';
 
 export function loadSearchData(filterBy) {
     return async dispatch => {
         try {
+            dispatch(loading());
             const searchData = await searchService.query(filterBy);
             dispatch(_setSearchData(searchData));
         } catch (err) {
             console.log('searchActions: err in load searchData', err);
+        }
+        finally {
+            dispatch(doneLoading());
         }
     };
 }

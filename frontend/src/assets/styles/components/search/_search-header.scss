@@ -45,6 +45,14 @@
                     margin: 3px 7px 0;
                 }
             }
+            &.sticky{
+                position: fixed;
+                top: 64px;
+                right: 0;
+                width: 100%;
+                background-color: #fff;
+                z-index: 499;
+            }
         }
     }
     @include for-mobile-layout {

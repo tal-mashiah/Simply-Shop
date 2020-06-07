@@ -57,12 +57,13 @@
             height: 100px;
             a {
                 width: 50%;
+                margin-right: 10px;
             }
             .main-btn {
                 height: 40px;
                 &.primary {
-                    margin-right: 10px;
                     width: 100%;
+                    margin-right: 0;
                 }
                 &.secondary {
                     width: 50%;

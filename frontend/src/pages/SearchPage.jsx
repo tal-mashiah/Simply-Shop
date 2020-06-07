@@ -86,7 +86,7 @@ class SearchPage extends Component {
     }
 
     render() {
-        const { products, filters, priceFilter, filterBy } = this.props;
+        const { products, filters, priceFilter, filterBy, isLoading } = this.props;
         const {isFiltersShown} = this.state;
         const { term, name } = this.props.match.params;
         if (!products) return <Spinner />
@@ -98,13 +98,14 @@ class SearchPage extends Component {
                         filters={filters}
                         priceFilter={priceFilter}
                         isFiltersShown={isFiltersShown}
+                        isLoading={isLoading}
                         updatePrice={this.updatePrice}
                         updateFilters={this.updateFilters}
                         toggleFilters={this.toggleFilters}
                     />}
                 <div className="screen" onClick={this.toggleFilters}></div>
 
-                <div className="search-container">
+                <div className="search-container"> 
                     <SearchHeader term={term || name} productsLength={products.length} updateSort={this.updateSort} toggleFilters={this.toggleFilters} />
                     <ProductList products={products} />
                 </div>
@@ -118,7 +119,8 @@ const mapStateToProps = state => {
         products: state.search.searchData.products,
         filters: state.search.searchData.filters,
         priceFilter: state.search.searchData.priceFilter,
-        filterBy: state.search.filterBy
+        filterBy: state.search.filterBy,
+        isLoading: state.system.isLoading
     };
 };
 

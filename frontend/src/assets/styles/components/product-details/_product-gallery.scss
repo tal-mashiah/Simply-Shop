@@ -10,6 +10,9 @@
     @include for-tablet-layout {
         width: initial;
     }
+    @include for-mobile-layout {
+        margin: 0px 0 25px;
+    }
 }
 
 .image-gallery-thumbnail {
@@ -26,4 +29,10 @@
 
 .image-gallery-slide{
     outline: none;
+}
+
+.image-gallery-slide-wrapper.left, .image-gallery-slide-wrapper.right {
+    @include for-mobile-layout {
+        width: initial;
+    }
 }

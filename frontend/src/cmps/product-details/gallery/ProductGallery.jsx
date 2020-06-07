@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import mobile from 'is-mobile';
 import ImageGallery from 'react-image-gallery';
 
 export default class ProductGallery extends Component {
@@ -9,9 +10,13 @@ export default class ProductGallery extends Component {
             thumbnailPosition: "right",
             slideOnThumbnailOver:true,
             showPlayButton: false,
-            showNav: false,
-            items: this.props.images
+            showNav: mobile(),
+            items: this.props.images,
+            showThumbnails: !mobile(),
+            showFullscreenButton: !mobile()
         };
+        console.log(mobile());
+
         return <ImageGallery {...properties} />
         
     }

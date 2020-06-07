@@ -28,13 +28,14 @@ export default class FilterPreview extends Component {
 
     render() {
         const { filter, updateFilters } = this.props;
+        const {isFiltersShown} = this.state;
         return (
             <div className="filter-preview flex column">
                 <div className="filter-title-container flex justify-between" onClick={this.toggleFilters}>
                     <h3 className="filter-title">{filter.key}</h3>
-                    <i className="fas fa-plus"></i>
+                    <i className={`fas ${isFiltersShown ? 'fa-minus' : 'fa-plus'}`}></i>
                 </div>
-                {this.state.isFiltersShown ?
+                {isFiltersShown ?
                     <FilterOptionList updateFilters={updateFilters} options={filter.values} /> : null}
             </div>
         )
