@@ -15,8 +15,6 @@ export default class ProductGallery extends Component {
             showThumbnails: !mobile(),
             showFullscreenButton: !mobile()
         };
-        console.log(mobile());
-
         return <ImageGallery {...properties} />
         
     }
