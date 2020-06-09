@@ -7,9 +7,12 @@
     img {
         width: 100px;
         height: 100px;
+        margin-left: 10px;
     }
     .title {
         line-height: 22px;
+        min-width: 175px;
+        max-width: 500px;
         &:hover {
             text-decoration: underline;
         }
@@ -40,6 +43,39 @@
         transition: color ease-in 0.3s;
         &:hover {
             color: initial;
+        }
+    }
+    @include for-tablet-layout{
+        padding: 15px 0;
+        flex-wrap: wrap;
+        img {
+            margin-left: 20px;
+        }
+        .title {
+            line-height: 20px;
+        }
+        .price {
+            display: flex;
+            align-items: baseline;
+            .fa-shekel-sign {
+                font-size: 10px;
+            }
+        }
+    }
+    @include for-mobile-layout{
+        position: relative;
+        font-size: 14px;
+        img {
+            width: 75px;
+            height: 75px;
+            margin-left: 10px;
+        }
+        .title {
+            min-width: initial;
+        }
+        .fa-trash-alt {
+            padding: 14px;
+            font-size: 15px;
         }
     }
 }

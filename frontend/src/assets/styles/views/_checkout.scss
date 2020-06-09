@@ -1,5 +1,4 @@
 .cart-page {
-    // height: 100vh;
     background-color: #f6f6f6;
     .cart-sections {
         & > div {
@@ -13,6 +12,16 @@
                 padding-bottom:$cart-section-padding;
                 border-bottom: 1px solid $border-clr;
                 margin-bottom: 15px;
+            }
+            @include for-tablet-layout {
+                &.cart-table{
+                    h1{
+                        margin: 0;
+                    }
+                }
+                .payment {
+                    flex-direction: column;
+                }
             }
         }
     }

@@ -9,6 +9,11 @@
             align-items: center;
         }
     }
+    @include for-tablet-layout {
+        .product-top-container {
+            margin-bottom: 20px;
+        }
+    }
     @include for-mobile-layout {
         padding: 16px;
     }

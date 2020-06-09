@@ -6,8 +6,7 @@ export default function CartTableList({ bag, deleteItem, changeQuantity }) {
         <div className="cart-table-list">
 
             <div className="cart-table-header flex">
-                <div className="col-1">מוצר</div>
-                <div className="col-2"></div>
+                <div className="col-2">מוצר</div>
                 <div className="col-3">מחיר</div>
                 <div className="col-4">כמות</div>
                 <div className="col-5">סה"כ</div>

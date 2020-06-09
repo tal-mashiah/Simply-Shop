@@ -14,8 +14,10 @@ export default class CartTablePreview extends Component {
         const { item, changeQuantity } = this.props;
         return (
             <div className="cart-table-preview flex align-center justify-between">
-                <div className="col-1"><Link to={`/product/${_id}`}><img src={imagesUrl[0].thumbnail} alt="product img" /></Link></div>
-                <div className="col-2 title"><Link to={`/product/${_id}`}>{title}</Link></div>
+                <div className="col-2 flex align-center">
+                    <Link to={`/product/${_id}`}><img src={imagesUrl[0].thumbnail} alt="product img" /></Link>
+                    <div className="title"><Link to={`/product/${_id}`}>{title}</Link></div>
+                </div>
                 <div className="col-3 price">{price}<i className="fas fa-shekel-sign"></i></div>
                 <div className="col-4"><QuntityBar quantity={item.quantity} changeQuantity={changeQuantity} itemId={_id} /></div>
                 <div className="col-5 price">{price * item.quantity}<i className="fas fa-shekel-sign"></i></div>

@@ -20,4 +20,10 @@
     .main-btn {
         margin: 15px 0 0;
     }
+    @include for-tablet-layout {
+        align-self: flex-end;
+    }
+    @include for-mobile-layout {
+        align-self: center;
+    }
 }

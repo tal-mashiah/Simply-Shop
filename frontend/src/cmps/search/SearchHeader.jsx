@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import SearchResultInfo from './SearchResultInfo';
+// import SearchResultInfo from './SearchResultInfo';
 import SelectBox from '../general/SelectBox.jsx';
 
 export default class SearchHeader extends Component {
@@ -12,11 +12,10 @@ export default class SearchHeader extends Component {
         ],
         isSticky: false
     };
-    stickyContainer = React.createRef()
+    title = React.createRef()
 
     componentDidMount() {
         window.addEventListener('scroll', this.handleScroll);
-        console.log(this.stickyContainer.current.offsetHeight);
     }
 
     componentWillUnmount() {
@@ -24,9 +23,9 @@ export default class SearchHeader extends Component {
     }
 
     handleScroll = () => {
-        console.log(window.scrollY);
+        console.log('offsetHeight: ',this.title.current.offsetHeight);
         
-        if (window.scrollY > 70) {
+        if (window.scrollY > this.title.current.offsetHeight) {
             this.setState({ isSticky: true });
         } else {
             this.setState({ isSticky: false });
@@ -36,11 +35,11 @@ export default class SearchHeader extends Component {
     render() {
         const { term, productsLength, updateSort, toggleFilters } = this.props;
         const { options, isSticky } = this.state;
-        
+
         return (
             <div className="search-header flex align-center justify-between">
-                <SearchResultInfo term={term} productsLength={productsLength} />
-                <div className={`btns-container flex ${isSticky ? 'sticky' : ''}`} ref={this.stickyContainer}>
+                <h2 ref={this.title}>{productsLength === 0 ? 'לא מצאנו שום' : productsLength === 1 ? '' : productsLength} {productsLength === 1 ? 'תוצאה אחת' : 'תוצאות'} עבור <span>"{term}"</span> </h2>
+                <div className={`btns-container flex ${isSticky ? 'sticky' : ''}`}>
                     <div className="filter-btn flex justify-center align-center" onClick={toggleFilters}>
                         <i className="fas fa-filter"></i>
                         <div className="title">סנן תוצאות</div>

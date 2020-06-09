@@ -27,7 +27,7 @@ export default class Delivery extends Component {
         return (
             <div className="delivery">
                 <h1>סוג המשלוח</h1>
-                <div className="flex justify-between align-center">
+                <div className="info-container flex justify-between align-center">
                     <SelectBox handleChange={onDeliverySelected} options={options} />
                     <div className="delivery-price">
                         עלות משלוח: {delivery.price > 0 ? delivery.price : ' חינם!'}

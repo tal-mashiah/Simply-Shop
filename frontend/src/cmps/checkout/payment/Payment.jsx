@@ -6,7 +6,7 @@ export default function Payment({ bag, delivery, form, addOrder }) {
     return (
         <div>
             <h1>סיכום ההזמנה ותשלום</h1>
-            <div className="flex justify-between">
+            <div className="payment flex justify-between">
                 {!form.isValid || <DeliveryInfo form={form} />}
                 <PaymentTotal bag={bag} delivery={delivery} form={form} addOrder={addOrder}/>
             </div>

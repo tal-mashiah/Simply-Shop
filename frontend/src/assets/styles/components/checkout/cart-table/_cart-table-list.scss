@@ -6,8 +6,6 @@
         }
         .col-2 {
             width: 60%;
-            min-width: 175px;
-            max-width: 500px;
         }
         .col-3 {
             width: 10%;
@@ -30,5 +28,51 @@
         text-align: center;
         font-family: open-sans-bold;
         padding: 5px 0;
+        div:first-child {
+            text-align: start;
+        }
+    }
+    @include for-laptop-layout {
+        div {
+            margin: 0 5px;
+        }
+    }
+    @include for-tablet-layout {
+        div {
+            .col-1 {
+                min-width: 80px;
+            }
+            .col-2 {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .col-3 {
+                min-width: initial;
+            }
+            .col-4 {
+                min-width: 120px;
+            }
+        }
+        .cart-table-header {
+            display: none;
+        }
+    }
+    @include for-mobile-layout {
+        div {
+            .col-2 {
+                margin-bottom: 20px;
+                align-items: flex-start;
+            }
+            .col-5 {
+                min-width: 40px;
+                justify-content: flex-end;
+            }
+            .col-6 {
+                position: absolute;
+                top: 5px;
+                left: -4px;
+                margin: 0;
+            }
+        }
     }
 }

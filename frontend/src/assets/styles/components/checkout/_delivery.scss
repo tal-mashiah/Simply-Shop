@@ -1,18 +1,46 @@
 .delivery {
-    .delivery-price {
-        font-size: 18px;
-        .fa-shekel-sign{
-            font-size: 12px;
-            margin-right: 2px;
+    .info-container {
+        .delivery-price {
+            font-size: 18px;
+            .fa-shekel-sign {
+                font-size: 12px;
+                margin-right: 2px;
+            }
+        }
+        .total-price {
+            font-size: 18px;
+            font-family: open-sans-bold;
+
+            .fa-shekel-sign {
+                font-size: 14px;
+                margin-right: 3px;
+            }
         }
     }
-    .total-price {
-        font-size: 18px;
-        font-family: open-sans-bold;
-
-        .fa-shekel-sign{
-            font-size: 14px;
-            margin-right: 3px;
+    @include for-tablet-layout {
+        .info-container {
+            flex-wrap: wrap;
+            .total-price {
+                width: 100%;
+                padding-top: 25px;
+                text-align: end;
+            }
+        }
+    }
+    @include for-mobile-layout {
+        .info-container {
+            .select-box {
+                width: 100%;
+            }
+            .delivery-price {
+                font-size: 18px;
+                width: 100%;
+                text-align: end;
+                margin-top: 25px;
+            }
+            .total-price {
+                padding-top: 10px;
+            }
         }
     }
 }
