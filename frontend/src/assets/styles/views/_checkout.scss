@@ -23,6 +23,9 @@
                     flex-direction: column;
                 }
             }
+            @include for-mobile-layout {
+                margin-bottom: 20px;
+            }
         }
     }
     .empty-cart{

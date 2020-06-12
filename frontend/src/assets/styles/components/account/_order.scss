@@ -6,8 +6,16 @@
             padding: 0 35px;
             margin-bottom: 40px;
             box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
+            @include for-tablet-layout {
+                padding: 0 15px;
+            }
             .order-header {
                 height: 50px;
+                @include for-mobile-layout {
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    align-items: flex-start;
+                }
                 .date {
                     margin-left: 20px;
                 }
@@ -16,6 +24,9 @@
                 background-color: #fff;
                 padding: 0 15px;
                 box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.25);
+                @include for-mobile-layout {
+                    padding: 0 5px;
+                }
                 .order-product-preview {
                     padding: 10px 0;
                     &:not(:last-of-type) {
@@ -24,14 +35,24 @@
                     img {
                         width: 100px;
                         margin-left: 20px;
+                        @include for-mobile-layout {
+                            width: 85px;
+                            margin-left: 15px;
+                        }
                     }
                     .info {
                         .title {
-                            margin-bottom: 10px;
+                            margin-bottom: 5px;
                             font-size: 15px;
+                            @include for-tablet-layout {
+                                font-size: 14px;
+                            }
                             :hover {
                                 text-decoration: underline;
                             }
+                        }
+                        .quantity {
+                            margin-bottom: 10px;
                         }
                         .price {
                             font-family: open-sans-bold;
@@ -51,6 +72,12 @@
                     .fa-shekel-sign {
                         font-size: 13px;
                         margin-right: 3px;
+                    }
+                    @include for-mobile-layout {
+                        font-size: 15px;
+                        .fa-shekel-sign {
+                            font-size: 12px;
+                        }
                     }
                 }
             }

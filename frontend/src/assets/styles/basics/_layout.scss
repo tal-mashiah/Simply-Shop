@@ -1,6 +1,9 @@
 .container {
     margin: 0 auto;
     padding: 32px;
+    @include for-mobile-layout {
+        padding: 10px;
+    }
 }
 
 .header-padding {

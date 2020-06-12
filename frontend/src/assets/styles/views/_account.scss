@@ -18,11 +18,39 @@
                 }
             }
         }
-        form{
+        form {
             width: 450px;
         }
-        .main-btn{
+        .main-btn {
             margin: 0;
+        }
+    }
+    @include for-tablet-layout {
+        .hero {
+            font-size: 20px;
+            padding: 8px 15px;
+        }
+        .page-container {
+            padding: 0px 30px 30px;
+            .main-btn {
+                height: 40px;
+                width: 180px;
+            }
+        }
+    }
+    @include for-mobile-layout {
+        .hero {
+            font-size: 18px;
+            padding: 6px 15px;
+        }
+        .page-container {
+            padding: 0px 15px 30px;
+            form {
+                width: 100vw;
+            }
+            .main-btn {
+                width: 150px;
+            }
         }
     }
 }

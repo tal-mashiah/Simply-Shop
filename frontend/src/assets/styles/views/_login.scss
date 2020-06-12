@@ -12,4 +12,9 @@
         top: 60px;
         z-index: 100;
     }
+    @include for-mobile-layout {
+        form {
+            min-width: 100%;
+        }
+    }
 }

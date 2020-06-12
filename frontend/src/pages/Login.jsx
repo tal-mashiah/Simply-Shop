@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import ReCAPTCHA from "react-google-recaptcha";
 
 import { connect } from 'react-redux';
 import { updateForm, signup, login } from '../actions/UserActions';
@@ -45,19 +46,23 @@ class Login extends Component {
     setUser = () => {
         const { pageName } = this.state;
         const { login, signup, form } = this.props;
-        const {lastRoute} = this.props.location;
+        const { lastRoute } = this.props.location;
         if (!form.isValid) return;
         if (pageName === 'login') {
-            login(form.input,lastRoute);
+            login(form.input, lastRoute);
         } else {
             signup(form.input);
         }
     }
 
+    onChange = value => {
+        console.log("Captcha value:", value);
+    }
+
     render() {
         const { loginInputs, registerInputs, pageName } = this.state;
         const { isLoading, form } = this.props;
-        if (!pageName) return null;        
+        if (!pageName) return null;
         return (
             <div className="login flex column align-center">
                 <div className="page-nav flex justify-around">
@@ -68,6 +73,10 @@ class Login extends Component {
                 {pageName === 'login' ?
                     <Form inputs={loginInputs} updateForm={this.updateForm} /> :
                     <Form inputs={registerInputs} updateForm={this.updateForm} />}
+                <ReCAPTCHA
+                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                    onChange={this.onChange}
+                />
                 <button onClick={this.setUser} className={form.isValid ? "main-btn primary" : "main-btn primary disabled"}>{pageName === 'login' ? 'התחבר' : 'הרשם'}</button>
             </div>
         )
