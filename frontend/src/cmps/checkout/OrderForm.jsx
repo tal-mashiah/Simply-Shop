@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Form from '../general/Form.jsx';
 import { Link } from 'react-router-dom';
-import history from '../../history';
+
 export default class OrderForm extends Component {
     state = {
         inputs: [
@@ -59,12 +59,12 @@ export default class OrderForm extends Component {
         const { updatedInputs } = this.state;
         const { user, updateForm } = this.props;
         if (!updatedInputs) return null;
-
+        
         return (
             <div className="order-form">
                 <h1>פרטי הזמנה</h1>
         {user ? <div className="checkout-auth">{`לא ${user.fullName}?`} <span onClick={this.onLogOut}>התנתק</span></div> :
-                <div className="checkout-auth">לקוח/ה רשום? <Link to={{ pathname: 'auth/login', lastRoute: history.location.pathname }}>התחבר/י עכשיו</Link></div>}
+                <div className="checkout-auth">לקוח/ה רשום? <Link to={{ pathname: 'auth/login', lastRoute: window.location.hash }}>התחבר/י עכשיו</Link></div>}
                 <Form inputs={updatedInputs} updateForm={updateForm} />
             </div>
         )

@@ -22,9 +22,7 @@ export default class SearchHeader extends Component {
         window.removeEventListener('scroll', this.handleScroll);
     }
 
-    handleScroll = () => {
-        console.log('offsetHeight: ',this.title.current.offsetHeight);
-        
+    handleScroll = () => {        
         if (window.scrollY > this.title.current.offsetHeight) {
             this.setState({ isSticky: true });
         } else {

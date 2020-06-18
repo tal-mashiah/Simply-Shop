@@ -1,5 +1,11 @@
 .order {
     width: 100%;
+    h1 {
+        text-align: center;
+        @include for-mobile-layout {
+            font-size: 24px;
+        }
+    }
     .order-list {
         .order-preview {
             background-color: #f5f5f5;
