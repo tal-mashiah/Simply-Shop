@@ -1,3 +1,8 @@
 .spinner {
-    height: 90vh;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    img{
+        width: 200px;
+    }
 }

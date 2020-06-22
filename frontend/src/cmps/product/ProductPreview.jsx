@@ -7,7 +7,7 @@ export default class ProductPreview extends Component {
         return (
             <div className="product-preview">
                 <Link to={`/product/${_id}`}>
-                <div className="img-container">
+                <div className="img-container square-ratio">
                     <img src={imagesUrl[0]} onMouseOver={e => (e.currentTarget.src = imagesUrl[1])} onMouseOut={e => (e.currentTarget.src = imagesUrl[0])} alt={title} />
                 </div>
                 <div className="details-container flex column justify-between">

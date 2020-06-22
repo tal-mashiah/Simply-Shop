@@ -32,8 +32,6 @@ export default class ProductContent extends Component {
         const { quantity } = this.state;
         return (
             <div className="product-content">
-                <div className="gallery-zoom" id="myPortal" />
-
                 <div className="top-content flex column justify-between">
                     <h1 className="content-title flex column">{title}</h1>
                     {quantity === 1 || <span> סה"כ עבור {quantity} יחידות:</span>}

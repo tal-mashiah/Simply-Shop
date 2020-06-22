@@ -8,16 +8,16 @@
     .close-btn {
         display: none;
     }
-    .spinner {
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 10%;
-        width: 98%;
-        img {
-            width: 100px;
-        }
-    }
+    // .spinner {
+    //     position: absolute;
+    //     top: 0;
+    //     right: 0;
+    //     height: 10%;
+    //     width: 98%;
+    //     img {
+    //         width: 100px;
+    //     }
+    // }
     @include for-tablet-layout {
         transform: translate(100%, 0);
         transition: transform 0.9s;
