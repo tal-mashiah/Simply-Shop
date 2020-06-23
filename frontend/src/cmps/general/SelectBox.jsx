@@ -23,10 +23,14 @@ export default class SelectBox extends Component {
         }
     }
 
+    onSelectBoxBlur = () => {
+        this.setState({ isOptionsShown: false })
+    }
+
     render() {
         const { title, isOptionsShown } = this.state;
         return (
-            <div className="select-box">
+            <div className="select-box" onBlur={this.onSelectBoxBlur} tabIndex="0" >
                 <div onClick={() => this.showOptions()} className={`title-container flex justify-between ${isOptionsShown ? 'active' : ''}`}>
                     <div className="title">{title}</div>
                     <i className="fas fa-caret-down"></i>
