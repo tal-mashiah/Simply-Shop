@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { updateUser, updatePassword } from '../actions/UserActions';
+import { updateUser, updatePassword, logout } from '../actions/UserActions';
 import { setGrowl } from '../actions/GrowlActions';
 
 import Order from '../cmps/account/order/Order';
@@ -43,7 +43,7 @@ class Account extends Component {
 
     render() {
         const { pageName } = this.state;
-        const { loggedInUser, setGrowl } = this.props;
+        const { loggedInUser, setGrowl, logout } = this.props;
         if (!loggedInUser) return null;
         return (
             <div className="acount">
@@ -53,6 +53,8 @@ class Account extends Component {
                         <Link to="/account/orders"> <div className={pageName === 'orders' ? "orders active" : "orders"}>הזמנות</div></Link>
                         <Link to="/account/edit"> <div className={pageName === 'edit' ? "edit active" : "edit"}>עריכת חשבון</div></Link>
                         <Link to="/account/password"> <div className={pageName === 'password' ? "password active" : "password"}>שינוי סיסמה</div></Link>
+                        <Link onClick={() => logout()}><div>התנתק</div></Link>
+
                     </div>
                     {pageName === 'orders' && <Order userId={loggedInUser._id} />}
                     {pageName === 'edit' && <Edit user={loggedInUser} updateUser={this.updateUser} setGrowl={setGrowl} />}
@@ -72,7 +74,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     updatePassword,
     updateUser,
-    setGrowl
+    setGrowl,
+    logout
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);

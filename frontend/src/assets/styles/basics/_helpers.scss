@@ -64,14 +64,14 @@
   @include for-tablet-layout {
     height: 30px;
     a > div {
-      font-size: 18px;
+      font-size: 16px;
       height: 30px;
     }
   }
   @include for-mobile-layout {
     width: 285px;
     a > div {
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 }
