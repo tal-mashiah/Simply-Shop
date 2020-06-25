@@ -42,7 +42,7 @@ export default class SearchHeader extends Component {
                         <i className="fas fa-filter"></i>
                         <div className="title">סנן תוצאות</div>
                     </div>
-                    <SelectBox handleChange={updateSort} options={options} />
+                    {productsLength === 0 || <SelectBox handleChange={updateSort} options={options} />}
                 </div>
             </div>
         )

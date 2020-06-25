@@ -74,6 +74,8 @@ const createSpecs = (specKeys, specValues) => {
 const createImages = (imageUrls) => {
     const images = [];
     for (const imageUrl of imageUrls) {
+        console.log(imageUrl);
+        
         images.push({ original: imageUrl, thumbnail: imageUrl })
     }
     return images;

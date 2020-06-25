@@ -92,7 +92,7 @@ class SearchPage extends Component {
         if (!products) return <Spinner />
 
         return (
-            <div className={`flex ${isFiltersShown ? 'menu-open' : ''}`}>
+            <div className={`search-page flex ${isFiltersShown ? 'menu-open' : ''}`}>
                 {(products.length < 2 && filterBy.filters.length === 0 && !filterBy.priceFilter.min && !name) ||
                     <FilterList
                         filters={filters}

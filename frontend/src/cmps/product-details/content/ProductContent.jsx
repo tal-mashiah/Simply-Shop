@@ -30,6 +30,7 @@ export default class ProductContent extends Component {
     render() {
         const { title, price } = this.props.product;
         const { quantity } = this.state;
+
         return (
             <div className="product-content">
                 <div className="top-content flex column justify-between">

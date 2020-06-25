@@ -2,16 +2,22 @@
     margin-right: 64px;
     min-width: 605px;
     width: 40vw;
+    .image-gallery-image{
+        height: 450px;
+    }
     @include for-laptop-layout {
         min-width: initial;
         width: 70vw;
         margin: 0 0 35px;
     }
     @include for-tablet-layout {
-        width: initial;
+        width: 100%;
     }
     @include for-mobile-layout {
         margin: 0px 0 25px;
+        .image-gallery-image{
+            height: 300px;
+        }
     }
 }
 
@@ -25,10 +31,18 @@
     &:hover {
         opacity: 0.9;
     }
+    .image-gallery-thumbnail-inner {
+        height: 100px;
+        display: flex;
+        align-items: center;
+    }
 }
 
 .image-gallery-slide{
     outline: none;
+    .image-gallery-image{
+        width: 98%;
+    }
 }
 
 .image-gallery-slide-wrapper.left, .image-gallery-slide-wrapper.right {

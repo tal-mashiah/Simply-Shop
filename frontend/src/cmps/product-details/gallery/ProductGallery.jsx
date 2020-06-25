@@ -1,21 +1,20 @@
 import React, { Component } from 'react'
 
-import mobile from 'is-mobile';
+import { isMobileOnly, isMobile, isTablet, isBrowser } from 'mobile-device-detect';
 import ImageGallery from 'react-image-gallery';
 
 export default class ProductGallery extends Component {
 
     render() {
         const properties = {
-            thumbnailPosition: "right",
-            slideOnThumbnailOver:true,
+            thumbnailPosition: isTablet ? "bottom" : "right",
             showPlayButton: false,
-            showNav: mobile(),
+            showNav: isMobile,
             items: this.props.images,
-            showThumbnails: !mobile(),
-            showFullscreenButton: !mobile()
+            showThumbnails: !isMobileOnly,
+            showFullscreenButton: isBrowser
         };
         return <ImageGallery {...properties} />
-        
+
     }
 }

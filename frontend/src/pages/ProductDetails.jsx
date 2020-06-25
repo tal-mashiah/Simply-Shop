@@ -34,7 +34,7 @@ class ProductDetails extends Component {
     render() {
         if (!this.props.productData) return <Spinner />
         const { product } = this.props.productData;
-        const { productData, setGrowl } = this.props;
+        const { productData, setGrowl } = this.props;        
         return (
             <div className="product-details flex column align-center">
                 <div className="product-details-container">
