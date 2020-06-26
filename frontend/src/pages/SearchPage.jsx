@@ -98,6 +98,7 @@ class SearchPage extends Component {
                         filters={filters}
                         priceFilter={priceFilter}
                         isFiltersShown={isFiltersShown}
+                        productsLength={products.length}
                         isLoading={isLoading}
                         updatePrice={this.updatePrice}
                         updateFilters={this.updateFilters}

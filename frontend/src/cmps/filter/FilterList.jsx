@@ -3,14 +3,14 @@ import FilterPreview from '../filter/FilterPreview.jsx';
 import FilterPrice from './FilterPrice.jsx';
 import Spinner from '../general/Spinner.jsx';
 
-export default function FilterList({ filters, priceFilter, isFiltersShown, isLoading, updatePrice, updateFilters, toggleFilters }) {
+export default function FilterList({ filters, priceFilter, isFiltersShown, isLoading, updatePrice, updateFilters, toggleFilters, productsLength }) {
 
     return (
         <div className={`filter-list ${isFiltersShown ? 'open' : ''}`}>
             <div className="close"><i className="fas fa-times" onClick={toggleFilters}></i></div>
             {isLoading && <Spinner/>}
-            <FilterPrice priceFilter={priceFilter} updatePrice={updatePrice} />
-
+            {/* {productsLength === 1 || <FilterPrice priceFilter={priceFilter} updatePrice={updatePrice} />} */}
+            <FilterPrice priceFilter={priceFilter} updatePrice={updatePrice} productsLength={productsLength} />
             {filters.map((filter, idx) => {
                 return <FilterPreview updateFilters={updateFilters} filter={filter} key={idx} />
             })}

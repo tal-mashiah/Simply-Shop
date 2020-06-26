@@ -19,6 +19,11 @@ export default class FilterPrice extends Component {
              generalMax !== prevprops.priceFilter.generalMax) {
             this.setState({ value: { min: generalMin, max: generalMax } })
         }
+        if (this.props.productsLength === 1){
+            if(this.state.value.min > this.props.priceFilter.min || this.state.value.max < this.props.priceFilter.min){
+                this.setState({ value: { min: this.props.priceFilter.min-1, max: this.props.priceFilter.max } })                
+            }
+        }
     }
 
 

@@ -1,4 +1,12 @@
 const ObjectId = require('mongodb').ObjectId;
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+    cloud_name: 'talmashiah',
+    api_key: '872477533892996',
+    api_secret: 'GClD2mEYGHjNdC0hLfzH40b2cMc'
+});
+
 
 const sortProducts = (products, sort) => {
     switch (sort) {
@@ -71,15 +79,20 @@ const createSpecs = (specKeys, specValues) => {
     return specs;
 }
 
-const createImages = (imageUrls) => {
+const createImages = (imageUrls, withThumbnail = false) => {
+    const folderName = 'corona';
     const images = [];
     for (const imageUrl of imageUrls) {
-        console.log(imageUrl);
-        
-        images.push({ original: imageUrl, thumbnail: imageUrl })
+        if (withThumbnail) {
+            images.push({ original: cloudinary.url(`${folderName}/${imageUrl}`), thumbnail: cloudinary.url(`${folderName}/${imageUrl}`, { width: 200, crop: "thumb" }) })
+        } else {
+            images.push(cloudinary.url(`${folderName}/${imageUrl}`, { width: 350 }));
+        }
     }
     return images;
 }
+
+
 
 const _updateSpecValues = (values, filters) => {
     return values.map(value => {

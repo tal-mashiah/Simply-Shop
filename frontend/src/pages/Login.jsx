@@ -74,7 +74,7 @@ class Login extends Component {
                     <Form inputs={loginInputs} updateForm={this.updateForm} /> :
                     <Form inputs={registerInputs} updateForm={this.updateForm} />}
                 <ReCAPTCHA
-                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                    sitekey="6LcE8KkZAAAAACpaSlvrKUjtR56-C8nQ67pKYLo0"
                     onChange={this.onChange}
                 />
                 <button onClick={this.setUser} className={form.isValid ? "main-btn primary" : "main-btn primary disabled"}>{pageName === 'login' ? 'התחבר' : 'הרשם'}</button>

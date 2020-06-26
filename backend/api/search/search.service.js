@@ -21,6 +21,7 @@ async function query(filterBy) {
             var allProducts = await collection.find({ 'categoryId': ObjectId(filterBy.categoryId) }).toArray();
         }
         products.forEach(product => delete product.costPrice);
+        products.forEach(product => product.imagesUrl = searchUtils.createImages(product.imagesUrl));
         const priceFilter = searchUtils.createPriceFilter(allProducts, products);
         const sortedProducts = searchUtils.sortProducts(products, filterBy.sortBy);
         const specValueIds = products.map(product => product.specValues).flat();
@@ -51,7 +52,7 @@ async function getById(productId) {
         collection = await dbService.getCollection('specValue');
         const specValues = await collection.find({ "_id": { $in: product.specValues } }).toArray();;
         const specs = searchUtils.createSpecs(specKeys, specValues);
-        product.imagesUrl = searchUtils.createImages(product.imagesUrl);
+        product.imagesUrl = searchUtils.createImages(product.imagesUrl, true);
         delete product.specValues
         return { product, specs };
 
