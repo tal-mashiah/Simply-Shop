@@ -86,27 +86,30 @@ class SearchPage extends Component {
     }
 
     render() {
-        const { products, filters, priceFilter, filterBy, isLoading } = this.props;
-        const {isFiltersShown} = this.state;
+        const { products, filters, priceFilter, isLoading } = this.props;
+        const { isFiltersShown } = this.state;
         const { term, name } = this.props.match.params;
         if (!products) return <Spinner />
+        console.log('products: ', products.length);
 
         return (
             <div className={`search-page flex ${isFiltersShown ? 'menu-open' : ''}`}>
-                {(products.length < 2 && filterBy.filters.length === 0 && !filterBy.priceFilter.min && !name) ||
-                    <FilterList
-                        filters={filters}
-                        priceFilter={priceFilter}
-                        isFiltersShown={isFiltersShown}
-                        productsLength={products.length}
-                        isLoading={isLoading}
-                        updatePrice={this.updatePrice}
-                        updateFilters={this.updateFilters}
-                        toggleFilters={this.toggleFilters}
-                    />}
+                {/* TODO check if there is a problem */}
+                {/* {(products.length < 2 && filterBy.filters.length === 0 && !filterBy.priceFilter.min && !name) || */}
+                {products.length ? <FilterList
+                    filters={filters}
+                    priceFilter={priceFilter}
+                    isFiltersShown={isFiltersShown}
+                    productsLength={products.length}
+                    isLoading={isLoading}
+                    updatePrice={this.updatePrice}
+                    updateFilters={this.updateFilters}
+                    toggleFilters={this.toggleFilters}
+                /> : null}
+                {/* } */}
                 <div className="screen" onClick={this.toggleFilters}></div>
 
-                <div className="search-container"> 
+                <div className="search-container">
                     <SearchHeader term={term || name} productsLength={products.length} updateSort={this.updateSort} toggleFilters={this.toggleFilters} />
                     <ProductList products={products} />
                 </div>

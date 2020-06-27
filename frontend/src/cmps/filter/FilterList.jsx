@@ -8,8 +8,7 @@ export default function FilterList({ filters, priceFilter, isFiltersShown, isLoa
     return (
         <div className={`filter-list ${isFiltersShown ? 'open' : ''}`}>
             <div className="close"><i className="fas fa-times" onClick={toggleFilters}></i></div>
-            {isLoading && <Spinner/>}
-            {/* {productsLength === 1 || <FilterPrice priceFilter={priceFilter} updatePrice={updatePrice} />} */}
+            {isLoading && <Spinner />}
             <FilterPrice priceFilter={priceFilter} updatePrice={updatePrice} productsLength={productsLength} />
             {filters.map((filter, idx) => {
                 return <FilterPreview updateFilters={updateFilters} filter={filter} key={idx} />

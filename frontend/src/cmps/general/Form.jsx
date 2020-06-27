@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default class Form extends Component {
     state = {
         form: null,
+        captchaValue: null,
         regex: {
             required: /(.|\s)*\S(.|\s)*/,
             langAndMin2Char: /^[a-zA-Z\u0590-\u05fe\s"'-]{2,}$/,
@@ -116,7 +118,10 @@ export default class Form extends Component {
     }
 
     checkIfFormValid = () => {
-        const isFormValid = this.props.inputs.every(input => input.isValid === true);
+        let isFormValid = this.props.inputs.every(input => input.isValid === true);
+        isFormValid = isFormValid && this.state.captchaValue ? true : false;
+        console.log(isFormValid);
+
         this.props.updateForm(isFormValid, this.state.form);
     }
 
@@ -124,6 +129,10 @@ export default class Form extends Component {
         const currInput = this.props.inputs.find(currInput => currInput.name === input.name);
         currInput.type = currInput.type === 'password' ? 'text' : 'password';
         this.setState({ ...this.state })
+    }
+
+    onChange = value => {
+        this.setState({ captchaValue: value }, () => this.checkIfFormValid())
     }
 
     render() {
@@ -137,7 +146,7 @@ export default class Form extends Component {
 
                     return <div key={idx} className={input.error ? "input-container error" : input.isValid && input.value && !input.disabled ? "input-container valid" : "input-container"}>
                         <label htmlFor={input.disabled ? '' : input.name}>{input.label} {input.validation ? input.validation.includes('required') ? <i className="fas fa-star-of-life"></i> : null : null}</label>
-                        <ConditionalInput className={input.disabled && "disabled"} type={input.type} value={input.value || ''} onChange={this.handleChange} id={input.name} name={input.name} placeholder={input.label} autoComplete="on"></ConditionalInput>
+                        <ConditionalInput className={input.disabled && "disabled"} type={input.type} value={input.value || ''} onChange={this.handleChange} id={input.name} name={input.name} placeholder={input.label} autoComplete={input.autoComplete ? input.autoComplete : 'off'}></ConditionalInput>
                         <div className="form-error">{!input || input.error}
                             <div className="arrow-up"></div>
                         </div>
@@ -146,6 +155,13 @@ export default class Form extends Component {
                         <i className="fas fa-check-circle"></i>
                     </div>
                 })}
+                <div className="recaptcha flex justify-center">
+                    <ReCAPTCHA
+                        // sitekey="6LcE8KkZAAAAACpaSlvrKUjtR56-C8nQ67pKYLo0"
+                        sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                        onChange={this.onChange}/>
+                </div>
+
             </form >
         )
     }

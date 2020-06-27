@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ReCAPTCHA from "react-google-recaptcha";
 
 import { connect } from 'react-redux';
 import { updateForm, signup, login } from '../actions/UserActions';
@@ -12,14 +11,14 @@ class Login extends Component {
     state = {
         pageName: null,
         registerInputs: [
-            { type: 'text', name: 'fullName', label: 'שם מלא', validation: ['required', 'langAndMin2Char', 'twoWords'] },
-            { type: 'text', name: 'email', label: 'אימייל', validation: ['required', 'email'] },
+            { type: 'text', name: 'fullName', label: 'שם מלא', autoComplete: 'name', validation: ['required', 'langAndMin2Char', 'twoWords'] },
+            { type: 'text', name: 'email', label: 'אימייל', autoComplete: 'email', validation: ['required', 'email'] },
             { type: 'password', name: 'password', label: 'סיסמה', toggleVisibility: true, validation: ['required', 'passvalid', 'min8Char', 'engAndNums'] },
             { type: 'password', name: 'passwordValidation', label: 'אימות סיסמה', toggleVisibility: true, validation: ['required', 'passvalid'] }
         ],
         loginInputs: [
-            { type: 'text', name: 'email', label: 'אימייל', validation: ['required', 'email'] },
-            { type: 'password', name: 'password', label: 'סיסמה', toggleVisibility: true, validation: ['required', 'min8Char', 'engAndNums'] }
+            { type: 'text', name: 'email', label: 'אימייל', autoComplete: 'email', validation: ['required', 'email'] },
+            { type: 'password', name: 'password', label: 'סיסמה', autoComplete: 'current-password', toggleVisibility: true, validation: ['required', 'min8Char', 'engAndNums'] }
         ]
     }
 
@@ -55,10 +54,6 @@ class Login extends Component {
         }
     }
 
-    onChange = value => {
-        console.log("Captcha value:", value);
-    }
-
     render() {
         const { loginInputs, registerInputs, pageName } = this.state;
         const { isLoading, form } = this.props;
@@ -73,10 +68,7 @@ class Login extends Component {
                 {pageName === 'login' ?
                     <Form inputs={loginInputs} updateForm={this.updateForm} /> :
                     <Form inputs={registerInputs} updateForm={this.updateForm} />}
-                <ReCAPTCHA
-                    sitekey="6LcE8KkZAAAAACpaSlvrKUjtR56-C8nQ67pKYLo0"
-                    onChange={this.onChange}
-                />
+
                 <button onClick={this.setUser} className={form.isValid ? "main-btn primary" : "main-btn primary disabled"}>{pageName === 'login' ? 'התחבר' : 'הרשם'}</button>
             </div>
         )
