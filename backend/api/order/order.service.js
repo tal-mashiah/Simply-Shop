@@ -1,3 +1,4 @@
+const searchUtils = require('../search/search.utils');
 const dbService = require('../../services/db.service')
 const ObjectId = require('mongodb').ObjectId;
 
@@ -24,7 +25,7 @@ async function getByUserId(userId) {
             for (const order of orders) {
                 for (const product of order.products) {
                     const dbProduct = await collection.findOne({ "_id": ObjectId(product.productId) });
-                    product.imagesUrl = dbProduct.imagesUrl;
+                    product.imagesUrl = searchUtils.createImages(dbProduct.imagesUrl);
                     product.title = dbProduct.title;
                 }
             }

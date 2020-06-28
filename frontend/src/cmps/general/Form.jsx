@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import googleService from '../../services/googleService';
 import ReCAPTCHA from "react-google-recaptcha";
 
 export default class Form extends Component {
     state = {
         form: null,
-        captchaValue: null,
+        isCaptchaValid: false,
         regex: {
             required: /(.|\s)*\S(.|\s)*/,
             langAndMin2Char: /^[a-zA-Z\u0590-\u05fe\s"'-]{2,}$/,
@@ -119,9 +120,7 @@ export default class Form extends Component {
 
     checkIfFormValid = () => {
         let isFormValid = this.props.inputs.every(input => input.isValid === true);
-        isFormValid = isFormValid && this.state.captchaValue ? true : false;
-        console.log(isFormValid);
-
+        isFormValid = isFormValid && this.state.isCaptchaValid ? true : false;
         this.props.updateForm(isFormValid, this.state.form);
     }
 
@@ -131,8 +130,10 @@ export default class Form extends Component {
         this.setState({ ...this.state })
     }
 
-    onChange = value => {
-        this.setState({ captchaValue: value }, () => this.checkIfFormValid())
+    onChange = async captchaValue => {
+        const res = await googleService.getCaptchaValue(captchaValue);
+        console.log('res.isValid: ', res.isValid);
+        this.setState({ isCaptchaValid: res.isValid }, () => this.checkIfFormValid());
     }
 
     render() {
@@ -157,9 +158,9 @@ export default class Form extends Component {
                 })}
                 <div className="recaptcha flex justify-center">
                     <ReCAPTCHA
-                        // sitekey="6LcE8KkZAAAAACpaSlvrKUjtR56-C8nQ67pKYLo0"
-                        sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-                        onChange={this.onChange}/>
+                        sitekey="6LcE8KkZAAAAACpaSlvrKUjtR56-C8nQ67pKYLo0"
+                        // sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                        onChange={this.onChange} />
                 </div>
 
             </form >

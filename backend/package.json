@@ -11,6 +11,7 @@
     "author": "tal mashiah",
     "license": "ISC",
     "dependencies": {
+        "axios": "^0.19.2",
         "bcrypt": "^3.0.8",
         "body-parser": "^1.19.0",
         "cloudinary": "^1.22.0",
@@ -19,6 +20,7 @@
         "express": "^4.17.1",
         "express-session": "^1.16.2",
         "mongodb": "^3.2.7",
+        "request": "^2.88.2",
         "socket.io": "^2.2.0"
     },
     "devDependencies": {

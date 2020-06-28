@@ -13,6 +13,7 @@ const searchRoutes = require('./api/search/search.routes');
 const orderRoutes = require('./api/order/order.routes');
 const authRoutes = require('./api/auth/auth.routes');
 const userRoutes = require('./api/user/user.routes');
+const googleRoutes = require('./api/google/google.routes');
 
 app.use(cookieParser())
 app.use(bodyParser.json());
@@ -39,6 +40,8 @@ app.use('/api/category', categoryRoutes);
 app.use('/api/search', searchRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/google', googleRoutes);
+
 
 const logger = require('./services/logger.service');
 const port = process.env.PORT || 3030;
