@@ -88,7 +88,7 @@ class SearchPage extends Component {
         const { products, filters, priceFilter } = this.props;
         const { isFiltersShown } = this.state;
         const { term, name } = this.props.match.params;
-        if (!products) return 'helllllo';
+        if (!products) return null;
         return (
             <div className={`search-page flex ${isFiltersShown ? 'menu-open' : ''}`}>
                 {/* TODO check if there is a problem */}

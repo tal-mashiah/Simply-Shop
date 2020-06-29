@@ -69,7 +69,7 @@ async function getByIds(ids) {
         const productIds = ids.map(id => ObjectId(id));
         const products = await collection.find({ "_id": { $in: productIds } }).toArray();
         products.forEach(product => {
-            product.imagesUrl = searchUtils.createImages(product.imagesUrl);
+            product.imagesUrl = searchUtils.createImages(product.imagesUrl,true);            
             delete product.costPrice;
         });
         return products;
