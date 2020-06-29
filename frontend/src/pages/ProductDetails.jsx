@@ -7,7 +7,6 @@ import { setGrowl } from '../actions/GrowlActions';
 
 import ProductContent from '../cmps/product-details/content/ProductContent.jsx';
 import ProductGallery from '../cmps/product-details/gallery/ProductGallery';
-import Spinner from '../cmps/general/Spinner.jsx';
 import ProductInfo from '../cmps/product-details/info/ProductInfo';
 
 class ProductDetails extends Component {
@@ -32,7 +31,7 @@ class ProductDetails extends Component {
     }
 
     render() {
-        if (!this.props.productData) return <Spinner />
+        if (!this.props.productData) return null;
         const { product } = this.props.productData;
         const { productData, setGrowl } = this.props;        
         return (

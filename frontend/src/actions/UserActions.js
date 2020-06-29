@@ -6,9 +6,14 @@ import history from '../history';
 export function updateForm(isValid, form) {
     return dispatch => {
         try {
+            dispatch(loading());
             dispatch(_updateForm(isValid, form));
-        } catch (err) {
+        } 
+        catch (err) {
             console.log('userActions: err in update form', err);
+        }
+        finally {
+            dispatch(doneLoading());
         }
     };
 }
@@ -66,6 +71,7 @@ export function signup(userCreds) {
 export function logout(currRoute) {
     return dispatch => {
         try {
+            dispatch(loading());
             userService.logout();
             dispatch(setGrowl('התנתקת בהצלחה', 'info'));
             dispatch(_setUser(null));
@@ -73,6 +79,9 @@ export function logout(currRoute) {
         }
         catch (err) {
             console.log('userActions: err in logout', err);
+        }
+        finally {
+            dispatch(doneLoading());
         }
     };
 }

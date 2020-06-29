@@ -10,13 +10,16 @@ import Checkout from './pages/Checkout.jsx';
 import Login from './pages/Login.jsx';
 import Account from './pages/Account.jsx';
 import NotFound from './pages/NotFound.jsx';
-import GrowlMessage from './cmps/general/GrowlMessage.jsx'
+import GrowlMessage from './cmps/general/GrowlMessage.jsx';
+import Spinner from './cmps/general/Spinner.jsx';
+
 
 function App() {
   return (
     <div className="App header-padding">
       <Router history={history}>
         <GrowlMessage />
+        <Spinner />
         <Header />
         <Switch>
           <Route path="/" component={Home} exact />

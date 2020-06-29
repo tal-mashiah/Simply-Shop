@@ -3,12 +3,14 @@ import orderService from '../services/orderService';
 import storageService from '../services/storageService';
 import history from '../history';
 
+import { loading, doneLoading } from './SystemActions';
 import { setGrowl } from './GrowlActions';
 
 
 export function setBag(storageBag) {
     return async dispatch => {
         try {
+            dispatch(loading());
             const productIds = storageBag.map(item => item.productId);
             const products = await searchService.getByIds(productIds);
             // eslint-disable-next-line
@@ -21,8 +23,12 @@ export function setBag(storageBag) {
             })
 
             dispatch(_setBag(updatedBag));
-        } catch (err) {
+        }
+        catch (err) {
             console.log('checkoutActions: err in set bag', err);
+        }
+        finally {
+            dispatch(doneLoading());
         }
     };
 }
@@ -37,9 +43,14 @@ function _setBag(updatedBag) {
 export function updateBag(item) {
     return dispatch => {
         try {
+            dispatch(loading());
             dispatch(_updateBag(item));
-        } catch (err) {
+        }
+        catch (err) {
             console.log('checkoutActions: err in update bag', err);
+        }
+        finally {
+            dispatch(doneLoading());
         }
     };
 }
@@ -54,9 +65,14 @@ function _updateBag(item) {
 export function deleteItem(itemId) {
     return dispatch => {
         try {
+            dispatch(loading());
             dispatch(_deleteItem(itemId));
-        } catch (err) {
+        }
+        catch (err) {
             console.log('checkoutActions: err in delete item', err);
+        }
+        finally {
+            dispatch(doneLoading());
         }
     };
 }
@@ -71,9 +87,14 @@ function _deleteItem(itemId) {
 export function updateQuantity(itemId, diff, quantity) {
     return dispatch => {
         try {
+            dispatch(loading());
             dispatch(_updateQuantity(itemId, diff, quantity));
-        } catch (err) {
+        }
+        catch (err) {
             console.log('checkoutActions: err in update quantity', err);
+        }
+        finally {
+            dispatch(doneLoading());
         }
     };
 }
@@ -90,9 +111,14 @@ function _updateQuantity(itemId, diff, quantity) {
 export function setDelivery(option) {
     return dispatch => {
         try {
+            dispatch(loading());
             dispatch(_setDelivery(option));
-        } catch (err) {
+        }
+        catch (err) {
             console.log('checkoutActions: err in set delivery', err);
+        }
+        finally {
+            dispatch(doneLoading());
         }
     };
 }
@@ -107,9 +133,14 @@ function _setDelivery(option) {
 export function updateForm(isValid, form) {
     return dispatch => {
         try {
+            dispatch(loading());
             dispatch(_updateForm(isValid, form));
-        } catch (err) {
+        }
+        catch (err) {
             console.log('checkoutActions: err in update form', err);
+        }
+        finally {
+            dispatch(doneLoading());
         }
     };
 }
@@ -126,6 +157,7 @@ export function addOrder(type, order) {
 
     return async dispatch => {
         try {
+            dispatch(loading());
             await orderService.add(order);
 
             switch (type) {
@@ -145,8 +177,12 @@ export function addOrder(type, order) {
                     break;
             }
 
-        } catch (err) {
+        }
+        catch (err) {
             console.log('checkoutActions: err in set bag', err);
+        }
+        finally {
+            dispatch(doneLoading());
         }
     };
 }

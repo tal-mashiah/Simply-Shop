@@ -9,7 +9,6 @@ import { logout } from '../../actions/UserActions';
 import NavBar from './NavBar.jsx'
 import Logo from './Logo.jsx';
 import Hamburger from './Hamburger.jsx';
-import Spinner from '../../cmps/general/Spinner.jsx';
 import CategoryList from '../category/CategoryList.jsx';
 import SearchBar from './SearchBar.jsx';
 
@@ -65,7 +64,7 @@ class Header extends Component {
     render() {
         const { categories, isSearchBarOpen, isBurgerOpen } = this.state;
         const { bag, loggedInUser } = this.props;
-        if (!categories) return <Spinner />
+        if (!categories) return null;
         
         return (
             <header className={isBurgerOpen ? "menu-open" : ''}>

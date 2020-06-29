@@ -1,9 +1,6 @@
 .spinner {
-    height: 100%;
+    height: calc(100% - #{$header-height});
     width: 100%;
     position: fixed;
     z-index: 2000;
-    img{
-        width: 200px;
-    }
 }

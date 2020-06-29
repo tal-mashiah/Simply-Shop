@@ -5,7 +5,6 @@ import { loadSearchData, updateFilterBy, updateSortBy } from '../actions/searchA
 
 import ProductList from '../cmps/product/ProductList.jsx';
 import FilterList from '../cmps/filter/FilterList.jsx';
-import Spinner from '../cmps/general/Spinner.jsx';
 import SearchHeader from '../cmps/search/SearchHeader';
 
 class SearchPage extends Component {
@@ -86,12 +85,10 @@ class SearchPage extends Component {
     }
 
     render() {
-        const { products, filters, priceFilter, isLoading } = this.props;
+        const { products, filters, priceFilter } = this.props;
         const { isFiltersShown } = this.state;
         const { term, name } = this.props.match.params;
-        if (!products) return <Spinner />
-        console.log('products: ', products.length);
-
+        if (!products) return 'helllllo';
         return (
             <div className={`search-page flex ${isFiltersShown ? 'menu-open' : ''}`}>
                 {/* TODO check if there is a problem */}
@@ -101,7 +98,6 @@ class SearchPage extends Component {
                     priceFilter={priceFilter}
                     isFiltersShown={isFiltersShown}
                     productsLength={products.length}
-                    isLoading={isLoading}
                     updatePrice={this.updatePrice}
                     updateFilters={this.updateFilters}
                     toggleFilters={this.toggleFilters}
@@ -123,8 +119,7 @@ const mapStateToProps = state => {
         products: state.search.searchData.products,
         filters: state.search.searchData.filters,
         priceFilter: state.search.searchData.priceFilter,
-        filterBy: state.search.filterBy,
-        isLoading: state.system.isLoading
+        filterBy: state.search.filterBy
     };
 };
 

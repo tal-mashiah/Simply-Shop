@@ -26,10 +26,15 @@ function _setSearchData(searchData) {
 export function loadCurrProduct(_id) {
     return async dispatch => {
         try {
+            dispatch(loading());
             const currProduct = await searchService.getById(_id);
             dispatch(_setCurrProduct(currProduct));
-        } catch (err) {
+        }
+        catch (err) {
             console.log('searchActions: err in load currProduct', err);
+        }
+        finally {
+            dispatch(doneLoading());
         }
     };
 }
@@ -44,9 +49,14 @@ function _setCurrProduct(currProduct) {
 export function updateFilterBy(filterBy) {
     return dispatch => {
         try {
+            dispatch(loading());
             dispatch(_updateFilterBy(filterBy));
-        } catch (err) {
+        } 
+        catch (err) {
             console.log('searchActions: err in update FilterBy', err);
+        }
+        finally {
+            dispatch(doneLoading());
         }
     };
 }
@@ -61,9 +71,14 @@ function _updateFilterBy(filterBy) {
 export function updateSortBy(sortBy) {
     return dispatch => {
         try {
+            dispatch(loading());
             dispatch(_updateSortBy(sortBy));
-        } catch (err) {
+        } 
+        catch (err) {
             console.log('searchActions: err in update SortBy', err);
+        }
+        finally {
+            dispatch(doneLoading());
         }
     };
 }
