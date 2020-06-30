@@ -6,8 +6,8 @@ import { updateBag } from '../actions/checkoutActions';
 import { setGrowl } from '../actions/GrowlActions';
 
 import ProductContent from '../cmps/product-details/content/ProductContent.jsx';
-import ProductGallery from '../cmps/product-details/gallery/ProductGallery';
-import ProductInfo from '../cmps/product-details/info/ProductInfo';
+import ProductGallery from '../cmps/product-details/gallery/ProductGallery.jsx';
+import ProductInfo from '../cmps/product-details/info/ProductInfo.jsx';
 
 class ProductDetails extends Component {
 

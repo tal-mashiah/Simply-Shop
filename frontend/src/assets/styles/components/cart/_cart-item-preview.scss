@@ -16,7 +16,7 @@
         margin: 0 15px 0 50px;
         h5 {
             font-weight: 600;
-            font-size: 14px;
+            font-size: 12px;
             cursor: pointer;
             &:hover {
                 text-decoration: underline;
@@ -40,11 +40,12 @@
         }
         .price {
             font-weight: 600;
-            font-size: 14px;
+            font-size: 12px;
             .fa-shekel-sign {
-                font-size: 11px;
-                margin: 5px 2px 0 0;
+                font-size: 9px;
+                margin: 5px 2px 0px 0;
                 color: $base-clr;
+                line-height: 9px;
             }
         }
     }

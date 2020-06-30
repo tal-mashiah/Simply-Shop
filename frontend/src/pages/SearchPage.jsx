@@ -102,7 +102,6 @@ class SearchPage extends Component {
                     updateFilters={this.updateFilters}
                     toggleFilters={this.toggleFilters}
                 /> : null}
-                {/* } */}
                 <div className="screen" onClick={this.toggleFilters}></div>
 
                 <div className="search-container">

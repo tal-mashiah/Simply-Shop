@@ -32,4 +32,11 @@
             border-color: darken($color: $secondary-clr, $amount: 5%);
         }
     }
+    &.error {
+        background-color: $error-clr;
+        color: #fff;
+        &:hover {
+            background-color: darken($color: $error-clr, $amount: 10%);
+        }
+    }
 }
