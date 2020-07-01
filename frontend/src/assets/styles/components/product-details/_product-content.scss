@@ -18,13 +18,19 @@
             color: $primary-clr;
             text-align: left;
         }
-        .content-price {
+        .info-continer {
             font-family: open-sans-bold;
             font-size: 24px;
-            text-align: left;
-            i {
-                font-size: 20px;
-                padding-right: 5px;
+            .in-stock{
+                color: lighten($error-clr, 5%);
+                
+            }
+            .content-price {
+                text-align: left;
+                i {
+                    font-size: 20px;
+                    padding-right: 5px;
+                }
             }
         }
     }

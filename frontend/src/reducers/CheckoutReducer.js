@@ -28,7 +28,6 @@ export default function (state = initialState, action = {}) {
             return { ...state, bag: filteredBag };
 
         case 'UPDATE_QUANTITY':
-            // TODO handle max quantity
             if (action.quantity === 1 && action.diff < 0) {
                 return { ...state }
             }
