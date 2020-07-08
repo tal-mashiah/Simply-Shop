@@ -5,7 +5,7 @@ export default function FooterNav() {
     return (
         <div className="footer-nav flex column">
             <Link to='/about'>אודות</Link>
-            <Link to='/terms'>תקנון האתר</Link>
+            <Link to='/terms'>תקנון</Link>
             <Link to='/contact'>צור קשר</Link>
         </div>
     )
