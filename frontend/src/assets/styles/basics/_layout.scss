@@ -6,10 +6,21 @@
     }
 }
 
-.header-padding {
-    padding-top: $header-height;
-    @include for-tablet-layout {
-        padding-top: $top-header-height;
+.app {
+    min-height: 100%;
+    position: relative;
+    &.header-padding {
+        padding-top: $header-height;
+        @include for-tablet-layout {
+            padding-top: $top-header-height;
+        }
+    }
+    .app-content {
+        padding-bottom: $footer-height;
+        min-height: calc(100vh - #{$header-height});
+        @include for-tablet-layout {
+            min-height: calc(100vh - #{$top-header-height});
+        }
     }
 }
 
@@ -41,4 +52,4 @@
 
 :-webkit-full-screen {
     background-color: #fff;
-  }
+}

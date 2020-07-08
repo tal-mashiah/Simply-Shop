@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default function Logo() {
+export default class Logo extends Component {
+    render() {
+        return (
+            <div className='main-logo'>
+                <NavLink activeClassName="active" to='/' exact>
+                    <img src={require(`../../assets/images/${this.props.logo}.png`)} alt="logo" />
+                </NavLink>
+            </div>
+        )
+    }
+}
 
-    return (
-        <div className='main-logo'>
-            <NavLink activeClassName="active" to='/' exact>
-                <img src={require('../../assets/images/logo.png')} alt="logo" />
-            </NavLink>
-        </div>
-    )
+Logo.defaultProps = {
+    logo: 'logo'
 }

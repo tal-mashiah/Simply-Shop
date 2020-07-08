@@ -6,6 +6,7 @@ $success-clr: #28a945;
 $primary-clr: #3589fe;
 $secondary-clr: #3a414a;
 $border-clr: #ebebeb;
+
 // Breakpoints
 $mobile-breakpoint: 479px;
 $tablet-breakpoint: 768px;
@@ -17,3 +18,6 @@ $top-header-height: 65px;
 $bottom-header-height: 45px;
 $header-height: $top-header-height + $bottom-header-height;
 $logo-width: 225px;
+
+// footer
+$footer-height: 150px;

@@ -14,7 +14,7 @@ export default class ProductPreview extends Component {
                         <h4 className="title">{title}</h4>
                         <div className="info-continer flex justify-between">
                             <h2 className="price">{price}<i className="fas fa-shekel-sign"></i></h2>
-                            <div className="in-stock">{inStock ? '' : 'נגמר המלאי'}</div>
+                            <div className="in-stock">{inStock ? '' : 'אזל המלאי'}</div>
                         </div>
                     </div>
                 </Link>
