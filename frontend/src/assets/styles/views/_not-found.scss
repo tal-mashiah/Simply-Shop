@@ -1,0 +1,45 @@
+.not-found {
+    min-height: calc(100vh - #{$header-height + $footer-height});
+    svg {
+        width: 700px;
+    }
+    .info-container {
+        margin-right: 25px;
+        h1 {
+            font-size: 100px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        h2 {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .text {
+            font-size: 16px;
+            white-space: pre;
+            margin-bottom: 20px;
+        }
+    }
+    @include for-tablet-layout {
+        flex-direction: column;
+        svg {
+            width: unset;
+            max-width: 600px;
+        }
+        .info-container {
+            margin: 25px 0 40px;
+            text-align: center;
+            h1 {
+                font-size: 85px;
+            }
+            button {
+                height: 40px;
+            }
+        }
+    }
+    @include for-mobile-layout {
+        &.flex {
+            justify-content: flex-start;
+        }
+    }
+}
