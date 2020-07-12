@@ -159,7 +159,6 @@ export default class Form extends Component {
                 <div className="recaptcha flex justify-center">
                     <ReCAPTCHA
                         sitekey="6LcE8KkZAAAAACpaSlvrKUjtR56-C8nQ67pKYLo0"
-                        // sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                         onChange={this.onChange} />
                 </div>
 

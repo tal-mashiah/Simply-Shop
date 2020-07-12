@@ -39,7 +39,7 @@ export default class ProductContent extends Component {
                     <h1 className="content-title flex column">{title}</h1>
                     {quantity === 1 || <span> סה"כ עבור {quantity} יחידות:</span>}
                     <div className="info-continer flex justify-between">
-                        <div className="in-stock">{inStock ? '' : 'נגמר המלאי'}</div>
+                        <div className="in-stock">{inStock ? '' : 'אזל המלאי'}</div>
                         <div className="content-price">{price * quantity}<i className="fas fa-shekel-sign"></i></div>
                     </div>
                 </div>
