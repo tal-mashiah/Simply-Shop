@@ -10,9 +10,9 @@ export class GoogleMap extends Component {
         containerStyle: {
             position: 'relative',
             width: '100%',
-            height: '700px'
+            height: '350px'
         },
-        initialCenter:{
+        initialCenter: {
             lat: 32.0817,
             lng: 34.7808
         }
@@ -21,6 +21,8 @@ export class GoogleMap extends Component {
     render() {
         return (
             <Map
+                optimized='false'
+                draggable="false"
                 containerStyle={this.state.containerStyle}
                 google={this.props.google}
                 style={this.state.style}

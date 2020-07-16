@@ -1,0 +1,28 @@
+.contact-form {
+    margin-left: 100px;
+    form {
+        padding: initial;
+        margin-bottom: 25px;
+        max-width: 650px;
+        flex-wrap: wrap;
+        display: flex;
+        .input-container {
+            padding-left: 20px;
+            width: 100%;
+            &:nth-child(-n + 2) {
+                width: 50%;
+            }
+            i {
+                left: 30px;
+            }
+            input,
+            textarea {
+                padding: 5px 10px 5px 30px;
+            }
+        }
+    }
+    button {
+        width: 120px;
+        height: 40px;
+    }
+}

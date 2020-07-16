@@ -1,0 +1,33 @@
+.contact-info {
+    & > div {
+        width: 250px;
+        margin-bottom: 25px;
+        .text {
+            font-size: 16px;
+        }
+        i {
+            font-size: 18px;
+        }
+        &.phone:hover {
+            .text {
+                text-decoration: underline;
+            }
+            i {
+                color: $primary-clr;
+            }
+        }
+        &.whatsapp {
+            i {
+                font-size: 20px;
+            }
+            &:hover {
+                .text {
+                    text-decoration: underline;
+                }
+                i {
+                    color: #25d366;
+                }
+            }
+        }
+    }
+}
