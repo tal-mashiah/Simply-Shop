@@ -31,4 +31,7 @@
             }
         }
     }
+    @include for-tablet-layout{
+        margin: 0 auto;
+    }
 }

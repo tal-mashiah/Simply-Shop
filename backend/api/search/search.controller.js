@@ -8,7 +8,7 @@ async function getSearchData(req, res) {
     } catch (err) {
         logger.error('Cannot get searchData', err);
         res.status(500).send({ error: 'cannot get searchData' })
-        
+
     }
 }
 
@@ -27,7 +27,18 @@ async function getProduct(req, res) {
     res.send(product)
 }
 
+async function getProductByTerm(req, res) {
+    try {
+        const products = await searchService.getByTerm(req.params.term)
+        res.send(products)
+    } catch (err) {
+        logger.error('Cannot get products', err);
+        res.status(500).send({ error: 'cannot get products' })
+    }
+}
+
 module.exports = {
+    getProductByTerm,
     getSearchData,
     getProducts,
     getProduct

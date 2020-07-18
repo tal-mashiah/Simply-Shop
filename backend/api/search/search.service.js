@@ -6,7 +6,8 @@ const ObjectId = require('mongodb').ObjectId;
 module.exports = {
     query,
     getById,
-    getByIds
+    getByIds,
+    getByTerm
 }
 
 async function query(filterBy) {
@@ -50,7 +51,7 @@ async function getById(productId) {
         collection = await dbService.getCollection('specKey');
         const specKeys = await collection.find({}).toArray();;
         collection = await dbService.getCollection('specValue');
-        const specValues = await collection.find({ "_id": { $in: product.specValues } }).toArray();;
+        const specValues = await collection.find({ "_id": { $in: product.specValues } }).toArray();
         const specs = searchUtils.createSpecs(specKeys, specValues);
         product.imagesUrl = searchUtils.createImages(product.imagesUrl, true);
         delete product.specValues
@@ -76,6 +77,20 @@ async function getByIds(ids) {
 
     } catch (err) {
         console.log('ERROR: cannot find storage products', err);
+        throw err;
+    }
+}
+
+async function getByTerm(term) {
+    let collection = await dbService.getCollection('product');
+    try {
+        const products = await collection.find({ "title": new RegExp(".*" + term + ".*", "i") }).toArray();
+        products.forEach(product => delete product.costPrice);
+        products.forEach(product => product.imagesUrl = searchUtils.createImages(product.imagesUrl));
+        return products;
+
+    } catch (err) {
+        console.log(`ERROR: while finding products by term: ${term}`)
         throw err;
     }
 }

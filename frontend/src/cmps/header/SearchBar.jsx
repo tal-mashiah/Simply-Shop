@@ -1,12 +1,21 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 
+import searchService from '../../services/searchService';
+
 class SearchBar extends Component {
-    state = { term: '' };
+    state = {
+        term: '',
+        products: null
+    };
     searchInputRef = React.createRef();
 
     handleChange = (ev) => {
-        this.setState({ term: ev.target.value })
+        this.setState({ term: ev.target.value }, async () => {
+            if (!this.state.term) return;
+            const products = await searchService.getByTerm(this.state.term)
+            this.setState({ products })
+        })
     }
 
     onSubmit = (ev) => {
@@ -25,12 +34,14 @@ class SearchBar extends Component {
     }
 
     render() {
+        console.log('products: ', this.state.products);
         return (
             <div className='search-bar flex align-center'>
                 <form onSubmit={this.onSubmit}>
                     <input type="text" ref={this.searchInputRef} className="search-input" onBlur={this.onInputBlur} onChange={this.handleChange} value={this.state.term} placeholder="חפש..." />
                     <i className="fas fa-search" onClick={this.onSubmit}></i>
                 </form>
+                <div className="dropdown-menu"></div>
             </div>
         )
     }
