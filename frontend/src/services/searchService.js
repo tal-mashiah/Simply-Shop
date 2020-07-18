@@ -14,10 +14,6 @@ function getById(id) {
     return HttpService.get(`search/${id}`);
 }
 
-// function getStorageProducts(storageBag) {
-//     return HttpService.post('search/storage', storageBag);
-// }
-
 function getByIds(productIds) {
     return HttpService.post('search/products', productIds);
 }

@@ -54,6 +54,14 @@ export default class Form extends Component {
         }
     }
 
+    clearForm = () => {
+        this.props.inputs.forEach(input => {
+            input.value = '';
+        });
+        window.grecaptcha.reset();
+        this.setState({})
+    }
+
     componentDidMount() {
         let form = {};
         this.props.inputs.forEach(input => {
@@ -72,6 +80,7 @@ export default class Form extends Component {
                 input.isValid = input.validation ? input.validation.includes('required') ? false : true : true;
             });
         }
+        if (this.props.clearForm !== prevProps.clearForm) this.clearForm();
     }
 
     handleChange = (event) => {
@@ -132,7 +141,6 @@ export default class Form extends Component {
 
     onChange = async captchaValue => {
         const res = await googleService.getCaptchaValue(captchaValue);
-        console.log('res.isValid: ', res.isValid);
         this.setState({ isCaptchaValid: res.isValid }, () => this.checkIfFormValid());
     }
 
@@ -143,7 +151,6 @@ export default class Form extends Component {
             <form>
                 {inputs.map((input, idx) => {
                     const ConditionalInput = input.type === 'textarea' ? 'textarea' : 'input';
-
 
                     return <div key={idx} className={input.error ? "input-container error" : input.isValid && input.value && !input.disabled ? "input-container valid" : "input-container"}>
                         <label htmlFor={input.disabled ? '' : input.name}>{input.label} {input.validation ? input.validation.includes('required') ? <i className="fas fa-star-of-life"></i> : null : null}</label>

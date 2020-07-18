@@ -14,6 +14,7 @@ const orderRoutes = require('./api/order/order.routes');
 const authRoutes = require('./api/auth/auth.routes');
 const userRoutes = require('./api/user/user.routes');
 const googleRoutes = require('./api/google/google.routes');
+const contactRoutes = require('./api/contact/contact.routes');
 
 app.use(cookieParser())
 app.use(bodyParser.json());
@@ -41,6 +42,7 @@ app.use('/api/search', searchRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/google', googleRoutes);
+app.use('/api/contact', contactRoutes);
 
 
 const logger = require('./services/logger.service');

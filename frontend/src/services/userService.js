@@ -1,27 +1,12 @@
 import HttpService from './HttpService'
 
 export default {
-    // getUsers,
-    // getById,
-    // remove,
     login,
     logout,
     signup,
     update,
     updatePassword
 }
-
-// function getUsers() {
-//     return HttpService.get('user')
-// }
-
-// function getById(userId) {
-//     return HttpService.get(`user/${userId}`)
-// }
-
-// function remove(userId) {
-//     return HttpService.delete(`user/${userId}`)
-// }
 
 async function update(userCred) {
     const user = await HttpService.put(`user/${userCred._id}`, userCred)

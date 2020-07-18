@@ -4,5 +4,11 @@
         h1 {
             margin-bottom: 56px;
         }
+        @include for-tablet-layout{
+            flex-direction: column;
+        }
+        @include for-mobile-layout{
+            padding: 55px 15px;
+        }
     }
 }

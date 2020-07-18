@@ -7,14 +7,17 @@
         flex-wrap: wrap;
         display: flex;
         .input-container {
-            padding-left: 20px;
             width: 100%;
+            &:first-child {
+                padding-left: 20px;
+                i {
+                    left: 30px;
+                }
+            }
             &:nth-child(-n + 2) {
                 width: 50%;
             }
-            i {
-                left: 30px;
-            }
+
             input,
             textarea {
                 padding: 5px 10px 5px 30px;
@@ -24,5 +27,8 @@
     button {
         width: 120px;
         height: 40px;
+    }
+    @include for-tablet-layout {
+        margin: 0 0 80px;
     }
 }

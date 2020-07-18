@@ -38,16 +38,5 @@ async function ajax(endpoint, method = 'get', data = null) {
     }
 }
 
-/*
-function extractResponseErrorMessage(errorObject) {
-    if (_.isString(errorObject)) return errorObject;
-    let data = _.get(errorObject, 'data');
-    if (_.isString(data)) return data;
-    let message = _.get(errorObject, 'data.message');
-    if (_.isString(message)) return message;
-    return '';
-};
-*/
-
 
 
