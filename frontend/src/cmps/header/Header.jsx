@@ -10,7 +10,7 @@ import NavBar from './NavBar.jsx'
 import Logo from './Logo.jsx';
 import Hamburger from './Hamburger.jsx';
 import CategoryList from '../category/CategoryList.jsx';
-import SearchBar from './SearchBar.jsx';
+import SearchBar from '../search-bar/SearchBar.jsx';
 
 class Header extends Component {
     state = { categories: [], isSearchBarOpen: false, isBurgerOpen: false }

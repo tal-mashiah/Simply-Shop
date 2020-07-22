@@ -11,7 +11,6 @@
 @import "basics/layout.scss";
 @import "basics/typography.scss";
 
-
 // Components //
 
 // general
@@ -24,12 +23,16 @@
 // header
 @import "components/header/header.scss";
 @import "components/header/nav-bar.scss";
-@import "components/header/search-bar.scss";
 
 // footer
 @import "components/footer/footer.scss";
 @import "components/footer/footer-nav.scss";
-@import "components/footer/social-links";
+@import "components/footer/social-links.scss";
+
+// search-bar
+@import "components/search-bar/search-bar.scss";
+@import "components/search-bar/search-product-list.scss";
+@import "components/search-bar/search-product-preview.scss";
 
 // product
 @import "components/product/product-preview.scss";
@@ -60,7 +63,7 @@
 @import "components/user/nav-user.scss";
 
 // cart
-@import "components/cart/nav-cart";
+@import "components/cart/nav-cart.scss";
 @import "components/cart/cart-item-preview.scss";
 @import "components/cart/cart-item-list.scss";
 
