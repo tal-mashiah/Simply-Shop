@@ -8,7 +8,8 @@ class SearchBar extends Component {
     state = {
         term: '',
         products: [],
-        isModalShown: true
+        isModalShown: false,
+        isNoResultShown: false,
     };
     searchInputRef = React.createRef();
 
@@ -20,7 +21,7 @@ class SearchBar extends Component {
                 return;
             }
             const products = await searchService.getByTerm(this.state.term)
-            this.setState({ products })
+            this.setState({ products, isNoResultShown: products.length === 0 })
         })
     }
 
@@ -37,6 +38,7 @@ class SearchBar extends Component {
 
     onScreenClicked = () => {
         this.state.isModalShown && this.setState({ isModalShown: false });
+        if (!this.state.products.length) this.setState({ term: '' })
     }
 
     onProductClick = () => {
@@ -52,7 +54,7 @@ class SearchBar extends Component {
     }
 
     render() {
-        const { products, term, isModalShown } = this.state;
+        const { products, term, isModalShown, isNoResultShown } = this.state;
         return (
             <div className='search-bar flex align-center'>
                 <form onSubmit={this.onSubmit}>
@@ -60,7 +62,8 @@ class SearchBar extends Component {
                     <i className="fas fa-search" onClick={this.onSubmit}></i>
                 </form>
                 {products.length && isModalShown ? <SearchProductList products={products} onProductClick={this.onProductClick} /> : null}
-                {products.length && isModalShown ? <div className="search-bar-screen" onClick={this.onScreenClicked}></div> : null}
+                {isModalShown && term ? <div className="search-bar-screen" onClick={this.onScreenClicked}></div> : null}
+                {isNoResultShown && isModalShown && term ? <div className="search-bar-modal-container no-result">אין תוצאות</div> : null}
             </div>
         )
     }

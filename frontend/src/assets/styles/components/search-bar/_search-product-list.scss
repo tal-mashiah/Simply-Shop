@@ -1,5 +1,6 @@
-.search-product-list {
+.search-bar-modal-container {
     position: absolute;
+    min-height: 50px;
     top: 25px;
     right: 0;
     background-color: #fff;
@@ -7,4 +8,12 @@
     border-radius: 5px;
     width: 100%;
     z-index: 500;
+    box-shadow: 0 4px 3px -3px grey;
+    &.no-result {
+        font-size: 16px;
+        display: flex;
+        flex-direction: column-reverse;
+        padding: 6px 20px;
+        cursor: default;
+    }
 }
