@@ -6,8 +6,8 @@ export default class SearchProductPreview extends Component {
     render() {
         const { imagesUrl, title, _id } = this.props.product;
         return (
-            <Link to={`/product/${_id}`}>
-                <div className="search-product-preview flex align-center" onClick={()=>this.props.onProductClick()}>
+            <Link to={`/product/${_id}`} onClick={() => this.props.onProductClick()}>
+                <div className="search-product-preview flex align-center">
                     <img src={imagesUrl[0]} alt={title} />
                     <div className="title">{title}</div>
                 </div>

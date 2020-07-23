@@ -12,6 +12,7 @@ class SearchBar extends Component {
     };
     searchInputRef = React.createRef();
 
+
     handleChange = (ev) => {
         this.setState({ term: ev.target.value }, async () => {
             if (!this.state.term) {
@@ -34,23 +35,24 @@ class SearchBar extends Component {
         this.setState({ term: '' });
     }
 
-    onInputBlur = () => {
-        this.state.isModalShown && this.setState({ isModalShown: false })
-        this.props.toggleSearchBar();
+    onScreenClicked = () => {
+        this.state.isModalShown && this.setState({ isModalShown: false });
+    }
 
+    onProductClick = () => {
+        this.state.isModalShown && this.setState({ isModalShown: false, term: '', products: [] });
+    }
+
+    onInputBlur = () => {
+        this.props.toggleSearchBar();
     }
 
     onInputClick = () => {
         this.state.isModalShown || this.setState({ isModalShown: true });
     }
 
-    onProductClick = () => {
-        console.log('hello');
-    }
-
     render() {
         const { products, term, isModalShown } = this.state;
-        console.log('products: ', products);
         return (
             <div className='search-bar flex align-center'>
                 <form onSubmit={this.onSubmit}>
@@ -58,6 +60,7 @@ class SearchBar extends Component {
                     <i className="fas fa-search" onClick={this.onSubmit}></i>
                 </form>
                 {products.length && isModalShown ? <SearchProductList products={products} onProductClick={this.onProductClick} /> : null}
+                {products.length && isModalShown ? <div className="search-bar-screen" onClick={this.onScreenClicked}></div> : null}
             </div>
         )
     }
