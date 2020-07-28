@@ -13,7 +13,7 @@
         transition: transform 0.9s;
         background-color: #ebecf0;
         padding-top: $top-header-height;
-        z-index: 999;
+        z-index: 1000;
     }
     @include for-mobile-layout {
         width: 50%;

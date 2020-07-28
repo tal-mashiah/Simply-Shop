@@ -9,6 +9,7 @@
         &.fullscreen{
             .image-gallery-image{
                 height: initial;
+                min-height: -webkit-fill-available;
             }
         }
     }

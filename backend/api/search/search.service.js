@@ -70,7 +70,7 @@ async function getByIds(ids) {
         const productIds = ids.map(id => ObjectId(id));
         const products = await collection.find({ "_id": { $in: productIds } }).toArray();
         products.forEach(product => {
-            product.imagesUrl = searchUtils.createImages(product.imagesUrl,true);            
+            product.imagesUrl = searchUtils.createImages(product.imagesUrl, true);
             delete product.costPrice;
         });
         return products;
@@ -86,7 +86,7 @@ async function getByTerm(term) {
     try {
         const products = await collection.find({ "title": new RegExp(".*" + term + ".*", "i") }).toArray();
         products.forEach(product => delete product.costPrice);
-        products.forEach(product => product.imagesUrl = searchUtils.createImages(product.imagesUrl));
+        products.forEach(product => product.imagesUrl = searchUtils.createImages(product.imagesUrl, true));
         return products;
 
     } catch (err) {
