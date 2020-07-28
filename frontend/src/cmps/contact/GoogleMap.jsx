@@ -25,6 +25,7 @@ export class GoogleMap extends Component {
                 google={this.props.google}
                 style={this.state.style}
                 zoom={15}
+                className={'google-map'}
                 initialCenter={this.state.initialCenter}>
                 <Marker />
             </Map>

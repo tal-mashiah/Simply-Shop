@@ -1,0 +1,7 @@
+.google-map {
+    filter: grayscale(1);
+    transition: filter 0.5s ease-in-out;
+    &:hover {
+        filter: grayscale(0.4);
+    }
+}
