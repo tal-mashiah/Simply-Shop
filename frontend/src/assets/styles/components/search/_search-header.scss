@@ -1,9 +1,10 @@
 .search-header {
     height: 135px;
+    padding: 0 20px;
     border-bottom: 1px solid $border-clr;
     h2 {
         font-size: 20px;
-        margin-left: 15px;
+        margin: 0 15px;
         span {
             font-family: open-sans-bold;
         }
@@ -16,6 +17,7 @@
         height: auto;
         flex-direction: column;
         border: none;
+        padding: 0;
         &.flex {
             align-items: initial;
         }
@@ -23,7 +25,6 @@
             height: 100px;
             display: flex;
             align-items: center;
-            margin: 0;
             span {
                 margin-right: 6px;
             }
@@ -78,6 +79,7 @@
             height: 70px;
             font-size: 18px;
             justify-content: center;
+            margin: 0;
             span {
                 display: block;
             }
