@@ -3,6 +3,7 @@
     min-width: 605px;
     width: 40vw;
     .image-gallery-content{
+        text-align: center;
         .image-gallery-image{
             height: 450px;
         }
@@ -16,9 +17,10 @@
     @include for-laptop-layout {
         min-width: initial;
         width: 70vw;
-        margin: 0 0 35px;
+        margin: 0 0 85px;
     }
     @include for-tablet-layout {
+        margin: 0 0 45px;
         width: 100%;
     }
     @include for-mobile-layout {

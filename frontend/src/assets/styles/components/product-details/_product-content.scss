@@ -42,6 +42,7 @@
     }
     @include for-laptop-layout {
         max-width: 600px;
+        min-width: 100%;
     }
     @include for-mobile-layout {
         .top-content {
@@ -61,10 +62,6 @@
         }
         .buy-container {
             height: 100px;
-            a {
-                width: 50%;
-                margin-right: 10px;
-            }
             .main-btn {
                 height: 40px;
                 &.primary {
@@ -74,6 +71,10 @@
                 &.secondary {
                     width: 50%;
                 }
+            }
+            .buy-now-container {
+                width: 50%;
+                margin-right: 10px;
             }
         }
     }

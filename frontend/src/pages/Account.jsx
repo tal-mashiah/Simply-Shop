@@ -8,6 +8,7 @@ import { setGrowl } from '../actions/GrowlActions';
 import Order from '../cmps/account/order/Order';
 import Edit from '../cmps/account/Edit';
 import Password from '../cmps/account/Password';
+import LogoutModal from '../cmps/account/LogoutModal';
 
 class Account extends Component {
     state = {
@@ -52,7 +53,6 @@ class Account extends Component {
         const { pageName, isLogoutModalShown } = this.state;
         const { loggedInUser, setGrowl, logout } = this.props;
         if (!loggedInUser) return null;
-        console.log('isLogoutModalShown: ', isLogoutModalShown);
 
         return (
             <div className="acount">
@@ -68,16 +68,7 @@ class Account extends Component {
                     {pageName === 'edit' && <Edit user={loggedInUser} updateUser={this.updateUser} setGrowl={setGrowl} />}
                     {pageName === 'password' && <Password updatePassword={this.updatePassword} />}
                 </div>
-                {isLogoutModalShown &&
-                    <div onClick={this.toggleLogoutModal} className="account-screen flex justify-center align-center">
-                        <div onClick={(e) => e.stopPropagation()} className="logout-modal">
-                            <div className="title">כבר הולכים?</div>
-                            <div className="btns-container">
-                                <button onClick={this.toggleLogoutModal} className="main-btn secondary">אני רוצה להישאר</button>
-                                <button onClick={() => logout()} className="main-btn error">התנתק</button>
-                            </div>
-                        </div>
-                    </div>}
+                {isLogoutModalShown && <LogoutModal logout={logout} toggleLogoutModal={this.toggleLogoutModal}/>}
             </div>
         )
     }

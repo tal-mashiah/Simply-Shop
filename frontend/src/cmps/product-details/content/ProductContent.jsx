@@ -47,7 +47,7 @@ export default class ProductContent extends Component {
                 <ProductQuantity quantity={quantity} changeQuantity={this.changeQuantity} />
                 <div className="buy-container flex justify-between align-center">
                     <button className={`main-btn secondary ${inStock?'':'disabled'}`} onClick={() => this.onAddToBag()} >הוסף לסל</button>
-                    <ConditionalLink to={'/checkout'}><button className={`main-btn primary ${inStock?'':'disabled'}`} onClick={() => this.onAddToBag()}>קנה עכשיו</button></ConditionalLink>
+                    <ConditionalLink to={'/checkout'} className="buy-now-container"><button className={`main-btn primary ${inStock?'':'disabled'}`} onClick={() => this.onAddToBag()}>קנה עכשיו</button></ConditionalLink>
                 </div>
             </div>
 
