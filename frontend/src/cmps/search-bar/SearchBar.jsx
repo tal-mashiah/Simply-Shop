@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
+import { isMobile } from 'mobile-device-detect';
 
 import searchService from '../../services/searchService';
 import SearchProductList from './SearchProductList';
@@ -26,6 +27,7 @@ class SearchBar extends Component {
     }
 
     onSubmit = (ev) => {
+        if (isMobile) this.onInputClick();
         ev.preventDefault();
         this.searchInputRef.current.focus();
         const { term } = this.state;
@@ -39,6 +41,7 @@ class SearchBar extends Component {
     onScreenClicked = () => {
         this.state.isModalShown && this.setState({ isModalShown: false });
         if (!this.state.products.length) this.setState({ term: '' })
+        if (isMobile) this.onProductClick();
     }
 
     onProductClick = () => {
@@ -63,7 +66,7 @@ class SearchBar extends Component {
                 </form>
                 {products.length && isModalShown ? <SearchProductList products={products} onProductClick={this.onProductClick} /> : null}
                 {isModalShown && term ? <div className="search-bar-screen" onClick={this.onScreenClicked}></div> : null}
-                {isNoResultShown && isModalShown && term ? <div className="search-bar-modal-container no-result">אין תוצאות</div> : null}
+                {isNoResultShown && isModalShown && term ? <div onClick={this.onProductClick} className="search-bar-modal-container no-result">אין תוצאות</div> : null}
             </div>
         )
     }

@@ -15,4 +15,9 @@
             font-family: open-sans-bold;
         }
     }
+    @include for-mobile-layout {
+        form{
+            padding: 25px 0;
+        }
+    }
 }

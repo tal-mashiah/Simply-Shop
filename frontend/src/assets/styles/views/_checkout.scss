@@ -25,6 +25,7 @@
             }
             @include for-mobile-layout {
                 margin-bottom: 20px;
+                padding: $cart-section-padding 15px;
             }
         }
     }
