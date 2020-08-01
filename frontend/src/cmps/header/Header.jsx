@@ -72,7 +72,7 @@ class Header extends Component {
                     <Logo />
                     <div className="right-container flex justify-center align-center">
                         <Hamburger toggleBurgerModal={this.toggleBurgerModal} />
-                        <SearchBar toggleSearchBar={this.toggleSearchBar} />
+                        <SearchBar toggleSearchBar={this.toggleSearchBar} isSearchBarOpen={isSearchBarOpen}/>
                     </div>
                     <NavBar categories={categories} bag={bag} loggedInUser={loggedInUser} logout={this.logout} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
                 </div>

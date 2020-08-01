@@ -27,32 +27,41 @@ class SearchBar extends Component {
     }
 
     onSubmit = (ev) => {
-        if (isMobile) this.onInputClick();
         ev.preventDefault();
-        this.searchInputRef.current.focus();
+
+        const { isSearchBarOpen, toggleSearchBar, history } = this.props;
         const { term } = this.state;
-        const { toggleSearchBar, history } = this.props;
-        toggleSearchBar();
+
+        if (isMobile) {
+            this.searchInputRef.current.focus();
+            this.openSearchModal();
+            isSearchBarOpen || toggleSearchBar();
+        }
         if (!term) return;
+
+        this.closeSearchModal();
         history.push(`/search/${term}`)
         this.setState({ term: '' });
     }
 
     onScreenClicked = () => {
-        this.state.isModalShown && this.setState({ isModalShown: false });
-        if (!this.state.products.length) this.setState({ term: '' })
-        if (isMobile) this.onProductClick();
+        if (isMobile) {
+            this.closeSearchModal();
+        } else {
+            this.state.isModalShown && this.setState({ isModalShown: false });
+            if (!this.state.products.length) this.setState({ term: '' })
+        }
     }
 
-    onProductClick = () => {
+    closeSearchModal = () => {
         this.state.isModalShown && this.setState({ isModalShown: false, term: '', products: [] });
+        this.searchInputRef.current.blur();
+        if (isMobile) {
+            this.props.toggleSearchBar();
+        }
     }
 
-    onInputBlur = () => {
-        this.props.toggleSearchBar();
-    }
-
-    onInputClick = () => {
+    openSearchModal = () => {
         this.state.isModalShown || this.setState({ isModalShown: true });
     }
 
@@ -61,12 +70,12 @@ class SearchBar extends Component {
         return (
             <div className='search-bar flex align-center'>
                 <form onSubmit={this.onSubmit}>
-                    <input type="text" ref={this.searchInputRef} className="search-input" onBlur={this.onInputBlur} onClick={this.onInputClick} onChange={this.handleChange} value={term} placeholder="חפש..." />
+                    <input type="text" ref={this.searchInputRef} className="search-input" onClick={this.openSearchModal} onChange={this.handleChange} value={term} placeholder="חפש..." />
                     <i className="fas fa-search" onClick={this.onSubmit}></i>
                 </form>
-                {products.length && isModalShown ? <SearchProductList products={products} onProductClick={this.onProductClick} /> : null}
-                {isModalShown && term ? <div className="search-bar-screen" onClick={this.onScreenClicked}></div> : null}
-                {isNoResultShown && isModalShown && term ? <div onClick={this.onProductClick} className="search-bar-modal-container no-result">אין תוצאות</div> : null}
+                {products.length && isModalShown ? <SearchProductList products={products} onProductClick={this.closeSearchModal} /> : null}
+                {isModalShown && (term || isMobile) ? <div className="search-bar-screen" onClick={this.onScreenClicked}></div> : null}
+                {isNoResultShown && isModalShown && term ? <div onClick={this.closeSearchModal} className="search-bar-modal-container no-result">אין תוצאות</div> : null}
             </div>
         )
     }
