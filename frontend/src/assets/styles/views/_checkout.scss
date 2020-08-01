@@ -2,20 +2,20 @@
     background-color: #f6f6f6;
     .cart-sections {
         & > div {
-            $cart-section-padding:25px;
+            $cart-section-padding: 25px;
 
             background-color: #fff;
             border-radius: 3px;
             padding: $cart-section-padding;
             margin-bottom: 35px;
             h1 {
-                padding-bottom:$cart-section-padding;
+                padding-bottom: $cart-section-padding;
                 border-bottom: 1px solid $border-clr;
                 margin-bottom: 15px;
             }
             @include for-tablet-layout {
-                &.cart-table{
-                    h1{
+                &.cart-table {
+                    h1 {
                         margin: 0;
                     }
                 }
@@ -29,11 +29,16 @@
             }
         }
     }
-    .empty-cart{
+    .empty-cart {
         font-family: open-sans-bold;
         font-size: 18px;
-        height: 81vh;
+        height: calc(100vh - (#{$header-height} + #{$footer-height} + 64px));
         padding-bottom: 20vh;
+        @include for-tablet-layout {
+            height: calc(100vh - (#{$top-header-height} + #{$footer-height} + 64px));
+        }
+        @include for-mobile-layout {
+            height: calc(100vh - (#{$top-header-height} + #{$footer-height} + 20px));
+        }
     }
 }
-
