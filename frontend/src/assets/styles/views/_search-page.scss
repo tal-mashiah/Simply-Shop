@@ -1,9 +1,7 @@
 .search-page{
-    min-height: calc(100vh - #{$header-height});
     .search-container {
         width: 100%;
         border-right: 1px solid $border-clr;
-        // padding: 0 20px;
         @include for-mobile-layout {
             padding: 0;
         }
