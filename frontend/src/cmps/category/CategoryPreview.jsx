@@ -8,7 +8,7 @@ export default class CategoryPreview extends Component {
         return (
             <div className="category-preview" onClick={this.props.toggleBurgerModal}>
                 <Link to={`/category/${name}/${_id}`}>
-                <h3>roy - {name}</h3>
+                <h3>roy mashiah - {name}</h3>
                 </Link>
             </div>
         )
