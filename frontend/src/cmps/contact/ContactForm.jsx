@@ -24,6 +24,7 @@ export default function ContactForm({ sendForm }) {
             sendForm(state.form)
             setState(prevState => ({
                 ...state,
+                isFormValid:false,
                 clearForm: !prevState.clearForm
             }));
         }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
@@ -6,9 +6,11 @@ import { updateForm, signup, login } from '../actions/UserActions';
 
 import Form from '../cmps/general/Form.jsx';
 
-class Login extends Component {
-    state = {
+function Login({ match, location, updateForm, login, signup, form }) {
+
+    const [state, setstate] = useState({
         pageName: null,
+        clearForm: true,
         registerInputs: [
             { type: 'text', name: 'fullName', label: 'שם מלא', autoComplete: 'name', validation: ['required', 'langAndMin2Char', 'twoWords'] },
             { type: 'text', name: 'email', label: 'אימייל', autoComplete: 'email', validation: ['required', 'email'] },
@@ -19,58 +21,38 @@ class Login extends Component {
             { type: 'text', name: 'email', label: 'אימייל', autoComplete: 'email', validation: ['required', 'email'] },
             { type: 'password', name: 'password', label: 'סיסמה', autoComplete: 'current-password', toggleVisibility: true, validation: ['required', 'min8Char', 'engAndNums'] }
         ]
+    })
+
+    useEffect(() => {
+        onUpdateForm(false, null);
+        setstate(prevState => ({ ...state, pageName: match.params.pageName, clearForm: !prevState.clearForm }));
+    }, [match.params.pageName])
+
+    const onUpdateForm = (isValid, form) => {
+        updateForm(isValid, form);
     }
 
-    componentDidMount() {
-        this.loadPageData()
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.match.params.pageName !== this.props.match.params.pageName) {
-            this.loadPageData();
-        }
-    }
-
-    loadPageData() {
-        const { pageName } = this.props.match.params;
-        this.updateForm(false, null);
-        this.setState({ pageName });
-    }
-
-    updateForm = (isValid, form) => {
-        this.props.updateForm(isValid, form);
-    }
-
-    setUser = () => {
-        const { pageName } = this.state;
-        const { login, signup, form } = this.props;
-        const { lastRoute } = this.props.location;
+    const setUser = () => {
         if (!form.isValid) return;
-        if (pageName === 'login') {
-            login(form.input, lastRoute);
+        if (state.pageName === 'login') {
+            login(form.input, location.lastRoute);
         } else {
             signup(form.input);
         }
     }
 
-    render() {
-        const { loginInputs, registerInputs, pageName } = this.state;
-        const { form } = this.props;
-        if (!pageName) return null;
-        return (
-            <div className="login flex column align-center">
-                <div className="page-nav flex justify-around">
-                    <Link to="/auth/login"> <div className={pageName === 'login' ? "login active" : "login"}>התחבר</div></Link>
-                    <Link to="/auth/register"> <div className={pageName === 'register' ? "register active" : "register"}>הרשם</div></Link>
-                </div>
-                {pageName === 'login' ?
-                    <Form inputs={loginInputs} updateForm={this.updateForm} /> :
-                    <Form inputs={registerInputs} updateForm={this.updateForm} />}
-
-                <button onClick={this.setUser} className={form.isValid ? "main-btn primary" : "main-btn primary disabled"}>{pageName === 'login' ? 'התחבר' : 'הרשם'}</button>
+    const { pageName, loginInputs, registerInputs, clearForm } = state;
+    if (!pageName) return null;
+    return (
+        <div className="login flex column align-center">
+            <div className="page-nav flex justify-around">
+                <Link to="/auth/login"> <div className={pageName === 'login' ? "login active" : "login"}>התחבר</div></Link>
+                <Link to="/auth/register"> <div className={pageName === 'register' ? "register active" : "register"}>הרשם</div></Link>
             </div>
-        )
-    }
+            <Form inputs={pageName === 'login' ? loginInputs : registerInputs} updateForm={onUpdateForm} clearForm={clearForm} />
+            <button onClick={setUser} className={form.isValid ? "main-btn primary" : "main-btn primary disabled"}>{pageName === 'login' ? 'התחבר' : 'הרשם'}</button>
+        </div>
+    )
 }
 
 const mapStateToProps = state => {
