@@ -1,5 +1,6 @@
 import React from 'react';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+// TODO check Router on production 
+import { Router, Switch, Route } from 'react-router-dom';
 import history from './history';
 
 import GrowlMessage from './cmps/general/GrowlMessage.jsx';

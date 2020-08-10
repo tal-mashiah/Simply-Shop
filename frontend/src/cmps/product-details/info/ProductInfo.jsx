@@ -1,30 +1,29 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 
-export default class ProductInfo extends Component {
-    state = {
-        openTab: 'Specification',
-        embedLink: null
-    }
+export default function ProductInfo({ productData }) {
 
-    componentDidMount() {
-        this.ConvertLinkToEmbed();
-    }
+    const [openTab, setOpenTab] = useState('Specification');
+    const [embedLink, setEmbedLink] = useState(null);
 
-    ConvertLinkToEmbed = () => {
-        const { videoUrl } = this.props.productData.product;
-        if (videoUrl) {
-            const idx = videoUrl.lastIndexOf("=");
-            const embedLink = videoUrl.substring(idx + 1);
-            this.setState({ embedLink });
+    useEffect(() => {
+        const ConvertLinkToEmbed = () => {
+            const { videoUrl } = productData.product;
+            if (productData.product.videoUrl) {
+                const idx = videoUrl.lastIndexOf("=");
+                const embedLink = videoUrl.substring(idx + 1);
+                setEmbedLink(embedLink);
+            }
         }
+        ConvertLinkToEmbed();
+    }, [productData])
+
+
+    const onTabClick = (tabName) => {
+        setOpenTab(tabName);
     }
 
-    onTabClick = (tabName) => {
-        this.setState({ openTab: tabName });
-    }
-
-    renderSpecTable() {
-        return this.props.productData.specs.map((spec, index) => {
+    const renderSpecTable = () => {
+        return productData.specs.map((spec, index) => {
             const { specKey, specValue } = spec
             return (
                 <tr key={index}>
@@ -35,31 +34,29 @@ export default class ProductInfo extends Component {
         })
     }
 
-    render() {
-        if (!this.props.productData) return null;
-        const { openTab, embedLink } = this.state;
-        const { product } = this.props.productData;
-        if (!product) return null;
-        return (
-            <div className="product-info">
-                <ul className="info-tabs flex">
-                    <li className={openTab === 'Specification' ? 'active' : ''} onClick={() => this.onTabClick('Specification')}>מפרט</li>
-                    <li className={openTab === 'Description' ? 'active' : ''} onClick={() => this.onTabClick('Description')}>תיאור המוצר</li>
-                    {product.videoUrl && <li className={openTab === 'Video' ? 'active' : ''} onClick={() => this.onTabClick('Video')}>סרטון וידאו</li>}
-                </ul>
-                {openTab !== 'Description' || <div className="product-description">{product.description}</div>}
-                {openTab !== 'Specification' ||
-                    <table className="product-specification">
-                        <tbody>
-                            {this.renderSpecTable()}
-                        </tbody>
-                    </table>}
-                {openTab !== 'Video' || <div className="product-video">
+    if (!productData) return null;
+    const { product } = productData;
+    if (!product) return null;
+    return (
+        <div className="product-info">
+            <ul className="info-tabs flex">
+                <li className={openTab === 'Specification' ? 'active' : ''} onClick={() => onTabClick('Specification')}>מפרט</li>
+                <li className={openTab === 'Description' ? 'active' : ''} onClick={() => onTabClick('Description')}>תיאור המוצר</li>
+                {product.videoUrl && <li className={openTab === 'Video' ? 'active' : ''} onClick={() => onTabClick('Video')}>סרטון וידאו</li>}
+            </ul>
+            {openTab !== 'Description' || <div className="product-description">{product.description}</div>}
+            {openTab !== 'Specification' ||
+                <table className="product-specification">
+                    <tbody>
+                        {renderSpecTable()}
+                    </tbody>
+                </table>}
+            {openTab !== 'Video' || <div className="product-video">
                 {/* eslint-disable-next-line */}
-                    <iframe className="video" src={`https://www.youtube.com/embed/${embedLink}?autoplay=1`} frameBorder="0" allowFullScreen> </iframe>
-                </div>}
+                <iframe className="video" src={`https://www.youtube.com/embed/${embedLink}?autoplay=1`} frameBorder="0" allowFullScreen> </iframe>
+            </div>}
 
-            </div>
-        )
-    }
+        </div>
+    )
+
 }

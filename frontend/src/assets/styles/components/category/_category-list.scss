@@ -1,5 +1,4 @@
 .category-list {
-    width: 100vw;
     height: $bottom-header-height;
     @include for-tablet-layout {
         flex-direction: column;

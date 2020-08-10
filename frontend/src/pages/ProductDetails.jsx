@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect, useCallback } from 'react';
 
 import { connect } from 'react-redux';
 import { loadCurrProduct } from '../actions/searchActions';
@@ -9,43 +9,35 @@ import ProductContent from '../cmps/product-details/content/ProductContent.jsx';
 import ProductGallery from '../cmps/product-details/gallery/ProductGallery.jsx';
 import ProductInfo from '../cmps/product-details/info/ProductInfo.jsx';
 
-class ProductDetails extends Component {
+function ProductDetails({ productData, loadCurrProduct, updateBag, setGrowl, match }) {
 
-    componentDidMount() {
-        this.loadProduct();
+    const loadProduct = useCallback(() => {
+        const { _id } = match.params;
+        loadCurrProduct(_id)
+    }, [match.params, loadCurrProduct])
+
+    useEffect(() => {
+        loadProduct();
+    }, [loadProduct])
+
+    const addToBag = (item) => {
+        updateBag(item)
     }
 
-    loadProduct = () => {
-        const { _id } = this.props.match.params;
-        this.props.loadCurrProduct(_id)
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.match.params._id !== this.props.match.params._id) {
-            this.loadProduct();
-        }
-    }
-
-    addToBag = (item) => {
-        this.props.updateBag(item)
-    }
-
-    render() {
-        if (!this.props.productData) return null;
-        const { product } = this.props.productData;
-        const { productData, setGrowl } = this.props;        
-        return (
-            <div className="product-details flex column align-center">
-                <div className="product-details-container">
-                    <div className="product-top-container flex">
-                        <ProductContent product={product} addToBag={this.addToBag} setGrowl={setGrowl} />
-                        <ProductGallery images={product.imagesUrl} />
-                    </div>
-                    <ProductInfo productData={productData} />
+    if (!productData) return null;
+    const { product } = productData;
+    return (
+        <div className="product-details flex column align-center">
+            <div className="product-details-container">
+                <div className="product-top-container flex">
+                    <ProductContent product={product} addToBag={addToBag} setGrowl={setGrowl} />
+                    <ProductGallery images={product.imagesUrl} />
                 </div>
+                <ProductInfo productData={productData} />
             </div>
-        )
-    }
+        </div>
+    )
+
 }
 
 const mapStateToProps = state => {

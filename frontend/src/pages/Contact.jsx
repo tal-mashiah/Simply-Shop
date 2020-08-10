@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react'
 
 import { connect } from 'react-redux';
 import { setGrowl } from '../actions/GrowlActions';
@@ -8,24 +8,22 @@ import GoogleMap from '../cmps/contact/GoogleMap.jsx';
 import ContactForm from '../cmps/contact/ContactForm.jsx';
 import ContactInfo from '../cmps/contact/ContactInfo.jsx';
 
-class Contact extends Component {
+const Contact = ({ setGrowl }) => {
 
-    sendForm = (form) => {
+    const sendForm = (form) => {
         contactService.add(form)
-        this.props.setGrowl('פנייתך התקבלה בהצלחה', 'success')
+        setGrowl('פנייתך התקבלה בהצלחה', 'success')
     }
 
-    render() {
-        return (
-            <div className="contact">
-                <div className="top-container flex justify-center">
-                    <ContactForm sendForm={this.sendForm} />
-                    <ContactInfo />
-                </div>
-                <GoogleMap />
+    return (
+        <div className="contact">
+            <div className="top-container flex justify-center">
+                <ContactForm sendForm={sendForm} />
+                <ContactInfo />
             </div>
-        )
-    }
+            <GoogleMap />
+        </div>
+    )
 }
 
 const mapDispatchToProps = {

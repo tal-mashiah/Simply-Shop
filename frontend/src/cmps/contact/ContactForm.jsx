@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Form from '../general/Form.jsx'
 
-export default class ContactForm extends Component {
+export default function ContactForm({ sendForm }) {
 
-    state = {
+    const [state, setState] = useState({
         inputs: [
             { type: 'text', name: 'fullName', label: 'שם מלא', autoComplete: 'name', validation: ['required', 'langAndMin2Char', 'twoWords'] },
             { type: 'tel', name: 'phone', label: 'טלפון נייד', validation: ['phone'] },
@@ -13,30 +13,28 @@ export default class ContactForm extends Component {
         isFormValid: false,
         clearForm: false,
         form: null
+    })
+
+    const updateForm = (isFormValid, form) => {
+        setState({ ...state, isFormValid, form })
     }
 
-    updateForm = (isFormValid, form) => {
-        this.setState({ isFormValid, form })
-    }
-
-    onSendForm = () => {
-        const { isFormValid, form } = this.state;
-        if (isFormValid) {
-            this.props.sendForm(form)
-            this.setState(prevState => ({
+    const onSendForm = () => {
+        if (state.isFormValid) {
+            sendForm(state.form)
+            setState(prevState => ({
+                ...state,
                 clearForm: !prevState.clearForm
             }));
         }
     }
 
-    render() {
-        const { inputs, isFormValid, clearForm } = this.state;
-        return (
-            <div className="contact-form">
-                <h1>צור קשר</h1>
-                <Form inputs={inputs} updateForm={this.updateForm} clearForm={clearForm} />
-                <button onClick={this.onSendForm} className={isFormValid ? "main-btn primary" : "main-btn primary disabled"}>שלח</button>
-            </div>
-        )
-    }
+    return (
+        <div className="contact-form">
+            <h1>צור קשר</h1>
+            <Form inputs={state.inputs} updateForm={updateForm} clearForm={state.clearForm} />
+            <button onClick={onSendForm} className={state.isFormValid ? "main-btn primary" : "main-btn primary disabled"}>שלח</button>
+        </div>
+    )
+
 }
