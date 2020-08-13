@@ -4,7 +4,7 @@ footer {
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: $base-clr;
+    background-color: $footer-clr;
     padding: 0 15px;
     .main-logo {
         position: absolute;
@@ -12,9 +12,25 @@ footer {
         margin: 0 auto;
         left: 0;
         right: 0;
-        width: $footer-logo-width;
+        width: max-content;
         img {
             width: $footer-logo-width;
+        }
+    }
+    @include for-tablet-layout{
+        height: 100px;
+        .main-logo {
+            img {
+                width: 175px;
+            }
+        }
+    }
+    @include for-mobile-layout{
+        height: 80px;
+        .main-logo {
+            img {
+                width: 150px;
+            }
         }
     }
 }

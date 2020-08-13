@@ -130,7 +130,7 @@ export default class Form extends Component {
 
     checkIfFormValid = () => {
         let isFormValid = this.props.inputs.every(input => input.isValid === true);
-        isFormValid = isFormValid && this.state.isCaptchaValid ? true : false;
+        isFormValid = isFormValid && this.state.isCaptchaValid;
         this.props.updateForm(isFormValid, this.state.form);
     }
 

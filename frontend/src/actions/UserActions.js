@@ -75,7 +75,6 @@ export function logout(currRoute) {
             userService.logout();
             dispatch(setGrowl('התנתקת בהצלחה', 'info'));
             dispatch(_setUser(null));
-            console.log(currRoute);
             if(currRoute.includes("account")) history.push('/');
         }
         catch (err) {

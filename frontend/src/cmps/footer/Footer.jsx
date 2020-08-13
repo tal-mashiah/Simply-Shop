@@ -7,7 +7,7 @@ export default function Footer() {
     return (
         <footer className="flex justify-between align-center">
             <FooterNav/>
-            <Logo logo='footer-logo'/>
+            <Logo logo='simplyshop-footer-logo'/>
             <SocialLinks/>
         </footer>
     )

@@ -63,6 +63,7 @@ class Header extends Component {
 
     render() {
         const { categories, isSearchBarOpen, isBurgerOpen } = this.state;
+        console.log(categories)
         const { bag, loggedInUser } = this.props;
         if (!categories) return null;
         

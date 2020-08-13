@@ -1,27 +1,33 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
+
 import orderService from '../../../services/orderService';
 import OrderList from './OrderList';
 
-export default class Order extends Component {
-    state = { orders: null }
+export default function Order({ userId, loading, doneLoading, isLoading, setOrders, orders }) {
 
-    componentDidMount() {
-        this.loadOrders();
-    }
+    useEffect(() => {
+        if (orders) return;
+        const loadOrders = async () => {
+            try {
+                loading();
+                const orders = await orderService.getByUserId(userId);
+                setOrders(orders);
+            }
+            finally {
+                doneLoading();
+            }
+        }
+        loadOrders();
+        // eslint-disable-next-line
+    },[])
 
-    loadOrders = async () => {
-        const orders = await orderService.getByUserId(this.props.userId);
-        this.setState({ orders })
-    }
+    if (isLoading || !orders) return null;
+    return (
+        <div className="order">
+            {orders.length
+                ? <OrderList orders={orders} />
+                : <h1>אין היסטוריית הזמנות</h1>}
+        </div>
+    )
 
-    render() {
-        const { orders } = this.state;
-        return (
-            <div className="order">
-                {orders
-                    ? <OrderList orders={orders} />
-                    : <h1>אין היסטוריית הזמנות</h1>}
-            </div>
-        )
-    }
 }

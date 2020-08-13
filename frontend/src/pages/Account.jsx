@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { updateUser, updatePassword, logout } from '../actions/UserActions';
+import { loading, doneLoading } from '../actions/SystemActions';
 import { setGrowl } from '../actions/GrowlActions';
 
 import Order from '../cmps/account/order/Order';
@@ -10,80 +11,63 @@ import Edit from '../cmps/account/Edit';
 import Password from '../cmps/account/Password';
 import LogoutModal from '../cmps/account/LogoutModal';
 
-class Account extends Component {
-    state = {
-        pageName: null,
-        isLogoutModalShown: false
+function Account({ match, updateUser, loggedInUser, updatePassword, setGrowl, logout, loading, doneLoading, isLoading }) {
+
+    const [pageName, setPageName] = useState(null)
+    const [isLogoutModalShown, setIsLogoutModalShown] = useState(false)
+    const [orders, setOrders] = useState(null)
+
+    useEffect(() => {
+        setPageName(match.params.pageName)
+    }, [match.params.pageName])
+
+    const onUpdateUser = (form) => {
+        updateUser(form);
     }
 
-    componentDidMount() {
-        this.loadPageData()
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.match.params.pageName !== this.props.match.params.pageName) {
-            this.loadPageData();
-        }
-    }
-
-    loadPageData() {
-        const { pageName } = this.props.match.params;
-        this.setState({ pageName });
-    }
-
-    updateUser = (form) => {
-        this.props.updateUser(form);
-    }
-
-    updatePassword = (form) => {
-        const { loggedInUser, updatePassword } = this.props;
+    const onUpdatePassword = (form) => {
         form._id = loggedInUser._id;
         form.email = loggedInUser.email;
         delete form.passwordValidation;
         updatePassword(form);
     }
 
-    toggleLogoutModal = () => {
-        this.setState(prevState => ({
-            isLogoutModalShown: !prevState.isLogoutModalShown
-        }))
-    }
+    const toggleLogoutModal = () => setIsLogoutModalShown(isLogoutModalShown => !isLogoutModalShown);
 
-    render() {
-        const { pageName, isLogoutModalShown } = this.state;
-        const { loggedInUser, setGrowl, logout } = this.props;
-        if (!loggedInUser) return null;
-
-        return (
-            <div className="acount">
-                <div className="hero flex align-center justify-center"> {loggedInUser.fullName}</div>
-                <div className="page-container flex column align-center">
-                    <div className="page-nav flex justify-around">
-                        <Link to="/account/orders"> <div className={pageName === 'orders' ? "orders active" : "orders"}>הזמנות</div></Link>
-                        <Link to="/account/edit"> <div className={pageName === 'edit' ? "edit active" : "edit"}>עריכת חשבון</div></Link>
-                        <Link to="/account/password"> <div className={pageName === 'password' ? "password active" : "password"}>שינוי סיסמה</div></Link>
-                        <Link onClick={this.toggleLogoutModal}><div>התנתק</div></Link>
-                    </div>
-                    {pageName === 'orders' && <Order userId={loggedInUser._id} />}
-                    {pageName === 'edit' && <Edit user={loggedInUser} updateUser={this.updateUser} setGrowl={setGrowl} />}
-                    {pageName === 'password' && <Password updatePassword={this.updatePassword} />}
+    if (!loggedInUser) return null;
+    return (
+        <div className="acount">
+            <div className="hero flex align-center justify-center"> {loggedInUser.fullName}</div>
+            <div className="page-container flex column align-center">
+                <div className="page-nav flex justify-around">
+                    <Link to="/account/orders"> <div className={pageName === 'orders' ? "orders active" : "orders"}>הזמנות</div></Link>
+                    <Link to="/account/edit"> <div className={pageName === 'edit' ? "edit active" : "edit"}>עריכת חשבון</div></Link>
+                    <Link to="/account/password"> <div className={pageName === 'password' ? "password active" : "password"}>שינוי סיסמה</div></Link>
+                    <div className="logout-section" onClick={toggleLogoutModal}><div>התנתק</div></div>
                 </div>
-                {isLogoutModalShown && <LogoutModal logout={logout} toggleLogoutModal={this.toggleLogoutModal}/>}
+                {pageName === 'orders' && <Order orders={orders} setOrders={setOrders} userId={loggedInUser._id} isLoading={isLoading} loading={loading} doneLoading={doneLoading} />}
+                {pageName === 'edit' && <Edit user={loggedInUser} updateUser={onUpdateUser} setGrowl={setGrowl} />}
+                {pageName === 'password' && <Password updatePassword={onUpdatePassword} />}
             </div>
-        )
-    }
+            {isLogoutModalShown && <LogoutModal logout={logout} toggleLogoutModal={toggleLogoutModal} />}
+        </div>
+    )
+
 }
 
 const mapStateToProps = state => {
     return {
-        loggedInUser: state.user.loggedInUser
+        loggedInUser: state.user.loggedInUser,
+        isLoading: state.system.isLoading
     };
 };
 
 const mapDispatchToProps = {
     updatePassword,
+    doneLoading,
     updateUser,
     setGrowl,
+    loading,
     logout
 };
 

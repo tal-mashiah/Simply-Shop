@@ -2,10 +2,15 @@
     padding: 10px 0;
     height: 65px;
     cursor: pointer;
+    .image-container{
+        margin-left: 10px;
+        width: 50px;
+        text-align: center;
         img {
-            margin-left: 15px;
-            width: 50px;
+            max-width: 50px;
+            max-height: 50px;
         }
+    }
     
     &:hover {
         background-color: #f7f7f7;

@@ -14,5 +14,5 @@ export default class Logo extends Component {
 }
 
 Logo.defaultProps = {
-    logo: 'logo'
+    logo: 'simplyshop-header-logo'
 }

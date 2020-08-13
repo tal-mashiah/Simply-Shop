@@ -43,7 +43,8 @@
   border-bottom: 1px solid #b7b7b7;
   width: 350px;
   height: 35px;
-  a {
+  & > a,
+  & > div {
     width: 50%;
     height: 20px;
     text-align: center;
@@ -63,14 +64,14 @@
   }
   @include for-tablet-layout {
     height: 30px;
-    a > div {
+    & > div {
       font-size: 16px;
       height: 30px;
     }
   }
   @include for-mobile-layout {
     width: 285px;
-    a > div {
+    & > div {
       font-size: 14px;
     }
   }

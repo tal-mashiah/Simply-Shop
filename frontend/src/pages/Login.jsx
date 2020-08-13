@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
@@ -10,7 +10,7 @@ function Login({ match, location, updateForm, login, signup, form }) {
 
     const [state, setstate] = useState({
         pageName: null,
-        clearForm: true,
+        clearForm: false,
         registerInputs: [
             { type: 'text', name: 'fullName', label: 'שם מלא', autoComplete: 'name', validation: ['required', 'langAndMin2Char', 'twoWords'] },
             { type: 'text', name: 'email', label: 'אימייל', autoComplete: 'email', validation: ['required', 'email'] },
@@ -23,14 +23,19 @@ function Login({ match, location, updateForm, login, signup, form }) {
         ]
     })
 
-    useEffect(() => {
-        onUpdateForm(false, null);
-        setstate(prevState => ({ ...state, pageName: match.params.pageName, clearForm: !prevState.clearForm }));
-    }, [match.params.pageName])
-
-    const onUpdateForm = (isValid, form) => {
+    const onUpdateForm = useCallback((isValid, form) => {
         updateForm(isValid, form);
-    }
+    }, [updateForm]);
+    
+    useEffect(() => {
+        console.log('effect');
+        onUpdateForm(false, null);
+        setstate(prevState => ({ ...prevState, pageName: match.params.pageName, clearForm: !prevState.clearForm }));
+    }, [match.params.pageName,onUpdateForm])
+
+    // const onUpdateForm = (isValid, form) => {
+    //     updateForm(isValid, form);
+    // }
 
     const setUser = () => {
         if (!form.isValid) return;

@@ -91,8 +91,6 @@ class SearchPage extends Component {
         if (!products) return null;
         return (
             <div className={`search-page flex ${isFiltersShown ? 'menu-open' : ''}`}>
-                {/* TODO check if there is a problem */}
-                {/* {(products.length < 2 && filterBy.filters.length === 0 && !filterBy.priceFilter.min && !name) || */}
                 {products.length ? <FilterList
                     filters={filters}
                     priceFilter={priceFilter}

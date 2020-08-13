@@ -46,6 +46,8 @@
                     }
                     img {
                         width: 100px;
+                        height: 80px;
+                        object-fit: contain;
                         margin-left: 20px;
                         @include for-mobile-layout {
                             width: 85px;

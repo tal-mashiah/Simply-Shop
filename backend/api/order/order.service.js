@@ -34,7 +34,7 @@ async function getByUserId(userId) {
             orders.sort((a, b) => parseFloat(b.date) - parseFloat(a.date));
             return orders
         } else {
-            return null;
+            return [];
         }
     } catch (err) {
         console.log('ERROR: cannot find orders')

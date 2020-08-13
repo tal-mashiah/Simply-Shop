@@ -31,7 +31,7 @@ function App() {
         <div className="app-content">
           <Switch>
             <Route path="/" component={Home} exact />
-            <Route path="/category/:name/:_id" component={SearchPage} exact />
+            <Route path="/category/:_id" component={SearchPage} exact />
             <Route path="/product/:_id" component={ProductDetails} exact />
             <Route path="/search/:term" component={SearchPage} exact />
             <Route path="/checkout" component={Checkout} exact />
