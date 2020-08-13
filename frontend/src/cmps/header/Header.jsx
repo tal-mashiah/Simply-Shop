@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import categoryService from '../../services/categoryService';
 import storageService from '../../services/storageService';
 
 import { connect } from 'react-redux';
 import { setBag, deleteItem, updateQuantity } from '../../actions/checkoutActions';
+import { loadCategories } from '../../actions/categoryAction';
 import { logout } from '../../actions/UserActions';
 
 import NavBar from './NavBar.jsx'
@@ -13,7 +13,7 @@ import CategoryList from '../category/CategoryList.jsx';
 import SearchBar from '../search-bar/SearchBar.jsx';
 
 class Header extends Component {
-    state = { categories: [], isSearchBarOpen: false, isBurgerOpen: false }
+    state = { isSearchBarOpen: false, isBurgerOpen: false }
 
     componentDidMount() {
         this.loadCategories();
@@ -35,13 +35,13 @@ class Header extends Component {
 
     toggleBurgerModal = () => {
         this.setState(prevState => ({
-            isBurgerOpen: !prevState.isBurgerOpen
+            isBurgerOpen: !prevState.isBurgerOpen,
+            isSearchBarOpen: false
         }));
     }
 
-    loadCategories = async () => {
-        const categories = await categoryService.query();
-        this.setState({ categories })
+    loadCategories = () => {
+        this.props.loadCategories();
     }
 
     loadStorageBag = () => {
@@ -62,22 +62,21 @@ class Header extends Component {
     }
 
     render() {
-        const { categories, isSearchBarOpen, isBurgerOpen } = this.state;
-        console.log(categories)
-        const { bag, loggedInUser } = this.props;
+        const { isSearchBarOpen, isBurgerOpen } = this.state;
+        const { bag, loggedInUser, categories } = this.props;
         if (!categories) return null;
-        
+
         return (
             <header className={isBurgerOpen ? "menu-open" : ''}>
                 <div className={`top-header flex justify-between align-center ${isSearchBarOpen && 'query-open'}`}>
                     <Logo />
                     <div className="right-container flex justify-center align-center">
                         <Hamburger toggleBurgerModal={this.toggleBurgerModal} />
-                        <SearchBar toggleSearchBar={this.toggleSearchBar} isSearchBarOpen={isSearchBarOpen}/>
+                        <SearchBar toggleSearchBar={this.toggleSearchBar} isSearchBarOpen={isSearchBarOpen} />
                     </div>
                     <NavBar bag={bag} loggedInUser={loggedInUser} logout={this.logout} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
                 </div>
-                <CategoryList categories={categories} isBurgerOpen={isBurgerOpen} toggleBurgerModal={this.toggleBurgerModal}/>
+                <CategoryList categories={categories} isBurgerOpen={isBurgerOpen} toggleBurgerModal={this.toggleBurgerModal} />
                 <div className="screen" onClick={this.toggleBurgerModal}></div>
             </header>
         )
@@ -87,7 +86,9 @@ class Header extends Component {
 const mapStateToProps = state => {
     return {
         bag: state.checkout.bag,
-        loggedInUser: state.user.loggedInUser
+        loggedInUser: state.user.loggedInUser,
+        categories: state.category.categories
+
     };
 };
 
@@ -95,7 +96,8 @@ const mapDispatchToProps = {
     logout,
     setBag,
     deleteItem,
-    updateQuantity
+    updateQuantity,
+    loadCategories
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

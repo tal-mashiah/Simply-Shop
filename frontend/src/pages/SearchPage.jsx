@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { connect } from 'react-redux';
 import { loadSearchData, updateFilterBy, updateSortBy } from '../actions/searchActions';
@@ -7,17 +7,13 @@ import ProductList from '../cmps/product/ProductList.jsx';
 import FilterList from '../cmps/filter/FilterList.jsx';
 import SearchHeader from '../cmps/search/SearchHeader';
 
-class SearchPage extends Component {
+function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, loadSearchData, match, categories }) {
 
-    state = { isFiltersShown: false };
+    const [categoryName, setCategoryName] = useState(null)
+    const [isFiltersShown, setIsFiltersShown] = useState(false)
 
-    componentDidMount() {
-        this.loadSearchData();
-    }
-
-    loadSearchData = () => {
-        const { term, _id } = this.props.match.params;
-        const { filterBy, updateFilterBy, loadSearchData } = this.props;
+    const onloadSearchData = () => {
+        const { term, _id } = match.params;
         if (term) {
             filterBy.searchValue = term;
             filterBy.categoryId = null;
@@ -30,85 +26,75 @@ class SearchPage extends Component {
         loadSearchData(filterBy);
     }
 
+    useEffect(() => {
+        onloadSearchData();
+    }, [filterBy])
 
-    componentDidUpdate(prevProps) {
-        const { term, _id } = this.props.match.params;
-        const { filterBy } = this.props;
-        if (term) {
-            if (prevProps.match.params.term !== this.props.match.params.term) {
-                filterBy.filters = [];
-                filterBy.priceFilter = { max: null, min: null };
-                this.loadSearchData();
-            }
-            if (prevProps.filterBy !== filterBy) {
-                this.loadSearchData();
-            }
+    useEffect(() => {
+        filterBy.priceFilter = { max: null, min: null };
+        filterBy.filters = [];
+        onloadSearchData();
+    }, [match.params])
+
+    useEffect(() => {
+        const getCategoryName = (categoryid) => {
+            const currCategory = categories.find(category => category._id === categoryid);
+            setCategoryName(currCategory.name)
         }
-        if (_id) {
-            const isIdMatch = prevProps.match.params._id !== this.props.match.params._id;
-            if (prevProps.filterBy !== this.props.filterBy || isIdMatch) {
-                this.loadSearchData();
-            }
-            if (isIdMatch) {
-                filterBy.priceFilter = { max: null, min: null };
-                filterBy.filters = [];
-                this.props.updateFilterBy(filterBy);
-            }
+        if (match.params._id && categories.length) {
+            getCategoryName(match.params._id);
         }
+
+    }, [match.params._id, categories])
+
+
+    const updatePrice = (updatedPrice) => {
+        const currFilterBy = { ...filterBy };
+        currFilterBy.priceFilter = updatedPrice;
+        updateFilterBy(currFilterBy);
     }
 
-    updatePrice = (updatedPrice) => {
-        let filterBy = { ...this.props.filterBy };
-        filterBy.priceFilter = updatedPrice;
-        this.props.updateFilterBy(filterBy);
-    }
-
-    updateFilters = (filter) => {
-        let filterBy = { ...this.props.filterBy };
-        const isFound = filterBy.filters.some(currFilter => currFilter.name === filter.name);
+    const updateFilters = (filter) => {
+        const currFilterBy = { ...filterBy };
+        const isFound = currFilterBy.filters.some(currFilter => currFilter.name === filter.name);
         if (isFound) {
-            filterBy.filters = filterBy.filters.filter(currFilter => currFilter.name !== filter.name);
+            currFilterBy.filters = filterBy.filters.filter(currFilter => currFilter.name !== filter.name);
         } else {
-            filterBy.filters.push(filter);
+            currFilterBy.filters.push(filter);
         }
-        this.props.updateFilterBy(filterBy);
+        updateFilterBy(currFilterBy);
     }
 
-    updateSort = (option) => {
-        this.props.updateSortBy(option.key);
+    const updateSort = (option) => {
+        updateSortBy(option.key);
     }
 
-    toggleFilters = () => {
-        this.setState(prevState => ({
-            isFiltersShown: !prevState.isFiltersShown
-        }))
+    const toggleFilters = () => {
+        setIsFiltersShown(isFiltersShown => !isFiltersShown)
     }
 
-    render() {
-        const { products, filters, priceFilter } = this.props;
-        const { isFiltersShown } = this.state;
-        const { term, name } = this.props.match.params;
-        if (!products) return null;
-        return (
-            <div className={`search-page flex ${isFiltersShown ? 'menu-open' : ''}`}>
-                {products.length ? <FilterList
-                    filters={filters}
-                    priceFilter={priceFilter}
-                    isFiltersShown={isFiltersShown}
-                    productsLength={products.length}
-                    updatePrice={this.updatePrice}
-                    updateFilters={this.updateFilters}
-                    toggleFilters={this.toggleFilters}
-                /> : null}
-                <div className="screen" onClick={this.toggleFilters}></div>
+    const { term } = match.params;
+    if (!products) return null;
+    return (
+        <div className={`search-page flex ${isFiltersShown ? 'menu-open' : ''}`}>
+            {products.length ? <FilterList
+                filters={filters}
+                priceFilter={priceFilter}
+                isFiltersShown={isFiltersShown}
+                productsLength={products.length}
+                updatePrice={updatePrice}
+                updateFilters={updateFilters}
+                toggleFilters={toggleFilters}
+            /> : null}
+            <div className="screen" onClick={toggleFilters}></div>
 
-                <div className="search-container">
-                    <SearchHeader term={term || name} productsLength={products.length} updateSort={this.updateSort} toggleFilters={this.toggleFilters} />
-                    <ProductList products={products} />
-                </div>
+            <div className="search-container">
+                <SearchHeader term={term || categoryName} productsLength={products.length} updateSort={updateSort} toggleFilters={toggleFilters} />
+                <ProductList products={products} />
             </div>
-        )
-    }
+        </div>
+    )
+
 }
 
 const mapStateToProps = state => {
@@ -116,7 +102,8 @@ const mapStateToProps = state => {
         products: state.search.searchData.products,
         filters: state.search.searchData.filters,
         priceFilter: state.search.searchData.priceFilter,
-        filterBy: state.search.filterBy
+        filterBy: state.search.filterBy,
+        categories: state.category.categories
     };
 };
 

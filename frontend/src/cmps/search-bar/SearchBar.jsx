@@ -44,7 +44,7 @@ class SearchBar extends Component {
         this.setState({ term: '' });
     }
 
-    onScreenClicked = () => {
+    onScreenClicked = (ev) => {
         if (isMobile) {
             this.closeSearchModal();
         } else {
@@ -74,7 +74,7 @@ class SearchBar extends Component {
                     <i className="fas fa-search" onClick={this.onSubmit}></i>
                 </form>
                 {products.length && isModalShown ? <SearchProductList products={products} onProductClick={this.closeSearchModal} /> : null}
-                {isModalShown && (term || isMobile) ? <div className="search-bar-screen" onClick={this.onScreenClicked}></div> : null}
+                {this.props.isSearchBarOpen && isModalShown && (term || isMobile) ? <div className="search-bar-screen" onClick={this.onScreenClicked}></div> : null}
                 {isNoResultShown && isModalShown && term ? <div onClick={this.closeSearchModal} className="search-bar-modal-container no-result">אין תוצאות</div> : null}
             </div>
         )
