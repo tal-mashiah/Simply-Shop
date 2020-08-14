@@ -1,20 +1,19 @@
-import React, { Component } from 'react'
+import React from 'react';
 
-export default class FilterPreview extends Component {
+export default function FilterPreview({ option, updateFilters }) {
 
-    onToggleOption = () => {
-        this.props.updateFilters(this.props.option)
+    const onToggleOption = () => {
+        updateFilters(option)
     }
 
-    render() {
-        const { name, _id, selected} = this.props.option;
-        return (
-            <div className="filter-option-preview">
-                <div className="option-container flex">
-                    <input className="option-checkbox" type="checkbox" id={_id} checked={selected || false} onChange={() => this.onToggleOption()}></input>
-                    <label className="option-title" htmlFor={_id}>{name}</label>
-                </div>
+    const { name, _id, selected } = option;
+    return (
+        <div className="filter-option-preview">
+            <div className="option-container flex">
+                <input className="option-checkbox" type="checkbox" id={_id} checked={selected || false} onChange={() => onToggleOption()}></input>
+                <label className="option-title" htmlFor={_id}>{name}</label>
             </div>
-        )
-    }
+        </div>
+    )
+
 }
