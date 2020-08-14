@@ -88,7 +88,6 @@ const mapStateToProps = state => {
         bag: state.checkout.bag,
         loggedInUser: state.user.loggedInUser,
         categories: state.category.categories
-
     };
 };
 

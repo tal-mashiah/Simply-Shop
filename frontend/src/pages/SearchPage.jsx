@@ -7,7 +7,7 @@ import ProductList from '../cmps/product/ProductList.jsx';
 import FilterList from '../cmps/filter/FilterList.jsx';
 import SearchHeader from '../cmps/search/SearchHeader';
 
-function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, loadSearchData, match, categories }) {
+function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, updateSortBy, loadSearchData, match, categories }) {
 
     const [categoryName, setCategoryName] = useState(null)
     const [isFiltersShown, setIsFiltersShown] = useState(false)
@@ -77,7 +77,7 @@ function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, 
     if (!products) return null;
     return (
         <div className={`search-page flex ${isFiltersShown ? 'menu-open' : ''}`}>
-            {products.length ? <FilterList
+            <FilterList
                 filters={filters}
                 priceFilter={priceFilter}
                 isFiltersShown={isFiltersShown}
@@ -85,7 +85,7 @@ function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, 
                 updatePrice={updatePrice}
                 updateFilters={updateFilters}
                 toggleFilters={toggleFilters}
-            /> : null}
+            />
             <div className="screen" onClick={toggleFilters}></div>
 
             <div className="search-container">

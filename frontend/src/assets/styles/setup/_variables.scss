@@ -3,9 +3,10 @@ $base-clr: #44484a;
 $filter-clr: #2a2c2e;
 $error-clr: #dc3545;
 $success-clr: #28a945;
-$primary-clr: #3589fe;
+$primary-clr: #3b9be4;
 $secondary-clr: #3a414a;
 $border-clr: #ebebeb;
+$footer-clr: #282c2e;
 
 // Breakpoints
 $mobile-breakpoint: 479px;
@@ -21,5 +22,6 @@ $logo-width: 250px;
 
 // footer
 $footer-height: 125px;
+$footer-tablet-height: 100px;
+$footer-mobile-height: 80px;
 $footer-logo-width: 200px;
-$footer-clr: #282c2e;

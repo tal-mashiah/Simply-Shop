@@ -3,7 +3,7 @@
     padding: 32px;
     @include for-mobile-layout {
         padding: 10px;
-        &.cart-page{
+        &.cart-page {
             padding: 20px 10px 0;
         }
     }
@@ -22,7 +22,11 @@
         padding-bottom: $footer-height;
         min-height: calc(100vh - #{$header-height});
         @include for-tablet-layout {
+            padding-bottom: $footer-tablet-height;
             min-height: calc(100vh - #{$top-header-height});
+        }
+        @include for-mobile-layout {
+            padding-bottom: $footer-mobile-height;
         }
     }
 }
@@ -57,7 +61,7 @@
     background-color: #fff;
 }
 
-.search-bar-screen{
+.search-bar-screen {
     width: 100%;
     height: 100%;
     position: fixed;

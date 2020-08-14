@@ -37,12 +37,12 @@ export default class SearchHeader extends Component {
         return (
             <div className="search-header flex align-center justify-between">
                 <h2 ref={this.title}>{productsLength === 0 ? 'לא מצאנו שום' : productsLength === 1 ? '' : productsLength} {productsLength === 1 ? 'תוצאה אחת' : 'תוצאות'} עבור <span>"{term}"</span> </h2>
-                {productsLength === 0 || <div className={`btns-container flex ${isSticky ? 'sticky' : ''}`}>
+                {<div className={`btns-container flex ${isSticky ? 'sticky' : ''}`}>
                     <div className="filter-btn flex justify-center align-center" onClick={toggleFilters}>
                         <i className="fas fa-filter"></i>
                         <div className="title">סנן תוצאות</div>
                     </div>
-                    {productsLength === 0 || <SelectBox handleChange={updateSort} options={options} />}
+                    {<SelectBox handleChange={updateSort} options={options} />}
                 </div>}
             </div>
         )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import { isMobile } from 'mobile-device-detect';
+import { isMobile, isBrowser } from 'mobile-device-detect';
 
 import searchService from '../../services/searchService';
 import SearchProductList from './SearchProductList';
@@ -44,7 +44,7 @@ class SearchBar extends Component {
         this.setState({ term: '' });
     }
 
-    onScreenClicked = (ev) => {
+    onScreenClicked = () => {
         if (isMobile) {
             this.closeSearchModal();
         } else {
@@ -67,14 +67,16 @@ class SearchBar extends Component {
 
     render() {
         const { products, term, isModalShown, isNoResultShown } = this.state;
+        const { isSearchBarOpen } = this.props;
+
         return (
             <div className='search-bar flex align-center'>
                 <form onSubmit={this.onSubmit}>
                     <input type="text" ref={this.searchInputRef} className="search-input" onClick={this.openSearchModal} onChange={this.handleChange} value={term} placeholder="חפש..." />
                     <i className="fas fa-search" onClick={this.onSubmit}></i>
                 </form>
-                {products.length && isModalShown ? <SearchProductList products={products} onProductClick={this.closeSearchModal} /> : null}
-                {this.props.isSearchBarOpen && isModalShown && (term || isMobile) ? <div className="search-bar-screen" onClick={this.onScreenClicked}></div> : null}
+                {(isSearchBarOpen || isBrowser) && products.length && isModalShown ? <SearchProductList products={products} onProductClick={this.closeSearchModal} /> : null}
+                {(isSearchBarOpen || isBrowser) && isModalShown && (term || isMobile) ? <div className="search-bar-screen" onClick={this.onScreenClicked}></div> : null}
                 {isNoResultShown && isModalShown && term ? <div onClick={this.closeSearchModal} className="search-bar-modal-container no-result">אין תוצאות</div> : null}
             </div>
         )
