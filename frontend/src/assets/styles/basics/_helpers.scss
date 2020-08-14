@@ -63,7 +63,6 @@
     }
   }
   @include for-tablet-layout {
-    height: 30px;
     & > div {
       font-size: 16px;
       height: 30px;

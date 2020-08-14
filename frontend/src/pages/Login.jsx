@@ -28,14 +28,9 @@ function Login({ match, location, updateForm, login, signup, form }) {
     }, [updateForm]);
     
     useEffect(() => {
-        console.log('effect');
         onUpdateForm(false, null);
         setstate(prevState => ({ ...prevState, pageName: match.params.pageName, clearForm: !prevState.clearForm }));
     }, [match.params.pageName,onUpdateForm])
-
-    // const onUpdateForm = (isValid, form) => {
-    //     updateForm(isValid, form);
-    // }
 
     const setUser = () => {
         if (!form.isValid) return;
