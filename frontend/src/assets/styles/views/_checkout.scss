@@ -35,10 +35,10 @@
         height: calc(100vh - (#{$header-height} + #{$footer-height} + 64px));
         padding-bottom: 20vh;
         @include for-tablet-layout {
-            height: calc(100vh - (#{$top-header-height} + #{$footer-height} + 64px));
+            height: calc(100vh - (#{$top-header-height} + #{$footer-tablet-height} + 64px));
         }
         @include for-mobile-layout {
-            height: calc(100vh - (#{$top-header-height} + #{$footer-height} + 20px));
+            height: calc(100vh - (#{$top-header-height} + #{$footer-mobile-height} + 20px));
         }
     }
 }
