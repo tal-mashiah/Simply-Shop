@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 
 import { connect } from 'react-redux';
@@ -76,7 +77,10 @@ class Checkout extends Component {
                         </div>
                         <Payment bag={bag} delivery={delivery} form={form} addOrder={this.addOrder} />
                     </div> :
-                    <div className="empty-cart flex align-center">העגלה שלך ריקה</div>}
+                    <div className="empty-cart flex align-center column justify-center">
+                        <div className="title"> העגלה שלך ריקה</div>
+                        <Link to="/"><button className="main-btn primary">חזרה לקניות</button></Link>
+                    </div>}
             </div>
         )
     }
