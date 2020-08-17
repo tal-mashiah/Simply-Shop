@@ -1,39 +1,37 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Form from '../general/Form.jsx';
 
-export default class Password extends Component {
-    state = {
-        isValid: null,
-        form: null,
-        inputs: [
-            { type: 'password', name: 'currPassword', label: 'סיסמה נוכחית', toggleVisibility: true, validation: ['required'] },
-            { type: 'password', name: 'password', label: 'סיסמה חדשה', toggleVisibility: true, validation: ['required', 'passvalid', 'min8Char', 'engAndNums'] },
-            { type: 'password', name: 'passwordValidation', label: 'אימות סיסמה', toggleVisibility: true, validation: ['required', 'passvalid'] }
-        ]
+export default function Password({ updatePassword }) {
+
+    const [isValid, setIsValid] = useState(null)
+    const [form, setForm] = useState(null)
+    const [inputs, setInputs] = useState([
+        { type: 'password', name: 'currPassword', label: 'סיסמה נוכחית', toggleVisibility: true, validation: ['required'] },
+        { type: 'password', name: 'password', label: 'סיסמה חדשה', toggleVisibility: true, validation: ['required', 'passvalid', 'min8Char', 'engAndNums'] },
+        { type: 'password', name: 'passwordValidation', label: 'אימות סיסמה', toggleVisibility: true, validation: ['required', 'passvalid'] }
+    ])
+
+    const updateForm = (isValid, form) => {
+        setIsValid(isValid);
+        setForm(form);
     }
 
-    updateForm = (isValid, form) => {
-        this.setState({ isValid, form });
-    }
-
-    onUpdatePassword = () => {
-        const { isValid, form, inputs } = this.state;
+    const onUpdatePassword = () => {
         if (isValid) {
             inputs.forEach(input => {
                 delete input.value;
             });
-            this.setState({ inputs });
-            this.props.updatePassword(form);
+            setInputs(inputs);
+            updatePassword(form);
         }
     }
 
-    render() {
-        const { isValid, inputs } = this.state;
-        return (
-            <div className="flex column align-center">
-                <Form inputs={inputs} updateForm={this.updateForm} />
-                <button className={isValid ? "main-btn primary" : "main-btn primary disabled"} onClick={this.onUpdatePassword}>עדכון סיסמה</button>
-            </div>
-        )
-    }
+
+    return (
+        <div className="flex column align-center">
+            <Form inputs={inputs} updateForm={updateForm} />
+            <button className={isValid ? "main-btn primary" : "main-btn primary disabled"} onClick={onUpdatePassword}>עדכון סיסמה</button>
+        </div>
+    )
+
 }
