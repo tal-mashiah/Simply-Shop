@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import storageService from '../../services/storageService';
 
 import { connect } from 'react-redux';
@@ -12,75 +12,63 @@ import Hamburger from './Hamburger.jsx';
 import CategoryList from '../category/CategoryList.jsx';
 import SearchBar from '../search-bar/SearchBar.jsx';
 
-class Header extends Component {
-    state = { isSearchBarOpen: false, isBurgerOpen: false }
+function Header({ setBag, bag, loadCategories, categories, deleteItem, updateQuantity, loggedInUser, logout }) {
 
-    componentDidMount() {
-        this.loadCategories();
-        this.loadStorageBag();
-    }
+    const [isSearchBarOpen, setIsSearchBarOpen] = useState(false)
+    const [isBurgerOpen, setIsBurgerOpen] = useState(false)
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.bag !== this.props.bag) {
-            const storageBag = this.props.bag.map(item => { return { productId: item.product._id, quantity: item.quantity } });
-            storageService.saveToStorage('bag', storageBag);
-        }
-    }
+    useEffect(() => {
+        loadCategories();
+        loadStorageBag();
+    }, [])
 
-    toggleSearchBar = () => {
-        this.setState(prevState => ({
-            isSearchBarOpen: !prevState.isSearchBarOpen
-        }));
-    }
-
-    toggleBurgerModal = () => {
-        this.setState(prevState => ({
-            isBurgerOpen: !prevState.isBurgerOpen,
-            isSearchBarOpen: false
-        }));
-    }
-
-    loadCategories = () => {
-        this.props.loadCategories();
-    }
-
-    loadStorageBag = () => {
+    const loadStorageBag = () => {
         const storageBag = storageService.loadFromStorage('bag');
-        if (storageBag && storageBag.length > 0) this.props.setBag(storageBag);
+        if (storageBag && storageBag.length > 0) setBag(storageBag);
     }
 
-    deleteItem = (itemId) => {
-        this.props.deleteItem(itemId);
+    useEffect(() => {
+        const storageBag = bag.map(item => { return { productId: item.product._id, quantity: item.quantity } });
+        storageService.saveToStorage('bag', storageBag);
+    }, [bag])
+
+    const toggleSearchBar = () => {
+        setIsSearchBarOpen(isSearchBarOpen => !isSearchBarOpen);
     }
 
-    changeQuantity = (diff, itemId, quantity) => {
-        this.props.updateQuantity(itemId, diff, quantity);
+    const toggleBurgerModal = () => {
+        setIsBurgerOpen(isBurgerOpen => !isBurgerOpen);
+        setIsSearchBarOpen(false);
     }
 
-    logout = (currRoute) => {
-        this.props.logout(currRoute)
+    const onDeleteItem = (itemId) => {
+        deleteItem(itemId);
     }
 
-    render() {
-        const { isSearchBarOpen, isBurgerOpen } = this.state;
-        const { bag, loggedInUser, categories } = this.props;
-        if (!categories) return null;
+    const changeQuantity = (diff, itemId, quantity) => {
+        updateQuantity(itemId, diff, quantity);
+    }
 
-        return (
-            <header className={isBurgerOpen ? "menu-open" : ''}>
-                <div className={`top-header flex justify-between align-center ${isSearchBarOpen && 'query-open'}`}>
-                    <Logo />
-                    <div className="right-container flex justify-center align-center">
-                        <Hamburger toggleBurgerModal={this.toggleBurgerModal} />
-                        <SearchBar toggleSearchBar={this.toggleSearchBar} isSearchBarOpen={isSearchBarOpen} />
-                    </div>
-                    <NavBar bag={bag} loggedInUser={loggedInUser} logout={this.logout} deleteItem={this.deleteItem} changeQuantity={this.changeQuantity} />
+    const onLogout = (currRoute) => {
+        logout(currRoute)
+    }
+
+    if (!categories) return null;
+    return (
+        <header className={isBurgerOpen ? "menu-open" : ''}>
+            <div className={`top-header flex justify-between align-center ${isSearchBarOpen && 'query-open'}`}>
+                <Logo />
+                <div className="right-container flex justify-center align-center">
+                    <Hamburger toggleBurgerModal={toggleBurgerModal} />
+                    <SearchBar toggleSearchBar={toggleSearchBar} isSearchBarOpen={isSearchBarOpen} />
                 </div>
-                <CategoryList categories={categories} isBurgerOpen={isBurgerOpen} toggleBurgerModal={this.toggleBurgerModal} />
-                <div className="screen" onClick={this.toggleBurgerModal}></div>
-            </header>
-        )
-    }
+                <NavBar bag={bag} loggedInUser={loggedInUser} logout={onLogout} deleteItem={onDeleteItem} changeQuantity={changeQuantity} />
+            </div>
+            <CategoryList categories={categories} isBurgerOpen={isBurgerOpen} toggleBurgerModal={toggleBurgerModal} />
+            <div className="screen" onClick={toggleBurgerModal}></div>
+        </header>
+    )
+
 }
 
 const mapStateToProps = state => {
