@@ -23,8 +23,8 @@ export default function ProductGallery({images}) {
         showThumbnails: !isMobileOnly,
         showFullscreenButton: isBrowser,
         autoPlay: isBrowser,
-        slideInterval: 4000,
-        slideOnThumbnailOver: true,
+        slideInterval: 3500,
+        slideOnThumbnailOver: false,
         onMouseOver: onMouseOver,
         onMouseLeave: onMouseLeave
     };
