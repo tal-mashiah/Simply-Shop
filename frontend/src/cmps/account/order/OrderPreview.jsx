@@ -7,7 +7,7 @@ export default function OrderPreview({ order }) {
     return (
         <div className="order-preview">
             <div className="order-header flex align-center">
-                <div className="date">זמן ביצוע ההזמנה: {new Date(date).toLocaleDateString()} - {new Date(date).toLocaleTimeString()}</div>
+                <div className="date">זמן ביצוע ההזמנה: {new Date(date).toLocaleDateString()} - {new Date(date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
                 <div className="order-number">מספר הזמנה: {orderNumber}</div>
             </div>
             <OrderProductList products={products} />
