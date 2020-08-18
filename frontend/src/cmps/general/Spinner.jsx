@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
-class Spinner extends Component {
-    render() {
+function Spinner({isLoading}) {
 
-        return (
-            <React.Fragment>
-                {this.props.isLoading ? <div className='spinner flex justify-center align-center'>
-                    <img src={require('../../assets/animation/spinner.png')} alt='spinner' />
-                </div> : null}
-            </React.Fragment>
-        )
-    }
+    return (
+        <React.Fragment>
+            {isLoading ? <div className='spinner flex justify-center align-center'>
+                <img src={require('../../assets/animation/spinner.png')} alt='spinner' />
+            </div> : null}
+        </React.Fragment>
+    )
 }
 
 const mapStateToProps = state => {
