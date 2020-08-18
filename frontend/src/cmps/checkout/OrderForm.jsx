@@ -40,7 +40,7 @@ export default function OrderForm({ user, logout, updateForm }) {
     }, [user])
 
     const onLogOut = () => {
-        logout();
+        logout(window.location.href);
         updateForm(false, null);
     }
 

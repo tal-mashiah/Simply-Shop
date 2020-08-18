@@ -26,14 +26,14 @@ function _updateForm(isValid, form) {
     };
 }
 
-export function login(userCreds, lastRoute) {    
+export function login(userCreds, lastRoute) {  
     return async dispatch => {
         try {
             dispatch(loading());
             const user = await userService.login(userCreds);
             dispatch(_setUser(user));
 
-            if (lastRoute === '#/checkout') {
+            if (lastRoute && lastRoute.includes("checkout")) {
                 history.push('/checkout#form');
             } else {
                 history.push('/account/orders');
