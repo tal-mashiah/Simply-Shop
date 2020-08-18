@@ -1,47 +1,43 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 
-export default class SelectBox extends Component {
-    state = {
-        title: null,
-        isOptionsShown: false
-    };
+export default function SelectBox({ options, handleChange }) {
 
-    componentDidMount() {
-        this.setState({ title: this.props.options[0].value })
+    const [title, setTitle] = useState(null);
+    const [isOptionsShown, setIsOptionsShown] = useState(false);
+
+    useEffect(() => {
+        setTitle(options[0].value);
+    }, [])
+
+    const showOptions = () => {
+        setIsOptionsShown(isOptionsShown => !isOptionsShown);
     }
 
-    showOptions = () => {
-        this.setState(prevState => ({
-            isOptionsShown: !prevState.isOptionsShown
-        }));
-    }
+    const handleOptionClick = (option) => {
+        setTitle(option.value);
+        setIsOptionsShown(false);
 
-    handleOptionClick = (option) => {
-        this.setState({ title: option.value, isOptionsShown: false })
-        if (option !== this.state.title) {
-            this.props.handleChange(option);
+        if (option !== title) {
+            handleChange(option);
         }
     }
 
-    onSelectBoxBlur = () => {
-        this.setState({ isOptionsShown: false })
+    const onSelectBoxBlur = () => {
+        setIsOptionsShown(false)
     }
 
-    render() {
-        const { title, isOptionsShown } = this.state;
-        return (
-            <div className="select-box" onBlur={this.onSelectBoxBlur} tabIndex="0" >
-                <div onClick={() => this.showOptions()} className={`title-container flex justify-between ${isOptionsShown ? 'active' : ''}`}>
-                    <div className="title">{title}</div>
-                    <i className="fas fa-caret-down"></i>
-                </div>
-                {!isOptionsShown ||
-                    <div className={`options-container ${isOptionsShown ? 'active' : ''}`}>
-                        {this.props.options.map((option, idx) => {
-                            return <div key={idx} onClick={() => this.handleOptionClick(option)} className="option">{option.value}</div>
-                        })}
-                    </div>}
+    return (
+        <div className="select-box" onBlur={onSelectBoxBlur} tabIndex="0" >
+            <div onClick={() => showOptions()} className={`title-container flex justify-between ${isOptionsShown ? 'active' : ''}`}>
+                <div className="title">{title}</div>
+                <i className="fas fa-caret-down"></i>
             </div>
-        )
-    }
+            {!isOptionsShown ||
+                <div className={`options-container ${isOptionsShown ? 'active' : ''}`}>
+                    {options.map((option, idx) => {
+                        return <div key={idx} onClick={() => handleOptionClick(option)} className="option">{option.value}</div>
+                    })}
+                </div>}
+        </div>
+    )
 }
