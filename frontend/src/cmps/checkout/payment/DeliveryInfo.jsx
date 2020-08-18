@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function DeliveryInfo({ form }) {
+
     if (!form.input) return null;
     const { fullName, city, street, number, apartment, postal, phone, email, mailbox, notes } = form.input;
     return (
