@@ -1,86 +1,88 @@
-import React, { Component } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { withRouter } from "react-router-dom";
 import { isMobile, isBrowser } from 'mobile-device-detect';
 
 import searchService from '../../services/searchService';
 import SearchProductList from './SearchProductList';
 
-class SearchBar extends Component {
-    state = {
-        term: '',
-        products: [],
-        isModalShown: false,
-        isNoResultShown: false,
-    };
-    searchInputRef = React.createRef();
+function SearchBar({ isSearchBarOpen, toggleSearchBar, history }) {
+
+    const [term, setTerm] = useState('')
+    const [products, setProducts] = useState([])
+    const [isModalShown, setIsModalShown] = useState(false)
+    const [isNoResultShown, setIsNoResultShown] = useState(false)
+
+    const searchInputRef = useRef(null)
 
 
-    handleChange = (ev) => {
-        this.setState({ term: ev.target.value }, async () => {
-            if (!this.state.term) {
-                this.setState({ products: [] })
-                return;
-            }
-            const products = await searchService.getByTerm(this.state.term)
-            this.setState({ products, isNoResultShown: products.length === 0 })
-        })
+    const handleChange = (ev) => {
+        setTerm(ev.target.value)
     }
 
-    onSubmit = (ev) => {
+    useEffect(() => {
+        if (!term) {
+            setProducts([]);
+        }
+        else {
+            const getProductsByTerm = async () => {
+                const products = await searchService.getByTerm(term)
+                setProducts(products);
+                setIsNoResultShown(products.length === 0);
+            }
+            getProductsByTerm();
+        }
+    }, [term])
+
+    const onSubmit = (ev) => {
         ev.preventDefault();
-
-        const { isSearchBarOpen, toggleSearchBar, history } = this.props;
-        const { term } = this.state;
-
         if (isMobile) {
-            this.searchInputRef.current.focus();
-            this.openSearchModal();
+            searchInputRef.current.focus();
+            openSearchModal();
             isSearchBarOpen || toggleSearchBar();
         }
         if (!term) return;
 
-        this.closeSearchModal();
-        history.push(`/search/${term}`)
-        this.setState({ term: '' });
+        closeSearchModal();
+        history.push(`/search/${term}`);
+        setTerm('');
     }
 
-    onScreenClicked = () => {
+    const onScreenClicked = () => {
         if (isMobile) {
-            this.closeSearchModal();
+            closeSearchModal();
         } else {
-            this.state.isModalShown && this.setState({ isModalShown: false });
-            if (!this.state.products.length) this.setState({ term: '' })
+            isModalShown && setIsModalShown(false);
+            products.length && setTerm('');
         }
     }
 
-    closeSearchModal = () => {
-        this.state.isModalShown && this.setState({ isModalShown: false, term: '', products: [] });
-        this.searchInputRef.current.blur();
+    const closeSearchModal = () => {
+        if (isModalShown) {
+            setIsModalShown(false);
+            setTerm('');
+            setProducts([]);
+        }
+        searchInputRef.current.blur();
         if (isMobile) {
-            this.props.toggleSearchBar();
+            toggleSearchBar();
         }
     }
 
-    openSearchModal = () => {
-        this.state.isModalShown || this.setState({ isModalShown: true });
+    const openSearchModal = () => {
+        isModalShown || setIsModalShown(true);
     }
 
-    render() {
-        const { products, term, isModalShown, isNoResultShown } = this.state;
-        const { isSearchBarOpen } = this.props;
-
-        return (
-            <div className='search-bar flex align-center'>
-                <form onSubmit={this.onSubmit}>
-                    <input type="text" ref={this.searchInputRef} className="search-input" onClick={this.openSearchModal} onChange={this.handleChange} value={term} placeholder="חפש..." />
-                    <i className="fas fa-search" onClick={this.onSubmit}></i>
-                </form>
-                {(isSearchBarOpen || isBrowser) && products.length && isModalShown ? <SearchProductList products={products} onProductClick={this.closeSearchModal} /> : null}
-                {(isSearchBarOpen || isBrowser) && isModalShown && (term || isMobile) ? <div className="search-bar-screen" onClick={this.onScreenClicked}></div> : null}
-                {isNoResultShown && isModalShown && term ? <div onClick={this.closeSearchModal} className="search-bar-modal-container no-result">אין תוצאות</div> : null}
-            </div>
-        )
-    }
+    return (
+        <div className='search-bar flex align-center'>
+            <form onSubmit={onSubmit}>
+                <input type="text" ref={searchInputRef} className="search-input" onClick={openSearchModal} onChange={handleChange} value={term} placeholder="חפש..." />
+                <i className="fas fa-search" onClick={onSubmit}></i>
+            </form>
+            {(isSearchBarOpen || isBrowser) && products.length && isModalShown ? <SearchProductList products={products} onProductClick={closeSearchModal} /> : null}
+            {(isSearchBarOpen || isBrowser) && isModalShown && (term || isMobile) ? <div className="search-bar-screen" onClick={onScreenClicked}></div> : null}
+            {isNoResultShown && isModalShown && term ? <div onClick={closeSearchModal} className="search-bar-modal-container no-result">אין תוצאות</div> : null}
+        </div>
+    )
 }
 
 export default withRouter(SearchBar);
