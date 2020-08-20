@@ -13,7 +13,7 @@ export default function CartItemPreview({ deleteItem, item, changeQuantity }) {
         <div className="cart-item-preview flex">
             <img src={imagesUrl[0].thumbnail} alt="Cart item" />
             <div className="cart-item-info flex column justify-between">
-                <Link to={`/product/${_id}`}><h5>{title}</h5></Link>
+                <Link to={`/product/${_id}`} replace><h5>{title}</h5></Link>
                 <div className="price flex">{price}<i className="fas fa-shekel-sign"></i></div>
                 <QuntityBar quantity={item.quantity} changeQuantity={changeQuantity} itemId={_id} />
             </div>

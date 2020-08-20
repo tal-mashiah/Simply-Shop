@@ -23,35 +23,6 @@ function _setSearchData(searchData) {
     };
 }
 
-export function loadCurrProduct(_id) {
-    return async dispatch => {
-        try {
-            dispatch(loading());
-            const currProduct = await searchService.getById(_id);
-            dispatch(_setCurrProduct(currProduct));
-        }
-        catch (err) {
-            console.log('searchActions: err in load currProduct', err);
-        }
-        finally {
-            dispatch(doneLoading());
-        }
-    };
-}
-
-function _setCurrProduct(currProduct) {
-    return {
-        type: 'SET_CURR_PRODUCT',
-        currProduct
-    };
-}
-
-export function clearCurrProduct() {
-    return {
-        type: 'CLEAR_CURR_PRODUCT'
-    };
-}
-
 export function updateFilterBy(filterBy) {
     return dispatch => {
         try {

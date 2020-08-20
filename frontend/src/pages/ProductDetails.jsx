@@ -1,27 +1,41 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import searchService from '../services/searchService'
 
 import { connect } from 'react-redux';
-import { loadCurrProduct, clearCurrProduct } from '../actions/searchActions';
 import { updateBag } from '../actions/checkoutActions';
 import { setGrowl } from '../actions/GrowlActions';
+import { loading, doneLoading } from '../actions/SystemActions';
 
 import ProductContent from '../cmps/product-details/content/ProductContent.jsx';
 import ProductGallery from '../cmps/product-details/gallery/ProductGallery.jsx';
 import ProductInfo from '../cmps/product-details/info/ProductInfo.jsx';
 
-function ProductDetails({ productData, loadCurrProduct, clearCurrProduct, updateBag, setGrowl, match }) {
+function ProductDetails({ loading, doneLoading, updateBag, setGrowl, match }) {
 
-    const loadProduct = useCallback(() => {
-        const { _id } = match.params;
-        loadCurrProduct(_id)
-    }, [match.params, loadCurrProduct])
+    const [productData, setProductData] = useState(null)
+
+    const loadCurrProduct = async (id) => {
+        try {
+            loading();
+            const currProduct = await searchService.getById(id);
+            setProductData(currProduct);
+        }
+        catch (err) {
+            console.log('err in load currProduct', err);
+        }
+        finally {
+            doneLoading();
+        }
+    };
 
     useEffect(() => {
-        loadProduct();
+        loadCurrProduct(match.params._id);
+        
         return () => {
-            clearCurrProduct();
+            setProductData(null);
         }
-    }, [loadProduct])
+    }, [match.params._id])
 
     const addToBag = (item) => {
         updateBag(item)
@@ -43,17 +57,11 @@ function ProductDetails({ productData, loadCurrProduct, clearCurrProduct, update
 
 }
 
-const mapStateToProps = state => {
-    return {
-        productData: state.search.currProduct
-    };
-};
-
 const mapDispatchToProps = {
-    clearCurrProduct,
-    loadCurrProduct,
+    doneLoading,
     updateBag,
-    setGrowl
+    setGrowl,
+    loading
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(null, mapDispatchToProps)(ProductDetails);
