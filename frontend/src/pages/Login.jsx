@@ -6,42 +6,44 @@ import { updateForm, signup, login } from '../actions/UserActions';
 
 import Form from '../cmps/general/Form.jsx';
 
+const initRegisterInputs = [
+    { type: 'text', name: 'fullName', label: 'שם מלא', autoComplete: 'name', validation: ['required', 'langAndMin2Char', 'twoWords'] },
+    { type: 'text', name: 'email', label: 'אימייל', autoComplete: 'email', validation: ['required', 'email'] },
+    { type: 'password', name: 'password', label: 'סיסמה', toggleVisibility: true, validation: ['required', 'passvalid', 'min8Char', 'engAndNums'] },
+    { type: 'password', name: 'passwordValidation', label: 'אימות סיסמה', toggleVisibility: true, validation: ['required', 'passvalid'] }
+];
+
+const initLoginInputs = [
+    { type: 'text', name: 'email', label: 'אימייל', autoComplete: 'email', validation: ['required', 'email'] },
+    { type: 'password', name: 'password', label: 'סיסמה', autoComplete: 'current-password', toggleVisibility: true, validation: ['required', 'min8Char', 'engAndNums'] }
+];
+
 function Login({ match, location, updateForm, login, signup, form }) {
 
-    const [state, setstate] = useState({
-        pageName: null,
-        clearForm: false,
-        registerInputs: [
-            { type: 'text', name: 'fullName', label: 'שם מלא', autoComplete: 'name', validation: ['required', 'langAndMin2Char', 'twoWords'] },
-            { type: 'text', name: 'email', label: 'אימייל', autoComplete: 'email', validation: ['required', 'email'] },
-            { type: 'password', name: 'password', label: 'סיסמה', toggleVisibility: true, validation: ['required', 'passvalid', 'min8Char', 'engAndNums'] },
-            { type: 'password', name: 'passwordValidation', label: 'אימות סיסמה', toggleVisibility: true, validation: ['required', 'passvalid'] }
-        ],
-        loginInputs: [
-            { type: 'text', name: 'email', label: 'אימייל', autoComplete: 'email', validation: ['required', 'email'] },
-            { type: 'password', name: 'password', label: 'סיסמה', autoComplete: 'current-password', toggleVisibility: true, validation: ['required', 'min8Char', 'engAndNums'] }
-        ]
-    })
+    const [pageName, setPageName] = useState(null);
+    const [clearForm, setClearForm] = useState(false);
+    const [registerInputs] = useState(initRegisterInputs);
+    const [loginInputs] = useState(initLoginInputs);
 
     const onUpdateForm = useCallback((isValid, form) => {
         updateForm(isValid, form);
     }, [updateForm]);
-    
+
     useEffect(() => {
         onUpdateForm(false, null);
-        setstate(prevState => ({ ...prevState, pageName: match.params.pageName, clearForm: !prevState.clearForm }));
-    }, [match.params.pageName,onUpdateForm])
+        setPageName(match.params.pageName);
+        setClearForm(clearForm => !clearForm);
+    }, [match.params.pageName, onUpdateForm])
 
     const setUser = () => {
         if (!form.isValid) return;
-        if (state.pageName === 'login') {
+        if (pageName === 'login') {
             login(form.input, location.lastRoute);
         } else {
             signup(form.input);
         }
     }
 
-    const { pageName, loginInputs, registerInputs, clearForm } = state;
     if (!pageName) return null;
     return (
         <div className="login flex column align-center">

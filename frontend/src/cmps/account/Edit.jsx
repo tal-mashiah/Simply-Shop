@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import Form from '../general/Form.jsx';
 
+const initInputs = [
+    { type: 'text', name: 'email', label: 'אימייל', disabled: true },
+    { type: 'text', name: 'fullName', label: 'שם מלא', validation: ['required', 'langAndMin2Char', 'twoWords'] },
+    { type: 'text', name: 'city', label: 'עיר / יישוב', validation: ['langAndMin2Char'] },
+    { type: 'text', name: 'street', label: 'רחוב' },
+    { type: 'number', name: 'number', label: 'מספר בית' },
+    { type: 'number', name: 'apartment', label: 'דירה' },
+    { type: 'text', name: 'postal', label: 'מיקוד' },
+    { type: 'text', name: 'mailbox', label: 'ת.ד' },
+    { type: 'tel', name: 'phone', label: 'טלפון נייד', validation: ['phone'] }
+];
+
 export default function Edit({ user, updateUser, setGrowl }) {
 
-    const [inputs] = useState([
-        { type: 'text', name: 'email', label: 'אימייל', disabled: true },
-        { type: 'text', name: 'fullName', label: 'שם מלא', validation: ['required', 'langAndMin2Char', 'twoWords'] },
-        { type: 'text', name: 'city', label: 'עיר / יישוב', validation: ['langAndMin2Char'] },
-        { type: 'text', name: 'street', label: 'רחוב' },
-        { type: 'number', name: 'number', label: 'מספר בית' },
-        { type: 'number', name: 'apartment', label: 'דירה' },
-        { type: 'text', name: 'postal', label: 'מיקוד' },
-        { type: 'text', name: 'mailbox', label: 'ת.ד' },
-        { type: 'tel', name: 'phone', label: 'טלפון נייד', validation: ['phone'] }
-    ])
-
-    const [isValid, setIsValid] = useState(null)
-    const [form, setForm] = useState(null)
-    const [updatedInputs, setUpdatedInputs] = useState(null)
+    const [inputs] = useState(initInputs);
+    const [isValid, setIsValid] = useState(null);
+    const [form, setForm] = useState(null);
+    const [updatedInputs, setUpdatedInputs] = useState(null);
 
     useEffect(() => {
         const mappedInputs = inputs.map(input => {

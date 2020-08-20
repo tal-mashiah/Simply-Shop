@@ -7,7 +7,7 @@ export default function Delivery({ onDeliverySelected, bag, delivery }) {
         { value: 'דואר רשום', price: 0 },
         { value: 'דואר שליחים', price: 49 },
         { value: 'איסוף עצמי', price: 0 }
-    ])
+    ]);
 
     useEffect(() => {
         onDeliverySelected(options[0]);

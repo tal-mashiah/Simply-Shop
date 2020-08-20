@@ -2,21 +2,23 @@ import React, { useEffect, useState } from 'react';
 import Form from '../general/Form.jsx';
 import { Link } from 'react-router-dom';
 
+const initInputs = [
+    { type: 'text', name: 'email', label: 'אימייל', validation: ['required', 'email'] },
+    { type: 'text', name: 'fullName', label: 'שם מלא', validation: ['required', 'langAndMin2Char', 'twoWords'] },
+    { type: 'tel', name: 'phone', label: 'טלפון נייד', validation: ['required', 'phone'] },
+    { type: 'text', name: 'city', label: 'עיר / יישוב', validation: ['required', 'langAndMin2Char'] },
+    { type: 'text', name: 'street', label: 'רחוב', validation: ['required'] },
+    { type: 'number', name: 'number', label: 'מספר בית', validation: ['required'] },
+    { type: 'number', name: 'apartment', label: 'דירה' },
+    { type: 'text', name: 'postal', label: 'מיקוד', validation: ['required'] },
+    { type: 'text', name: 'mailbox', label: 'ת.ד' },
+    { type: 'textarea', name: 'notes', label: 'הערות' }
+];
+
 export default function OrderForm({ user, logout, updateForm }) {
 
     const [updatedInputs, setUpdatedInputs] = useState(null);
-    const [inputs] = useState([
-        { type: 'text', name: 'email', label: 'אימייל', validation: ['required', 'email'] },
-        { type: 'text', name: 'fullName', label: 'שם מלא', validation: ['required', 'langAndMin2Char', 'twoWords'] },
-        { type: 'tel', name: 'phone', label: 'טלפון נייד', validation: ['required', 'phone'] },
-        { type: 'text', name: 'city', label: 'עיר / יישוב', validation: ['required', 'langAndMin2Char'] },
-        { type: 'text', name: 'street', label: 'רחוב', validation: ['required'] },
-        { type: 'number', name: 'number', label: 'מספר בית', validation: ['required'] },
-        { type: 'number', name: 'apartment', label: 'דירה' },
-        { type: 'text', name: 'postal', label: 'מיקוד', validation: ['required'] },
-        { type: 'text', name: 'mailbox', label: 'ת.ד' },
-        { type: 'textarea', name: 'notes', label: 'הערות' }
-    ]);
+    const [inputs] = useState(initInputs);
 
     useEffect(() => {
         if (user) {

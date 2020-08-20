@@ -2,14 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import SelectBox from '../general/SelectBox.jsx';
 
+const initOptions = [
+    { key: 'bestMatch', value: 'רלוונטיות' },
+    { key: 'PriceAscending', value: 'מחיר: מהנמוך לגבוה' },
+    { key: 'PriceDescending', value: 'מחיר: מהגבוה לנמוך' }
+];
+
 export default function SearchHeader({ term, productsLength, updateSort, toggleFilters }) {
 
     const [isSticky, setIsSticky] = useState(false);
-    const [options] = useState([
-        { key: 'bestMatch', value: 'רלוונטיות' },
-        { key: 'PriceAscending', value: 'מחיר: מהנמוך לגבוה' },
-        { key: 'PriceDescending', value: 'מחיר: מהגבוה לנמוך' }
-    ]);
+    const [options] = useState(initOptions);
     
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);

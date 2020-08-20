@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import Form from '../general/Form.jsx';
 
+const initInputs = [
+    { type: 'password', name: 'currPassword', label: 'סיסמה נוכחית', toggleVisibility: true, validation: ['required'] },
+    { type: 'password', name: 'password', label: 'סיסמה חדשה', toggleVisibility: true, validation: ['required', 'passvalid', 'min8Char', 'engAndNums'] },
+    { type: 'password', name: 'passwordValidation', label: 'אימות סיסמה', toggleVisibility: true, validation: ['required', 'passvalid'] }
+];
+
 export default function Password({ updatePassword }) {
 
-    const [isValid, setIsValid] = useState(null)
-    const [form, setForm] = useState(null)
-    const [inputs, setInputs] = useState([
-        { type: 'password', name: 'currPassword', label: 'סיסמה נוכחית', toggleVisibility: true, validation: ['required'] },
-        { type: 'password', name: 'password', label: 'סיסמה חדשה', toggleVisibility: true, validation: ['required', 'passvalid', 'min8Char', 'engAndNums'] },
-        { type: 'password', name: 'passwordValidation', label: 'אימות סיסמה', toggleVisibility: true, validation: ['required', 'passvalid'] }
-    ])
+    const [isValid, setIsValid] = useState(null);
+    const [form, setForm] = useState(null);
+    const [inputs, setInputs] = useState(initInputs);
 
     const updateForm = (isValid, form) => {
         setIsValid(isValid);
