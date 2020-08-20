@@ -22,6 +22,8 @@ export default function (state = initialState, action = {}) {
             return { ...state, filterBy: { ...state.filterBy, sortBy: action.sortBy } };
         case 'SET_CURR_PRODUCT':
             return { ...state, currProduct: action.currProduct };
+        case 'CLEAR_CURR_PRODUCT':
+            return { ...state, currProduct: null };
         default:
             return state;
     }

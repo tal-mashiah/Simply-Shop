@@ -7,7 +7,7 @@ import ProductList from '../cmps/product/ProductList.jsx';
 import FilterList from '../cmps/filter/FilterList.jsx';
 import SearchHeader from '../cmps/search/SearchHeader';
 
-function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, updateSortBy, loadSearchData, match, categories, isLoading }) {
+function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, updateSortBy, loadSearchData, match, categories}) {
 
     const [categoryName, setCategoryName] = useState(null)
     const [isFiltersShown, setIsFiltersShown] = useState(false)
@@ -103,8 +103,7 @@ const mapStateToProps = state => {
         filters: state.search.searchData.filters,
         priceFilter: state.search.searchData.priceFilter,
         filterBy: state.search.filterBy,
-        categories: state.category.categories,
-        isLoading: state.system.isLoading
+        categories: state.category.categories
     };
 };
 

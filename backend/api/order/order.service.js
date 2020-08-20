@@ -28,9 +28,7 @@ async function getByUserId(userId) {
                     product.imagesUrl = searchUtils.createImages(dbProduct.imagesUrl);
                     product.title = dbProduct.title;
                 }
-            }
-            console.log('orders: ', orders);
-            
+            }            
             orders.sort((a, b) => parseFloat(b.date) - parseFloat(a.date));
             return orders
         } else {

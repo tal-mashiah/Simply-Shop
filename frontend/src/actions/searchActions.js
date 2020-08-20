@@ -46,12 +46,18 @@ function _setCurrProduct(currProduct) {
     };
 }
 
+export function clearCurrProduct() {
+    return {
+        type: 'CLEAR_CURR_PRODUCT'
+    };
+}
+
 export function updateFilterBy(filterBy) {
     return dispatch => {
         try {
             dispatch(loading());
             dispatch(_updateFilterBy(filterBy));
-        } 
+        }
         catch (err) {
             console.log('searchActions: err in update FilterBy', err);
         }
@@ -73,7 +79,7 @@ export function updateSortBy(sortBy) {
         try {
             dispatch(loading());
             dispatch(_updateSortBy(sortBy));
-        } 
+        }
         catch (err) {
             console.log('searchActions: err in update SortBy', err);
         }

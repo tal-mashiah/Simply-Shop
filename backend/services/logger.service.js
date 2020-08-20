@@ -13,7 +13,6 @@ function getTime() {
 
 function doLog(line, level='Debug') {
     line = `${getTime()} - ${level} - ${line}\n` 
-    console.log(line);
     fs.appendFileSync('./logs/backend.log',line);
 }
 

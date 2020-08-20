@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 
 import { connect } from 'react-redux';
-import { loadCurrProduct } from '../actions/searchActions';
+import { loadCurrProduct, clearCurrProduct } from '../actions/searchActions';
 import { updateBag } from '../actions/checkoutActions';
 import { setGrowl } from '../actions/GrowlActions';
 
@@ -9,7 +9,7 @@ import ProductContent from '../cmps/product-details/content/ProductContent.jsx';
 import ProductGallery from '../cmps/product-details/gallery/ProductGallery.jsx';
 import ProductInfo from '../cmps/product-details/info/ProductInfo.jsx';
 
-function ProductDetails({ productData, loadCurrProduct, updateBag, setGrowl, match }) {
+function ProductDetails({ productData, loadCurrProduct, clearCurrProduct, updateBag, setGrowl, match }) {
 
     const loadProduct = useCallback(() => {
         const { _id } = match.params;
@@ -18,6 +18,9 @@ function ProductDetails({ productData, loadCurrProduct, updateBag, setGrowl, mat
 
     useEffect(() => {
         loadProduct();
+        return () => {
+            clearCurrProduct();
+        }
     }, [loadProduct])
 
     const addToBag = (item) => {
@@ -47,6 +50,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
+    clearCurrProduct,
     loadCurrProduct,
     updateBag,
     setGrowl
