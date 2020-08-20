@@ -57,22 +57,25 @@
       width: fit-content;
       display: inline-block;
       height: 34px;
+      @include for-tablet-layout {
+        height: 29px;
+        font-size: 18px;
+      }
+      @include for-mobile-layout {
+        height: 24px;
+        font-size: 14px;
+      }
       &.active {
         border-bottom: 3px solid $primary-clr;
       }
     }
   }
   @include for-tablet-layout {
-    & > div {
-      font-size: 16px;
-      height: 30px;
-    }
+    height: 30px;
   }
   @include for-mobile-layout {
     width: 285px;
-    & > div {
-      font-size: 14px;
-    }
+    height: 25px;
   }
 }
 
@@ -105,4 +108,3 @@
     }
   }
 }
-
