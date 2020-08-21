@@ -15,27 +15,27 @@ function ProductDetails({ loading, doneLoading, updateBag, setGrowl, match }) {
 
     const [productData, setProductData] = useState(null)
 
-    const loadCurrProduct = async (id) => {
-        try {
-            loading();
-            const currProduct = await searchService.getById(id);
-            setProductData(currProduct);
-        }
-        catch (err) {
-            console.log('err in load currProduct', err);
-        }
-        finally {
-            doneLoading();
-        }
-    };
-
     useEffect(() => {
+        const loadCurrProduct = async (id) => {
+            try {
+                loading();
+                const currProduct = await searchService.getById(id);
+                setProductData(currProduct);
+            }
+            catch (err) {
+                console.log('err in load currProduct', err);
+            }
+            finally {
+                doneLoading();
+            }
+        };
+
         loadCurrProduct(match.params._id);
-        
+
         return () => {
             setProductData(null);
         }
-    }, [match.params._id])
+    }, [match.params._id, loading, doneLoading])
 
     const addToBag = (item) => {
         updateBag(item)

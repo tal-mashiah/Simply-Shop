@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 export default function SelectBox({ options, handleChange }) {
 
-    const [title, setTitle] = useState(null);
+    const [title, setTitle] = useState(options[0].value);
     const [isOptionsShown, setIsOptionsShown] = useState(false);
-
-    useEffect(() => {
-        setTitle(options[0].value);
-    }, [])
 
     const showOptions = () => {
         setIsOptionsShown(isOptionsShown => !isOptionsShown);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
 import { connect } from 'react-redux';
 import { loadSearchData, updateFilterBy, updateSortBy } from '../actions/searchActions';
@@ -7,10 +7,10 @@ import ProductList from '../cmps/product/ProductList.jsx';
 import FilterList from '../cmps/filter/FilterList.jsx';
 import SearchHeader from '../cmps/search/SearchHeader';
 
-function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, updateSortBy, loadSearchData, match, categories}) {
+function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, updateSortBy, loadSearchData, match, categories }) {
 
-    const [categoryName, setCategoryName] = useState(null)
-    const [isFiltersShown, setIsFiltersShown] = useState(false)
+    const [categoryName, setCategoryName] = useState(null);
+    const [isFiltersShown, setIsFiltersShown] = useState(false);
 
     const onloadSearchData = () => {
         const { term, _id } = match.params;
@@ -34,7 +34,7 @@ function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, 
         filterBy.priceFilter = { max: null, min: null };
         filterBy.filters = [];
         onloadSearchData();
-    }, [match.params])
+    }, [match.params._id])
 
     useEffect(() => {
         const getCategoryName = (categoryid) => {

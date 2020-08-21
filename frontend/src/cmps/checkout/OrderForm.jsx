@@ -39,7 +39,7 @@ export default function OrderForm({ user, logout, updateForm }) {
         } else {
             setUpdatedInputs(inputs);
         }
-    }, [user])
+    }, [user,inputs])
 
     const onLogOut = () => {
         logout(window.location.href);

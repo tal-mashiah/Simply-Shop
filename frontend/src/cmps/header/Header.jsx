@@ -18,14 +18,14 @@ function Header({ setBag, bag, loadCategories, categories, deleteItem, updateQua
     const [isBurgerOpen, setIsBurgerOpen] = useState(false)
 
     useEffect(() => {
-        loadCategories();
+        const loadStorageBag = () => {
+            const storageBag = storageService.loadFromStorage('bag');
+            if (storageBag && storageBag.length > 0) setBag(storageBag);
+        }
         loadStorageBag();
-    }, [])
+        loadCategories();
+    }, [loadCategories,setBag])
 
-    const loadStorageBag = () => {
-        const storageBag = storageService.loadFromStorage('bag');
-        if (storageBag && storageBag.length > 0) setBag(storageBag);
-    }
 
     useEffect(() => {
         const storageBag = bag.map(item => { return { productId: item.product._id, quantity: item.quantity } });
