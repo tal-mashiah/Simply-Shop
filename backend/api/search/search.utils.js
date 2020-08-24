@@ -106,6 +106,10 @@ const _updateSpecValues = (values, filters) => {
     })
 }
 
+// function sum(a, b) {
+//     return a + b;
+// }
+
 module.exports = {
     createPriceFilter,
     createFilters,
@@ -113,4 +117,5 @@ module.exports = {
     createSpecs,
     createImages,
     sortProducts
+    // sum
 }

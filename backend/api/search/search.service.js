@@ -85,9 +85,11 @@ async function getByTerm(term) {
     let collection = await dbService.getCollection('product');
     try {
         const products = await collection.find({ "title": new RegExp(".*" + term + ".*", "i") }).toArray();
-        products.forEach(product => delete product.costPrice);
         products.forEach(product => product.imagesUrl = searchUtils.createImages(product.imagesUrl, true));
-        return products;
+        const filteredProducts = products.map(product => {
+            return { _id: product._id, title: product.title, image: product.imagesUrl[0].thumbnail }
+        });
+        return filteredProducts;
 
     } catch (err) {
         console.log(`ERROR: while finding products by term: ${term}`)

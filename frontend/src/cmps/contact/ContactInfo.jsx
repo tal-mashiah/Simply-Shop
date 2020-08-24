@@ -19,7 +19,7 @@ export default function ContactInfo() {
             </div>
 
             <div className="email flex justify-between">
-                <div className="text">info@alakazem.co.il</div>
+                <div className="text">info@simplyshop.co.il</div>
                 <i className="far fa-envelope"></i>
             </div>
             <a rel="noopener noreferrer" target="_blank" href="https://wa.me/9720545929187" >

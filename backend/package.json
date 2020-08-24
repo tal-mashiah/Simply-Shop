@@ -6,7 +6,8 @@
     "scripts": {
         "start": "node server.js",
         "server:dev": "NODE_ENV=development nodemon app.js",
-        "server:prod": "node app.js"
+        "server:prod": "node app.js",
+        "test": "jest"
     },
     "author": "tal mashiah",
     "license": "ISC",
