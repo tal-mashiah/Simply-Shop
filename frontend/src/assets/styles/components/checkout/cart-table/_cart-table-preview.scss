@@ -73,9 +73,12 @@
         }
         .title {
             min-width: initial;
+            max-width: 200px;
+            line-break: auto;
+            margin-left: 10px;
         }
         .fa-trash-alt {
-            padding: 14px;
+            padding: 10px;
             font-size: 15px;
         }
     }

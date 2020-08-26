@@ -6,8 +6,10 @@ import SearchReducer from './SearchReducer';
 import UserReducer from './UserReducer';
 import GrowlReducer from './GrowlReducer';
 import CategoryReducer from './CategoryReducer';
+import CompareReducer from './CompareReducer';
 
 const rootReducer = combineReducers({
+  compare: CompareReducer,
   checkout: CheckoutReducer,
   category: CategoryReducer,
   system: SystemReducer,

@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 
 import { connect } from 'react-redux';
 import { loadSearchData, updateFilterBy, updateSortBy } from '../actions/searchActions';
+import { toggleCompareProduct } from '../actions/compareAction';
 
 import ProductList from '../cmps/product/ProductList.jsx';
 import FilterList from '../cmps/filter/FilterList.jsx';
 import SearchHeader from '../cmps/search/SearchHeader';
 
-function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, updateSortBy, loadSearchData, match, categories }) {
+function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, updateSortBy, loadSearchData, match, categories, toggleCompareProduct }) {
 
     const [categoryName, setCategoryName] = useState(null);
     const [isFiltersShown, setIsFiltersShown] = useState(false);
@@ -73,6 +74,10 @@ function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, 
         setIsFiltersShown(isFiltersShown => !isFiltersShown)
     }
 
+    const onToggleCompareProduct = (product) => {
+        toggleCompareProduct(product);
+    }
+
     const { term } = match.params;
     if (!products) return null;
     return (
@@ -90,7 +95,7 @@ function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, 
 
             <div className="search-container">
                 <SearchHeader term={term || categoryName} productsLength={products.length} updateSort={updateSort} toggleFilters={toggleFilters} />
-                <ProductList products={products} />
+                <ProductList products={products} toggleCompareProduct={onToggleCompareProduct} />
             </div>
         </div>
     )
@@ -108,6 +113,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
+    toggleCompareProduct,
     loadSearchData,
     updateFilterBy,
     updateSortBy
