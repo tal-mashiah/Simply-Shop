@@ -5,35 +5,34 @@ import { connect } from 'react-redux';
 import { doneLoading, loading } from '../actions/SystemActions'
 import { toggleCompareProduct } from '../actions/compareAction'
 
-import searchService from '../services/searchService';
+import compareService from '../services/compareService';
 
 import ComparedProductsTable from '../cmps/compare/ComparedProductsTable';
 
 export const Compare = ({ products, doneLoading, loading, toggleCompareProduct }) => {
+
     const [productsData, setProductsData] = useState([])
 
     useEffect(() => {
-        const loadCurrProduct = async (id) => {
+        const loadCurrProduct = async (ids) => {
             try {
                 loading();
-                const ProductData = await searchService.getById(id);
-                return ProductData;
+                return await compareService.getByIds(ids);
             }
             catch (err) {
-                console.log('err in load currProduct', err);
+                console.log('err in load ProductsData', err);
             }
             finally {
                 doneLoading();
             }
         };
+
         const getProductsData = async () => {
-            const data = [];
-            for (const product of products) {
-                const ProductData = await loadCurrProduct(product._id);
-                data.push(ProductData);
-            }
-            setProductsData(data);
+            const ids = products.map(product=>product._id);
+            const ProductsData = await loadCurrProduct(ids)
+            setProductsData(ProductsData);
         }
+
         getProductsData();
     }, [products, loading, doneLoading])
 

@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import {useEffect} from 'react';
 // import ImageGallery from 'react-image-gallery';
 import { useHistory } from 'react-router-dom';
 
