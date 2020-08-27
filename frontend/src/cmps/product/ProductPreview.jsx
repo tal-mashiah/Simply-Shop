@@ -18,7 +18,7 @@ export default function ProductPreview({ product, toggleComparedProduct, compare
     useEffect(() => {
         const isCompare = compareProducts.some(comparedProduct=>comparedProduct._id === product._id)
         setIsCompared(isCompare);
-    }, [compareProducts])
+    }, [compareProducts, product._id])
 
     const { title, imagesUrl, price, inStock } = product;
     return (

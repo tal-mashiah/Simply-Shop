@@ -1,0 +1,37 @@
+.column-list {
+    padding: 20px 0 0;
+    overflow-y: auto;
+    .spec-list {
+        min-width: 130px;
+        margin: 425px 20px 0 25px;
+    }
+    .spec {
+        height: 70px;
+        overflow: scroll;
+        font-size: 16px;
+        padding: 8px 0;
+        line-height: 22px;
+        text-align: center;
+        border-top: 1px solid $border-clr;
+        cursor: default;
+        &.key {
+            color: $primary-clr;
+            overflow: unset;
+            font-family: open-sans-bold;
+        }
+    }
+    @include for-laptop-layout {
+        .spec-list {
+            margin: 350px 0 0 0;
+        }
+        .spec {
+            font-size: 14px;
+        }
+    }
+    @include for-tablet-layout {
+        .spec-list {
+            min-width: initial;
+            padding: 0 8px;
+        }
+    }
+}

@@ -17,6 +17,7 @@ import Footer from './cmps/footer/Footer';
 import AboutUs from './pages/AboutUs.jsx';
 import Terms from './pages/Terms.jsx';
 import Contact from './pages/Contact.jsx';
+import Compare from './pages/Compare.jsx';
 import ScrollToTop from './cmps/general/ScrollToTop.jsx';
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <Route path="/about" component={AboutUs} exact />
             <Route path="/terms" component={Terms} exact />
             <Route path="/contact" component={Contact} exact />
+            <Route path="/compare" component={Compare} exact />
             <Route path="/auth/:pageName" component={Login} exact />
             <Route path="/account/:pageName" component={Account} exact />
             <Route path="/" component={NotFound} />

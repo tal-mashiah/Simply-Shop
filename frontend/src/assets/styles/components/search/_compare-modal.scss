@@ -1,9 +1,9 @@
 .compare-modal {
     position: fixed;
     background-color: #fff;
-    transition: transform 0.9s ease-out;
+    transition: transform 0.5s ease-out;
     z-index: 950;
-    padding: 13px 23px;
+    padding: 15px 20px;
     box-shadow: 0px 2px 14px -3px rgba(0, 0, 0, 0.35);
     border-radius: 4px;
     bottom: -5px;
@@ -13,14 +13,14 @@
     margin-left: auto;
     width: fit-content;
     &.hidden {
-        transition: transform 0.4s;
-        transform:translateY(100%) rotateY(720deg) ;
+        transition: transform 0.3s;
+        transform:translateY(100%) rotateY(90deg) ;
     }
     .cube-list {
         .cube {
             position: relative;
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             border: 2px solid $border-clr;
             margin-left: 5px;
             padding: 4px;
@@ -47,10 +47,11 @@
 
     .fa-times {
         position: absolute;
-        top: 0;
+        top: -2px;
         left: 0;
-        padding: 6px;
+        padding: 7px;
         cursor: pointer;
+        font-size: 16px;
     }
     @include for-tablet-layout {
         flex-direction: column;

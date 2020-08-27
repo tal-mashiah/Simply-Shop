@@ -29,22 +29,4 @@
             }
         }
     }
-    .empty-cart {
-        height: calc(100vh - (#{$header-height} + #{$footer-height} + 64px));
-        padding-bottom: 20vh;
-        .title{
-            font-family: open-sans-bold;
-            font-size: 18px;
-        }
-        .main-btn{
-            margin-top: 20px;
-            height: 40px;
-        }
-        @include for-tablet-layout {
-            height: calc(100vh - (#{$top-header-height} + #{$footer-tablet-height} + 64px));
-        }
-        @include for-mobile-layout {
-            height: calc(100vh - (#{$top-header-height} + #{$footer-mobile-height} + 20px));
-        }
-    }
 }

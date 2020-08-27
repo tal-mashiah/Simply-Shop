@@ -73,7 +73,7 @@ function Checkout({ location, bag, delivery, setDelivery, form, loggedInUser, lo
                     </div>
                     <Payment bag={bag} delivery={delivery} form={form} addOrder={onAddOrder} />
                 </div> :
-                <div className="empty-cart flex align-center column justify-center">
+                <div className="empty-page flex align-center column justify-center">
                     <div className="title"> העגלה שלך ריקה</div>
                     <Link to="/"><button className="main-btn primary">חזרה לקניות</button></Link>
                 </div>}

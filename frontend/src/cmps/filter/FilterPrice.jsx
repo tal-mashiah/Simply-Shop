@@ -23,13 +23,13 @@ export default function FilterPrice({ priceFilter, updatePrice }) {
         <div className="filter-price-preview">
             <h3 className="filter-price-title">מחיר</h3>
             <div className="price-range flex">
-                <InputRange
+                {(generalMin <= value.min && value.max <= generalMax) && <InputRange
                     maxValue={generalMax}
                     minValue={generalMin}
                     value={value}
                     onChange={value => setValue(value)}
                     onChangeComplete={value => onUpdatePrice(value)}
-                />
+                />}
             </div>
 
         </div>

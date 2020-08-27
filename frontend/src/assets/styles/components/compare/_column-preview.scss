@@ -1,0 +1,78 @@
+.column-preview {
+    padding: 0 25px;
+    flex: 1;
+    border-right: 1px solid $border-clr;
+    .product {
+        height: 425px;
+        .fa-times {
+            font-size: 20px;
+            cursor: pointer;
+            padding: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease-out;
+            &:hover {
+                transform: rotate(360deg);
+                color: $error-clr;
+            }
+        }
+        img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 35px;
+            cursor: pointer;
+            padding: 0 8px;
+        }
+        .price {
+            font-size: 16px;
+            cursor: default;
+            text-align: center;
+            font-family: open-sans-bold;
+            margin-bottom: 25px;
+            .fa-shekel-sign {
+                font-size: 12px;
+                margin-right: 3px;
+            }
+        }
+        .title {
+            max-height: 62px;
+            overflow: hidden;
+            font-size: 18px;
+            line-height: 22px;
+            text-align: center;
+            padding: 0 10px;
+            cursor: pointer;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+    @include for-laptop-layout {
+        padding: 0 0;
+        .product {
+            height: 350px;
+            img {
+                width: 150px;
+                height: 150px;
+            }
+            .title {
+                font-size: 16px;
+                line-height: 20px;
+            }
+        }
+    }
+    @include for-tablet-layout {
+        .product {
+            img {
+                width: 125px;
+                height: 125px;
+            }
+        }
+    }
+    @include for-mobile-layout {
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    }
+}
