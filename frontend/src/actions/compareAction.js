@@ -4,3 +4,9 @@ export function toggleCompareProduct(product) {
         product
     };
 }
+
+export function deleteComparedProducts() {
+    return {
+        type: 'DELETE_COMPARED_PRODUCTS'
+    };
+}

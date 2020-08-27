@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 
-export default function ProductPreview({ product, toggleCompareProduct }) {
+export default function ProductPreview({ product, toggleComparedProduct, compareProducts }) {
     const [isCompared, setIsCompared] = useState(false);
 
     const history = useHistory();
 
     const onToggleCompareProduct = (ev) => {
         ev.stopPropagation();
-        setIsCompared(prevIscompared => !prevIscompared)
-        toggleCompareProduct(product)
+        toggleComparedProduct(product)
     }
 
     const moveToProductPage = () => {
         history.push(`/product/${product._id}`);
     }
+
+    useEffect(() => {
+        const isCompare = compareProducts.some(comparedProduct=>comparedProduct._id === product._id)
+        setIsCompared(isCompare);
+    }, [compareProducts])
 
     const { title, imagesUrl, price, inStock } = product;
     return (

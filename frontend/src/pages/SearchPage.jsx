@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 
 import { connect } from 'react-redux';
 import { loadSearchData, updateFilterBy, updateSortBy } from '../actions/searchActions';
-import { toggleCompareProduct } from '../actions/compareAction';
+import { toggleCompareProduct, deleteComparedProducts } from '../actions/compareAction';
+import { setGrowl } from '../actions/GrowlActions';
 
 import ProductList from '../cmps/product/ProductList.jsx';
 import FilterList from '../cmps/filter/FilterList.jsx';
 import SearchHeader from '../cmps/search/SearchHeader';
+import CompareModal from '../cmps/search/CompareModal';
 
-function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, updateSortBy, loadSearchData, match, categories, toggleCompareProduct }) {
+function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, updateSortBy, loadSearchData, match, categories, toggleCompareProduct, compareProducts, maxComparedNumber, setGrowl, deleteComparedProducts}) {
 
     const [categoryName, setCategoryName] = useState(null);
     const [isFiltersShown, setIsFiltersShown] = useState(false);
@@ -74,8 +76,19 @@ function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, 
         setIsFiltersShown(isFiltersShown => !isFiltersShown)
     }
 
-    const onToggleCompareProduct = (product) => {
+    const onToggleComparedProduct = (product) => {
+        if (compareProducts.length === maxComparedNumber) {
+            const isExist = compareProducts.some(compareProduct => compareProduct._id === product._id);
+            if (!isExist) {
+                setGrowl(`אפשר להשוות עד ${maxComparedNumber} מוצרים בכל פעם`, 'warning');
+                return;
+            }
+        }
         toggleCompareProduct(product);
+    }
+
+    const onDeleteComparedProducts = () => {
+        deleteComparedProducts();
     }
 
     const { term } = match.params;
@@ -95,8 +108,10 @@ function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, 
 
             <div className="search-container">
                 <SearchHeader term={term || categoryName} productsLength={products.length} updateSort={updateSort} toggleFilters={toggleFilters} />
-                <ProductList products={products} toggleCompareProduct={onToggleCompareProduct} />
+                <ProductList products={products} toggleComparedProduct={onToggleComparedProduct} compareProducts={compareProducts} />
             </div>
+
+            <CompareModal products={compareProducts} maxComparedNumber={maxComparedNumber} toggleComparedProduct={onToggleComparedProduct} deleteComparedProducts={onDeleteComparedProducts}/>
         </div>
     )
 
@@ -108,15 +123,19 @@ const mapStateToProps = state => {
         filters: state.search.searchData.filters,
         priceFilter: state.search.searchData.priceFilter,
         filterBy: state.search.filterBy,
-        categories: state.category.categories
+        categories: state.category.categories,
+        compareProducts: state.compare.compareProducts,
+        maxComparedNumber: state.compare.maxComparedNumber
     };
 };
 
 const mapDispatchToProps = {
+    deleteComparedProducts,
     toggleCompareProduct,
     loadSearchData,
     updateFilterBy,
-    updateSortBy
+    updateSortBy,
+    setGrowl
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);

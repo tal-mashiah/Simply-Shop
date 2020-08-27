@@ -5,7 +5,7 @@
     border-bottom: 1px solid $border-clr;
     border-left: 1px solid $border-clr;
     &.out-of-stock {
-        opacity: 0.65;
+        opacity: 0.50;
     }
 
     .details-container {
@@ -19,7 +19,7 @@
         }
         .info-continer {
             font-family: open-sans-bold;
-            align-items: flex-end;
+            align-items: baseline;
             .price {
                 font-size: 16px;
                 i {
@@ -28,17 +28,30 @@
                 }
             }
             .in-stock {
-                font-size: 14px;
+                font-size: 16px;
                 color: $error-clr;
+            }
+            .compare {
+                color: $primary-clr;
+                transition: color 0.2s ease-in;
+                font-size: 16px;
+                &:hover {
+                    color: darken($color: $primary-clr, $amount: 10);
+                    transition: color 0.1s ease-in;
+                }
+                &.remove {
+                    color: $error-clr;
+                    &:hover {
+                        color: darken($color: $error-clr, $amount: 10);
+                        transition: color 0.1s ease-in;
+                    }
+                }
             }
             @include for-mobile-layout {
                 flex-direction: column;
                 align-items: flex-start;
                 .price {
-                    margin-bottom: 4px;
-                }
-                .in-stock {
-                    font-size: 12px;
+                    margin-bottom: 8px;
                 }
             }
         }

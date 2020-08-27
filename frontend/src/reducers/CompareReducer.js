@@ -1,5 +1,6 @@
 const initialState = {
-    compareProducts: []
+    compareProducts: [],
+    maxComparedNumber: 4
 };
 
 export default function (state = initialState, action = {}) {
@@ -7,11 +8,12 @@ export default function (state = initialState, action = {}) {
         case 'TOGGLE_COMPARE_PRODUCT':
             const isExist = state.compareProducts.some(product => product._id === action.product._id);
             if (isExist) {
-                const filteredProducts = state.compareProducts.filter(product => product._id !== action.product._id )
+                const filteredProducts = state.compareProducts.filter(product => product._id !== action.product._id)
                 return { ...state, compareProducts: filteredProducts };
-            } else {
-                return { ...state, compareProducts: [...state.compareProducts, action.product] };
             }
+            return { ...state, compareProducts: [...state.compareProducts, action.product] };
+            case 'DELETE_COMPARED_PRODUCTS':
+                return { ...state, compareProducts: [] };
         default:
             return state;
     }
