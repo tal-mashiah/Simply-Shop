@@ -2,7 +2,7 @@
     padding: 10px 8px;
     height: 65px;
     cursor: pointer;
-    .image-container{
+    .image-container {
         margin-left: 10px;
         width: 50px;
         text-align: center;
@@ -11,8 +11,10 @@
             max-height: 50px;
         }
     }
-    
+    &.key-selected {
+        background-color: #0000000d;
+    }
     &:hover {
-        background-color: #f7f7f7;
+        background-color: #0000000d;
     }
 }

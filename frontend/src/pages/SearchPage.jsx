@@ -10,7 +10,7 @@ import FilterList from '../cmps/filter/FilterList.jsx';
 import SearchHeader from '../cmps/search/SearchHeader';
 import CompareModal from '../cmps/search/CompareModal';
 
-function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, updateSortBy, loadSearchData, match, categories, toggleCompareProduct, compareProducts, maxComparedNumber, setGrowl, deleteComparedProducts}) {
+function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, updateSortBy, loadSearchData, match, categories, toggleCompareProduct, compareProducts, maxComparedNumber, setGrowl, deleteComparedProducts }) {
 
     const [categoryName, setCategoryName] = useState(null);
     const [isFiltersShown, setIsFiltersShown] = useState(false);
@@ -37,7 +37,7 @@ function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, 
         filterBy.priceFilter = { max: null, min: null };
         filterBy.filters = [];
         onloadSearchData();
-    }, [match.params._id])
+    }, [match.params._id, match.params.term])
 
     useEffect(() => {
         const getCategoryName = (categoryid) => {
@@ -111,7 +111,7 @@ function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, 
                 <ProductList products={products} toggleComparedProduct={onToggleComparedProduct} compareProducts={compareProducts} />
             </div>
 
-            <CompareModal products={compareProducts} maxComparedNumber={maxComparedNumber} toggleComparedProduct={onToggleComparedProduct} deleteComparedProducts={onDeleteComparedProducts}/>
+            <CompareModal products={compareProducts} maxComparedNumber={maxComparedNumber} toggleComparedProduct={onToggleComparedProduct} deleteComparedProducts={onDeleteComparedProducts} />
         </div>
     )
 
