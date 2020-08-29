@@ -16,9 +16,9 @@ export default function ProductContent({ setGrowl, addToBag, product }) {
         }
     }
 
-    const onAddToBag = () => {
+    const onAddToBag = (isBuyNow) => {
         if (!product.inStock) return;
-        addToBag({ product, quantity });
+        addToBag({ product, quantity }, isBuyNow);
         setGrowl(quantity > 1 ? `${quantity} מוצרים התווספו לעגלה` : `המוצר התווסף לעגלה`, 'info')
     }
 
@@ -38,8 +38,8 @@ export default function ProductContent({ setGrowl, addToBag, product }) {
 
             <ProductQuantity quantity={quantity} changeQuantity={changeQuantity} />
             <div className="buy-container flex justify-between align-center">
-                <button className={`main-btn secondary ${inStock ? '' : 'disabled'}`} onClick={() => onAddToBag()} >הוסף לסל</button>
-                <ConditionalLink to={'/checkout'} className="buy-now-container"><button className={`main-btn primary ${inStock ? '' : 'disabled'}`} onClick={() => onAddToBag()}>קנה עכשיו</button></ConditionalLink>
+                <button className={`main-btn secondary ${inStock ? '' : 'disabled'}`} onClick={() => onAddToBag(false)} >הוסף לסל</button>
+                <ConditionalLink to={'/checkout'} className="buy-now-container"><button className={`main-btn primary ${inStock ? '' : 'disabled'}`} onClick={() => onAddToBag(true)}>קנה עכשיו</button></ConditionalLink>
             </div>
         </div>
 

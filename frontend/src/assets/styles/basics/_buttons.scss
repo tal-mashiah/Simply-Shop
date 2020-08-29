@@ -1,5 +1,5 @@
 .main-btn {
-    transition: all .25s ease-out;
+    transition: all 0.25s ease-out;
     cursor: pointer;
     height: 50px;
     width: 195px;
@@ -14,10 +14,10 @@
     &.primary {
         background-color: $primary-clr;
         color: #fff;
-        &:hover {
+        @include hover-supported() {
             background-color: darken($color: $primary-clr, $amount: 10%);
         }
-        &.disabled{
+        &.disabled {
             background-color: #c3dcff;
             cursor: not-allowed;
         }
@@ -26,26 +26,24 @@
         color: $secondary-clr;
         background-color: transparent;
         border: 2px solid $secondary-clr;
-        &:not(.disabled):hover {
-            color: #fff;
-            background-color: darken($color: $secondary-clr, $amount: 5%);
-            border-color: darken($color: $secondary-clr, $amount: 5%);
+        &:not(.disabled) {
+            @include hover-supported() {
+                color: #fff;
+                background-color: darken($color: $secondary-clr, $amount: 5%);
+                border-color: darken($color: $secondary-clr, $amount: 5%);
+            }
         }
-        &.disabled{
+
+        &.disabled {
             color: lighten($secondary-clr, 50%);
             border-color: lighten($color: $secondary-clr, $amount: 50%);
             cursor: not-allowed;
-            // &:hover {
-            //     color: lighten($secondary-clr, 50%);
-            //     border-color: lighten($color: $secondary-clr, $amount: 50%);
-            //     background-color: transparent;
-            // }
         }
     }
     &.error {
         background-color: $error-clr;
         color: #fff;
-        &:hover {
+        @include hover-supported() {
             background-color: darken($color: $error-clr, $amount: 10%);
         }
     }

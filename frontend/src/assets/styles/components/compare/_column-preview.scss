@@ -10,7 +10,7 @@
             padding: 10px;
             margin-bottom: 10px;
             transition: all 0.3s ease-out;
-            &:hover {
+            @include hover-supported {
                 transform: rotate(360deg);
                 color: $error-clr;
             }

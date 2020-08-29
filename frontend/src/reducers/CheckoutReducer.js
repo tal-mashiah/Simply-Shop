@@ -1,5 +1,6 @@
 const initialState = {
     bag: [],
+    isItemAdded: false,
     delivery: null,
     form: {
         isValid: false,
@@ -12,6 +13,9 @@ export default function (state = initialState, action = {}) {
 
         case 'SET_BAG':
             return { ...state, bag: action.updatedBag };
+
+        case 'SET_IS_ITEM_ADDED':
+            return { ...state, isItemAdded: action.isItemAdded };
 
         case 'UPDATE_BAG':
             const isExist = state.bag.some(bagItem => bagItem.product._id === action.item.product._id);
@@ -43,9 +47,9 @@ export default function (state = initialState, action = {}) {
             updatedForm.isValid = action.isValid;
             updatedForm.input = action.form;
 
-            return { ...state, form: {...updatedForm} };
+            return { ...state, form: { ...updatedForm } };
 
         default:
-            return state; 
+            return state;
     }
 }

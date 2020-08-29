@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import searchService from '../services/searchService'
 
 import { connect } from 'react-redux';
-import { updateBag } from '../actions/checkoutActions';
+import { updateBag, setIsItemAdded } from '../actions/checkoutActions';
 import { setGrowl } from '../actions/GrowlActions';
 import { loading, doneLoading } from '../actions/SystemActions';
 
@@ -11,7 +11,7 @@ import ProductContent from '../cmps/product-details/content/ProductContent.jsx';
 import ProductGallery from '../cmps/product-details/gallery/ProductGallery.jsx';
 import ProductInfo from '../cmps/product-details/info/ProductInfo.jsx';
 
-function ProductDetails({ loading, doneLoading, updateBag, setGrowl, match }) {
+function ProductDetails({ loading, doneLoading, updateBag, setGrowl, match, setIsItemAdded }) {
 
     const [productData, setProductData] = useState(null)
 
@@ -37,8 +37,12 @@ function ProductDetails({ loading, doneLoading, updateBag, setGrowl, match }) {
         }
     }, [match.params._id, loading, doneLoading])
 
-    const addToBag = (item) => {
-        updateBag(item)
+    const addToBag = (item, isBuyNow) => {
+        if (!isBuyNow) {
+            setIsItemAdded(true);
+            setTimeout(() => setIsItemAdded(false), 2250);
+        }
+        updateBag(item);
     }
 
     if (!productData) return null;
@@ -54,10 +58,10 @@ function ProductDetails({ loading, doneLoading, updateBag, setGrowl, match }) {
             </div>
         </div>
     )
-
 }
 
 const mapDispatchToProps = {
+    setIsItemAdded,
     doneLoading,
     updateBag,
     setGrowl,

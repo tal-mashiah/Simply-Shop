@@ -186,3 +186,10 @@ export function addOrder(type, order) {
         }
     };
 }
+
+export function setIsItemAdded(isItemAdded) {
+    return {
+        type: 'SET_IS_ITEM_ADDED',
+        isItemAdded
+    };
+}

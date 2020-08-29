@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import NavCart from '../cart/NavCart.jsx';
 import NavUser from '../user/NavUser.jsx';
 
-export default function NavBar({ bag, loggedInUser, deleteItem, changeQuantity, logout }) {
+export default function NavBar({ bag, loggedInUser, deleteItem, changeQuantity, logout, isItemAdded }) {
     return (
         <nav className='flex'>
             <div className='link-container contact'>
@@ -12,7 +12,7 @@ export default function NavBar({ bag, loggedInUser, deleteItem, changeQuantity, 
             </div>
 
             <NavUser loggedInUser={loggedInUser} logout={logout} />
-            <NavCart bag={bag} deleteItem={deleteItem} changeQuantity={changeQuantity} />
+            <NavCart bag={bag} isItemAdded={isItemAdded} deleteItem={deleteItem} changeQuantity={changeQuantity} />
         </nav>
     )
 }

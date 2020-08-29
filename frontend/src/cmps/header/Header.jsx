@@ -12,7 +12,7 @@ import Hamburger from './Hamburger.jsx';
 import CategoryList from '../category/CategoryList.jsx';
 import SearchBar from '../search-bar/SearchBar.jsx';
 
-function Header({ setBag, bag, loadCategories, categories, deleteItem, updateQuantity, loggedInUser, logout }) {
+function Header({ setBag, bag, loadCategories, categories, deleteItem, updateQuantity, loggedInUser, logout, isItemAdded }) {
 
     const [isSearchBarOpen, setIsSearchBarOpen] = useState(false)
     const [isBurgerOpen, setIsBurgerOpen] = useState(false)
@@ -62,7 +62,7 @@ function Header({ setBag, bag, loadCategories, categories, deleteItem, updateQua
                     <Hamburger toggleBurgerModal={toggleBurgerModal} />
                     <SearchBar toggleSearchBar={toggleSearchBar} isSearchBarOpen={isSearchBarOpen} />
                 </div>
-                <NavBar bag={bag} loggedInUser={loggedInUser} logout={onLogout} deleteItem={onDeleteItem} changeQuantity={changeQuantity} />
+                <NavBar bag={bag} loggedInUser={loggedInUser} isItemAdded={isItemAdded} logout={onLogout} deleteItem={onDeleteItem} changeQuantity={changeQuantity} />
             </div>
             <CategoryList categories={categories} isBurgerOpen={isBurgerOpen} toggleBurgerModal={toggleBurgerModal} />
             <div className="screen" onClick={toggleBurgerModal}></div>
@@ -74,6 +74,7 @@ function Header({ setBag, bag, loadCategories, categories, deleteItem, updateQua
 const mapStateToProps = state => {
     return {
         bag: state.checkout.bag,
+        isItemAdded: state.checkout.isItemAdded,
         loggedInUser: state.user.loggedInUser,
         categories: state.category.categories
     };

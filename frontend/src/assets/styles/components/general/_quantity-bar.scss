@@ -24,14 +24,18 @@
             font-size: 13px;
         }
     }
-    #inc-btn:hover {
-        i {
-            color: $success-clr;
+    #inc-btn {
+        @include hover-supported() {
+            i {
+                color: $success-clr;
+            }
         }
     }
-    #dec-btn:hover {
-        i {
-            color: $error-clr;
+    #dec-btn {
+        @include hover-supported() {
+            i {
+                color: $error-clr;
+            }
         }
     }
 }

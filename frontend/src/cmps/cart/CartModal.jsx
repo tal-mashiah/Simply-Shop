@@ -2,7 +2,7 @@ import React from 'react';
 import CartItemList from './CartItemList.jsx';
 import { Link } from 'react-router-dom';
 
-export default function CartModal({ bag, deleteItem, changeQuantity }) {
+export default function CartModal({ bag, isItemAdded, deleteItem, changeQuantity }) {
 
     const renderBagSum = () => {
         return bag.reduce((acc, item) => acc + (item.product.price * item.quantity), 0)
@@ -11,7 +11,7 @@ export default function CartModal({ bag, deleteItem, changeQuantity }) {
     const ConditionalLink = bag.length > 0 ? Link : 'div';
 
     return (
-        <div className="modal">
+        <div className={`modal ${isItemAdded ? 'item-added' : ''}`}>
             <CartItemList bag={bag} deleteItem={deleteItem} changeQuantity={changeQuantity} />
             {bag.length > 0 ||
                 <div className="cart-modal-empty">
