@@ -22,8 +22,8 @@ const sortProducts = (products, sort) => {
 }
 
 const createPriceFilter = (allProducts, products) => {
-    const prices = products.map(product => product.price);
-    const allPrices = allProducts.map(product => product.price);
+    const prices = products.map(product => product.salePrice || product.price);
+    const allPrices = allProducts.map(product => product.salePrice || product.price);
     const max = Math.max(...prices);
     const min = Math.min(...prices);
     const generalMax = Math.max(...allPrices);
@@ -54,7 +54,11 @@ const buildCriteria = (filterBy) => {
         criteria['categoryId'] = ObjectId(filterBy.categoryId);
     }
     if (filterBy.priceFilter.min || filterBy.priceFilter.max) {
-        criteria['price'] = { $gte: filterBy.priceFilter.min || 0, $lte: filterBy.priceFilter.max || Infinity }
+        const minMaxQuery = { $gte: filterBy.priceFilter.min || 0, $lte: filterBy.priceFilter.max || Infinity };
+        criteria['$or'] = [
+            { price: minMaxQuery },
+            { salePrice: minMaxQuery }
+        ]
     }
     if (filterBy.filters && filterBy.filters.length > 0) {
         const filterIds = filterBy.filters.map(filter => ObjectId(filter._id));
@@ -106,10 +110,6 @@ const _updateSpecValues = (values, filters) => {
     })
 }
 
-// function sum(a, b) {
-//     return a + b;
-// }
-
 module.exports = {
     createPriceFilter,
     createFilters,
@@ -117,5 +117,4 @@ module.exports = {
     createSpecs,
     createImages,
     sortProducts
-    // sum
 }

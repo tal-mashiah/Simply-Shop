@@ -1,7 +1,7 @@
 const initialState = {
     bag: [],
     isItemAdded: false,
-    delivery: null,
+    delivery: { value: 'דואר רשום', price: 0 },
     form: {
         isValid: false,
         input: null

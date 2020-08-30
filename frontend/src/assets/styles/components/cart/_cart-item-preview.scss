@@ -39,14 +39,19 @@
                 }
             }
         }
-        .price {
-            font-weight: 600;
-            font-size: 12px;
-            .fa-shekel-sign {
-                font-size: 9px;
-                margin: 5px 2px 0px 0;
-                color: $base-clr;
-                line-height: 9px;
+        .price-container {
+            .price {
+                font-weight: 600;
+                font-size: 12px;
+                i {
+                    font-size: 9px;
+                }
+                &.sale {
+                    font-size: 10px;
+                    i {
+                        font-size: 8px;
+                    }
+                }
             }
         }
     }

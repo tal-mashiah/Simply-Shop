@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import ProductQuantity from './ProductQuantity.jsx';
 import { Link } from 'react-router-dom';
+import PriceContainer from '../../general/PriceContainer.jsx';
 
 export default function ProductContent({ setGrowl, addToBag, product }) {
 
@@ -22,7 +23,7 @@ export default function ProductContent({ setGrowl, addToBag, product }) {
         setGrowl(quantity > 1 ? `${quantity} מוצרים התווספו לעגלה` : `המוצר התווסף לעגלה`, 'info')
     }
 
-    const { title, price, inStock } = product;
+    const { title, price, salePrice, inStock } = product;
     const ConditionalLink = inStock ? Link : 'div';
 
     return (
@@ -32,10 +33,9 @@ export default function ProductContent({ setGrowl, addToBag, product }) {
                 {quantity === 1 || <span> סה"כ עבור {quantity} יחידות:</span>}
                 <div className="info-continer flex justify-between">
                     <div className="in-stock">{inStock ? '' : 'אזל המלאי'}</div>
-                    <div className="content-price">{price * quantity}<i className="fas fa-shekel-sign"></i></div>
+                    <PriceContainer price={price} salePrice={salePrice} quantity={quantity} />
                 </div>
             </div>
-
             <ProductQuantity quantity={quantity} changeQuantity={changeQuantity} />
             <div className="buy-container flex justify-between align-center">
                 <button className={`main-btn secondary ${inStock ? '' : 'disabled'}`} onClick={() => onAddToBag(false)} >הוסף לסל</button>

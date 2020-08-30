@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import SelectBox from '../general/SelectBox.jsx';
 
 export default function Delivery({ onDeliverySelected, bag, delivery }) {
@@ -9,15 +9,10 @@ export default function Delivery({ onDeliverySelected, bag, delivery }) {
         { value: 'איסוף עצמי', price: 0 }
     ]);
 
-    useEffect(() => {
-        onDeliverySelected(options[0]);
-    }, [])
-
     const rendertotalSum = () => {
-        return bag.reduce((acc, item) => acc + (item.product.price * item.quantity), delivery.price)
+        return bag.reduce((acc, item) => acc + ((item.product.salePrice || item.product.price) * item.quantity), delivery.price)
     }
 
-    if (!delivery) return null;
     return (
         <div className="delivery">
             <h1>סוג המשלוח</h1>

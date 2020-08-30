@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default function CartModal({ bag, isItemAdded, deleteItem, changeQuantity }) {
 
     const renderBagSum = () => {
-        return bag.reduce((acc, item) => acc + (item.product.price * item.quantity), 0)
+        return bag.reduce((acc, item) => acc + ((item.product.salePrice || item.product.price) * item.quantity), 0)
     }
 
     const ConditionalLink = bag.length > 0 ? Link : 'div';

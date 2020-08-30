@@ -4,7 +4,7 @@ import Paypal from './Paypal.jsx';
 export default function PaymentTotal({ bag, delivery, form, addOrder }) {
 
     const rendertotalSum = () => {
-        return bag.reduce((acc, item) => acc + (item.product.price * item.quantity), 0)
+        return bag.reduce((acc, item) => acc + ((item.product.salePrice || item.product.price) * item.quantity), 0)
     }
 
     const sum = rendertotalSum();

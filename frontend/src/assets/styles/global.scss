@@ -2,6 +2,7 @@
 @import "setup/variables.scss";
 @import "setup/functions.scss";
 @import "setup/mixins.scss";
+@import "setup/animation.scss";
 
 // Basics
 @import "basics/base.scss";
@@ -19,6 +20,7 @@
 @import "components/general/select-box.scss";
 @import "components/general/form.scss";
 @import "components/general/growl-message.scss";
+@import "components/general/price-container.scss";
 
 // header
 @import "components/header/header.scss";
