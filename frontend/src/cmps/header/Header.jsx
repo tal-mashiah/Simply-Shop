@@ -20,7 +20,7 @@ function Header({ setBag, bag, loadCategories, categories, deleteItem, updateQua
     useEffect(() => {
         const loadStorageBag = () => {
             const storageBag = storageService.loadFromStorage('bag');
-            if (storageBag && storageBag.length > 0) setBag(storageBag);
+            if (storageBag && storageBag.length) setBag(storageBag);
         }
         loadStorageBag();
         loadCategories();

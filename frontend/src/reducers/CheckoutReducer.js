@@ -1,10 +1,13 @@
+let localForm = null;
+if (localStorage.form) localForm = JSON.parse(localStorage.form);
+
 const initialState = {
     bag: [],
     isItemAdded: false,
     delivery: { value: 'דואר רשום', price: 0 },
     form: {
         isValid: false,
-        input: null
+        input: localForm
     }
 };
 

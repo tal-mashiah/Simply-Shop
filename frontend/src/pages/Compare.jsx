@@ -6,6 +6,7 @@ import { doneLoading, loading } from '../actions/SystemActions'
 import { toggleCompareProduct } from '../actions/compareAction'
 
 import compareService from '../services/compareService';
+import storageService from '../services/storageService';
 
 import ComparedProductsTable from '../cmps/compare/ComparedProductsTable';
 
@@ -14,6 +15,8 @@ export const Compare = ({ products, doneLoading, loading, toggleCompareProduct }
     const [productsData, setProductsData] = useState([])
 
     useEffect(() => {
+        storageService.saveToSession('compareProducts', products);
+
         const loadCurrProduct = async (ids) => {
             try {
                 loading();
@@ -28,7 +31,7 @@ export const Compare = ({ products, doneLoading, loading, toggleCompareProduct }
         };
 
         const getProductsData = async () => {
-            const ids = products.map(product=>product._id);
+            const ids = products.map(product => product._id);
             const ProductsData = await loadCurrProduct(ids)
             setProductsData(ProductsData);
         }

@@ -1,5 +1,8 @@
+let sessionCompareProducts = [];
+if (sessionStorage.compareProducts) sessionCompareProducts = JSON.parse(sessionStorage.compareProducts);
+
 const initialState = {
-    compareProducts: [],
+    compareProducts: sessionCompareProducts,
     maxComparedNumber: 4
 };
 

@@ -5,6 +5,8 @@ import { loadSearchData, updateFilterBy, updateSortBy } from '../actions/searchA
 import { toggleCompareProduct, deleteComparedProducts } from '../actions/compareAction';
 import { setGrowl } from '../actions/GrowlActions';
 
+import storageService from '../services/storageService'
+
 import ProductList from '../cmps/product/ProductList.jsx';
 import FilterList from '../cmps/filter/FilterList.jsx';
 import SearchHeader from '../cmps/search/SearchHeader';
@@ -14,6 +16,10 @@ function SearchPage({ products, filters, priceFilter, filterBy, updateFilterBy, 
 
     const [categoryName, setCategoryName] = useState(null);
     const [isFiltersShown, setIsFiltersShown] = useState(false);
+    
+    useEffect(() => {
+        storageService.saveToSession('compareProducts', compareProducts);
+    }, [compareProducts])
 
     const onloadSearchData = () => {
         const { term, _id } = match.params;

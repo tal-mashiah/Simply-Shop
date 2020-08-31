@@ -1,19 +1,40 @@
-function saveToStorage(key, value) {
-    var str = JSON.stringify(value);
+// Local Storage
+
+const saveToStorage = (key, value) => {
+    const str = JSON.stringify(value);
     localStorage.setItem(key, str);
 }
 
-function loadFromStorage(key, defaultValue) {
-    var str = localStorage.getItem(key);
+const loadFromStorage = (key, defaultValue) => {
+    const str = localStorage.getItem(key);
     return str ? JSON.parse(str) : defaultValue
 }
 
-function removeFromStorage(key) {
+const removeFromStorage = key => {
     localStorage.removeItem(key);
+}
+
+// Session Storage
+
+const saveToSession = (key, value) => {
+    const str = JSON.stringify(value);
+    sessionStorage.setItem(key, str);
+}
+
+const loadFromSession = (key, defaultValue) => {
+    const str = sessionStorage.getItem(key);
+    return str ? JSON.parse(str) : defaultValue
+}
+
+const removeFromSession = key => {
+    sessionStorage.removeItem(key);
 }
 
 export default {
     removeFromStorage,
+    removeFromSession,
     loadFromStorage,
-    saveToStorage
+    loadFromSession,
+    saveToStorage,
+    saveToSession
 };

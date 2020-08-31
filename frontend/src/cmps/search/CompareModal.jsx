@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const CompareModal = ({ products, maxComparedNumber, toggleComparedProduct, deleteComparedProducts }) => {
@@ -18,6 +18,7 @@ const CompareModal = ({ products, maxComparedNumber, toggleComparedProduct, dele
         }
         return cubes;
     }
+
     return (
         <div className={`compare-modal flex align-center ${products.length ? '' : 'hidden'}`}>
             <i className="fas fa-times" onClick={deleteComparedProducts}></i>

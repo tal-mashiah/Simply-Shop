@@ -1,4 +1,5 @@
 import HttpService from './HttpService'
+import storageService from './storageService'
 
 export default {
     login,
@@ -26,9 +27,9 @@ async function signup(userCred) {
     return _handleLogin(user)
 }
 function logout() {
-    sessionStorage.clear();
+    storageService.removeFromSession('user');
 }
 function _handleLogin(user) {
-    sessionStorage.setItem('user', JSON.stringify(user))
+    storageService.saveToSession('user',user);
     return user;
 }
