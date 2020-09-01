@@ -22,9 +22,11 @@
         z-index: 1;
         color: #fff;
         font-family: open-sans-bold;
+        transition: all 0.4s ease;
+        backface-visibility: hidden;
         &:hover {
-            animation: shake 0.5s;
-            animation-iteration-count: infinite;
+            transition: all 0.4s ease;
+            transform: scale(1.1);
         }
     }
 
