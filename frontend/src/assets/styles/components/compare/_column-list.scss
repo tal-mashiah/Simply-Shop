@@ -30,7 +30,7 @@
     }
     @include for-tablet-layout {
         .spec-list {
-            min-width: initial;
+            min-width: 100px;
             padding: 0 8px;
         }
     }

@@ -42,7 +42,7 @@ function App() {
             <Route path="/compare" component={Compare} exact />
             <Route path="/auth/:pageName" component={Login} exact />
             <Route path="/account/:pageName" component={Account} exact />
-            <Route path="/" component={NotFound} />
+            <Route component={NotFound} />
           </Switch>
         </div>
         <Footer />

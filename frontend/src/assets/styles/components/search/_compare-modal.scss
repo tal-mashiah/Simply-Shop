@@ -68,5 +68,13 @@
             margin-top: 10px;
             height: 35px;
         }
+        .fa-times {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            padding: 7px;
+            cursor: pointer;
+            font-size: 13px;
+        }
     }
 }
