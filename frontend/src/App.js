@@ -1,11 +1,14 @@
 import React from 'react';
-//TODO check Router on production 
 import { Router, Switch, Route } from 'react-router-dom';
 import history from './history';
 
 import GrowlMessage from './cmps/general/GrowlMessage.jsx';
 import Spinner from './cmps/general/Spinner.jsx';
+import ScrollToTop from './cmps/general/ScrollToTop.jsx';
+
 import Header from './cmps/header/Header.jsx';
+import Footer from './cmps/footer/Footer';
+
 import Home from './pages/Home.jsx';
 import ProductDetails from './pages/ProductDetails.jsx';
 import SearchPage from './pages/SearchPage.jsx';
@@ -13,12 +16,10 @@ import Checkout from './pages/Checkout.jsx';
 import Login from './pages/Login.jsx';
 import Account from './pages/Account.jsx';
 import NotFound from './pages/NotFound.jsx';
-import Footer from './cmps/footer/Footer';
 import AboutUs from './pages/AboutUs.jsx';
 import Terms from './pages/Terms.jsx';
 import Contact from './pages/Contact.jsx';
 import Compare from './pages/Compare.jsx';
-import ScrollToTop from './cmps/general/ScrollToTop.jsx';
 
 function App() {
   return (
@@ -52,3 +53,5 @@ function App() {
 }
 
 export default App;
+
+

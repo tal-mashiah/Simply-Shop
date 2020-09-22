@@ -1,16 +1,16 @@
-import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useEffect, useRef} from 'react';
+import {Link} from 'react-router-dom';
 
-import { connect } from 'react-redux';
-import { deleteItem, updateQuantity, setDelivery, updateForm, addOrder } from '../actions/checkoutActions';
-import { logout } from '../actions/UserActions';
+import {connect} from 'react-redux';
+import {deleteItem, updateQuantity, setDelivery, updateForm, addOrder} from '../actions/checkoutActions';
+import {logout} from '../actions/UserActions';
 
 import CartTable from '../cmps/checkout/cart-table/CartTable.jsx';
 import Delivery from '../cmps/checkout/Delivery.jsx';
 import OrderForm from '../cmps/checkout/OrderForm.jsx';
 import Payment from '../cmps/checkout/payment/Payment.jsx';
 
-function Checkout({ location, bag, delivery, setDelivery, form, loggedInUser, logout, addOrder, deleteItem, updateQuantity, updateForm }) {
+function Checkout({location, bag, delivery, setDelivery, form, loggedInUser, logout, addOrder, deleteItem, updateQuantity, updateForm}) {
 
     const formRef = useRef(null)
 
@@ -66,16 +66,18 @@ function Checkout({ location, bag, delivery, setDelivery, form, loggedInUser, lo
         <div className="cart-page container flex column align-center">
             {bag.length ?
                 <div className="cart-sections">
-                    <CartTable bag={bag} deleteItem={onDeleteItem} changeQuantity={changeQuantity} />
-                    <Delivery bag={bag} delivery={delivery} onDeliverySelected={onDeliverySelected} />
+                    <CartTable bag={bag} deleteItem={onDeleteItem} changeQuantity={changeQuantity}/>
+                    <Delivery bag={bag} delivery={delivery} onDeliverySelected={onDeliverySelected}/>
                     <div ref={formRef}>
-                        <OrderForm user={loggedInUser} updateForm={onUpdateForm} logout={logout} />
+                        <OrderForm user={loggedInUser} updateForm={onUpdateForm} logout={logout}/>
                     </div>
-                    <Payment bag={bag} delivery={delivery} form={form} addOrder={onAddOrder} />
+                    <Payment bag={bag} delivery={delivery} form={form} addOrder={onAddOrder}/>
                 </div> :
                 <div className="empty-page flex align-center column justify-center">
                     <div className="title"> העגלה שלך ריקה</div>
-                    <Link to="/"><button className="main-btn primary">חזרה לקניות</button></Link>
+                    <Link to="/">
+                        <button className="main-btn primary">חזרה לקניות</button>
+                    </Link>
                 </div>}
         </div>
     )

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-// import { setGrowl } from '../../actions/GrowlActions';
 
 import { ToastContainer, toast } from 'react-toastify';
 import { Flip } from 'react-toastify';
@@ -11,8 +10,6 @@ function GrowlMessage({ growl }) {
 
     const notify = (growl) => {
         toast[growl.type](growl.msg);
-        //TODO check if couse problems
-        // setGrowl(null)
     }
 
     return (
@@ -34,9 +31,5 @@ const mapStateToProps = state => {
         growl: state.growl.growl
     };
 };
-
-// const mapDispatchToProps = {
-//     setGrowl
-// };
 
 export default connect(mapStateToProps, null)(GrowlMessage);
