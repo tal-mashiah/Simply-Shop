@@ -19,8 +19,7 @@ export default function FilterPreview({ filter, updateFilters }) {
                 <h3 className="filter-title">{filter.key}</h3>
                 <i className={`fas ${isFiltersShown ? 'fa-minus' : 'fa-plus'}`}></i>
             </div>
-            {isFiltersShown ?
-                <FilterOptionList updateFilters={updateFilters} options={filter.values} /> : null}
+            <FilterOptionList updateFilters={updateFilters} options={filter.values} isFiltersShown={isFiltersShown} />
         </div>
     )
 }
