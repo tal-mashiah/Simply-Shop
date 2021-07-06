@@ -31,6 +31,7 @@ function Checkout({location, bag, delivery, setDelivery, form, loggedInUser, log
     }
 
     const onDeleteItem = (itemId) => {
+
         deleteItem(itemId);
     }
 
