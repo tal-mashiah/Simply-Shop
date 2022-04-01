@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { updateForm, signup, login } from '../actions/UserActions';
 
 import Form from '../cmps/general/Form.jsx';
+import Button from '../cmps/general/Button';
 
 const initRegisterInputs = [
     { type: 'text', name: 'fullName', label: 'שם מלא', autoComplete: 'name', validation: ['required', 'langAndMin2Char', 'twoWords'] },
@@ -52,7 +53,7 @@ function Login({ match, location, updateForm, login, signup, form }) {
                 <Link to="/auth/register"> <div className={pageName === 'register' ? "register active" : "register"}>הרשם</div></Link>
             </div>
             <Form inputs={pageName === 'login' ? loginInputs : registerInputs} updateForm={onUpdateForm} clearForm={clearForm} />
-            <button onClick={setUser} className={form.isValid ? "main-btn primary" : "main-btn primary disabled"}>{pageName === 'login' ? 'התחבר' : 'הרשם'}</button>
+            <Button onClick={setUser} primary disabled={!form.isValid}>{pageName === 'login' ? 'התחבר' : 'הרשם'}</Button>
         </div>
     )
 }

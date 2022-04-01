@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Button from '../cmps/general/Button';
 
 export default function NotFound() {
     return (
@@ -11,8 +12,8 @@ export default function NotFound() {
                     {`העמוד שחיפשת לא קיים.
 איך שהגעת לכאן זה עדיין תעלומה...`}
                 </div>
-                <Link to="/" ><button className="main-btn primary">חזרה לעמוד הבית</button></Link>
-
+                <Link to="/" ><Button primary>חזרה לעמוד הבית</Button></Link>
+                
             </div>
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink"
                 viewBox="0 0 800 600">
