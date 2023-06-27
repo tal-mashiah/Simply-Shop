@@ -1,0 +1,19 @@
+{
+  "name": "simplyshop",
+  "version": "1.0.0",
+  "description": "Simplyshop is a template website that I developed for creating generic eCommerce websites fast and simple.\r This is my first big project that I build from scratch, frontend and backend.\r You are more than welcome to see the result here => https://alakazem.herokuapp.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Talmashiah/Simply-Shop.git"
+  },
+  "author": "Tal Mashiah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Talmashiah/Simply-Shop/issues"
+  },
+  "homepage": "https://github.com/Talmashiah/Simply-Shop#readme"
+}
