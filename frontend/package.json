@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.1",
     "braintree-web": "^3.62.1",
+    "caniuse-lite": "^1.0.30001509",
     "google-maps-react": "^2.0.6",
     "mobile-device-detect": "^0.4.3",
     "node-sass": "^4.13.1",
